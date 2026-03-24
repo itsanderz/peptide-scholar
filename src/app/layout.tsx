@@ -73,6 +73,17 @@ export default async function RootLayout({
           url: "https://peptidescholar.com",
           description: "Comprehensive, research-backed guide to peptides — mechanisms, evidence levels, dosing, side effects, legal status, and comparisons. Every claim cited from PubMed.",
         }) }} />
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_ID}');`}
+            </Script>
+          </>
+        )}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
@@ -101,7 +112,7 @@ export default async function RootLayout({
                   className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm"
                   style={{ backgroundColor: "#3B7A9E", color: "#FFFFFF" }}
                 >
-                  PW
+                  PS
                 </div>
                 <span className="text-white font-bold text-lg tracking-tight" style={{ fontFamily: "var(--font-libre-franklin)" }}>
                   PeptideScholar
