@@ -44,11 +44,9 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "PeptideScholar",
     locale: "en_US",
-    images: [{ url: "/og-image.svg", width: 1200, height: 630, alt: "PeptideScholar" }],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/og-image.svg"],
   },
   verification: {
     google: "NTlRiN9ONICqNTkKYBaaJxDhDpTL5wpL2-DtT8Q0Y80",

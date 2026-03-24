@@ -32,7 +32,7 @@ export function ProviderCTA({ peptideName, fdaStatus, category }: ProviderCTAPro
         </p>
 
         <a
-          href="#provider-link"
+          href="/guide"
           className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-colors"
           style={{
             backgroundColor: "#0D9488",
@@ -103,7 +103,7 @@ export function ProviderCTA({ peptideName, fdaStatus, category }: ProviderCTAPro
           clinical-grade copper peptide concentrations.
         </p>
         <a
-          href="#product-link"
+          href="/guide"
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-colors"
           style={{
             backgroundColor: "#2563EB",
@@ -143,7 +143,7 @@ export function ProviderCTA({ peptideName, fdaStatus, category }: ProviderCTAPro
         before considering any peptide.
       </p>
       <a
-        href="#provider-resources"
+        href="/guide"
         className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-colors"
         style={{
           backgroundColor: "#3B7A9E",

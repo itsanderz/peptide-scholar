@@ -342,14 +342,14 @@ export default async function PeptideDetailPage({ params }: Props) {
                   description: "Evidence-based reference guide covering mechanisms, research, and clinical applications.",
                   type: "book",
                   ctaText: "View on Amazon",
-                  ctaUrl: "#book-link",
+                  ctaUrl: "/guide",
                 },
                 {
                   title: "Third-Party Peptide Testing",
                   description: "Independent lab analysis to verify peptide purity and authenticity.",
                   type: "testing",
                   ctaText: "Learn More",
-                  ctaUrl: "#testing-link",
+                  ctaUrl: "/tools",
                 },
               ]}
             />

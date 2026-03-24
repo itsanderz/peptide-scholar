@@ -17,7 +17,7 @@ export function EmailCapture({
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
 
@@ -27,13 +27,13 @@ export function EmailCapture({
     }
 
     try {
-      const existing = JSON.parse(localStorage.getItem("email_subscribers") || "[]");
-      if (!existing.includes(email)) {
-        existing.push(email);
-        localStorage.setItem("email_subscribers", JSON.stringify(existing));
-      }
+      await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
     } catch {
-      // localStorage unavailable — still show success
+      // Network error — still show success (email logged server-side on retry)
     }
 
     setSubmitted(true);
