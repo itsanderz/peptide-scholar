@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useCallback } from "react";
 import Link from "next/link";
+import { trackSearch } from "@/lib/analytics";
 
 interface PeptideSearchItem {
   name: string;
@@ -51,6 +52,7 @@ export default function PeptideSearch({ peptides, categories }: PeptideSearchPro
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim();
+    if (q.length > 2) trackSearch(q, 0);
     return peptides.filter((p) => {
       // Text search
       if (

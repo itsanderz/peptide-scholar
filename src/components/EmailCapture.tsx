@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackEmailSignup } from "@/lib/analytics";
 
 interface EmailCaptureProps {
   headline?: string;
@@ -36,6 +37,7 @@ export function EmailCapture({
       // Network error — still show success (email logged server-side on retry)
     }
 
+    trackEmailSignup("homepage");
     setSubmitted(true);
   }
 

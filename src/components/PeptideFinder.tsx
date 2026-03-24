@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useCallback } from "react";
 import Link from "next/link";
+import { trackToolUse } from "@/lib/analytics";
 
 /* ── Theme ─────────────────────────────────────────────────────────────── */
 const C = {
@@ -264,7 +265,11 @@ export default function PeptideFinder({ peptides }: PeptideFinderProps) {
   /* ── Navigation ──────────────────────────────────────────────────────── */
   const goNext = useCallback(() => {
     setDirection("forward");
-    setStep((s) => Math.min(s + 1, totalSteps + 1));
+    setStep((s) => {
+      const next = Math.min(s + 1, totalSteps + 1);
+      if (next === totalSteps + 1) trackToolUse("peptide_finder", "view_results");
+      return next;
+    });
   }, []);
 
   const goBack = useCallback(() => {

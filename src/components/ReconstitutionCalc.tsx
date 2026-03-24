@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { trackToolUse } from "@/lib/analytics";
 
 /* ── Theme ─────────────────────────────────────────────────────────────── */
 const C = {
@@ -111,6 +112,7 @@ export default function ReconstitutionCalc() {
 
   const results = useMemo(() => {
     if (!canCalculate) return null;
+    trackToolUse("reconstitution_calculator", "calculate");
 
     /* convert everything to mcg for uniform math */
     const peptideMcg = peptide * 1000;

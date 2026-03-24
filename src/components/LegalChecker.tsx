@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import { trackToolUse } from "@/lib/analytics";
 
 /* ── Theme ─────────────────────────────────────────────────────────────── */
 const C = {
@@ -110,6 +111,7 @@ export default function LegalChecker({ peptides, states }: LegalCheckerProps) {
   );
 
   const hasBothSelections = peptide !== null && state !== null;
+  if (hasBothSelections) trackToolUse("legal_checker", `${peptide.slug}_${state.stateSlug}`);
   const isFdaApproved = peptide?.fdaStatus === "approved";
 
   return (
