@@ -50,6 +50,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: ["/og-image.svg"],
   },
+  verification: {
+    google: "NTlRiN9ONICqNTkKYBaaJxDhDpTL5wpL2-DtT8Q0Y80",
+  },
 };
 
 export default async function RootLayout({
