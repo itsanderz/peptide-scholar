@@ -136,7 +136,7 @@ export function PeptideCard({
         >
           <span
             className="text-xs font-semibold uppercase tracking-wider"
-            style={{ color: "#9CA3AF" }}
+            style={{ color: "#6B7280" }}
           >
             Evidence Level {evidenceLevel}
           </span>
