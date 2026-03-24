@@ -46,6 +46,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFreq: "monthly" as const,
     })),
 
+    // Tools
+    { path: "/tools", priority: 0.8, changeFreq: "monthly" },
+    { path: "/tools/peptide-finder", priority: 0.7, changeFreq: "monthly" },
+    { path: "/tools/calculator", priority: 0.7, changeFreq: "monthly" },
+    { path: "/tools/legal-checker", priority: 0.7, changeFreq: "monthly" },
+    { path: "/tools/titration-planner", priority: 0.7, changeFreq: "monthly" },
+    { path: "/tools/side-effects", priority: 0.7, changeFreq: "monthly" },
+    { path: "/tools/interaction-checker", priority: 0.7, changeFreq: "monthly" },
+    { path: "/tools/cost-calculator", priority: 0.7, changeFreq: "monthly" },
+    { path: "/tools/symptom-checker", priority: 0.8, changeFreq: "monthly" },
+    { path: "/tools/protein-calculator", priority: 0.7, changeFreq: "monthly" },
+
+    // Guide pages
+    { path: "/guide", priority: 0.9, changeFreq: "monthly" },
+    { path: "/guide/glp1-nutrition", priority: 0.8, changeFreq: "monthly" },
+    { path: "/guide/wolverine-stack", priority: 0.7, changeFreq: "monthly" },
+    { path: "/guide/reading-coa", priority: 0.7, changeFreq: "monthly" },
+    { path: "/guide/after-stopping-glp1", priority: 0.8, changeFreq: "monthly" },
+
     // Static pages
     { path: "/glossary", priority: 0.5, changeFreq: "monthly" },
     { path: "/about", priority: 0.5, changeFreq: "monthly" },
