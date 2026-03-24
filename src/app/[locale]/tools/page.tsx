@@ -19,6 +19,8 @@ const C = {
   border: "#D0D7E2",
 } as const;
 
+// C.warning used in Titration Planner card color
+
 /* ── SEO ───────────────────────────────────────────────────────────────── */
 export async function generateMetadata({
   params,
@@ -32,9 +34,9 @@ export async function generateMetadata({
 
   return {
     ...generateSEO({
-      title: "Free Peptide Tools — Finder, Calculator & Legal Checker",
+      title: "Free Peptide & GLP-1 Tools — 7 Free Clinical Tools",
       description:
-        "Free peptide tools: guided peptide finder, reconstitution calculator, and legal status checker. Discover peptides, calculate syringe units, and check legality by state. No signup required.",
+        "Free peptide and GLP-1 tools: peptide finder, reconstitution calculator, legal status checker, titration planner, side effect visualizer, interaction checker, and cost calculator. No signup required.",
       canonical: alt.canonical,
       siteName: siteConfig.name,
     }),
@@ -87,6 +89,64 @@ const tools = [
     ),
     color: C.navy,
   },
+  {
+    title: "Titration Planner",
+    description:
+      "Pick a GLP-1 medication and a start date to generate a week-by-week dose escalation calendar. Color-coded by dose level with print support. Based on FDA prescribing information.",
+    href: "/tools/titration-planner",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+        <line x1="16" y1="2" x2="16" y2="6" />
+        <line x1="8" y1="2" x2="8" y2="6" />
+        <line x1="3" y1="10" x2="21" y2="10" />
+        <line x1="8" y1="15" x2="16" y2="15" />
+        <line x1="12" y1="12" x2="12" y2="18" />
+      </svg>
+    ),
+    color: C.warning,
+  },
+  {
+    title: "Side Effect Visualizer",
+    description:
+      "Compare GLP-1 medication side effect rates against placebo with horizontal bar charts. Data from STEP, SURPASS, and SCALE clinical trials via FDA prescribing labels.",
+    href: "/tools/side-effects",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="18" y1="20" x2="18" y2="10" />
+        <line x1="12" y1="20" x2="12" y2="4" />
+        <line x1="6" y1="20" x2="6" y2="14" />
+        <line x1="2" y1="20" x2="22" y2="20" />
+      </svg>
+    ),
+    color: "#D4553A",
+  },
+  {
+    title: "Interaction Checker",
+    description:
+      "Select two peptides or medications to check known interactions. Severity-coded results (avoid, caution, monitor, likely-safe, no-data) with evidence levels and recommendations.",
+    href: "/tools/interaction-checker",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="8" cy="12" r="5" />
+        <circle cx="16" cy="12" r="5" />
+      </svg>
+    ),
+    color: "#7C3AED",
+  },
+  {
+    title: "Cost Calculator",
+    description:
+      "Compare GLP-1 medication costs: list price, insurance copay range, manufacturer discount programs, and compounded alternatives. Monthly and yearly breakdowns.",
+    href: "/tools/cost-calculator",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="12" y1="1" x2="12" y2="23" />
+        <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+      </svg>
+    ),
+    color: C.success,
+  },
 ];
 
 /* ── Page ──────────────────────────────────────────────────────────────── */
@@ -106,9 +166,9 @@ export default async function ToolsPage({
         data={{
           "@context": "https://schema.org",
           "@type": "CollectionPage",
-          name: "Free Peptide Tools",
+          name: "Free Peptide & GLP-1 Tools",
           description:
-            "Free interactive peptide tools including a guided peptide finder, reconstitution calculator, and legal status checker.",
+            "Free interactive peptide and GLP-1 tools including a guided peptide finder, reconstitution calculator, legal status checker, dosage titration planner, side effect visualizer, interaction checker, and cost calculator.",
           url: `${siteConfig.domain}/tools`,
         }}
       />
@@ -130,7 +190,7 @@ export default async function ToolsPage({
               fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
             }}
           >
-            Free Peptide Tools
+            Free Peptide &amp; GLP-1 Tools
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
             No signup required. 100% free, forever.
@@ -138,7 +198,7 @@ export default async function ToolsPage({
         </div>
 
         {/* ── Tool Cards ────────────────────────────────────────────── */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {tools.map((tool) => (
             <Link
               key={tool.href}
