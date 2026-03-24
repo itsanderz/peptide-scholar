@@ -5,6 +5,7 @@ import { getPeptidesByCategory } from "@/data/peptides";
 import { getCategoryBySlug, getAllCategories } from "@/data/categories";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
 import { BreadcrumbNav, AdSlot, PeptideCard, EvidenceBadge, MedicalDisclaimer, CategoryNav, FAQ } from "@/components";
+import { PageTracker } from "@/components/PageTracker";
 import { isValidLocale } from "@/lib/i18n";
 import { withLocaleParams, localeAlternates } from "@/lib/locale-params";
 
@@ -84,6 +85,7 @@ export default async function CategoryPage({ params }: Props) {
 
   return (
     <>
+      <PageTracker event="category_view" params={{ category_name: category }} />
       <JsonLd
         data={{
           "@context": "https://schema.org",

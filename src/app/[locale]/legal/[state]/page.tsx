@@ -5,6 +5,7 @@ import { getAllStatesLegal, getStateBySlug } from "@/data/states-legal";
 import { getAllPeptides } from "@/data/peptides";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
 import { BreadcrumbNav, AdSlot, FAQ, LegalStatusBadge, MedicalDisclaimer } from "@/components";
+import { PageTracker } from "@/components/PageTracker";
 import { isValidLocale } from "@/lib/i18n";
 import { withLocaleParams, localeAlternates } from "@/lib/locale-params";
 
@@ -104,6 +105,7 @@ export default async function StateLegalPage({ params }: Props) {
 
   return (
     <>
+      <PageTracker event="state_view" params={{ state_name: state }} />
       <JsonLd
         data={{
           "@context": "https://schema.org",

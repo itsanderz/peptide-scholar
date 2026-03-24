@@ -5,6 +5,7 @@ import { getPeptideBySlug } from "@/data/peptides";
 import { getComparisonBySlug, getAllComparisonSlugs } from "@/data/comparisons";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
 import { BreadcrumbNav, FAQ, AdSlot, ComparisonGrid, EvidenceBadge, MedicalDisclaimer, ReviewedBadge, EmailCapture } from "@/components";
+import { PageTracker } from "@/components/PageTracker";
 import { isValidLocale } from "@/lib/i18n";
 import { withLocaleParams, localeAlternates } from "@/lib/locale-params";
 
@@ -70,6 +71,7 @@ export default async function ComparisonPage({ params }: Props) {
 
   return (
     <>
+      <PageTracker event="comparison_view" params={{ comparison_slug: slug }} />
       <JsonLd
         data={{
           "@context": "https://schema.org",

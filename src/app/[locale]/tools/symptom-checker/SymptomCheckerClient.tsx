@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { MedicationTimeline, SymptomTimeline } from "@/data/side-effect-timeline";
+import { trackSymptomCheck } from "@/lib/analytics";
 
 /* ── Theme ─────────────────────────────────────────────────────────────── */
 const C = {
@@ -115,7 +116,12 @@ export default function SymptomCheckerClient({ medications }: Props) {
               {selectedMed.symptoms.map((s) => (
                 <button
                   key={s.symptom}
-                  onClick={() => setSelectedSymptom(s.symptom)}
+                  onClick={() => {
+                    setSelectedSymptom(s.symptom);
+                    if (selectedMed) {
+                      trackSymptomCheck(selectedMed.brandName, s.symptom);
+                    }
+                  }}
                   className="rounded-lg px-4 py-2 text-sm font-medium transition-all"
                   style={{
                     backgroundColor: selectedSymptom === s.symptom ? C.accent : C.bg,

@@ -12,6 +12,7 @@ import {
 } from "@/components";
 import { isValidLocale } from "@/lib/i18n";
 import { withLocaleParams, localeAlternates } from "@/lib/locale-params";
+import { PageTracker } from "@/components/PageTracker";
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>;
@@ -79,6 +80,7 @@ export default async function PeptideDetailPage({ params }: Props) {
 
   return (
     <>
+      <PageTracker event="peptide_view" params={{ peptide_slug: slug, peptide_name: peptide.name, evidence_level: peptide.evidenceLevel, peptide_category: peptide.category }} />
       <JsonLd
         data={{
           "@context": "https://schema.org",

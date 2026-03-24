@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
 import { BreadcrumbNav, MedicalDisclaimer, AdSlot } from "@/components";
+import { PageTracker } from "@/components/PageTracker";
 import { proteinGuidelines } from "@/data/side-effect-timeline";
 import { isValidLocale } from "@/lib/i18n";
 import { localeAlternates } from "@/lib/locale-params";
@@ -74,6 +75,7 @@ export default async function GLP1NutritionPage({
 
   return (
     <>
+      <PageTracker event="guide_view" params={{ guide_slug: "glp1-nutrition" }} />
       <JsonLd
         data={{
           "@context": "https://schema.org",

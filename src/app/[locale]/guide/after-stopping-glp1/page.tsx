@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
 import { BreadcrumbNav, MedicalDisclaimer, AdSlot } from "@/components";
+import { PageTracker } from "@/components/PageTracker";
 import { postTreatmentData } from "@/data/side-effect-timeline";
 import { isValidLocale } from "@/lib/i18n";
 import { localeAlternates } from "@/lib/locale-params";
@@ -77,6 +78,7 @@ export default async function AfterStoppingGLP1Page({
 
   return (
     <>
+      <PageTracker event="guide_view" params={{ guide_slug: "after-stopping-glp1" }} />
       <JsonLd
         data={{
           "@context": "https://schema.org",

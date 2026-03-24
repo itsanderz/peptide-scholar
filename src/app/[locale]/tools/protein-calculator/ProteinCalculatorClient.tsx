@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import type { proteinGuidelines as ProteinGuidelinesType } from "@/data/side-effect-timeline";
+import { trackProteinCalc } from "@/lib/analytics";
 
 /* ── Theme ─────────────────────────────────────────────────────────────── */
 const C = {
@@ -76,6 +77,14 @@ export default function ProteinCalculatorClient({ guidelines }: Props) {
   }, [weightKg, age, activity]);
 
   const isValid = weightKg !== null && weightKg > 20 && weightKg < 400;
+
+  const prevResultRef = useRef<typeof result>(null);
+  useEffect(() => {
+    if (isValid && result && weightKg !== null && result !== prevResultRef.current) {
+      prevResultRef.current = result;
+      trackProteinCalc(weightKg, age, activity, result.daily);
+    }
+  }, [isValid, result, weightKg, age, activity]);
 
   return (
     <div>

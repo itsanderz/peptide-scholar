@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
 import { BreadcrumbNav, MedicalDisclaimer, AdSlot } from "@/components";
+import { PageTracker } from "@/components/PageTracker";
 import { isValidLocale } from "@/lib/i18n";
 import { localeAlternates } from "@/lib/locale-params";
 import { siteConfig } from "@/lib/siteConfig";
@@ -69,6 +70,7 @@ export default async function ReadingCOAPage({
 
   return (
     <>
+      <PageTracker event="guide_view" params={{ guide_slug: "reading-coa" }} />
       <JsonLd
         data={{
           "@context": "https://schema.org",

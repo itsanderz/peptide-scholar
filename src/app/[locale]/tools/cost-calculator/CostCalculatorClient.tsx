@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { CostEntry } from "@/data/clinical-data";
+import { trackCostLookup } from "@/lib/analytics";
 
 /* ── Theme ─────────────────────────────────────────────────────────────── */
 const C = {
@@ -135,7 +136,11 @@ export default function CostCalculatorClient({ costs }: Props) {
         </label>
         <select
           value={selectedSlug}
-          onChange={(e) => setSelectedSlug(e.target.value)}
+          onChange={(e) => {
+            setSelectedSlug(e.target.value);
+            const chosen = costs.find((c) => c.slug === e.target.value);
+            if (chosen) trackCostLookup(chosen.brandName);
+          }}
           className="w-full sm:w-auto rounded-lg px-3 py-2.5 text-sm"
           style={{
             border: `1px solid ${C.border}`,

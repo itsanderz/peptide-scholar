@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import type { TitrationSchedule } from "@/data/clinical-data";
+import { trackTitrationPlan } from "@/lib/analytics";
 
 /* ── Theme ─────────────────────────────────────────────────────────────── */
 const C = {
@@ -142,7 +143,11 @@ export default function TitrationPlannerClient({ schedules }: Props) {
             </label>
             <select
               value={selectedSlug}
-              onChange={(e) => setSelectedSlug(e.target.value)}
+              onChange={(e) => {
+                setSelectedSlug(e.target.value);
+                const chosen = schedules.find((s) => s.slug === e.target.value);
+                if (chosen) trackTitrationPlan(chosen.brandName);
+              }}
               className="w-full rounded-lg px-3 py-2.5 text-sm"
               style={{
                 border: `1px solid ${C.border}`,

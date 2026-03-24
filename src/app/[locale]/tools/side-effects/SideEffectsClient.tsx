@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { SideEffectProfile } from "@/data/clinical-data";
+import { trackSideEffectCompare } from "@/lib/analytics";
 
 /* ── Theme ─────────────────────────────────────────────────────────────── */
 const C = {
@@ -171,6 +172,20 @@ function BarChart({ profile }: { profile: SideEffectProfile }) {
 
 export default function SideEffectsClient({ profiles }: Props) {
   const [selectedSlugs, setSelectedSlugs] = useState<string[]>([profiles[0]?.slug ?? ""]);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    const selectedProfileNames = profiles
+      .filter((p) => selectedSlugs.includes(p.slug))
+      .map((p) => p.brandName);
+    if (selectedProfileNames.length > 0) {
+      trackSideEffectCompare(selectedProfileNames);
+    }
+  }, [selectedSlugs, profiles]);
 
   function toggleSlug(slug: string) {
     setSelectedSlugs((prev) => {

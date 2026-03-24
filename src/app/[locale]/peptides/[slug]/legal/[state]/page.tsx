@@ -5,6 +5,7 @@ import { getAllPeptides, getPeptideBySlug } from "@/data/peptides";
 import { getAllStatesLegal, getStateBySlug } from "@/data/states-legal";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
 import { BreadcrumbNav, AdSlot, FAQ, LegalStatusBadge, EvidenceBadge, MedicalDisclaimer } from "@/components";
+import { PageTracker } from "@/components/PageTracker";
 import { isValidLocale } from "@/lib/i18n";
 import { withLocaleParams, localeAlternates } from "@/lib/locale-params";
 
@@ -112,6 +113,7 @@ export default async function PeptideStateLegalPage({ params }: Props) {
 
   return (
     <>
+      <PageTracker event="peptide_state_view" params={{ peptide_slug: slug, state_name: state }} />
       <JsonLd
         data={{
           "@context": "https://schema.org",

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import type { PeptideInteraction, InteractionSeverity } from "@/data/clinical-data";
+import { trackInteractionCheck } from "@/lib/analytics";
 
 /* ── Theme ─────────────────────────────────────────────────────────────── */
 const C = {
@@ -118,6 +119,12 @@ export default function InteractionCheckerClient({ interactions }: Props) {
       : null;
 
   const displayed = result ?? noDataResult;
+
+  useEffect(() => {
+    if (displayed && peptideA && peptideB && !sameSelected) {
+      trackInteractionCheck(peptideA, peptideB, displayed.severity);
+    }
+  }, [displayed, peptideA, peptideB, sameSelected]);
 
   return (
     <div
