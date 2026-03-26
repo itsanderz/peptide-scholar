@@ -6,8 +6,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       { userAgent: "*", allow: "/" },
       { userAgent: "OAI-SearchBot", allow: "/" },
+      { userAgent: "Google-Extended", allow: "/" },
       { userAgent: "GPTBot", disallow: "/" },
-      { userAgent: "Google-Extended", disallow: "/" },
       { userAgent: "CCBot", disallow: "/" },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

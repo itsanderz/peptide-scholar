@@ -18,12 +18,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Homepage
     { path: "", priority: 1.0, changeFreq: "weekly" },
 
+    // Index / browse pages
+    { path: "/peptides", priority: 0.8, changeFreq: "weekly" },
+    { path: "/compare", priority: 0.7, changeFreq: "weekly" },
+    { path: "/legal", priority: 0.7, changeFreq: "weekly" },
+
     // Peptide detail pages
     ...peptideSlugs.map((slug) => ({
       path: `/peptides/${slug}`,
       priority: 0.8,
       changeFreq: "monthly" as const,
     })),
+
+    // Peptide × State legal pages
+    ...peptideSlugs.flatMap((slug) =>
+      states.map((state) => ({
+        path: `/peptides/${slug}/legal/${state}`,
+        priority: 0.5,
+        changeFreq: "monthly" as const,
+      }))
+    ),
 
     // Comparison pages
     ...comparisonSlugs.map((slug) => ({

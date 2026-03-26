@@ -1,11 +1,43 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllPeptides, getFeaturedPeptides, getPeptidesByCategory } from "@/data/peptides";
 import { getAllCategories } from "@/data/categories";
 import { getAllComparisons } from "@/data/comparisons";
 import { JsonLd, EmailCapture, AdSlot, PeptideCard, CategoryNav, MedicalDisclaimer, MoleculeDecoration } from "@/components";
+import { generateSEO } from "@/components/SEOHead";
+import { siteConfig } from "@/lib/siteConfig";
 import { isValidLocale, type Locale } from "@/lib/i18n";
+import { localeAlternates } from "@/lib/locale-params";
 import { notFound } from "next/navigation";
 import { t, HOMEPAGE_CONTENT, PEPTIDE_STRINGS } from "@/data/content-templates";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isValidLocale(locale)) return {};
+
+  const alt = localeAlternates(siteConfig.domain, "", locale);
+
+  const seo = generateSEO({
+    title: "PeptideScholar | The Evidence-Based Peptide Reference",
+    description:
+      "Comprehensive, research-backed guide to peptides — mechanisms, evidence levels, dosing, side effects, legal status, and comparisons. Every claim cited from PubMed.",
+    canonical: alt.canonical,
+    siteName: siteConfig.name,
+  });
+
+  return {
+    ...seo,
+    title: { absolute: "PeptideScholar | The Evidence-Based Peptide Reference" },
+    alternates: {
+      canonical: alt.canonical,
+      languages: alt.languages,
+    },
+  };
+}
 
 interface Props {
   params: Promise<{ locale: string }>;
