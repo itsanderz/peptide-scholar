@@ -4,93 +4,82 @@ import { getAllComparisonSlugs } from "@/data/comparisons";
 import { getAllCategories } from "@/data/categories";
 import { getAllStatesLegal } from "@/data/states-legal";
 import { LOCALES } from "@/lib/i18n";
+import { BUILD_LOCALES } from "@/lib/locale-params";
+
+const BASE = "https://peptidescholar.com";
+
+function localeUrl(locale: string, path: string): string {
+  if (locale === "en") return `${BASE}${path || "/"}`;
+  return `${BASE}/${locale}${path}`;
+}
+
+function hreflangMap(path: string, locales: readonly string[]) {
+  return {
+    languages: Object.fromEntries(
+      locales.map((l) => [l, localeUrl(l, path)])
+    ),
+  };
+}
+
+function entries(
+  path: string,
+  locales: readonly string[],
+  lastmod: string
+): MetadataRoute.Sitemap {
+  const alternates = hreflangMap(path, locales);
+  return locales.map((locale) => ({
+    url: localeUrl(locale, path),
+    lastModified: lastmod,
+    alternates,
+  }));
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://peptidescholar.com";
-  const now = new Date();
-
   const peptideSlugs = getAllSlugs();
   const comparisonSlugs = getAllComparisonSlugs();
-  const categories = getAllCategories();
-  const states = getAllStatesLegal();
+  const categorySlugs = getAllCategories().map((c) => c.slug);
+  const stateSlugs = getAllStatesLegal().map((s) => s.stateSlug);
+  const lastmod = "2026-03-26";
 
-  const paths: { path: string; priority: number; changeFreq: "weekly" | "monthly" }[] = [
-    // Homepage
-    { path: "", priority: 1.0, changeFreq: "weekly" },
-
-    // Index / browse pages
-    { path: "/peptides", priority: 0.8, changeFreq: "weekly" },
-    { path: "/compare", priority: 0.7, changeFreq: "weekly" },
-    { path: "/legal", priority: 0.7, changeFreq: "weekly" },
-
-    // Peptide detail pages
-    ...peptideSlugs.map((slug) => ({
-      path: `/peptides/${slug}`,
-      priority: 0.8,
-      changeFreq: "monthly" as const,
-    })),
-
-    // Peptide × State legal pages
-    ...peptideSlugs.flatMap((slug) =>
-      states.map((state) => ({
-        path: `/peptides/${slug}/legal/${state}`,
-        priority: 0.5,
-        changeFreq: "monthly" as const,
-      }))
-    ),
-
-    // Comparison pages
-    ...comparisonSlugs.map((slug) => ({
-      path: `/compare/${slug}`,
-      priority: 0.7,
-      changeFreq: "monthly" as const,
-    })),
-
-    // Category pages
-    ...categories.map((cat) => ({
-      path: `/best-for/${cat}`,
-      priority: 0.7,
-      changeFreq: "monthly" as const,
-    })),
-
-    // State legal pages
-    ...states.map((state) => ({
-      path: `/legal/${state}`,
-      priority: 0.6,
-      changeFreq: "monthly" as const,
-    })),
-
-    // Tools
-    { path: "/tools", priority: 0.8, changeFreq: "monthly" },
-    { path: "/tools/peptide-finder", priority: 0.7, changeFreq: "monthly" },
-    { path: "/tools/calculator", priority: 0.7, changeFreq: "monthly" },
-    { path: "/tools/legal-checker", priority: 0.7, changeFreq: "monthly" },
-    { path: "/tools/titration-planner", priority: 0.7, changeFreq: "monthly" },
-    { path: "/tools/side-effects", priority: 0.7, changeFreq: "monthly" },
-    { path: "/tools/interaction-checker", priority: 0.7, changeFreq: "monthly" },
-    { path: "/tools/cost-calculator", priority: 0.7, changeFreq: "monthly" },
-    { path: "/tools/symptom-checker", priority: 0.8, changeFreq: "monthly" },
-    { path: "/tools/protein-calculator", priority: 0.7, changeFreq: "monthly" },
-
-    // Guide pages
-    { path: "/guide", priority: 0.9, changeFreq: "monthly" },
-    { path: "/guide/glp1-nutrition", priority: 0.8, changeFreq: "monthly" },
-    { path: "/guide/wolverine-stack", priority: 0.7, changeFreq: "monthly" },
-    { path: "/guide/reading-coa", priority: 0.7, changeFreq: "monthly" },
-    { path: "/guide/after-stopping-glp1", priority: 0.8, changeFreq: "monthly" },
-
-    // Static pages
-    { path: "/glossary", priority: 0.5, changeFreq: "monthly" },
-    { path: "/about", priority: 0.5, changeFreq: "monthly" },
-    { path: "/disclaimer", priority: 0.5, changeFreq: "monthly" },
+  // Core pages — all 14 locales with full hreflang
+  const corePaths: string[] = [
+    "",
+    "/peptides",
+    "/compare",
+    "/legal",
+    ...peptideSlugs.map((s) => `/peptides/${s}`),
+    ...comparisonSlugs.map((s) => `/compare/${s}`),
+    ...categorySlugs.map((c) => `/best-for/${c}`),
+    ...stateSlugs.map((s) => `/legal/${s}`),
+    "/tools",
+    "/tools/peptide-finder",
+    "/tools/calculator",
+    "/tools/legal-checker",
+    "/tools/titration-planner",
+    "/tools/side-effects",
+    "/tools/interaction-checker",
+    "/tools/cost-calculator",
+    "/tools/symptom-checker",
+    "/tools/protein-calculator",
+    "/guide",
+    "/guide/glp1-nutrition",
+    "/guide/wolverine-stack",
+    "/guide/reading-coa",
+    "/guide/after-stopping-glp1",
+    "/glossary",
+    "/about",
+    "/disclaimer",
   ];
 
-  return paths.flatMap(({ path, priority, changeFreq }) =>
-    LOCALES.map((locale) => ({
-      url: locale === "en" ? `${baseUrl}${path || "/"}` : `${baseUrl}/${locale}${path}`,
-      lastModified: now,
-      changeFrequency: changeFreq,
-      priority,
-    }))
+  // Peptide × State — EN + ES only to avoid scaled-content-abuse signal
+  // for auto-translated template pages. Other locales discoverable via
+  // hreflang in HTML <link> tags on the EN/ES pages.
+  const peptideStatePaths = peptideSlugs.flatMap((slug) =>
+    stateSlugs.map((state) => `/peptides/${slug}/legal/${state}`)
   );
+
+  return [
+    ...corePaths.flatMap((p) => entries(p, LOCALES, lastmod)),
+    ...peptideStatePaths.flatMap((p) => entries(p, BUILD_LOCALES, lastmod)),
+  ];
 }
