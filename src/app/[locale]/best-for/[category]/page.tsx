@@ -24,14 +24,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const peptides = getPeptidesByCategory(category);
 
+  const alt = localeAlternates("https://peptidescholar.com", `/best-for/${category}`, locale);
   return {
     ...generateSEO({
       title: `Best Peptides for ${cat.name} (${new Date().getFullYear()}) — ${peptides.length} Compared`,
       description: `${cat.description} Compare ${peptides.length} peptides with evidence grades, mechanisms, and side effects.`,
-      canonical: `https://peptidescholar.com/best-for/${category}`,
+      canonical: alt.canonical,
       siteName: "PeptideScholar",
     }),
-    alternates: localeAlternates("https://peptidescholar.com", `/best-for/${category}`, locale),
+    alternates: alt,
   };
 }
 

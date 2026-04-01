@@ -22,14 +22,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const comparison = getComparisonBySlug(slug);
   if (!comparison) return {};
 
+  const alt = localeAlternates("https://peptidescholar.com", `/compare/${slug}`, locale);
   return {
     ...generateSEO({
       title: `${comparison.peptideAName} vs ${comparison.peptideBName}: Differences & Which Is Better (${new Date().getFullYear()})`,
       description: comparison.summary.slice(0, 155) + "...",
-      canonical: `https://peptidescholar.com/compare/${slug}`,
+      canonical: alt.canonical,
       siteName: "PeptideScholar",
     }),
-    alternates: localeAlternates("https://peptidescholar.com", `/compare/${slug}`, locale),
+    alternates: alt,
   };
 }
 

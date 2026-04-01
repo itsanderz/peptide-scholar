@@ -22,14 +22,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const stateInfo = getStateBySlug(state);
   if (!stateInfo) return {};
 
+  const alt = localeAlternates("https://peptidescholar.com", `/legal/${state}`, locale);
   return {
     ...generateSEO({
       title: `Are Peptides Legal in ${stateInfo.stateName}? (${new Date().getFullYear()}) — Complete Guide`,
       description: `Are peptides legal in ${stateInfo.stateName}? ${stateInfo.stateName} has a ${stateInfo.stance} stance on peptide regulation. ${stateInfo.compoundingAllowed ? "Compounding is allowed." : "Compounding is restricted."} See status for all 22 peptides.`,
-      canonical: `https://peptidescholar.com/legal/${state}`,
+      canonical: alt.canonical,
       siteName: "PeptideScholar",
     }),
-    alternates: localeAlternates("https://peptidescholar.com", `/legal/${state}`, locale),
+    alternates: alt,
   };
 }
 

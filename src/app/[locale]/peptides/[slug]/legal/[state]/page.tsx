@@ -29,16 +29,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const isApproved = peptide.fdaStatus === "approved";
 
+  const alt = localeAlternates("https://peptidescholar.com", `/peptides/${slug}/legal/${state}`, locale);
   return {
     ...generateSEO({
       title: `Is ${peptide.name} Legal in ${stateInfo.stateName}? (2026)`,
       description: isApproved
         ? `${peptide.name} is FDA approved and available by prescription in ${stateInfo.stateName}. Learn about availability, compounding options, and regulations.`
         : `${peptide.name} legal status in ${stateInfo.stateName}: ${stateInfo.stateName} has a ${stateInfo.stance} stance. ${stateInfo.compoundingAllowed ? "Compounding pharmacies may prepare it." : "Compounding is restricted."} Full legal guide.`,
-      canonical: `https://peptidescholar.com/peptides/${slug}/legal/${state}`,
+      canonical: alt.canonical,
       siteName: "PeptideScholar",
     }),
-    alternates: localeAlternates("https://peptidescholar.com", `/peptides/${slug}/legal/${state}`, locale),
+    alternates: alt,
   };
 }
 

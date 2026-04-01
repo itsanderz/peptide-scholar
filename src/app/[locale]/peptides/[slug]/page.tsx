@@ -29,14 +29,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const peptide = getPeptideBySlug(slug);
   if (!peptide) return {};
 
+  const alt = localeAlternates("https://peptidescholar.com", `/peptides/${slug}`, locale);
   return {
     ...generateSEO({
       title: `${peptide.name}${peptide.brandNames.length > 0 ? ` (${peptide.brandNames.slice(0, 2).join("/")})` : ""}: Benefits, Side Effects & Dosing Guide (${new Date().getFullYear()})`,
       description: `${peptide.name} ${peptide.evidenceLevel === "A" ? "is FDA-approved" : "research"}: benefits, side effects, dosing, mechanism of action, and legal status. Evidence level ${peptide.evidenceLevel}. ${peptide.refs.length} cited studies. ${peptide.fdaStatus === "approved" ? `Brands: ${peptide.brandNames.join(", ")}.` : "Not FDA approved."}`,
-      canonical: `https://peptidescholar.com/peptides/${slug}`,
+      canonical: alt.canonical,
       siteName: "PeptideScholar",
     }),
-    alternates: localeAlternates("https://peptidescholar.com", `/peptides/${slug}`, locale),
+    alternates: alt,
   };
 }
 
