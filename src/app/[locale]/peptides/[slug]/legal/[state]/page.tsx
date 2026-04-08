@@ -40,6 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "PeptideScholar",
     }),
     alternates: alt,
+    robots: { index: false, follow: true },
   };
 }
 

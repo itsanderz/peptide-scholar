@@ -133,6 +133,12 @@ export default async function RootLayout({
                   Guide
                 </Link>
                 <Link
+                  href="/blog"
+                  className="text-white/80 hover:text-white transition-colors"
+                >
+                  Blog
+                </Link>
+                <Link
                   href="/peptides"
                   className="text-white/80 hover:text-white transition-colors"
                 >
@@ -168,12 +174,14 @@ export default async function RootLayout({
             siteName="PeptideScholar"
             links={[
               { label: "Home", href: "/" },
+              { label: "Blog", href: "/blog" },
               { label: "Browse Peptides", href: "/peptides" },
               { label: "Compare", href: "/compare" },
               { label: "Legal", href: "/legal" },
               { label: "Tools", href: "/tools" },
               { label: "Glossary", href: "/glossary" },
               { label: "About", href: "/about" },
+              { label: "Contact", href: "/contact" },
               { label: "Disclaimer", href: "/disclaimer" },
             ]}
           />

@@ -3,8 +3,8 @@ import { getAllSlugs } from "@/data/peptides";
 import { getAllComparisonSlugs } from "@/data/comparisons";
 import { getAllCategories } from "@/data/categories";
 import { getAllStatesLegal } from "@/data/states-legal";
+import { getBlogSlugs } from "@/data/blog-posts";
 import { LOCALES } from "@/lib/i18n";
-import { BUILD_LOCALES } from "@/lib/locale-params";
 
 const BASE = "https://peptidescholar.com";
 
@@ -39,7 +39,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const comparisonSlugs = getAllComparisonSlugs();
   const categorySlugs = getAllCategories().map((c) => c.slug);
   const stateSlugs = getAllStatesLegal().map((s) => s.stateSlug);
-  const lastmod = "2026-03-26";
+  const blogSlugs = getBlogSlugs();
+  const lastmod = "2026-04-07";
 
   // Core pages — all 14 locales with full hreflang
   const corePaths: string[] = [
@@ -66,20 +67,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/guide/wolverine-stack",
     "/guide/reading-coa",
     "/guide/after-stopping-glp1",
+    "/blog",
+    ...blogSlugs.map((s) => `/blog/${s}`),
     "/glossary",
     "/about",
+    "/contact",
     "/disclaimer",
   ];
 
-  // Peptide × State — EN + ES only to avoid scaled-content-abuse signal
-  // for auto-translated template pages. Other locales discoverable via
-  // hreflang in HTML <link> tags on the EN/ES pages.
-  const peptideStatePaths = peptideSlugs.flatMap((slug) =>
-    stateSlugs.map((state) => `/peptides/${slug}/legal/${state}`)
-  );
+  // Peptide × State pages are noindexed (thin template content) so we
+  // exclude them from the sitemap to avoid scaled-content-abuse signals.
+  // They remain crawlable via links on the peptide and legal state pages.
 
-  return [
-    ...corePaths.flatMap((p) => entries(p, LOCALES, lastmod)),
-    ...peptideStatePaths.flatMap((p) => entries(p, BUILD_LOCALES, lastmod)),
-  ];
+  return corePaths.flatMap((p) => entries(p, LOCALES, lastmod));
 }

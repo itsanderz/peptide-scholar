@@ -1,0 +1,194 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { generateSEO } from "@/components/SEOHead";
+import { BreadcrumbNav } from "@/components";
+import { isValidLocale } from "@/lib/i18n";
+import { localeAlternates } from "@/lib/locale-params";
+import { siteConfig } from "@/lib/siteConfig";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isValidLocale(locale)) return {};
+
+  const alt = localeAlternates(siteConfig.domain, "/contact", locale);
+
+  return {
+    ...generateSEO({
+      title: "Contact PeptideScholar",
+      description:
+        "Contact the PeptideScholar team with questions, corrections, or partnership inquiries. We are committed to accuracy and welcome feedback on our evidence-based peptide reference.",
+      canonical: alt.canonical,
+      siteName: siteConfig.name,
+    }),
+    alternates: {
+      canonical: alt.canonical,
+      languages: alt.languages,
+    },
+  };
+}
+
+export default async function ContactPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  if (!isValidLocale(locale)) notFound();
+
+  const prefix = locale === "en" ? "" : `/${locale}`;
+
+  return (
+    <div className="max-w-2xl mx-auto px-4 py-8">
+      <BreadcrumbNav
+        crumbs={[
+          { label: "Home", href: `${prefix}/` },
+          { label: "Contact", href: `${prefix}/contact` },
+        ]}
+      />
+
+      <h1
+        className="text-3xl md:text-4xl font-bold text-[#1A3A5C] mb-4 mt-6"
+        style={{ fontFamily: "Libre Franklin, system-ui, sans-serif" }}
+      >
+        Contact Us
+      </h1>
+
+      <p className="text-lg text-[#5A6577] mb-8 leading-relaxed" style={{ fontFamily: "Source Serif 4, Georgia, serif" }}>
+        We welcome corrections, questions, and feedback. Accuracy is our priority — if you find an error in any of our evidence summaries or citations, please let us know.
+      </p>
+
+      {/* Contact Cards */}
+      <div className="space-y-4 mb-10">
+        <div
+          className="flex items-start gap-4 p-5 rounded-xl bg-white"
+          style={{ border: "1px solid #D0D7E2" }}
+        >
+          <div
+            className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+            style={{ backgroundColor: "#EBF5FF" }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B7A9E" strokeWidth="2" strokeLinecap="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </div>
+          <div>
+            <div className="font-bold text-[#1A3A5C] mb-1" style={{ fontFamily: "Libre Franklin, system-ui, sans-serif" }}>
+              General Inquiries
+            </div>
+            <p className="text-sm text-[#5A6577] mb-2">
+              Questions about our content, evidence grading methodology, or site features.
+            </p>
+            <a
+              href="mailto:info@peptidescholar.com"
+              className="text-sm font-semibold"
+              style={{ color: "#3B7A9E" }}
+            >
+              info@peptidescholar.com
+            </a>
+          </div>
+        </div>
+
+        <div
+          className="flex items-start gap-4 p-5 rounded-xl bg-white"
+          style={{ border: "1px solid #D0D7E2" }}
+        >
+          <div
+            className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+            style={{ backgroundColor: "#F0FFF4" }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2B8A5E" strokeWidth="2" strokeLinecap="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <div>
+            <div className="font-bold text-[#1A3A5C] mb-1" style={{ fontFamily: "Libre Franklin, system-ui, sans-serif" }}>
+              Content Corrections
+            </div>
+            <p className="text-sm text-[#5A6577] mb-2">
+              Found an error in a citation, evidence level, or factual claim? We take accuracy seriously and prioritize corrections.
+            </p>
+            <a
+              href="mailto:info@peptidescholar.com?subject=Content Correction"
+              className="text-sm font-semibold"
+              style={{ color: "#2B8A5E" }}
+            >
+              Submit a correction
+            </a>
+          </div>
+        </div>
+
+        <div
+          className="flex items-start gap-4 p-5 rounded-xl bg-white"
+          style={{ border: "1px solid #D0D7E2" }}
+        >
+          <div
+            className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+            style={{ backgroundColor: "#FFF8EB" }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4912A" strokeWidth="2" strokeLinecap="round">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+            </svg>
+          </div>
+          <div>
+            <div className="font-bold text-[#1A3A5C] mb-1" style={{ fontFamily: "Libre Franklin, system-ui, sans-serif" }}>
+              Partnership &amp; Media Inquiries
+            </div>
+            <p className="text-sm text-[#5A6577] mb-2">
+              Press, partnership, or research collaboration inquiries.
+            </p>
+            <a
+              href="mailto:info@peptidescholar.com?subject=Partnership Inquiry"
+              className="text-sm font-semibold"
+              style={{ color: "#D4912A" }}
+            >
+              info@peptidescholar.com
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Important Disclaimer */}
+      <div
+        className="rounded-xl p-5 mb-8"
+        style={{ backgroundColor: "#FFFBEB", border: "1px solid #FCD34D" }}
+      >
+        <div className="flex items-start gap-3">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D97706" strokeWidth="2" className="flex-shrink-0 mt-0.5">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+          <div>
+            <p className="font-bold text-[#92400E] text-sm mb-1">We Cannot Provide Medical Advice</p>
+            <p className="text-sm text-[#92400E] leading-relaxed">
+              PeptideScholar is an educational reference, not a medical service. We cannot respond to personal health questions, dosing inquiries, or requests for medical recommendations. Please consult a licensed healthcare provider for any medical questions.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Response time note */}
+      <div
+        className="rounded-xl p-5"
+        style={{ backgroundColor: "#F0F3F7", border: "1px solid #D0D7E2" }}
+      >
+        <h2
+          className="font-bold text-[#1A3A5C] mb-2"
+          style={{ fontFamily: "Libre Franklin, system-ui, sans-serif" }}
+        >
+          Response Times
+        </h2>
+        <p className="text-sm text-[#5A6577] leading-relaxed">
+          We respond to correction reports within 48 hours and general inquiries within 3-5 business days.
+          Content corrections that are verified against primary literature are prioritized and corrected as quickly as possible.
+        </p>
+      </div>
+    </div>
+  );
+}

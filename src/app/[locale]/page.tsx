@@ -10,6 +10,7 @@ import { isValidLocale, type Locale } from "@/lib/i18n";
 import { localeAlternates } from "@/lib/locale-params";
 import { notFound } from "next/navigation";
 import { t, HOMEPAGE_CONTENT, PEPTIDE_STRINGS } from "@/data/content-templates";
+import { getAllBlogPosts } from "@/data/blog-posts";
 
 export async function generateMetadata({
   params,
@@ -52,6 +53,7 @@ export default async function HomePage({ params }: Props) {
   const featured = getFeaturedPeptides();
   const categories = getAllCategories();
   const comparisons = getAllComparisons();
+  const latestPosts = getAllBlogPosts().slice(0, 3);
 
   const categoriesWithCount = categories.map((cat) => ({
     name: cat.name,
@@ -476,6 +478,83 @@ export default async function HomePage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* ── From the Blog ─────────────────────────────────────────────── */}
+      <section className="py-12 md:py-16">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h2
+                className="text-2xl md:text-3xl font-bold mb-1"
+                style={{ color: "#1A3A5C", fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)" }}
+              >
+                Research &amp; Analysis
+              </h2>
+              <p className="text-gray-600 text-sm">In-depth evidence reviews, trial data summaries, and regulatory updates.</p>
+            </div>
+            <Link
+              href="/blog"
+              className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold"
+              style={{ color: "#3B7A9E" }}
+            >
+              All articles
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            {latestPosts.map((post) => {
+              const catColors: Record<string, { bg: string; text: string }> = {
+                "Clinical Data": { bg: "#EBF5FF", text: "#1E4D8C" },
+                "Research Review": { bg: "#F0FFF4", text: "#1A6B3C" },
+                "Regulatory": { bg: "#FFF8EB", text: "#92400E" },
+                "Practical Guide": { bg: "#F5F0FF", text: "#5B21B6" },
+              };
+              const cc = catColors[post.category] ?? { bg: "#F0F3F7", text: "#1A3A5C" };
+              return (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group bg-white rounded-xl overflow-hidden transition-shadow hover:shadow-md"
+                  style={{ border: "1px solid #D0D7E2" }}
+                >
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ backgroundColor: cc.bg, color: cc.text }}>
+                        {post.category}
+                      </span>
+                      <span className="text-xs text-gray-400">{post.readingTime} min</span>
+                    </div>
+                    <h3
+                      className="font-bold text-sm leading-snug mb-2 group-hover:text-[#3B7A9E] transition-colors"
+                      style={{ color: "#1A3A5C", fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)" }}
+                    >
+                      {post.title}
+                    </h3>
+                    <p className="text-xs text-gray-500 leading-relaxed line-clamp-3">
+                      {post.excerpt}
+                    </p>
+                    <div className="mt-3 flex items-center gap-1 text-xs font-semibold" style={{ color: "#3B7A9E" }}>
+                      Read more
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="mt-5 sm:hidden text-center">
+            <Link href="/blog" className="text-sm font-semibold" style={{ color: "#3B7A9E" }}>
+              View all articles →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-6xl mx-auto px-4">
+        <AdSlot className="my-6" />
+      </div>
 
       {/* ── Email Capture ──────────────────────────────────────────────── */}
       <section className="py-12 md:py-16" style={{ backgroundColor: "#F0F3F7" }}>
