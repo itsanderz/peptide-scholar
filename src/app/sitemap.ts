@@ -9,7 +9,7 @@ import { LOCALES } from "@/lib/i18n";
 const BASE = "https://peptidescholar.com";
 
 function localeUrl(locale: string, path: string): string {
-  if (locale === "en") return `${BASE}${path || "/"}`;
+  if (locale === "en") return `${BASE}${path}`;
   return `${BASE}/${locale}${path}`;
 }
 
@@ -40,7 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const categorySlugs = getAllCategories().map((c) => c.slug);
   const stateSlugs = getAllStatesLegal().map((s) => s.stateSlug);
   const blogSlugs = getBlogSlugs();
-  const lastmod = "2026-04-07";
+  const lastmod = "2026-04-08";
 
   // Core pages — all 14 locales with full hreflang
   const corePaths: string[] = [
