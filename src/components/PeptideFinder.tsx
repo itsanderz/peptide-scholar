@@ -304,7 +304,7 @@ export default function PeptideFinder({ peptides }: PeptideFinderProps) {
   const results = useMemo(() => {
     const evidenceOpt = EVIDENCE_OPTIONS.find((o) => o.key === evidenceChoice);
 
-    let filtered = peptides.filter((p) => {
+    const filtered = peptides.filter((p) => {
       // Category filter
       if (selectedCategories.length > 0 && !selectedCategories.includes(p.category)) {
         return false;
@@ -340,7 +340,7 @@ export default function PeptideFinder({ peptides }: PeptideFinderProps) {
   }, [peptides, selectedCategories, evidenceChoice, excludeWADA, fdaOnly]);
 
   /* ── Progress Bar ────────────────────────────────────────────────────── */
-  const ProgressBar = () => {
+  const renderProgressBar = () => {
     const displayStep = Math.min(step, totalSteps);
     return (
       <div style={{ marginBottom: "2rem" }}>
@@ -401,7 +401,7 @@ export default function PeptideFinder({ peptides }: PeptideFinderProps) {
   };
 
   /* ── Step Wrapper with transitions ───────────────────────────────────── */
-  const StepWrapper = ({ children }: { children: React.ReactNode }) => (
+  const renderStepWrapper = (children: React.ReactNode) => (
     <div
       key={step}
       style={{
@@ -423,8 +423,8 @@ export default function PeptideFinder({ peptides }: PeptideFinderProps) {
   );
 
   /* ── Step 1: Categories ──────────────────────────────────────────────── */
-  const Step1 = () => (
-    <StepWrapper>
+  const renderStep1 = () => renderStepWrapper(
+    <>
       <h2
         style={{
           fontSize: "1.5rem",
@@ -493,12 +493,12 @@ export default function PeptideFinder({ peptides }: PeptideFinderProps) {
           </svg>
         </button>
       </div>
-    </StepWrapper>
+    </>
   );
 
   /* ── Step 2: Evidence Level ──────────────────────────────────────────── */
-  const Step2 = () => (
-    <StepWrapper>
+  const renderStep2 = () => renderStepWrapper(
+    <>
       <h2
         style={{
           fontSize: "1.5rem",
@@ -608,12 +608,12 @@ export default function PeptideFinder({ peptides }: PeptideFinderProps) {
           </svg>
         </button>
       </div>
-    </StepWrapper>
+    </>
   );
 
   /* ── Step 3: Additional Preferences ──────────────────────────────────── */
-  const Step3 = () => (
-    <StepWrapper>
+  const renderStep3 = () => renderStepWrapper(
+    <>
       <h2
         style={{
           fontSize: "1.5rem",
@@ -780,12 +780,12 @@ export default function PeptideFinder({ peptides }: PeptideFinderProps) {
           </button>
         </div>
       </div>
-    </StepWrapper>
+    </>
   );
 
   /* ── Step 4: State Selection ─────────────────────────────────────────── */
-  const Step4 = () => (
-    <StepWrapper>
+  const renderStep4 = () => renderStepWrapper(
+    <>
       <h2
         style={{
           fontSize: "1.5rem",
@@ -867,19 +867,19 @@ export default function PeptideFinder({ peptides }: PeptideFinderProps) {
           </svg>
         </button>
       </div>
-    </StepWrapper>
+    </>
   );
 
   /* ── Results ─────────────────────────────────────────────────────────── */
-  const Results = () => {
+  const renderResults = () => {
     // Map category slugs to labels for the "Why this matches" section
     const catLabels: Record<string, string> = {};
     CATEGORIES.forEach((c) => {
       catLabels[c.slug] = c.label;
     });
 
-    return (
-      <StepWrapper>
+    return renderStepWrapper(
+        <>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1rem", marginBottom: "1.5rem" }}>
           <div>
             <h2
@@ -1171,7 +1171,7 @@ export default function PeptideFinder({ peptides }: PeptideFinderProps) {
             </button>
           </div>
         )}
-      </StepWrapper>
+        </>
     );
   };
 
@@ -1187,12 +1187,12 @@ export default function PeptideFinder({ peptides }: PeptideFinderProps) {
         margin: "0 auto",
       }}
     >
-      <ProgressBar />
-      {step === 1 && <Step1 />}
-      {step === 2 && <Step2 />}
-      {step === 3 && <Step3 />}
-      {step === 4 && <Step4 />}
-      {step > totalSteps && <Results />}
+      {renderProgressBar()}
+      {step === 1 && renderStep1()}
+      {step === 2 && renderStep2()}
+      {step === 3 && renderStep3()}
+      {step === 4 && renderStep4()}
+      {step > totalSteps && renderResults()}
     </div>
   );
 }

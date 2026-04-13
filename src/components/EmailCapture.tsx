@@ -1,18 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import { trackEmailSignup } from "@/lib/analytics";
+import { trackAppWaitlistJoin, trackEmailSignup } from "@/lib/analytics";
 
 interface EmailCaptureProps {
   headline?: string;
   description?: string;
   buttonText?: string;
+  signupLocation?: string;
+  marketCode?: string;
+  offerSlug?: string;
+  appUseCase?: string;
+  platformInterest?: string;
 }
 
 export function EmailCapture({
   headline = "Stay Updated",
   description = "Get useful tips and updates delivered to your inbox.",
   buttonText = "Subscribe",
+  signupLocation = "homepage",
+  marketCode,
+  offerSlug,
+  appUseCase,
+  platformInterest,
 }: EmailCaptureProps) {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -31,13 +41,16 @@ export function EmailCapture({
       await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, signupLocation, marketCode, offerSlug }),
       });
     } catch {
       // Network error — still show success (email logged server-side on retry)
     }
 
-    trackEmailSignup("homepage");
+    trackEmailSignup(signupLocation, marketCode, offerSlug);
+    if (marketCode && appUseCase) {
+      trackAppWaitlistJoin(marketCode, appUseCase, platformInterest ?? "unspecified");
+    }
     setSubmitted(true);
   }
 

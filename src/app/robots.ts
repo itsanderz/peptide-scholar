@@ -1,14 +1,22 @@
 import type { MetadataRoute } from "next";
+import { getRequestSite } from "@/lib/request-site";
 
-export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://peptidescholar.com";
+export const dynamic = "force-dynamic";
+
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const site = await getRequestSite();
+
+  if (!site.capabilities.allowPublicSitemap || site.noindexByDefault) {
+    return {
+      rules: [{ userAgent: "*", disallow: "/" }],
+    };
+  }
+
   return {
     rules: [
       { userAgent: "*", allow: "/" },
-      // Allowed AI search bots (for visibility)
       { userAgent: "OAI-SearchBot", allow: "/" },
       { userAgent: "Google-Extended", allow: "/" },
-      // Blocked scrapers
       { userAgent: "GPTBot", disallow: "/" },
       { userAgent: "ChatGPT-User", disallow: "/" },
       { userAgent: "CCBot", disallow: "/" },
@@ -20,6 +28,6 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: "PetalBot", disallow: "/" },
       { userAgent: "Amazonbot", disallow: "/" },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${site.domain}/sitemap.xml`,
   };
 }

@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPeptidesByCategory } from "@/data/peptides";
 import { getCategoryBySlug, getAllCategories } from "@/data/categories";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
-import { BreadcrumbNav, AdSlot, PeptideCard, EvidenceBadge, MedicalDisclaimer, CategoryNav, FAQ } from "@/components";
+import {
+  BreadcrumbNav,
+  AdSlot,
+  PeptideCard,
+  MedicalDisclaimer,
+  CategoryNav,
+  FAQ,
+  ApprovedCategoryRouteCard,
+} from "@/components";
 import { PageTracker } from "@/components/PageTracker";
 import { isValidLocale } from "@/lib/i18n";
 import { withLocaleParams, localeAlternates } from "@/lib/locale-params";
+import { getRequestMarketCode } from "@/lib/request-market";
 
 interface Props {
   params: Promise<{ locale: string; category: string }>;
@@ -39,6 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CategoryPage({ params }: Props) {
   const { locale, category } = await params;
   if (!isValidLocale(locale)) notFound();
+  const marketCode = await getRequestMarketCode();
 
   const cat = getCategoryBySlug(category);
   if (!cat) notFound();
@@ -60,6 +69,7 @@ export default async function CategoryPage({ params }: Props) {
     C: peptides.filter((p) => p.evidenceLevel === "C").length,
     D: peptides.filter((p) => p.evidenceLevel === "D").length,
   };
+  const approvedPeptides = peptides.filter((p) => p.fdaStatus === "approved");
 
   const crumbs = [
     { label: "Home", href: "/" },
@@ -123,6 +133,19 @@ export default async function CategoryPage({ params }: Props) {
         </p>
 
         {/* ── Stats ──────────────────────────────────────────────────── */}
+        {approvedPeptides.length > 0 && (
+          <ApprovedCategoryRouteCard
+            categoryName={cat.name}
+            options={approvedPeptides.map((peptide) => ({
+              name: peptide.name,
+              slug: peptide.slug,
+              fdaApprovedFor: peptide.fdaApprovedFor,
+              brandNames: peptide.brandNames,
+            }))}
+            marketCode={marketCode}
+          />
+        )}
+
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
           <div
             className="text-center p-4 rounded-lg"

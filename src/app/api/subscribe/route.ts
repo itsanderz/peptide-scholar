@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const { email } = await request.json();
+    const { email, signupLocation, marketCode, offerSlug } = await request.json();
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
@@ -26,7 +26,9 @@ export async function POST(request: Request) {
     }
 
     // Log subscriber (works without any external service)
-    console.log(`[SUBSCRIBE] ${email} at ${new Date().toISOString()}`);
+    console.log(
+      `[SUBSCRIBE] ${email} market=${marketCode ?? "unknown"} location=${signupLocation ?? "unknown"} offer=${offerSlug ?? "unknown"} at ${new Date().toISOString()}`
+    );
 
     return NextResponse.json({ success: true });
   } catch {

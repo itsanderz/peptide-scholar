@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "id": "us-semaglutide-tracker",
+    "slug": "semaglutide-tracker",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "app-waitlist",
+    "indexable": true,
+    "generatedAt": "2026-04-11",
+    "reviewedAt": "2026-04-11",
+    "lastUpdated": "2026-04-11",
+    "contentType": "app-landing"
+  },
+  "seo": {
+    "title": "Semaglutide Tracker: Dose, Refill and Side-Effect Log",
+    "description": "Join the Semaglutide Tracker waitlist for a private, evidence-first workflow covering dose history, reminders, refill timing, and side-effect notes.",
+    "canonicalPath": "/app/semaglutide-tracker",
+    "keywords": [
+      "semaglutide tracker",
+      "wegovy tracker",
+      "ozempic tracker",
+      "semaglutide reminder app",
+      "semaglutide dose log"
+    ]
+  },
+  "trust": {
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-11",
+    "sourceCount": 3,
+    "disclaimer": "This landing page describes a planned tracking workflow, not medical advice. Actual use, dose changes, and missed-dose decisions should still follow official instructions and clinician guidance."
+  },
+  "appUseCaseSlug": "semaglutide-tracker",
+  "title": "Semaglutide Tracker",
+  "summary": "A private semaglutide workflow for people who want one place to log dose history, refill timing, symptom notes, and treatment milestones without forcing a social or marketplace experience.",
+  "supportedTreatments": [
+    "semaglutide"
+  ],
+  "supportedFeatures": [
+    "Dose history and schedule log",
+    "Refill and supply timing",
+    "Injection-site rotation notes",
+    "Side-effect and symptom journal",
+    "Printable treatment summary for clinician visits"
+  ],
+  "privacySummary": "The tracking roadmap is local-first and privacy-first by default. PeptideScholar does not position the tracker as a diagnostic or prescribing tool.",
+  "availabilitySummary": "The tracker is not publicly launched yet. Join the waitlist to get rollout updates and early access when the web-based version is ready.",
+  "faqs": [
+    {
+      "question": "What problem is the Semaglutide Tracker meant to solve?",
+      "answer": "It is meant to reduce the mental overhead around dose history, refill timing, side-effect notes, and treatment continuity for people following semaglutide workflows."
+    },
+    {
+      "question": "Is the tracker a replacement for clinical advice?",
+      "answer": "No. It is designed as a private adherence and note-taking layer that sits around official instructions and clinician follow-up, not a replacement for either."
+    },
+    {
+      "question": "Why build a dedicated semaglutide landing page before the full app launches?",
+      "answer": "Because semaglutide has strong intent across treatment, legal, cost, and reminder-related queries, and this page lets PeptideScholar validate demand before overbuilding the app."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Join the Semaglutide Tracker waitlist",
+    "primaryHref": "/app/semaglutide-tracker",
+    "secondaryLabel": "Compare cost and provider paths",
+    "secondaryHref": "/costs/semaglutide",
+    "notes": "Start with the waitlist if you want early access; use the cost page if you still need to choose a treatment path."
+  },
+  "sources": [
+    {
+      "id": "wegovy-dosing-2026",
+      "authority": "Wegovy",
+      "title": "Wegovy Pen Guide and Dosing Information",
+      "url": "https://www.wegovy.com/taking-wegovy/dosing-schedule.html",
+      "publishedAt": "2026",
+      "claimType": "clinical"
+    },
+    {
+      "id": "ozempic-pen-2026",
+      "authority": "Ozempic",
+      "title": "How to Use the Ozempic Pen",
+      "url": "https://www.ozempic.com/how-to-take/ozempic-pen.html",
+      "publishedAt": "2026",
+      "claimType": "clinical"
+    },
+    {
+      "id": "ozempic-support-2026",
+      "authority": "Ozempic",
+      "title": "Your Ozempic Support",
+      "url": "https://www.ozempic.com/savings-and-resources/your-ozempic-support.html",
+      "publishedAt": "2026",
+      "claimType": "market"
+    }
+  ]
+}

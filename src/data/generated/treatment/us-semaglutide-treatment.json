@@ -1,0 +1,121 @@
+{
+  "meta": {
+    "id": "us-semaglutide-treatment-hub",
+    "slug": "semaglutide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-11",
+    "reviewedAt": "2026-04-11",
+    "lastUpdated": "2026-04-11",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Semaglutide Treatment Guide: Wegovy, Ozempic, Cost and Provider Paths",
+    "description": "US-first semaglutide treatment hub covering approved product paths, route differences, cost friction, provider selection, and tracker next steps.",
+    "canonicalPath": "/treatments/semaglutide",
+    "keywords": [
+      "semaglutide treatment guide",
+      "wegovy vs ozempic",
+      "semaglutide provider",
+      "semaglutide treatment path",
+      "semaglutide cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-11",
+    "sourceCount": 3,
+    "disclaimer": "This hub summarizes official semaglutide treatment pathways at a high level. Brand availability, indication fit, coverage, and dosing choices still need confirmation from current official materials and a licensed clinician."
+  },
+  "treatmentSlug": "semaglutide",
+  "treatmentName": "Semaglutide",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, semaglutide is not one generic treatment path. It is a family of branded, indication-specific prescription pathways that can differ materially on goal, dose form, coverage, and follow-up workflow.",
+  "overview": "Semaglutide is a regulated GLP-1 treatment family that currently shows up across obesity, cardiovascular-risk, and type 2 diabetes decision journeys. For most users, the practical questions are not whether semaglutide exists, but which branded path fits the indication, what the real coverage friction looks like, and whether the treatment can be managed consistently over time.",
+  "approvedProducts": [
+    {
+      "slug": "wegovy",
+      "name": "Wegovy",
+      "summary": "Branded semaglutide pathway positioned around obesity and related cardiovascular-risk use cases, with official savings and coverage resources."
+    },
+    {
+      "slug": "ozempic",
+      "name": "Ozempic",
+      "summary": "Branded semaglutide pathway positioned around type 2 diabetes workflows, with official pen-use, support, and savings resources."
+    },
+    {
+      "slug": "rybelsus",
+      "name": "Rybelsus",
+      "summary": "Oral semaglutide product path that changes administration workflow and may alter how users compare convenience against provider and coverage constraints."
+    }
+  ],
+  "benefits": [
+    "Clear branded treatment pathways with official patient-support and savings resources",
+    "Use cases that can align with weight-management, cardiometabolic, or diabetes decision flows depending on product and indication",
+    "A regulated pathway that can be paired with provider matching, cost review, and adherence tracking instead of gray-market sourcing"
+  ],
+  "sideEffects": [
+    "Gastrointestinal side effects such as nausea, vomiting, diarrhea, constipation, and abdominal discomfort remain common discussion points",
+    "Coverage and prior-authorization friction can be as limiting as the medication choice itself",
+    "Semaglutide brands should not be treated as interchangeable without checking indication, formulation, and official instructions"
+  ],
+  "routes": [
+    "Subcutaneous injection",
+    "Oral"
+  ],
+  "costSummary": "Semaglutide costs can diverge sharply by brand, indication, insurance design, and whether the user qualifies for official savings or self-pay programs.",
+  "providerSummary": "The highest-converting next step is usually not a generic clinic search. It is comparing semaglutide provider paths by state, coverage posture, budget, and timeline.",
+  "appSummary": "Semaglutide demand also has a strong retention layer: weekly dose tracking, refill timing, and symptom logging are recurring jobs that justify a dedicated tracker workflow.",
+  "faqs": [
+    {
+      "question": "Is semaglutide one treatment path or several?",
+      "answer": "Several. In practice, semaglutide decisions often branch by branded pathway, indication, route, and coverage logic rather than behaving like one uniform treatment purchase."
+    },
+    {
+      "question": "Should I compare Wegovy and Ozempic the same way?",
+      "answer": "No. They may share semaglutide, but they sit in different branded workflows and should be compared through indication, route, provider, and coverage fit rather than name recognition alone."
+    },
+    {
+      "question": "What is the safest next step before starting semaglutide?",
+      "answer": "Review the official product path, check realistic cost and coverage friction, and then use a licensed provider route that fits your state, urgency, and budget."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a semaglutide provider",
+    "primaryHref": "/providers?treatment=semaglutide",
+    "secondaryLabel": "Review semaglutide costs",
+    "secondaryHref": "/costs/semaglutide",
+    "notes": "Use the provider matcher if you already know semaglutide is the right treatment family; use the cost guide if you still need to narrow the path."
+  },
+  "sources": [
+    {
+      "id": "wegovy-home-2026",
+      "authority": "Wegovy",
+      "title": "Weight Management for Adults with Obesity | Wegovy (semaglutide)",
+      "url": "https://www.wegovy.com/",
+      "publishedAt": "2026",
+      "claimType": "clinical"
+    },
+    {
+      "id": "ozempic-home-2026",
+      "authority": "Ozempic",
+      "title": "Type 2 Diabetes Treatment to Lower A1C | Ozempic (semaglutide)",
+      "url": "https://www.ozempic.com/",
+      "publishedAt": "2026",
+      "claimType": "clinical"
+    },
+    {
+      "id": "fda-semaglutide-safety-2026",
+      "authority": "FDA",
+      "title": "Medications Containing Semaglutide Marketed for Type 2 Diabetes or Weight Loss",
+      "url": "https://www.fda.gov/drugs/postmarket-drug-safety-information-patients-and-providers/medications-containing-semaglutide-marketed-type-2-diabetes-or-weight-loss",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

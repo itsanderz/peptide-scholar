@@ -4,10 +4,11 @@ import { notFound } from "next/navigation";
 import { getAllComparisons } from "@/data/comparisons";
 import { getPeptideBySlug } from "@/data/peptides";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
-import { BreadcrumbNav, MedicalDisclaimer, AdSlot } from "@/components";
+import { BreadcrumbNav, MedicalDisclaimer, AdSlot, EmailCapture, PageTracker } from "@/components";
 import { EvidenceBadge } from "@/components/EvidenceBadge";
 import { isValidLocale } from "@/lib/i18n";
 import { localeAlternates } from "@/lib/locale-params";
+import { getRequestMarket } from "@/lib/request-market";
 import { siteConfig } from "@/lib/siteConfig";
 
 interface Props {
@@ -17,14 +18,16 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
+  const market = await getRequestMarket();
 
   const alt = localeAlternates(siteConfig.domain, "/compare", locale);
+  const descriptor = market.code === "us" ? "for the United States" : `for ${market.name}`;
 
   return {
     ...generateSEO({
       title: "Peptide Comparisons: 35+ Head-to-Head Analyses",
       description:
-        "35+ evidence-based peptide comparisons. See how BPC-157, TB-500, semaglutide, ipamorelin, and more stack up on evidence, mechanisms, side effects, and cost.",
+        `35+ evidence-based peptide comparisons ${descriptor}. Compare evidence, mechanisms, side effects, cost, and treatment fit with market-aware guidance.`,
       canonical: alt.canonical,
       siteName: siteConfig.name,
     }),
@@ -59,6 +62,7 @@ function classifyComparison(
 export default async function CompareIndexPage({ params }: Props) {
   const { locale } = await params;
   if (!isValidLocale(locale)) notFound();
+  const market = await getRequestMarket();
 
   const comparisons = getAllComparisons();
 
@@ -99,6 +103,7 @@ export default async function CompareIndexPage({ params }: Props) {
 
   return (
     <>
+      <PageTracker event="market_page_view" params={{ page_family: "compare-index", page_slug: "compare", market: market.code }} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -134,6 +139,10 @@ export default async function CompareIndexPage({ params }: Props) {
           }}
         />
         <div className="relative max-w-4xl mx-auto px-4">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold" style={{ backgroundColor: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.14)", color: "rgba(255,255,255,0.82)" }}>
+            <span>Active market:</span>
+            <span style={{ color: "#FFFFFF" }}>{market.name}</span>
+          </div>
           <h1
             className="text-3xl md:text-5xl font-bold mb-4 tracking-tight"
             style={{ fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)" }}
@@ -174,6 +183,20 @@ export default async function CompareIndexPage({ params }: Props) {
       {/* ── Content ───────────────────────────────────────────────────── */}
       <section className="max-w-5xl mx-auto px-4 pt-10 pb-4">
         <BreadcrumbNav crumbs={crumbs} />
+
+        <div
+          className="rounded-xl p-4 mb-6"
+          style={{ backgroundColor: "#F8FAFC", border: "1px solid #D0D7E2" }}
+        >
+          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#3B7A9E] mb-2">
+            Active Market
+          </div>
+          <div className="text-sm md:text-base text-[#1C2028]">
+            {market.code === "us"
+              ? "These comparisons are paired with US-first legality, provider, and cost assumptions where relevant."
+              : `${market.name} is selected. The evidence comparison remains global, while legal, pricing, and routing assumptions may still use US-first defaults until ${market.name} rollout is complete.`}
+          </div>
+        </div>
 
         <p className="text-sm leading-relaxed mb-8" style={{ color: "#5A6577" }}>
           Each comparison covers evidence level, FDA status, mechanism of action, primary uses, side effects, ease
@@ -302,6 +325,19 @@ export default async function CompareIndexPage({ params }: Props) {
       {/* ── Ad + Disclaimer ───────────────────────────────────────────── */}
       <section className="max-w-5xl mx-auto px-4 pb-12">
         <AdSlot className="mb-6" />
+        <div className="mb-6">
+          <EmailCapture
+            headline={market.code === "us" ? "Get new peptide comparisons and treatment updates" : `Join the ${market.name} comparison waitlist`}
+            description={
+              market.code === "us"
+                ? "Get notified when new head-to-head comparisons, legal updates, and provider flows go live."
+                : `We will notify you when ${market.name}-specific legality, pricing, and provider guidance are added to comparison pages.`
+            }
+            signupLocation="compare_index"
+            marketCode={market.code}
+            offerSlug={market.code === "us" ? "compare_updates" : "market_compare_waitlist"}
+          />
+        </div>
         <MedicalDisclaimer />
       </section>
 

@@ -4,10 +4,11 @@ import { notFound } from "next/navigation";
 import { getAllStatesLegal, getStateBySlug } from "@/data/states-legal";
 import { getAllPeptides } from "@/data/peptides";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
-import { BreadcrumbNav, AdSlot, FAQ, LegalStatusBadge, MedicalDisclaimer } from "@/components";
+import { BreadcrumbNav, AdSlot, FAQ, MedicalDisclaimer, ProviderIntentCard } from "@/components";
 import { PageTracker } from "@/components/PageTracker";
 import { isValidLocale } from "@/lib/i18n";
 import { withLocaleParams, localeAlternates } from "@/lib/locale-params";
+import { getRequestMarketCode } from "@/lib/request-market";
 
 interface Props {
   params: Promise<{ locale: string; state: string }>;
@@ -61,6 +62,7 @@ const STANCE_STYLES = {
 export default async function StateLegalPage({ params }: Props) {
   const { locale, state } = await params;
   if (!isValidLocale(locale)) notFound();
+  const marketCode = await getRequestMarketCode();
 
   const stateInfo = getStateBySlug(state);
   if (!stateInfo) notFound();
@@ -68,10 +70,6 @@ export default async function StateLegalPage({ params }: Props) {
   const allPeptides = getAllPeptides();
   const allStates = getAllStatesLegal();
   const stanceConfig = STANCE_STYLES[stateInfo.stance];
-
-  // Group peptides by availability
-  const fdaApproved = allPeptides.filter((p) => p.fdaStatus === "approved");
-  const nonApproved = allPeptides.filter((p) => p.fdaStatus !== "approved");
 
   // Popular / neighboring states for cross-linking
   const popularStates = allStates
@@ -106,7 +104,7 @@ export default async function StateLegalPage({ params }: Props) {
 
   return (
     <>
-      <PageTracker event="state_view" params={{ state_name: state }} />
+      <PageTracker event="state_view" params={{ state_name: state, market: marketCode }} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -159,6 +157,44 @@ export default async function StateLegalPage({ params }: Props) {
         </p>
 
         {/* ── Key Facts Grid ─────────────────────────────────────────── */}
+        <div className="mb-8">
+          <ProviderIntentCard
+            marketCode={marketCode}
+            location="state_legal"
+            treatmentSlug="general"
+            headline={
+              marketCode === "us"
+                ? `Need a legal prescribing path in ${stateInfo.stateName}?`
+                : `Want provider rollout updates for ${stateInfo.stateName}?`
+            }
+            description={
+              marketCode === "us"
+                ? "Use the provider matcher to narrow options by treatment, insurance, budget, and urgency while keeping state-level legal context in view."
+                : `We are expanding country-aware provider workflows beyond the US. Join the rollout list for ${stateInfo.stateName}-adjacent legal and provider guidance.`
+            }
+            buttonText={marketCode === "us" ? "Find a provider" : "Join provider rollout"}
+          />
+        </div>
+
+        <div
+          className="rounded-xl p-4 mb-8"
+          style={{ backgroundColor: "#F8FAFC", border: "1px solid #D0D7E2" }}
+        >
+          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#3B7A9E] mb-2">
+            State Routing Guide
+          </div>
+          <div className="text-sm md:text-base text-[#1C2028] mb-3">
+            Need a more concrete next step? Use the provider routing guide for {stateInfo.stateName} to see how PeptideScholar currently prioritizes paths based on this state&apos;s legal profile.
+          </div>
+          <Link
+            href={`/providers/state/${stateInfo.stateSlug}`}
+            className="inline-flex items-center text-sm font-semibold"
+            style={{ color: "#1A3A5C", textDecoration: "none" }}
+          >
+            View {stateInfo.stateName} provider routing guide &rarr;
+          </Link>
+        </div>
+
         <section className="mb-10">
           <h2
             className="text-xl md:text-2xl font-bold mb-4"
@@ -285,7 +321,6 @@ export default async function StateLegalPage({ params }: Props) {
               <tbody>
                 {allPeptides.map((peptide, i) => {
                   const isApproved = peptide.fdaStatus === "approved";
-                  const available = isApproved || stateInfo.stance !== "restrictive";
                   return (
                     <tr
                       key={peptide.slug}

@@ -3,9 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllBlogPosts } from "@/data/blog-posts";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
-import { BreadcrumbNav, AdSlot } from "@/components";
+import { BreadcrumbNav, AdSlot, EmailCapture, PageTracker } from "@/components";
 import { isValidLocale } from "@/lib/i18n";
 import { localeAlternates } from "@/lib/locale-params";
+import { getRequestMarket } from "@/lib/request-market";
 import { siteConfig } from "@/lib/siteConfig";
 
 export async function generateMetadata({
@@ -15,6 +16,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
+  const market = await getRequestMarket();
 
   const alt = localeAlternates(siteConfig.domain, "/blog", locale);
 
@@ -22,7 +24,7 @@ export async function generateMetadata({
     ...generateSEO({
       title: "Peptide Research Blog — Evidence-Based Analysis",
       description:
-        "In-depth reviews of peptide clinical trial data, regulatory updates, and practical guides. Every article cites primary literature. Topics include GLP-1 medications, BPC-157, GHK-Cu, and peptide quality testing.",
+        `In-depth reviews of peptide clinical trial data, regulatory updates, and practical guides ${market.code === "us" ? "with US-first commercial context" : `for ${market.name}`}. Every article cites primary literature.`,
       canonical: alt.canonical,
       siteName: siteConfig.name,
     }),
@@ -55,6 +57,7 @@ export default async function BlogIndexPage({
 }) {
   const { locale } = await params;
   if (!isValidLocale(locale)) notFound();
+  const market = await getRequestMarket();
 
   const posts = getAllBlogPosts();
 
@@ -80,11 +83,20 @@ export default async function BlogIndexPage({
 
   return (
     <>
+      <PageTracker event="market_page_view" params={{ page_family: "blog-index", page_slug: "blog", market: market.code }} />
       <JsonLd data={jsonLd} />
 
       {/* Header */}
       <div style={{ background: "linear-gradient(145deg, #0F2740 0%, #1A3A5C 100%)" }} className="py-14">
         <div className="max-w-4xl mx-auto px-4 text-center">
+          <div
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5"
+            style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.14)" }}
+          >
+            <span className="text-xs font-semibold tracking-wide text-white/80">
+              Active Market: {market.name}
+            </span>
+          </div>
           <div
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5"
             style={{ backgroundColor: "rgba(59,122,158,0.2)", border: "1px solid rgba(59,122,158,0.3)" }}
@@ -114,8 +126,22 @@ export default async function BlogIndexPage({
           ]}
         />
 
+        <div
+          className="rounded-xl p-4 mt-6 mb-8"
+          style={{ backgroundColor: "#F8FAFC", border: "1px solid #D0D7E2" }}
+        >
+          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#3B7A9E] mb-2">
+            Active Market
+          </div>
+          <div className="text-sm md:text-base text-[#1C2028]">
+            {market.code === "us"
+              ? "These research articles connect directly into US-first legal, cost, and provider journeys."
+              : `${market.name} is selected. Research analysis remains globally useful, but some downstream legal and provider calls to action may stay US-first while ${market.name} rollout is still in progress.`}
+          </div>
+        </div>
+
         <div className="space-y-8 mt-6">
-          {posts.map((post, i) => {
+          {posts.map((post) => {
             const catStyle = CATEGORY_COLORS[post.category] ?? { bg: "#F0F3F7", text: "#1A3A5C" };
             return (
               <article
@@ -178,19 +204,17 @@ export default async function BlogIndexPage({
           className="mt-10 rounded-xl p-6 text-center"
           style={{ backgroundColor: "#F0F3F7", border: "1px solid #D0D7E2" }}
         >
-          <h2 className="text-lg font-bold mb-2" style={{ color: "#1A3A5C", fontFamily: "var(--font-libre-franklin)" }}>
-            Want Research Updates in Your Inbox?
-          </h2>
-          <p className="text-sm text-gray-600 mb-4">
-            New articles, regulatory changes, and trial data summaries — delivered weekly. No spam.
-          </p>
-          <Link
-            href="/"
-            className="inline-block px-5 py-2.5 rounded-lg font-semibold text-sm text-white transition-colors"
-            style={{ backgroundColor: "#1A3A5C" }}
-          >
-            Subscribe on the Homepage
-          </Link>
+          <EmailCapture
+            headline={market.code === "us" ? "Want research updates in your inbox?" : `Join the ${market.name} research waitlist`}
+            description={
+              market.code === "us"
+                ? "New articles, regulatory changes, and trial data summaries delivered weekly. No spam."
+                : `Get notified when ${market.name}-specific legal guides, provider flows, and tracker support are added to the research hub.`
+            }
+            signupLocation="blog_index"
+            marketCode={market.code}
+            offerSlug={market.code === "us" ? "blog_research_digest" : "market_blog_waitlist"}
+          />
         </div>
       </div>
     </>

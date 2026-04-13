@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "id": "us-tirzepatide-cost",
+    "slug": "tirzepatide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-11",
+    "reviewedAt": "2026-04-11",
+    "lastUpdated": "2026-04-11",
+    "contentType": "cost"
+  },
+  "seo": {
+    "title": "Tirzepatide Cost Guide: Zepbound, Mounjaro, Coverage and Savings",
+    "description": "US-first tirzepatide cost guide covering official Zepbound savings, self-pay pricing, insurance friction, and the checks to make before starting treatment.",
+    "canonicalPath": "/costs/tirzepatide",
+    "keywords": [
+      "tirzepatide cost",
+      "zepbound cost",
+      "mounjaro cost",
+      "tirzepatide insurance coverage",
+      "tirzepatide savings"
+    ]
+  },
+  "trust": {
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-11",
+    "sourceCount": 3,
+    "disclaimer": "Tirzepatide offers, dose-specific self-pay pricing, and insurance rules can change. Verify every current figure directly on official Lilly pages before acting."
+  },
+  "treatmentSlug": "tirzepatide",
+  "treatmentName": "Tirzepatide",
+  "marketSummary": "In the United States, tirzepatide costs depend on whether the prescription is routed through Zepbound or Mounjaro pathways, the indication, the dose, and whether you qualify for official coverage or self-pay offers.",
+  "listPrice": "Use official Lilly pricing and savings pages as the starting point. Tirzepatide pricing can vary by brand, dose, device format, and whether you are using a savings card or a self-pay purchase program.",
+  "cashPayRange": "Official self-pay programs now create dose-specific cash pricing for some Zepbound presentations, but the exact monthly amount still depends on dose and fulfillment path.",
+  "insuranceSummary": "Coverage remains highly plan-dependent. Weight-management access often differs from diabetes coverage, and approved use does not guarantee a simple covered pathway.",
+  "couponSummary": "Official Zepbound savings options may reduce cost for eligible patients with commercial coverage, and Lilly also publishes self-pay program terms for certain presentations.",
+  "priorAuthSummary": "Expect prior authorization or utilization management when tirzepatide is routed through obesity coverage, employer exclusions, or specialty-pharmacy workflows.",
+  "faqs": [
+    {
+      "question": "What should I verify before using a tirzepatide savings offer?",
+      "answer": "Check brand, dose, device format, refill timing rules, commercial-insurance eligibility, and the exact fulfillment channel named in the offer terms."
+    },
+    {
+      "question": "Why can advertised tirzepatide pricing differ so much?",
+      "answer": "Because dose, device type, self-pay program rules, insurance coverage status, and the prescribing path can all materially change the actual monthly price."
+    },
+    {
+      "question": "Should I choose based on price alone?",
+      "answer": "No. Treatment fit, legal indication, provider quality, follow-up support, and the likelihood of staying on therapy often matter more than the headline promotional number."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a tirzepatide provider",
+    "primaryHref": "/providers?treatment=tirzepatide",
+    "secondaryLabel": "Use the cost calculator",
+    "secondaryHref": "/tools/cost-calculator",
+    "notes": "Use provider matching when you need help sorting coverage, self-pay, and faster-intake options."
+  },
+  "sources": [
+    {
+      "id": "zepbound-savings-2026",
+      "authority": "Zepbound",
+      "title": "Savings Options | Zepbound (tirzepatide)",
+      "url": "https://zepbound.lilly.com/savings",
+      "publishedAt": "2026",
+      "claimType": "pricing"
+    },
+    {
+      "id": "zepbound-osa-fda-2024",
+      "authority": "FDA",
+      "title": "FDA Approves First Medication for Obstructive Sleep Apnea",
+      "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-first-medication-obstructive-sleep-apnea",
+      "publishedAt": "2024-12-20",
+      "claimType": "regulatory"
+    },
+    {
+      "id": "lilly-zepbound-vials-2024",
+      "authority": "Eli Lilly and Company",
+      "title": "Lilly releases Zepbound single-dose vials, expanding supply and access",
+      "url": "https://investor.lilly.com/news-releases/news-release-details/lilly-releases-zepboundr-tirzepatide-single-dose-vials-expanding",
+      "publishedAt": "2024-08-27",
+      "claimType": "pricing"
+    }
+  ]
+}

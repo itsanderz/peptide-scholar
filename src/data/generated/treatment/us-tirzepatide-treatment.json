@@ -1,0 +1,115 @@
+{
+  "meta": {
+    "id": "us-tirzepatide-treatment-hub",
+    "slug": "tirzepatide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-11",
+    "reviewedAt": "2026-04-11",
+    "lastUpdated": "2026-04-11",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Tirzepatide Treatment Guide: Zepbound, Mounjaro, Cost and Provider Paths",
+    "description": "US-first tirzepatide treatment hub covering approved product paths, provider fit, cost friction, and tracker demand for Zepbound and Mounjaro workflows.",
+    "canonicalPath": "/treatments/tirzepatide",
+    "keywords": [
+      "tirzepatide treatment guide",
+      "zepbound vs mounjaro",
+      "tirzepatide provider",
+      "tirzepatide treatment path",
+      "tirzepatide cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-11",
+    "sourceCount": 3,
+    "disclaimer": "This hub summarizes official tirzepatide treatment pathways at a high level. Product fit, coverage, ongoing access, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "tirzepatide",
+  "treatmentName": "Tirzepatide",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, tirzepatide decisions usually split between weight-management and diabetes-oriented branded workflows. That makes provider fit, cost structure, and treatment continuity more important than generic brand awareness.",
+  "overview": "Tirzepatide is a regulated treatment family that currently captures strong commercial intent because users want a cleaner way to compare branded paths, insurance friction, self-pay realities, and ongoing adherence demands. The right decision usually comes from comparing the treatment pathway, not just the molecule name.",
+  "approvedProducts": [
+    {
+      "slug": "zepbound",
+      "name": "Zepbound",
+      "summary": "Branded tirzepatide pathway positioned around obesity and other approved weight-related use cases, supported by official savings and self-pay program language."
+    },
+    {
+      "slug": "mounjaro",
+      "name": "Mounjaro",
+      "summary": "Branded tirzepatide pathway positioned around type 2 diabetes workflows, with its own clinical, support, and fulfillment expectations."
+    }
+  ],
+  "benefits": [
+    "A strong approved-treatment path for users comparing modern metabolic care options",
+    "Official product, savings, and support pages that make structured cost and provider comparison possible",
+    "A weekly-treatment workflow that maps cleanly into adherence, refill, and symptom-tracking tools"
+  ],
+  "sideEffects": [
+    "Gastrointestinal side effects such as nausea, vomiting, diarrhea, constipation, and abdominal discomfort can shape retention and dose-escalation tolerance",
+    "Coverage differences between obesity and diabetes pathways can create substantial access friction",
+    "Users still need to verify brand, indication, and fulfillment path rather than assuming all tirzepatide routes behave the same"
+  ],
+  "routes": [
+    "Subcutaneous injection"
+  ],
+  "costSummary": "Tirzepatide cost depends heavily on product path, dose, self-pay program structure, and plan design. For many users, the operational path matters as much as the headline price.",
+  "providerSummary": "The highest-value next step is narrowing the provider route by treatment goal, coverage posture, budget, and intake speed rather than browsing generic clinic pages.",
+  "appSummary": "Tirzepatide also has a strong future app layer because weekly routines, side effects, and refill timing create real repeat-use tracking demand.",
+  "faqs": [
+    {
+      "question": "Should Zepbound and Mounjaro be evaluated as the same commercial path?",
+      "answer": "No. They share tirzepatide but sit inside different branded and indication-specific treatment workflows, which can materially change coverage, support, and provider fit."
+    },
+    {
+      "question": "Why does tirzepatide require a provider and cost workflow instead of a simple product page?",
+      "answer": "Because the real decision includes product path, indication, access, ongoing affordability, and whether the user can stay consistent on treatment over time."
+    },
+    {
+      "question": "What is the safest next step before starting tirzepatide?",
+      "answer": "Review the official branded pathway, compare real cost friction, and then use a licensed provider path that fits your state, budget, and urgency."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a tirzepatide provider",
+    "primaryHref": "/providers?treatment=tirzepatide",
+    "secondaryLabel": "Review tirzepatide costs",
+    "secondaryHref": "/costs/tirzepatide",
+    "notes": "Use the provider matcher when tirzepatide already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "zepbound-what-is-2026",
+      "authority": "Zepbound",
+      "title": "What is Zepbound? | Obesity & Weight Loss Medication | Zepbound (tirzepatide)",
+      "url": "https://zepbound.lilly.com/weight/what-is-zepbound",
+      "publishedAt": "2026",
+      "claimType": "clinical"
+    },
+    {
+      "id": "mounjaro-home-2026",
+      "authority": "Mounjaro",
+      "title": "Type 2 Diabetes Treatment to Lower A1C | Mounjaro (tirzepatide)",
+      "url": "https://mounjaro.lilly.com/",
+      "publishedAt": "2026",
+      "claimType": "clinical"
+    },
+    {
+      "id": "fda-zepbound-osa-2024",
+      "authority": "FDA",
+      "title": "FDA Approves First Medication for Obstructive Sleep Apnea",
+      "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-first-medication-obstructive-sleep-apnea",
+      "publishedAt": "2024-12-20",
+      "claimType": "regulatory"
+    }
+  ]
+}

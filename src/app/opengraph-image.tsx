@@ -1,11 +1,15 @@
 import { ImageResponse } from "next/og";
+import { getRequestSite } from "@/lib/request-site";
 
 export const runtime = "nodejs";
-export const alt = "PeptideScholar — The Evidence-Based Peptide Reference";
+export const dynamic = "force-dynamic";
+export const alt = "PeptideScholar";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OGImage() {
+export default async function OGImage() {
+  const site = await getRequestSite();
+
   return new ImageResponse(
     (
       <div
@@ -16,7 +20,7 @@ export default function OGImage() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          background: "linear-gradient(135deg, #1A3A5C 0%, #0F2640 100%)",
+          background: `linear-gradient(135deg, ${site.theme.colors.primary} 0%, ${site.theme.colors.primaryDark} 100%)`,
           fontFamily: "sans-serif",
         }}
       >
@@ -33,7 +37,7 @@ export default function OGImage() {
               width: "64px",
               height: "64px",
               borderRadius: "12px",
-              backgroundColor: "#3B7A9E",
+              backgroundColor: site.theme.colors.secondary,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -42,21 +46,21 @@ export default function OGImage() {
               fontWeight: 700,
             }}
           >
-            PS
+            {site.shortName}
           </div>
           <span style={{ color: "#FFFFFF", fontSize: "48px", fontWeight: 700 }}>
-            PeptideScholar
+            {site.name}
           </span>
         </div>
         <div
           style={{
-            color: "#D4553A",
+            color: site.theme.colors.accent,
             fontSize: "28px",
             fontWeight: 600,
             marginBottom: "32px",
           }}
         >
-          The Evidence-Based Peptide Reference
+          {site.tagline}
         </div>
         <div
           style={{
@@ -78,7 +82,9 @@ export default function OGImage() {
             fontSize: "16px",
           }}
         >
-          Every claim cited from PubMed — Free forever
+          {site.launchState === "live"
+            ? "Every claim cited from PubMed - Free forever"
+            : "Planned site variant - not yet launched"}
         </div>
       </div>
     ),

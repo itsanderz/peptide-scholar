@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "id": "us-semaglutide-cost",
+    "slug": "semaglutide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-11",
+    "reviewedAt": "2026-04-11",
+    "lastUpdated": "2026-04-11",
+    "contentType": "cost"
+  },
+  "seo": {
+    "title": "Semaglutide Cost Guide: Wegovy, Ozempic, Coverage and Savings",
+    "description": "US-first semaglutide cost guide covering official savings programs, insurance friction, self-pay pathways, and what to verify before starting treatment.",
+    "canonicalPath": "/costs/semaglutide",
+    "keywords": [
+      "semaglutide cost",
+      "wegovy cost",
+      "ozempic cost",
+      "semaglutide insurance coverage",
+      "semaglutide savings card"
+    ]
+  },
+  "trust": {
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-11",
+    "sourceCount": 3,
+    "disclaimer": "Pricing, savings eligibility, and coverage rules can change quickly. Verify all current figures and terms directly on official brand pages before acting."
+  },
+  "treatmentSlug": "semaglutide",
+  "treatmentName": "Semaglutide",
+  "marketSummary": "In the United States, semaglutide costs depend on brand, indication, dose, insurance design, and whether the prescription is filled through an official self-pay or savings pathway.",
+  "listPrice": "Verify current pricing directly on official Wegovy and Ozempic savings pages before starting, because list pricing, self-pay offers, and eligibility terms can change.",
+  "cashPayRange": "Official self-pay offers exist for some semaglutide brands, but real monthly cost depends on brand, dose, fulfillment path, and whether you are new to a given savings program.",
+  "insuranceSummary": "Commercial coverage varies widely. Type 2 diabetes coverage does not automatically mean obesity coverage, and weight-management prescriptions often face stricter formulary and prior-authorization rules.",
+  "couponSummary": "Official manufacturer savings programs may reduce out-of-pocket cost for eligible commercially insured patients, and some self-pay introductory offers are available through official fulfillment channels.",
+  "priorAuthSummary": "Prior authorization is common when semaglutide is prescribed for obesity or when plans require documentation of BMI, comorbidities, or prior treatment attempts.",
+  "faqs": [
+    {
+      "question": "What is the safest way to check current semaglutide pricing?",
+      "answer": "Use the official Wegovy and Ozempic pricing or savings pages first, then confirm the exact cash-pay or insured amount with the prescribing service and dispensing pharmacy."
+    },
+    {
+      "question": "Does semaglutide coverage look the same for obesity and diabetes?",
+      "answer": "No. Coverage pathways can differ materially by indication, brand, and benefit design. A plan may cover Ozempic for type 2 diabetes but not cover Wegovy for obesity."
+    },
+    {
+      "question": "Should I compare only the advertised savings-card number?",
+      "answer": "No. You should also check dose-specific eligibility, refill timing rules, channel restrictions, prior-authorization requirements, and whether the offer counts toward deductible or out-of-pocket limits."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a semaglutide provider",
+    "primaryHref": "/providers?treatment=semaglutide",
+    "secondaryLabel": "Use the cost calculator",
+    "secondaryHref": "/tools/cost-calculator",
+    "notes": "Use provider matching when you need help comparing insured and self-pay treatment paths."
+  },
+  "sources": [
+    {
+      "id": "wegovy-savings-2026",
+      "authority": "Wegovy",
+      "title": "Savings Card | Wegovy (semaglutide) Injection 2.4 mg",
+      "url": "https://mash.wegovy.com/savings-support-resources/save-on-wegovy.html",
+      "publishedAt": "2026",
+      "claimType": "pricing"
+    },
+    {
+      "id": "wegovy-coverage-options-2026",
+      "authority": "Wegovy",
+      "title": "Check Cost and Insurance Coverage | Wegovy",
+      "url": "https://www.wegovy.com/obesity/what-to-pay-for-wegovy.html",
+      "publishedAt": "2026",
+      "claimType": "pricing"
+    },
+    {
+      "id": "ozempic-savings-2026",
+      "authority": "Ozempic",
+      "title": "Ozempic Savings Card | Ozempic (semaglutide) injection",
+      "url": "https://www.ozempic.com/savings-and-resources/save-on-ozempic.html",
+      "publishedAt": "2026",
+      "claimType": "pricing"
+    }
+  ]
+}

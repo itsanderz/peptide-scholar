@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { DEFAULT_LOCALE, isValidLocale } from "@/lib/i18n";
+import { MARKET_COOKIE_NAME, resolveMarketCode } from "@/lib/market";
+import { getSiteByKey, resolveSiteKeyFromHost } from "@/lib/site-config";
 
 const BLOCKED_BOTS = [
   "GPTBot",
@@ -20,17 +22,32 @@ const BLOCKED_BOTS = [
 
 export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const marketCode = resolveMarketCode(request.cookies.get(MARKET_COOKIE_NAME)?.value);
+  const requestHeaders = new Headers(request.headers);
+  const siteKey = resolveSiteKeyFromHost(
+    request.headers.get("x-forwarded-host") || request.headers.get("host")
+  );
+  const site = getSiteByKey(siteKey);
+
+  const applySiteResponseHeaders = (response: NextResponse) => {
+    if (site.noindexByDefault) {
+      response.headers.set("X-Robots-Tag", "noindex, nofollow");
+    }
+    return response;
+  };
 
   // Skip static assets, API routes, _next, sitemap, robots
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
     pathname.startsWith("/favicon") ||
+    pathname.startsWith("/opengraph-image") ||
+    pathname.startsWith("/twitter-image") ||
     pathname === "/robots.txt" ||
     pathname.startsWith("/sitemap") ||
     pathname.includes(".")
   ) {
-    return NextResponse.next();
+    return applySiteResponseHeaders(NextResponse.next());
   }
 
   // Block bots first
@@ -39,7 +56,7 @@ export default function proxy(request: NextRequest) {
     ua.toLowerCase().includes(bot.toLowerCase())
   );
   if (isBlocked) {
-    return new NextResponse("Forbidden", { status: 403 });
+    return applySiteResponseHeaders(new NextResponse("Forbidden", { status: 403 }));
   }
 
   // i18n logic
@@ -47,19 +64,41 @@ export default function proxy(request: NextRequest) {
   const maybeLocale = segments[1];
 
   if (isValidLocale(maybeLocale)) {
-    const response = NextResponse.next();
-    response.headers.set("x-locale", maybeLocale);
-    return response;
+    requestHeaders.set("x-locale", maybeLocale);
+    requestHeaders.set("x-market", marketCode);
+    requestHeaders.set("x-site", siteKey);
+    if (site.launchState !== "live" && pathname !== `/${maybeLocale}/site-variant`) {
+      const url = request.nextUrl.clone();
+      url.pathname = `/${maybeLocale}/site-variant`;
+      return applySiteResponseHeaders(NextResponse.rewrite(url, {
+        request: {
+          headers: requestHeaders,
+        },
+      }));
+    }
+    return applySiteResponseHeaders(NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    }));
   }
 
   // No locale prefix -> rewrite to /en/... internally
   const url = request.nextUrl.clone();
   url.pathname = `/${DEFAULT_LOCALE}${pathname}`;
-  const response = NextResponse.rewrite(url);
-  response.headers.set("x-locale", DEFAULT_LOCALE);
-  return response;
+  requestHeaders.set("x-locale", DEFAULT_LOCALE);
+  requestHeaders.set("x-market", marketCode);
+  requestHeaders.set("x-site", siteKey);
+  if (site.launchState !== "live") {
+    url.pathname = `/${DEFAULT_LOCALE}/site-variant`;
+  }
+  return applySiteResponseHeaders(NextResponse.rewrite(url, {
+    request: {
+      headers: requestHeaders,
+    },
+  }));
 }
 
 export const config = {
-  matcher: ["/((?!_next|api|favicon\\.ico|robots\\.txt|sitemap).*)"],
+  matcher: ["/((?!_next|api|favicon\\.ico|robots\\.txt|sitemap|opengraph-image|twitter-image).*)"],
 };

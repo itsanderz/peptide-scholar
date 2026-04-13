@@ -230,7 +230,7 @@ export default async function AboutPage({
               <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#1A3A5C] text-white text-xs font-bold flex-shrink-0 mt-0.5">3</span>
               <div>
                 <strong className="text-[#1A3A5C]">WADA Prohibited List</strong>
-                <span className="text-[#5A6577]"> — The World Anti-Doping Agency's annually updated list of substances prohibited in competitive sports.</span>
+                <span className="text-[#5A6577]"> — The World Anti-Doping Agency&apos;s annually updated list of substances prohibited in competitive sports.</span>
               </div>
             </li>
             <li className="flex items-start gap-3">
@@ -244,7 +244,7 @@ export default async function AboutPage({
               <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#1A3A5C] text-white text-xs font-bold flex-shrink-0 mt-0.5">5</span>
               <div>
                 <strong className="text-[#1A3A5C]">ClinicalTrials.gov</strong>
-                <span className="text-[#5A6577]"> — The U.S. National Library of Medicine's database of ongoing and completed clinical studies worldwide.</span>
+                <span className="text-[#5A6577]"> — The U.S. National Library of Medicine&apos;s database of ongoing and completed clinical studies worldwide.</span>
               </div>
             </li>
           </ul>

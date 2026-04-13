@@ -5,14 +5,16 @@ import { getAllPeptides, getPeptideBySlug } from "@/data/peptides";
 import { getComparisonsForPeptide } from "@/data/comparisons";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
 import {
-  BreadcrumbNav, FAQ, AdSlot, EvidenceBadge, CitationRef, ReferenceList,
+  BreadcrumbNav, FAQ, AdSlot, EvidenceBadge, ReferenceList,
   MedicalDisclaimer, PeptideCard, PeptideSidebar, DosingTable, ResearchCard,
   LegalStatusBadge, MoleculeDecoration, ReviewedBadge, ProviderCTA, ResourceBox,
-  EmailCapture,
+  EmailCapture, ApprovedTreatmentRouteCard, TreatmentMoneyLinks,
 } from "@/components";
 import { isValidLocale } from "@/lib/i18n";
 import { withLocaleParams, localeAlternates } from "@/lib/locale-params";
+import { getRequestMarketCode } from "@/lib/request-market";
 import { PageTracker } from "@/components/PageTracker";
+import { getGeneratedTreatmentHubSlugs } from "@/lib/generated-content";
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>;
@@ -44,6 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function PeptideDetailPage({ params }: Props) {
   const { locale, slug } = await params;
   if (!isValidLocale(locale)) notFound();
+  const marketCode = await getRequestMarketCode();
 
   const peptide = getPeptideBySlug(slug);
   if (!peptide) notFound();
@@ -81,7 +84,7 @@ export default async function PeptideDetailPage({ params }: Props) {
 
   return (
     <>
-      <PageTracker event="peptide_view" params={{ peptide_slug: slug, peptide_name: peptide.name, evidence_level: peptide.evidenceLevel, peptide_category: peptide.category }} />
+      <PageTracker event="peptide_view" params={{ peptide_slug: slug, peptide_name: peptide.name, evidence_level: peptide.evidenceLevel, peptide_category: peptide.category, market: marketCode }} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -253,8 +256,40 @@ export default async function PeptideDetailPage({ params }: Props) {
             <ProviderCTA
               peptideName={peptide.name}
               fdaStatus={peptide.fdaStatus}
-              category={peptide.categoryName}
+              marketCode={marketCode}
             />
+
+            {peptide.fdaStatus === "approved" && (
+              <ApprovedTreatmentRouteCard
+                peptideName={peptide.name}
+                peptideSlug={peptide.slug}
+                fdaApprovedFor={peptide.fdaApprovedFor}
+                brandNames={peptide.brandNames}
+                marketCode={marketCode}
+              />
+            )}
+
+            <TreatmentMoneyLinks treatmentSlug={peptide.slug} marketCode={marketCode} />
+
+            {peptide.fdaStatus === "approved" && getGeneratedTreatmentHubSlugs("us").includes(peptide.slug) && (
+              <div
+                className="rounded-xl p-5 mb-8"
+                style={{ backgroundColor: "#F0F9FF", border: "1px solid #BAE6FD" }}
+              >
+                <div className="text-xs font-semibold uppercase tracking-[0.16em] mb-2" style={{ color: "#0369A1" }}>
+                  Treatment Hub
+                </div>
+                <div className="text-lg font-bold mb-2" style={{ color: "#1A3A5C" }}>
+                  {peptide.name} Treatment Guide
+                </div>
+                <p className="text-sm leading-relaxed mb-3" style={{ color: "#5A6577" }}>
+                  Approved product paths, real cost friction, provider routing, and tracker next steps — all in one source-backed hub.
+                </p>
+                <Link href={`/treatments/${peptide.slug}`} className="font-semibold" style={{ color: "#0369A1" }}>
+                  Open treatment hub &rarr;
+                </Link>
+              </div>
+            )}
 
             {/* Research & Evidence */}
             <section className="mb-8">
@@ -421,8 +456,15 @@ export default async function PeptideDetailPage({ params }: Props) {
 
             {/* Email Capture */}
             <EmailCapture
-              headline="Get Peptide Research Updates"
-              description="Weekly evidence summaries and regulatory alerts."
+              headline={marketCode === "us" ? "Get peptide research updates" : `Join the ${marketCode.toUpperCase()} peptide waitlist`}
+              description={
+                marketCode === "us"
+                  ? "Weekly evidence summaries and regulatory alerts."
+                  : "Get notified when market-specific legal guidance, provider flows, and tracker support are added."
+              }
+              signupLocation="peptide_detail"
+              marketCode={marketCode}
+              offerSlug={marketCode === "us" ? `peptide_${peptide.slug}` : "market_peptide_waitlist"}
             />
 
             <AdSlot className="mt-4" />

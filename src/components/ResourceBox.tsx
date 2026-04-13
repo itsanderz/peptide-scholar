@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface Resource {
   title: string;
   description: string;
@@ -46,6 +48,8 @@ function TypeIcon({ type }: { type: Resource["type"] }) {
 }
 
 export function ResourceBox({ title = "Recommended Resources", resources }: ResourceBoxProps) {
+  const isInternalUrl = (url: string) => url.startsWith("/");
+
   return (
     <div
       className="rounded-xl p-6 mb-8"
@@ -84,19 +88,35 @@ export function ResourceBox({ title = "Recommended Resources", resources }: Reso
               <p className="text-xs text-gray-500 leading-relaxed mb-2">
                 {resource.description}
               </p>
-              <a
-                href={resource.ctaUrl}
-                className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-md transition-colors"
-                style={{
-                  backgroundColor: "#3B7A9E",
-                  color: "#FFFFFF",
-                }}
-              >
-                {resource.ctaText}
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </a>
+              {isInternalUrl(resource.ctaUrl) ? (
+                <Link
+                  href={resource.ctaUrl}
+                  className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-md transition-colors"
+                  style={{
+                    backgroundColor: "#3B7A9E",
+                    color: "#FFFFFF",
+                  }}
+                >
+                  {resource.ctaText}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              ) : (
+                <a
+                  href={resource.ctaUrl}
+                  className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-md transition-colors"
+                  style={{
+                    backgroundColor: "#3B7A9E",
+                    color: "#FFFFFF",
+                  }}
+                >
+                  {resource.ctaText}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </a>
+              )}
             </div>
           </div>
         ))}
@@ -104,9 +124,9 @@ export function ResourceBox({ title = "Recommended Resources", resources }: Reso
 
       <p className="text-[11px] mt-4" style={{ color: "#9CA3AF" }}>
         Links may be affiliate links. See our{" "}
-        <a href="/disclosure" className="underline" style={{ color: "#6B7280" }}>
+        <Link href="/disclosure" className="underline" style={{ color: "#6B7280" }}>
           disclosure
-        </a>
+        </Link>
         .
       </p>
     </div>

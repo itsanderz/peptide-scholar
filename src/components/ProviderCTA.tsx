@@ -1,12 +1,77 @@
+"use client";
+
+import Link from "next/link";
 import type { FDAStatus } from "@/data/peptides";
+import {
+  trackCTAClick,
+  trackProviderMatcherStart,
+} from "@/lib/analytics";
+import {
+  canShowProviderReferrals,
+  getMarketFallbackCta,
+} from "@/lib/market";
+import type { MarketCode } from "@/types/market";
 
 interface ProviderCTAProps {
   peptideName: string;
   fdaStatus: FDAStatus;
-  category?: string;
+  marketCode?: MarketCode;
 }
 
-export function ProviderCTA({ peptideName, fdaStatus, category }: ProviderCTAProps) {
+function getCtaConfig(marketCode: MarketCode, fdaStatus: FDAStatus, peptideName: string) {
+  const providerEnabled = canShowProviderReferrals(marketCode);
+  const fallback = getMarketFallbackCta(marketCode);
+  const treatmentSlug = peptideName.toLowerCase().replace(/\s+/g, "-");
+
+  if (providerEnabled && fdaStatus === "approved") {
+    return {
+      href: `/providers?treatment=${encodeURIComponent(treatmentSlug)}`,
+      label: "Find a Prescribing Provider",
+      subcopy: "Telehealth consultations available in most states",
+      context: "provider-referral",
+      onClick: () => {
+        trackCTAClick("provider_referral_primary", "provider_cta");
+        trackProviderMatcherStart(marketCode, "provider_cta", treatmentSlug);
+      },
+    };
+  }
+
+  if (fallback === "app-waitlist") {
+    return {
+      href: "/tools",
+      label: "Explore Free Tools",
+      subcopy: "Provider matching is not live in this market yet.",
+      context: "app-waitlist-fallback",
+      onClick: () => trackCTAClick("provider_fallback_tools", "provider_cta"),
+    };
+  }
+
+  if (fallback === "email-capture") {
+    return {
+      href: "/guide",
+      label: "Get the Provider Checklist",
+      subcopy: "Start with the evidence and provider checklist while routing is offline.",
+      context: "email-capture-fallback",
+      onClick: () => trackCTAClick("provider_fallback_checklist", "provider_cta"),
+    };
+  }
+
+  return {
+    href: "/tools/peptide-finder",
+    label: "Use the Peptide Finder",
+    subcopy: "Use the guided tool to narrow the safest next step.",
+    context: "tool-handoff-fallback",
+    onClick: () => trackCTAClick("provider_fallback_tool_handoff", "provider_cta"),
+  };
+}
+
+export function ProviderCTA({
+  peptideName,
+  fdaStatus,
+  marketCode = "us",
+}: ProviderCTAProps) {
+  const cta = getCtaConfig(marketCode, fdaStatus, peptideName);
+
   if (fdaStatus === "approved") {
     return (
       <div
@@ -31,8 +96,9 @@ export function ProviderCTA({ peptideName, fdaStatus, category }: ProviderCTAPro
           providers can evaluate if it&apos;s right for you.
         </p>
 
-        <a
-          href="/guide"
+        <Link
+          href={cta.href}
+          onClick={cta.onClick}
           className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-colors"
           style={{
             backgroundColor: "#0D9488",
@@ -42,11 +108,11 @@ export function ProviderCTA({ peptideName, fdaStatus, category }: ProviderCTAPro
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
           </svg>
-          Find a Prescribing Provider
-        </a>
+          {cta.label}
+        </Link>
 
         <p className="text-xs mt-3 mb-4" style={{ color: "#047857" }}>
-          Telehealth consultations available in most states
+          {cta.subcopy}
         </p>
 
         {/* Trust badges */}
@@ -102,16 +168,17 @@ export function ProviderCTA({ peptideName, fdaStatus, category }: ProviderCTAPro
           {peptideName} is available in cosmetic formulations. Look for products with
           clinical-grade copper peptide concentrations.
         </p>
-        <a
-          href="/guide"
+        <Link
+          href={cta.href}
+          onClick={cta.onClick}
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-colors"
           style={{
             backgroundColor: "#2563EB",
             color: "#FFFFFF",
           }}
         >
-          View Recommended Products
-        </a>
+          {cta.label}
+        </Link>
         <p className="text-[11px] mt-3" style={{ color: "#6B7280" }}>
           PeptideScholar may receive compensation from product referrals. This does not
           influence our editorial content.
@@ -142,16 +209,17 @@ export function ProviderCTA({ peptideName, fdaStatus, category }: ProviderCTAPro
         {peptideName} is not FDA-approved. Always consult a licensed healthcare provider
         before considering any peptide.
       </p>
-      <a
-        href="/guide"
+      <Link
+        href={cta.href}
+        onClick={cta.onClick}
         className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-colors"
         style={{
           backgroundColor: "#3B7A9E",
           color: "#FFFFFF",
         }}
       >
-        Learn About Finding a Provider
-      </a>
+        {cta.label}
+      </Link>
       <div className="mt-3">
         <span
           className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full"

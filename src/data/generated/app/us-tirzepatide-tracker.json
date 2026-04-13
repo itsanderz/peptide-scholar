@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "id": "us-tirzepatide-tracker",
+    "slug": "tirzepatide-tracker",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "app-waitlist",
+    "indexable": true,
+    "generatedAt": "2026-04-11",
+    "reviewedAt": "2026-04-11",
+    "lastUpdated": "2026-04-11",
+    "contentType": "app-landing"
+  },
+  "seo": {
+    "title": "Tirzepatide Tracker: Dose, Refill and Symptom Workflow",
+    "description": "Join the Tirzepatide Tracker waitlist for a private workflow covering dose logging, refill timing, side-effect notes, and weekly treatment continuity.",
+    "canonicalPath": "/app/tirzepatide-tracker",
+    "keywords": [
+      "tirzepatide tracker",
+      "zepbound tracker",
+      "mounjaro tracker",
+      "tirzepatide reminder app",
+      "tirzepatide dose log"
+    ]
+  },
+  "trust": {
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-11",
+    "sourceCount": 3,
+    "disclaimer": "This landing page describes a planned tracking workflow, not medical advice. Treatment decisions, dose escalation, and missed-dose handling should still follow official instructions and clinician guidance."
+  },
+  "appUseCaseSlug": "tirzepatide-tracker",
+  "title": "Tirzepatide Tracker",
+  "summary": "A private tirzepatide workflow for people who want clearer weekly dose history, refill timing, symptom notes, and progress tracking without depending on a generic reminder app.",
+  "supportedTreatments": [
+    "tirzepatide"
+  ],
+  "supportedFeatures": [
+    "Dose log for weekly tirzepatide routines",
+    "Refill timing and supply countdown",
+    "Injection-site rotation notes",
+    "GI side-effect journal",
+    "Exportable treatment summary for follow-up visits"
+  ],
+  "privacySummary": "The tracker roadmap is local-first and privacy-first by default. PeptideScholar does not position the tracker as a diagnostic, prescribing, or insurance tool.",
+  "availabilitySummary": "The tracker is staged. Join the waitlist to get rollout updates and early access when the first web-based version is ready.",
+  "faqs": [
+    {
+      "question": "Why does tirzepatide need a dedicated tracker page?",
+      "answer": "Because users searching for tirzepatide often need weekly adherence help, refill timing, symptom tracking, and a cleaner summary for follow-up care."
+    },
+    {
+      "question": "Will the tracker tell me how to change my dose?",
+      "answer": "No. The tracker is planned as an adherence and logging layer. Dose escalation and missed-dose decisions should still follow official instructions and clinician guidance."
+    },
+    {
+      "question": "What makes this different from a generic medication reminder app?",
+      "answer": "The goal is to combine weekly dose tracking, refill awareness, side-effect notes, and peptide-specific context in one workflow instead of scattering them across multiple tools."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Join the Tirzepatide Tracker waitlist",
+    "primaryHref": "/app/tirzepatide-tracker",
+    "secondaryLabel": "Compare cost and provider paths",
+    "secondaryHref": "/costs/tirzepatide",
+    "notes": "Use the tracker waitlist for early access and the cost guide when you still need to evaluate your treatment path."
+  },
+  "sources": [
+    {
+      "id": "zepbound-how-to-use-2026",
+      "authority": "Zepbound",
+      "title": "Dosing, How to Use and How to Inject Zepbound",
+      "url": "https://zepbound.lilly.com/weight/how-to-use",
+      "publishedAt": "2026",
+      "claimType": "clinical"
+    },
+    {
+      "id": "zepbound-savings-2026",
+      "authority": "Zepbound",
+      "title": "Savings Options | Zepbound (tirzepatide)",
+      "url": "https://zepbound.lilly.com/savings",
+      "publishedAt": "2026",
+      "claimType": "pricing"
+    },
+    {
+      "id": "fda-zepbound-osa-2024",
+      "authority": "FDA",
+      "title": "FDA Approves First Medication for Obstructive Sleep Apnea",
+      "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-first-medication-obstructive-sleep-apnea",
+      "publishedAt": "2024-12-20",
+      "claimType": "regulatory"
+    }
+  ]
+}

@@ -4,50 +4,98 @@ import { getAllComparisonSlugs } from "@/data/comparisons";
 import { getAllCategories } from "@/data/categories";
 import { getAllStatesLegal } from "@/data/states-legal";
 import { getBlogSlugs } from "@/data/blog-posts";
+import {
+  getAllProviderGoalSlugs,
+  getAllProviderInsuranceSlugs,
+  getAllProviderIntakeModes,
+  getAllProviderPartners,
+  getAllProviderTreatmentSlugs,
+} from "@/data/provider-partners";
+import {
+  getGeneratedAppLandingSlugs,
+  getGeneratedCostSlugs,
+  getGeneratedTreatmentHubSlugs,
+} from "@/lib/generated-content";
+import { getDefaultMarket } from "@/lib/market";
 import { LOCALES } from "@/lib/i18n";
+import { getRequestSite } from "@/lib/request-site";
 
-const BASE = "https://peptidescholar.com";
+export const dynamic = "force-dynamic";
 
-function localeUrl(locale: string, path: string): string {
-  if (locale === "en") return `${BASE}${path}`;
-  return `${BASE}/${locale}${path}`;
+function localeUrl(base: string, locale: string, path: string): string {
+  if (locale === "en") return `${base}${path}`;
+  return `${base}/${locale}${path}`;
 }
 
-function hreflangMap(path: string, locales: readonly string[]) {
+function hreflangMap(base: string, path: string, locales: readonly string[]) {
   return {
-    languages: Object.fromEntries(
-      locales.map((l) => [l, localeUrl(l, path)])
-    ),
+    languages: Object.fromEntries(locales.map((l) => [l, localeUrl(base, l, path)])),
   };
 }
 
 function entries(
+  base: string,
   path: string,
   locales: readonly string[],
   lastmod: string
 ): MetadataRoute.Sitemap {
-  const alternates = hreflangMap(path, locales);
+  const alternates = hreflangMap(base, path, locales);
   return locales.map((locale) => ({
-    url: localeUrl(locale, path),
+    url: localeUrl(base, locale, path),
     lastModified: lastmod,
     alternates,
   }));
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const site = await getRequestSite();
+
+  if (!site.capabilities.allowPublicSitemap || site.noindexByDefault) {
+    return [];
+  }
+
+  const base = site.domain;
+  const market = getDefaultMarket();
+  const indexableLocales = market.localeSupport
+    .filter((entry) => entry.isIndexable)
+    .map((entry) => entry.locale)
+    .filter(
+      (locale): locale is (typeof LOCALES)[number] =>
+        LOCALES.includes(locale as (typeof LOCALES)[number])
+    );
   const peptideSlugs = getAllSlugs();
   const comparisonSlugs = getAllComparisonSlugs();
   const categorySlugs = getAllCategories().map((c) => c.slug);
   const stateSlugs = getAllStatesLegal().map((s) => s.stateSlug);
   const blogSlugs = getBlogSlugs();
-  const lastmod = "2026-04-08";
+  const providerSlugs = getAllProviderPartners().map((partner) => partner.slug);
+  const providerTreatmentSlugs = getAllProviderTreatmentSlugs();
+  const providerGoalSlugs = getAllProviderGoalSlugs();
+  const providerInsuranceSlugs = getAllProviderInsuranceSlugs();
+  const providerIntakeSlugs = getAllProviderIntakeModes();
+  const treatmentSlugs = getGeneratedTreatmentHubSlugs("us");
+  const costSlugs = getGeneratedCostSlugs("us");
+  const appSlugs = getGeneratedAppLandingSlugs("us");
+  const lastmod = "2026-04-11";
 
-  // Core pages — all 14 locales with full hreflang
   const corePaths: string[] = [
     "",
     "/peptides",
     "/compare",
+    "/providers",
+    ...providerSlugs.map((slug) => `/providers/${slug}`),
+    ...providerTreatmentSlugs.map((slug) => `/providers/treatment/${slug}`),
+    ...providerGoalSlugs.map((slug) => `/providers/goal/${slug}`),
+    ...providerInsuranceSlugs.map((slug) => `/providers/insurance/${slug}`),
+    ...providerIntakeSlugs.map((slug) => `/providers/intake/${slug}`),
+    ...stateSlugs.map((slug) => `/providers/state/${slug}`),
     "/legal",
+    "/treatments",
+    ...treatmentSlugs.map((slug) => `/treatments/${slug}`),
+    "/costs",
+    ...costSlugs.map((slug) => `/costs/${slug}`),
+    "/app",
+    ...appSlugs.map((slug) => `/app/${slug}`),
     ...peptideSlugs.map((s) => `/peptides/${s}`),
     ...comparisonSlugs.map((s) => `/compare/${s}`),
     ...categorySlugs.map((c) => `/best-for/${c}`),
@@ -63,6 +111,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/symptom-checker",
     "/tools/protein-calculator",
     "/guide",
+    "/guide/insurance-prior-auth",
     "/guide/glp1-nutrition",
     "/guide/wolverine-stack",
     "/guide/reading-coa",
@@ -75,9 +124,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/disclaimer",
   ];
 
-  // Peptide × State pages are noindexed (thin template content) so we
-  // exclude them from the sitemap to avoid scaled-content-abuse signals.
-  // They remain crawlable via links on the peptide and legal state pages.
-
-  return corePaths.flatMap((p) => entries(p, LOCALES, lastmod));
+  return corePaths.flatMap((p) =>
+    entries(base, p, indexableLocales.length > 0 ? indexableLocales : LOCALES, lastmod)
+  );
 }

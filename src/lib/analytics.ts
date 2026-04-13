@@ -148,14 +148,164 @@ export const trackToolUse = (tool: string, action: string) =>
 export const trackCTAClick = (cta: string, location: string) =>
   trackEvent("cta_click", { cta_name: cta, cta_location: location });
 
-export const trackEmailSignup = (location: string) =>
-  trackEvent("email_signup", { signup_location: location });
+export const trackEmailSignup = (
+  location: string,
+  market?: string,
+  offerSlug?: string
+) =>
+  trackEvent("email_signup", {
+    signup_location: location,
+    ...(market ? { market } : {}),
+    ...(offerSlug ? { offer_slug: offerSlug } : {}),
+  });
 
 export const trackSearch = (query: string, resultCount: number) =>
   trackEvent("site_search", { search_term: query, result_count: resultCount });
+
+export function trackHalfLifeCalc(medication: string, daysSinceDose: number) {
+  trackEvent("half_life_calc", {
+    medication,
+    days_since_dose: daysSinceDose,
+  });
+}
+
+export function trackVialPlanner(peptide: string, vialMg: number, frequency: string) {
+  trackEvent("vial_planner", {
+    peptide,
+    vial_mg: vialMg,
+    frequency,
+  });
+}
 
 export const trackOutboundClick = (url: string, context: string) =>
   trackEvent("outbound_click", { link_url: url, link_context: context });
 
 export const trackScrollDepth = (depth: number, page: string) =>
   trackEvent("scroll_depth", { depth_percent: depth, page_path: page });
+
+export const trackMarketPageView = (market: string, pageFamily: string, pageSlug: string) =>
+  trackEvent("market_page_view", {
+    market,
+    page_family: pageFamily,
+    page_slug: pageSlug,
+  });
+
+export const trackMarketSelection = (market: string, selectionSource: string) =>
+  trackEvent("market_selected", {
+    market,
+    selection_source: selectionSource,
+  });
+
+export const trackProviderMatcherStart = (
+  market: string,
+  entryPoint: string,
+  treatmentSlug?: string
+) =>
+  trackEvent("provider_matcher_start", {
+    market,
+    entry_point: entryPoint,
+    ...(treatmentSlug ? { treatment_slug: treatmentSlug } : {}),
+  });
+
+export const trackProviderMatcherComplete = (
+  market: string,
+  treatmentSlug: string,
+  budgetBand: string,
+  insuranceStatus: string
+) =>
+  trackEvent("provider_matcher_complete", {
+    market,
+    treatment_slug: treatmentSlug,
+    budget_band: budgetBand,
+    insurance_status: insuranceStatus,
+  });
+
+export const trackProviderLeadSubmit = (
+  market: string,
+  partnerSlug: string,
+  leadType: string,
+  treatmentSlug: string
+) =>
+  trackEvent("provider_lead_submit", {
+    market,
+    partner_slug: partnerSlug,
+    lead_type: leadType,
+    treatment_slug: treatmentSlug,
+  });
+
+export const trackProviderPartnerSelect = (
+  market: string,
+  partnerSlug: string,
+  location: string
+) =>
+  trackEvent("provider_partner_select", {
+    market,
+    partner_slug: partnerSlug,
+    selection_location: location,
+  });
+
+export const trackProviderPartnerContactIntent = (
+  market: string,
+  partnerSlug: string,
+  treatmentSlug?: string
+) =>
+  trackEvent("provider_partner_contact_intent", {
+    market,
+    partner_slug: partnerSlug,
+    ...(treatmentSlug ? { treatment_slug: treatmentSlug } : {}),
+  });
+
+export const trackProviderDirectoryFilter = (
+  market: string,
+  treatmentSlug: string,
+  goal: string,
+  insuranceStatus: string,
+  budgetBand: string,
+  urgency: string,
+  intakeMode: string
+) =>
+  trackEvent("provider_directory_filter", {
+    market,
+    treatment_slug: treatmentSlug,
+    goal,
+    insurance_status: insuranceStatus,
+    budget_band: budgetBand,
+    urgency,
+    intake_mode: intakeMode,
+  });
+
+export const trackAppWaitlistJoin = (
+  market: string,
+  appUseCase: string,
+  platformInterest: string
+) =>
+  trackEvent("app_waitlist_join", {
+    market,
+    app_use_case: appUseCase,
+    platform_interest: platformInterest,
+  });
+
+export const trackAppInstallIntent = (
+  market: string,
+  appUseCase: string,
+  platform: string
+) =>
+  trackEvent("app_install_intent", {
+    market,
+    app_use_case: appUseCase,
+    platform,
+  });
+
+export const trackToolExport = (market: string, tool: string, exportFormat: string) =>
+  trackEvent("tool_export", {
+    market,
+    tool_name: tool,
+    export_format: exportFormat,
+  });
+
+export const trackToolSave = (market: string, tool: string, saveTarget: string) =>
+  trackEvent("tool_save", {
+    market,
+    tool_name: tool,
+    save_target: saveTarget,
+  });

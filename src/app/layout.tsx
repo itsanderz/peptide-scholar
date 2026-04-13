@@ -4,9 +4,10 @@ import { Libre_Franklin, Source_Serif_4 } from "next/font/google";
 import Link from "next/link";
 import Script from "next/script";
 import { ThemeProvider } from "@/lib/ThemeProvider";
-import { scientificTheme } from "@/lib/theme";
-import { Footer } from "@/components";
+import { Footer, MarketSelector } from "@/components";
 import { type Locale } from "@/lib/i18n";
+import { getRequestMarket } from "@/lib/request-market";
+import { getRequestSite } from "@/lib/request-site";
 import "./globals.css";
 
 const libreFranklin = Libre_Franklin({
@@ -21,37 +22,44 @@ const sourceSerif4 = Source_Serif_4({
   variable: "--font-source-serif-4",
 });
 
-const siteTheme = {
-  ...scientificTheme,
-  name: "PeptideScholar",
-  domain: "https://peptidescholar.com",
-  tagline: "The Evidence-Based Peptide Reference",
-  description:
-    "Comprehensive, research-backed guide to peptides — mechanisms, evidence levels, dosing, side effects, legal status, and comparisons. Every claim cited from PubMed.",
-};
+export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: {
-    default: "PeptideScholar | The Evidence-Based Peptide Reference",
-    template: "%s | PeptideScholar",
-  },
-  description: siteTheme.description,
-  metadataBase: new URL(siteTheme.domain),
-  icons: {
-    icon: "/favicon.svg",
-  },
-  openGraph: {
-    type: "website",
-    siteName: "PeptideScholar",
-    locale: "en_US",
-  },
-  twitter: {
-    card: "summary_large_image",
-  },
-  verification: {
-    google: "NTlRiN9ONICqNTkKYBaaJxDhDpTL5wpL2-DtT8Q0Y80",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getRequestSite();
+
+  return {
+    title: {
+      default: `${site.name} | ${site.tagline}`,
+      template: `%s | ${site.name}`,
+    },
+    description: site.description,
+    metadataBase: new URL(site.domain),
+    icons: {
+      icon: "/favicon.svg",
+    },
+    openGraph: {
+      type: "website",
+      siteName: site.name,
+      locale: "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+    },
+    verification: {
+      google: "NTlRiN9ONICqNTkKYBaaJxDhDpTL5wpL2-DtT8Q0Y80",
+    },
+    robots: site.noindexByDefault
+      ? {
+          index: false,
+          follow: false,
+          googleBot: {
+            index: false,
+            follow: false,
+          },
+        }
+      : undefined,
+  };
+}
 
 export default async function RootLayout({
   children,
@@ -60,17 +68,64 @@ export default async function RootLayout({
 }>) {
   const headersList = await headers();
   const locale = (headersList.get("x-locale") || "en") as Locale;
+  const market = await getRequestMarket();
+  const site = await getRequestSite();
+  const plausibleDomain = new URL(site.domain).hostname;
+  const mainSite = "https://peptidescholar.com";
+  const navLinks =
+    site.capabilities.showMainNavigation
+      ? [
+          { label: "Home", href: "/" },
+          { label: "Treatments", href: "/treatments" },
+          { label: "Peptides", href: "/peptides" },
+          { label: "Providers", href: "/providers" },
+          { label: "Costs", href: "/costs" },
+          { label: "Tools", href: "/tools" },
+          { label: "Guide", href: "/guide" },
+          { label: "Legal", href: "/legal" },
+        ]
+      : [
+          { label: "Main Site", href: mainSite },
+          { label: "Contact", href: `${mainSite}/contact` },
+        ];
+  const footerLinks =
+    site.capabilities.showMainNavigation
+      ? [
+          { label: "Home", href: "/" },
+          { label: "Treatments", href: "/treatments" },
+          { label: "Browse Peptides", href: "/peptides" },
+          { label: "Compare", href: "/compare" },
+          { label: "Providers", href: "/providers" },
+          { label: "Costs", href: "/costs" },
+          { label: "Legal", href: "/legal" },
+          { label: "Tools", href: "/tools" },
+          { label: "Blog", href: "/blog" },
+          { label: "Glossary", href: "/glossary" },
+          { label: "About", href: "/about" },
+          { label: "Contact", href: "/contact" },
+          { label: "Disclaimer", href: "/disclaimer" },
+        ]
+      : [
+          { label: "Main Site", href: mainSite },
+          { label: "Contact", href: `${mainSite}/contact` },
+          { label: "Disclaimer", href: `${mainSite}/disclaimer` },
+        ];
 
   return (
     <html lang={locale}>
       <body className={`${libreFranklin.variable} ${sourceSerif4.variable} ${sourceSerif4.className} antialiased`}>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "PeptideScholar",
-          url: "https://peptidescholar.com",
-          description: "Comprehensive, research-backed guide to peptides — mechanisms, evidence levels, dosing, side effects, legal status, and comparisons. Every claim cited from PubMed.",
-        }) }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: site.name,
+              url: site.domain,
+              description: site.description,
+            }),
+          }}
+        />
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
             <Script
@@ -82,108 +137,91 @@ export default async function RootLayout({
             </Script>
           </>
         )}
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT}
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        {site.capabilities.showAds && process.env.NEXT_PUBLIC_ADSENSE_CLIENT && (
+          <Script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+            data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        )}
         <Script
           defer
-          data-domain="peptidescholar.com"
+          data-domain={plausibleDomain}
           src="https://plausible.io/js/script.js"
           strategy="afterInteractive"
         />
         <Script id="clarity-init" strategy="afterInteractive">
           {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","w0ukcbj8hy");`}
         </Script>
-        <ThemeProvider theme={siteTheme}>
-          {/* Header */}
+        <ThemeProvider theme={site.theme}>
           <header
             className="sticky top-0 z-50 border-b-2"
             style={{
-              backgroundColor: "#1A3A5C",
-              borderBottomColor: "#D4553A",
+              backgroundColor: site.theme.colors.primary,
+              borderBottomColor: site.theme.colors.accent,
             }}
           >
             <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
               <Link href="/" className="flex items-center gap-2">
                 <div
                   className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm"
-                  style={{ backgroundColor: "#3B7A9E", color: "#FFFFFF" }}
+                  style={{ backgroundColor: site.theme.colors.secondary, color: "#FFFFFF" }}
                 >
-                  PS
+                  {site.shortName}
                 </div>
                 <span className="text-white font-bold text-lg tracking-tight" style={{ fontFamily: "var(--font-libre-franklin)" }}>
-                  PeptideScholar
+                  {site.name}
                 </span>
               </Link>
               <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-                <Link
-                  href="/"
-                  className="text-white/80 hover:text-white transition-colors"
-                >
-                  Home
-                </Link>
-                <Link
-                  href="/guide"
-                  className="text-white/80 hover:text-white transition-colors"
-                >
-                  Guide
-                </Link>
-                <Link
-                  href="/blog"
-                  className="text-white/80 hover:text-white transition-colors"
-                >
-                  Blog
-                </Link>
-                <Link
-                  href="/peptides"
-                  className="text-white/80 hover:text-white transition-colors"
-                >
-                  Peptides
-                </Link>
-                <Link
-                  href="/compare"
-                  className="text-white/80 hover:text-white transition-colors"
-                >
-                  Compare
-                </Link>
-                <Link
-                  href="/legal"
-                  className="text-white/80 hover:text-white transition-colors"
-                >
-                  Legal Status
-                </Link>
-                <Link
-                  href="/tools"
-                  className="text-white/80 hover:text-white transition-colors"
-                >
-                  Free Tools
-                </Link>
+                {navLinks.map((item) => (
+                  <Link key={item.label} href={item.href} className="text-white/80 hover:text-white transition-colors">
+                    {item.label}
+                  </Link>
+                ))}
               </nav>
+              <div className="flex items-center gap-3">
+                {site.capabilities.showMarketSelector && (
+                  <>
+                    <span
+                      className="hidden xl:inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold"
+                      style={{
+                        backgroundColor: "rgba(255,255,255,0.08)",
+                        color: "rgba(255,255,255,0.82)",
+                        border: "1px solid rgba(255,255,255,0.14)",
+                      }}
+                    >
+                      {market.name}
+                    </span>
+                    <MarketSelector currentMarket={market.code} />
+                  </>
+                )}
+              </div>
             </div>
           </header>
 
-          {/* Main content */}
+          {site.launchState !== "live" && site.betaMessage && (
+            <section
+              className="border-b px-4 py-3"
+              style={{
+                backgroundColor: "#FFFBEB",
+                borderColor: "#FCD34D",
+                color: "#92400E",
+              }}
+            >
+              <div className="max-w-6xl mx-auto text-sm leading-relaxed">
+                <strong className="font-semibold">Planned Site Variant:</strong> {site.betaMessage}
+              </div>
+            </section>
+          )}
+
           <main className="min-h-[70vh]">{children}</main>
 
-          {/* Footer */}
           <Footer
-            siteName="PeptideScholar"
-            links={[
-              { label: "Home", href: "/" },
-              { label: "Blog", href: "/blog" },
-              { label: "Browse Peptides", href: "/peptides" },
-              { label: "Compare", href: "/compare" },
-              { label: "Legal", href: "/legal" },
-              { label: "Tools", href: "/tools" },
-              { label: "Glossary", href: "/glossary" },
-              { label: "About", href: "/about" },
-              { label: "Contact", href: "/contact" },
-              { label: "Disclaimer", href: "/disclaimer" },
-            ]}
+            siteName={site.name}
+            links={footerLinks}
           />
         </ThemeProvider>
       </body>

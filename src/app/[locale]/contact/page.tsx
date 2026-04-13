@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { generateSEO } from "@/components/SEOHead";
-import { BreadcrumbNav } from "@/components";
+import { BreadcrumbNav, PageTracker, ProviderIntentCard, TrackedMailtoLink } from "@/components";
+import { getProviderPartnerBySlug } from "@/data/provider-partners";
 import { isValidLocale } from "@/lib/i18n";
 import { localeAlternates } from "@/lib/locale-params";
+import { getRequestMarket } from "@/lib/request-market";
 import { siteConfig } from "@/lib/siteConfig";
 
 export async function generateMetadata({
@@ -33,16 +35,44 @@ export async function generateMetadata({
 
 export default async function ContactPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ topic?: string; partner?: string; treatment?: string }>;
 }) {
   const { locale } = await params;
   if (!isValidLocale(locale)) notFound();
+  const market = await getRequestMarket();
+  const { topic, partner, treatment } = await searchParams;
+  const providerPartner = typeof partner === "string" ? getProviderPartnerBySlug(partner) : undefined;
+  const providerTopic = topic === "provider-match" && providerPartner;
 
   const prefix = locale === "en" ? "" : `/${locale}`;
+  const providerEmailHref = `mailto:info@peptidescholar.com?subject=${encodeURIComponent(
+    providerTopic
+      ? `Provider Match Follow-Up: ${providerPartner.name}${typeof treatment === "string" ? ` (${treatment})` : ""}`
+      : "PeptideScholar Inquiry"
+  )}`;
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
+      <PageTracker
+        event="market_page_view"
+        params={{
+          page_family: providerTopic ? "provider_contact" : "contact",
+          page_slug: providerTopic ? providerPartner.slug : "contact",
+          market: market.code,
+        }}
+      />
+      {providerTopic && (
+        <PageTracker
+          event="provider_partner_contact_view"
+          params={{
+            partner_slug: providerPartner.slug,
+            market: market.code,
+          }}
+        />
+      )}
       <BreadcrumbNav
         crumbs={[
           { label: "Home", href: `${prefix}/` },
@@ -60,6 +90,52 @@ export default async function ContactPage({
       <p className="text-lg text-[#5A6577] mb-8 leading-relaxed" style={{ fontFamily: "Source Serif 4, Georgia, serif" }}>
         We welcome corrections, questions, and feedback. Accuracy is our priority — if you find an error in any of our evidence summaries or citations, please let us know.
       </p>
+
+      {providerTopic && (
+        <div
+          className="rounded-xl p-5 mb-8"
+          style={{ backgroundColor: "#F8FAFC", border: "1px solid #D0D7E2" }}
+        >
+          <div className="text-xs font-semibold uppercase tracking-[0.16em] mb-2" style={{ color: "#3B7A9E" }}>
+            Provider Match Follow-Up
+          </div>
+          <h2
+            className="text-xl font-bold text-[#1A3A5C] mb-2"
+            style={{ fontFamily: "Libre Franklin, system-ui, sans-serif" }}
+          >
+            {providerPartner.name}
+          </h2>
+          <p className="text-sm text-[#5A6577] leading-relaxed mb-3">
+            You came in through a routing-profile recommendation for <strong>{providerPartner.bestFit}</strong>.
+            {typeof treatment === "string" ? ` Treatment context: ${treatment}.` : ""}
+            {" "}Use the contact route below for manual follow-up, coordination, or routing questions that should not wait for the matcher queue.
+          </p>
+          <div className="flex flex-wrap gap-2 mb-4">
+            <span
+              className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium"
+              style={{ backgroundColor: "#FFFFFF", color: "#1A3A5C", border: "1px solid #D0D7E2" }}
+            >
+              {providerPartner.turnaroundLabel}
+            </span>
+            <span
+              className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium capitalize"
+              style={{ backgroundColor: "#FFFFFF", color: "#1A3A5C", border: "1px solid #D0D7E2" }}
+            >
+              {providerPartner.intakeMode}
+            </span>
+          </div>
+          <TrackedMailtoLink
+            href={providerEmailHref}
+            marketCode={market.code}
+            partnerSlug={providerPartner.slug}
+            treatmentSlug={typeof treatment === "string" ? treatment : undefined}
+            className="inline-flex items-center text-sm font-semibold"
+            style={{ color: "#1A3A5C" }}
+          >
+            Email this provider follow-up &rarr;
+          </TrackedMailtoLink>
+        </div>
+      )}
 
       {/* Contact Cards */}
       <div className="space-y-4 mb-10">
@@ -84,7 +160,7 @@ export default async function ContactPage({
               Questions about our content, evidence grading methodology, or site features.
             </p>
             <a
-              href="mailto:info@peptidescholar.com"
+              href={providerTopic ? providerEmailHref : "mailto:info@peptidescholar.com"}
               className="text-sm font-semibold"
               style={{ color: "#3B7A9E" }}
             >
@@ -144,7 +220,7 @@ export default async function ContactPage({
               Press, partnership, or research collaboration inquiries.
             </p>
             <a
-              href="mailto:info@peptidescholar.com?subject=Partnership Inquiry"
+              href={providerTopic ? providerEmailHref : "mailto:info@peptidescholar.com?subject=Partnership Inquiry"}
               className="text-sm font-semibold"
               style={{ color: "#D4912A" }}
             >
@@ -189,6 +265,19 @@ export default async function ContactPage({
           Content corrections that are verified against primary literature are prioritized and corrected as quickly as possible.
         </p>
       </div>
+
+      {providerTopic && (
+        <div className="mt-8">
+          <ProviderIntentCard
+            marketCode={market.code}
+            location="contact_provider_followup"
+            treatmentSlug={typeof treatment === "string" ? treatment : "general"}
+            headline="Need to tighten the match first?"
+            description="If you are not ready for manual follow-up yet, go back through the provider matcher and refine treatment, budget, insurance, and urgency details."
+            buttonText="Return to provider matcher"
+          />
+        </div>
+      )}
     </div>
   );
 }

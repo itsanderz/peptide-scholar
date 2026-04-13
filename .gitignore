@@ -33,3 +33,11 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# local dev/test runtime artifacts
+devserver.log
+devserver.err
+prodserver.log
+prodserver.err
+pw-open.log
+.playwright-cli/

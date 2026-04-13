@@ -4,9 +4,10 @@ import { notFound } from "next/navigation";
 import { getAllStatesLegal } from "@/data/states-legal";
 import { getAllPeptides } from "@/data/peptides";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
-import { BreadcrumbNav, MedicalDisclaimer, AdSlot, FAQ } from "@/components";
+import { BreadcrumbNav, MedicalDisclaimer, AdSlot, FAQ, EmailCapture, PageTracker, ProviderIntentCard } from "@/components";
 import { isValidLocale } from "@/lib/i18n";
 import { localeAlternates } from "@/lib/locale-params";
+import { getRequestMarket } from "@/lib/request-market";
 import { siteConfig } from "@/lib/siteConfig";
 
 interface Props {
@@ -16,14 +17,20 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
+  const market = await getRequestMarket();
 
   const alt = localeAlternates(siteConfig.domain, "/legal", locale);
 
   return {
     ...generateSEO({
-      title: "Peptide Legal Status by State — 50 State Guide (2026)",
+      title:
+        market.code === "us"
+          ? "Peptide Legal Status by State — 50 State Guide (2026)"
+          : `Peptide Legal Status by State — US Guide for ${market.name} Users (2026)`,
       description:
-        "Are peptides legal in your state? See the legal status of peptides across all 50 US states — compounding pharmacy rules, FDA classification, and state-by-state stance for 2026.",
+        market.code === "us"
+          ? "Are peptides legal in your state? See the legal status of peptides across all 50 US states — compounding pharmacy rules, FDA classification, and state-by-state stance for 2026."
+          : `US peptide legality guide for users in ${market.name}. Review all 50 US states, compounding rules, and FDA status while ${market.name}-specific regulatory guidance is still being built.`,
       canonical: alt.canonical,
       siteName: siteConfig.name,
     }),
@@ -76,6 +83,7 @@ const LEGAL_FAQS = [
 export default async function LegalIndexPage({ params }: Props) {
   const { locale } = await params;
   if (!isValidLocale(locale)) notFound();
+  const market = await getRequestMarket();
 
   const states = getAllStatesLegal();
   const allPeptides = getAllPeptides();
@@ -97,6 +105,7 @@ export default async function LegalIndexPage({ params }: Props) {
 
   return (
     <>
+      <PageTracker event="market_page_view" params={{ page_family: "legal-index", page_slug: "legal", market: market.code }} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -188,6 +197,52 @@ export default async function LegalIndexPage({ params }: Props) {
       {/* ── Content ───────────────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-4 pt-10 pb-4">
         <BreadcrumbNav crumbs={crumbs} />
+
+        <div
+          className="rounded-xl p-5 mb-8"
+          style={{ backgroundColor: "#F8FAFC", border: "1px solid #D0D7E2" }}
+        >
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: "#3B7A9E" }}>
+                Active Market
+              </p>
+              <h2
+                className="text-lg font-bold mb-1"
+                style={{ color: "#1A3A5C", fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)" }}
+              >
+                {market.code === "us"
+                  ? "US legal coverage is primary"
+                  : `This section currently covers the United States, not ${market.name}`}
+              </h2>
+              <p className="text-sm text-gray-600 max-w-3xl">
+                {market.code === "us"
+                  ? "State-by-state legal coverage, compounding context, and treatment pathways are currently strongest in the US."
+                  : `${market.name} is selected as your market, but this legal section is still US-only. Use the tools and waitlist flows while country-specific legality pages are being prepared.`}
+              </p>
+            </div>
+            <span
+              className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold"
+              style={{ backgroundColor: "#EEF2FF", color: "#4338CA", border: "1px solid #C7D2FE" }}
+            >
+              {market.name}
+            </span>
+          </div>
+        </div>
+
+        <div className="mb-8">
+          <ProviderIntentCard
+            marketCode={market.code}
+            location="legal_index"
+            headline={market.code === "us" ? "Need a legal prescribing path?" : `Need treatment routing guidance for ${market.name}?`}
+            description={
+              market.code === "us"
+                ? "Use the provider matcher to narrow approved-treatment pathways by state, insurance, budget, and timing."
+                : `Save your treatment preferences now and join the rollout list while ${market.name} provider routing is still being prepared.`
+            }
+            buttonText={market.code === "us" ? "Find a provider" : "Join provider rollout"}
+          />
+        </div>
 
         {/* Legend */}
         <div
@@ -350,6 +405,21 @@ export default async function LegalIndexPage({ params }: Props) {
             question: f.question,
             answer: f.answer,
           }))}
+        />
+      </section>
+
+      <section className="max-w-4xl mx-auto px-4 pb-8">
+        <EmailCapture
+          headline={market.code === "us" ? "Get US legal and provider updates" : `Get notified when ${market.name} legal guidance launches`}
+          description={
+            market.code === "us"
+              ? "Get updates when state legal pages, routing guidance, and safety guidance change."
+              : `Join the waitlist for ${market.name}-specific legality, provider, and treatment guidance while the US section remains the primary legal reference.`
+          }
+          buttonText={market.code === "us" ? "Get Updates" : "Join Waitlist"}
+          signupLocation="legal_index"
+          marketCode={market.code}
+          offerSlug={market.code === "us" ? "us_legal_updates" : "market_legal_waitlist"}
         />
       </section>
 

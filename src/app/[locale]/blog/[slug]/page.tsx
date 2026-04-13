@@ -3,9 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllBlogPosts, getBlogPostBySlug, getBlogSlugs } from "@/data/blog-posts";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
-import { BreadcrumbNav, AdSlot, FAQ } from "@/components";
+import { BreadcrumbNav, AdSlot, EmailCapture, PageTracker } from "@/components";
 import { isValidLocale } from "@/lib/i18n";
 import { withLocaleParams, localeAlternates } from "@/lib/locale-params";
+import { getRequestMarket } from "@/lib/request-market";
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>;
@@ -19,12 +20,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const post = getBlogPostBySlug(slug);
   if (!post) return {};
+  const market = await getRequestMarket();
 
   const alt = localeAlternates("https://peptidescholar.com", `/blog/${slug}`, locale);
   return {
     ...generateSEO({
       title: post.title,
-      description: post.excerpt,
+      description: `${post.excerpt} ${market.code === "us" ? "US-first guidance and conversion paths included." : `${market.name} rollout context available.`}`,
       canonical: alt.canonical,
       siteName: "PeptideScholar",
     }),
@@ -50,6 +52,7 @@ function formatDate(iso: string): string {
 export default async function BlogPostPage({ params }: Props) {
   const { locale, slug } = await params;
   if (!isValidLocale(locale)) notFound();
+  const market = await getRequestMarket();
 
   const post = getBlogPostBySlug(slug);
   if (!post) notFound();
@@ -82,6 +85,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
+      <PageTracker event="market_page_view" params={{ page_family: "blog-detail", page_slug: slug, market: market.code }} />
       <JsonLd data={jsonLd} />
 
       <div className="max-w-3xl mx-auto px-4 py-8">
@@ -92,6 +96,20 @@ export default async function BlogPostPage({ params }: Props) {
             { label: post.title, href: `/blog/${slug}` },
           ]}
         />
+
+        <div
+          className="rounded-xl p-4 mt-6 mb-8"
+          style={{ backgroundColor: "#F8FAFC", border: "1px solid #D0D7E2" }}
+        >
+          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#3B7A9E] mb-2">
+            Active Market
+          </div>
+          <div className="text-sm md:text-base text-[#1C2028]">
+            {market.code === "us"
+              ? "This research article can feed directly into US-first legal, cost, and provider journeys."
+              : `${market.name} is selected. The research analysis remains valid globally, but legal, provider, and pricing calls to action may still be staged for later rollout.`}
+          </div>
+        </div>
 
         {/* Article Header */}
         <header className="mt-6 mb-8">
@@ -200,6 +218,20 @@ export default async function BlogPostPage({ params }: Props) {
         </article>
 
         <AdSlot className="my-8" />
+
+        <div className="mb-8">
+          <EmailCapture
+            headline={market.code === "us" ? "Get new research reviews and alerts" : `Join the ${market.name} research waitlist`}
+            description={
+              market.code === "us"
+                ? "New articles, regulatory changes, and evidence summaries delivered weekly. No spam."
+                : `Get notified when ${market.name}-specific legal guides, provider flows, and tracker support are added to this research hub.`
+            }
+            signupLocation="blog_detail"
+            marketCode={market.code}
+            offerSlug={market.code === "us" ? `blog_post_${slug}` : "market_blog_detail_waitlist"}
+          />
+        </div>
 
         {/* References */}
         {post.refs.length > 0 && (

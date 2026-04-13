@@ -3,11 +3,12 @@ import Link from "next/link";
 import { getAllPeptides, getFeaturedPeptides, getPeptidesByCategory } from "@/data/peptides";
 import { getAllCategories } from "@/data/categories";
 import { getAllComparisons } from "@/data/comparisons";
-import { JsonLd, EmailCapture, AdSlot, PeptideCard, CategoryNav, MedicalDisclaimer, MoleculeDecoration } from "@/components";
+import { JsonLd, EmailCapture, AdSlot, PeptideCard, MedicalDisclaimer, PageTracker } from "@/components";
 import { generateSEO } from "@/components/SEOHead";
 import { siteConfig } from "@/lib/siteConfig";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 import { localeAlternates } from "@/lib/locale-params";
+import { getRequestMarket } from "@/lib/request-market";
 import { notFound } from "next/navigation";
 import { t, HOMEPAGE_CONTENT, PEPTIDE_STRINGS } from "@/data/content-templates";
 import { getAllBlogPosts } from "@/data/blog-posts";
@@ -19,13 +20,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
+  const market = await getRequestMarket();
 
   const alt = localeAlternates(siteConfig.domain, "", locale);
+  const descriptor = market.code === "us" ? "for the United States" : `for ${market.name}`;
 
   const seo = generateSEO({
     title: "PeptideScholar | The Evidence-Based Peptide Reference",
     description:
-      "Comprehensive, research-backed guide to peptides — mechanisms, evidence levels, dosing, side effects, legal status, and comparisons. Every claim cited from PubMed.",
+      `Comprehensive, research-backed peptide reference ${descriptor} with evidence grades, legal guidance, comparisons, and protocol tools. Every claim cited from PubMed.`,
     canonical: alt.canonical,
     siteName: siteConfig.name,
   });
@@ -47,6 +50,7 @@ interface Props {
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   if (!isValidLocale(locale)) notFound();
+  const market = await getRequestMarket();
 
   const loc = locale as Locale;
   const allPeptides = getAllPeptides();
@@ -54,6 +58,15 @@ export default async function HomePage({ params }: Props) {
   const categories = getAllCategories();
   const comparisons = getAllComparisons();
   const latestPosts = getAllBlogPosts().slice(0, 3);
+  const toolsCount = 7;
+  const marketLocales = market.localeSupport.filter((entry) => entry.isIndexable);
+  const homepageEmailOffer = market.code === "us" ? "homepage_research_digest" : "homepage_market_waitlist";
+  const marketCtaHref = market.code === "us" ? "/legal" : "/tools";
+  const marketCtaLabel = market.code === "us" ? "See Legal Options" : `Join ${market.name} Waitlist`;
+  const marketSummary =
+    market.code === "us"
+      ? "Provider routing, legal guidance, and treatment tools are currently calibrated first for the United States."
+      : `${market.name} is in ${market.launchState.replace("-", " ")} rollout. Use the tools now and join the waitlist for country-specific legal guidance, provider flows, and tracker access.`;
 
   const categoriesWithCount = categories.map((cat) => ({
     name: cat.name,
@@ -63,6 +76,7 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
+      <PageTracker event="market_page_view" params={{ page_family: "homepage", page_slug: "home", market: market.code }} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -118,6 +132,10 @@ export default async function HomePage({ params }: Props) {
         </div>
 
         <div className="relative max-w-5xl mx-auto px-4 py-20 md:py-28">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold" style={{ backgroundColor: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.14)", color: "rgba(255,255,255,0.82)" }}>
+            <span>Current market:</span>
+            <span style={{ color: "#FFFFFF" }}>{market.name}</span>
+          </div>
           <div className="grid md:grid-cols-5 gap-8 items-center">
             {/* Left: Text content (3/5) */}
             <div className="md:col-span-3 text-center md:text-left">
@@ -159,6 +177,13 @@ export default async function HomePage({ params }: Props) {
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>
                   Find Your Peptide
                 </Link>
+                <Link
+                  href={marketCtaHref}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-sm transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
+                  style={{ backgroundColor: "rgba(212,85,58,0.16)", color: "#fff", border: "1px solid rgba(212,85,58,0.35)" }}
+                >
+                  {marketCtaLabel}
+                </Link>
               </div>
 
               {/* Inline trust signals */}
@@ -184,7 +209,7 @@ export default async function HomePage({ params }: Props) {
                 { value: allPeptides.length.toString(), label: "Peptides", sub: "Comprehensive profiles", color: "#3B7A9E" },
                 { value: `${comparisons.length}+`, label: "Comparisons", sub: "Head-to-head analysis", color: "#D4553A" },
                 { value: "50", label: "State Guides", sub: "Legal status by state", color: "#2B8A5E" },
-                { value: "3", label: "Free Tools", sub: "Calculator, finder, checker", color: "#D4912A" },
+                { value: toolsCount.toString(), label: "Free Tools", sub: "Calculators, planners, checkers", color: "#D4912A" },
               ].map((stat) => (
                 <div
                   key={stat.label}
@@ -218,6 +243,17 @@ export default async function HomePage({ params }: Props) {
       {/* ── Stats Bar ──────────────────────────────────────────────────── */}
       <section className="py-8" style={{ backgroundColor: "#F0F3F7" }}>
         <div className="max-w-5xl mx-auto px-4">
+          <div
+            className="mb-4 rounded-xl p-4"
+            style={{ backgroundColor: "#FFFFFF", border: "1px solid #D0D7E2" }}
+          >
+            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#3B7A9E] mb-2">
+              Active Market
+            </div>
+            <div className="text-sm md:text-base text-[#1C2028]">
+              <strong>{market.name}</strong>: {marketSummary}
+            </div>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div
               className="text-center p-4 rounded-lg"
@@ -257,10 +293,10 @@ export default async function HomePage({ params }: Props) {
               style={{ backgroundColor: "#FFFFFF", border: "1px solid #D0D7E2" }}
             >
               <div className="text-2xl md:text-3xl font-bold" style={{ color: "#1A3A5C" }}>
-                14
+                {marketLocales.length}
               </div>
               <div className="text-xs md:text-sm text-gray-500 uppercase tracking-wider mt-1">
-                Languages
+                Indexed Locales
               </div>
             </div>
           </div>
@@ -560,8 +596,15 @@ export default async function HomePage({ params }: Props) {
       <section className="py-12 md:py-16" style={{ backgroundColor: "#F0F3F7" }}>
         <div className="max-w-3xl mx-auto px-4">
           <EmailCapture
-            headline="Stay Updated on Peptide Research"
-            description="Get weekly summaries of new peptide studies, regulatory changes, and evidence updates delivered to your inbox."
+            headline={market.code === "us" ? "Stay Updated on Peptide Research" : `Join the ${market.name} launch list`}
+            description={
+              market.code === "us"
+                ? "Get weekly summaries of new peptide studies, regulatory changes, and evidence updates delivered to your inbox."
+                : `Get notified when ${market.name}-specific legality pages, provider flows, and tracker access go live.`
+            }
+            signupLocation="homepage"
+            marketCode={market.code}
+            offerSlug={homepageEmailOffer}
           />
         </div>
       </section>

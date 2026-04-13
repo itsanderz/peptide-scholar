@@ -4,9 +4,10 @@ import { notFound } from "next/navigation";
 import { getAllPeptides } from "@/data/peptides";
 import { getAllCategories } from "@/data/categories";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
-import { BreadcrumbNav, FAQ, AdSlot, MedicalDisclaimer, EvidenceBadge, EmailCapture } from "@/components";
+import { BreadcrumbNav, FAQ, AdSlot, MedicalDisclaimer, EvidenceBadge, EmailCapture, PageTracker } from "@/components";
 import { isValidLocale } from "@/lib/i18n";
 import { localeAlternates } from "@/lib/locale-params";
+import { getRequestMarket } from "@/lib/request-market";
 import { siteConfig } from "@/lib/siteConfig";
 import { getPeptidesByCategory } from "@/data/peptides";
 
@@ -32,6 +33,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
+  const market = await getRequestMarket();
 
   const alt = localeAlternates(siteConfig.domain, "/guide", locale);
 
@@ -39,7 +41,7 @@ export async function generateMetadata({
     ...generateSEO({
       title: "What Are Peptides? The Complete Beginner's Guide (2026)",
       description:
-        "Learn what peptides are, how they work, types of therapeutic peptides, FDA-approved vs research peptides, side effects, and legal status. Evidence-based guide with 25 peptides covered.",
+        `Learn what peptides are, how they work, types of therapeutic peptides, FDA-approved vs research peptides, side effects, and legal status ${market.code === "us" ? "with US-first guidance" : `for ${market.name}`}.`,
       canonical: alt.canonical,
       siteName: siteConfig.name,
     }),
@@ -139,6 +141,7 @@ export default async function GuidePage({
 }) {
   const { locale } = await params;
   if (!isValidLocale(locale)) notFound();
+  const market = await getRequestMarket();
 
   const prefix = locale === "en" ? "" : `/${locale}`;
   const allPeptides = getAllPeptides();
@@ -166,6 +169,7 @@ export default async function GuidePage({
   return (
     <>
       {/* ── JSON-LD: Article + FAQPage ───────────────────────────────── */}
+      <PageTracker event="market_page_view" params={{ page_family: "guide", page_slug: "what-are-peptides", market: market.code }} />
       <JsonLd
         data={[
           {
@@ -212,6 +216,10 @@ export default async function GuidePage({
         }}
       >
         <div className="relative max-w-4xl mx-auto px-4 py-16 md:py-20 text-center">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold" style={{ backgroundColor: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.14)", color: "rgba(255,255,255,0.82)" }}>
+            <span>Active market:</span>
+            <span style={{ color: "#FFFFFF" }}>{market.name}</span>
+          </div>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6" style={{ backgroundColor: "rgba(59,122,158,0.2)", border: "1px solid rgba(59,122,158,0.3)" }}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3B7A9E" strokeWidth="2.5" strokeLinecap="round">
               <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -259,6 +267,19 @@ export default async function GuidePage({
             { label: "Guide", href: `${prefix}/guide` },
           ]}
         />
+        <div
+          className="rounded-xl p-4 mt-6"
+          style={{ backgroundColor: "#F8FAFC", border: "1px solid #D0D7E2" }}
+        >
+          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#3B7A9E] mb-2">
+            Active Market
+          </div>
+          <div className="text-sm md:text-base text-[#1C2028]">
+            {market.code === "us"
+              ? "This guide feeds directly into US-first legal, provider, and treatment tools."
+              : `${market.name} is selected. The science stays global, while legal, provider, and pricing guidance may still be phased in as ${market.name} rollout continues.`}
+          </div>
+        </div>
       </div>
 
       {/* ── Main Layout: Sidebar + Content ───────────────────────────── */}
@@ -934,10 +955,10 @@ export default async function GuidePage({
                 Free Peptide Tools
               </h2>
               <p className="text-lg leading-relaxed mb-6" style={{ color: C.text }}>
-                We built three free tools to help you navigate the peptide landscape. No signup required.
+                We built a growing toolkit of free peptide calculators, checkers, and planners to help you navigate the peptide landscape. No signup required.
               </p>
 
-              <div className="grid sm:grid-cols-3 gap-4 mb-6">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                 {[
                   {
                     title: "Peptide Finder",
@@ -969,6 +990,18 @@ export default async function GuidePage({
                     icon: (
                       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round">
                         <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                    ),
+                  },
+                  {
+                    title: "Titration Planner",
+                    desc: "Map escalation schedules, dose steps, and weekly protocol changes for GLP-1 and peptide use cases.",
+                    href: "/tools/titration-planner",
+                    color: C.accent,
+                    icon: (
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round">
+                        <path d="M3 17l6-6 4 4 7-7" />
+                        <path d="M14 8h6v6" />
                       </svg>
                     ),
                   },
@@ -1014,8 +1047,15 @@ export default async function GuidePage({
             {/* ── Email Capture ───────────────────────────────────────── */}
             <section className="mb-12">
               <EmailCapture
-                headline="Get the Weekly Peptide Research Digest"
-                description="New studies, regulatory updates, and evidence-based analysis delivered every week. Join thousands of researchers and practitioners."
+                headline={market.code === "us" ? "Get the Weekly Peptide Research Digest" : `Join the ${market.name} peptide waitlist`}
+                description={
+                  market.code === "us"
+                    ? "New studies, regulatory updates, and evidence-based analysis delivered every week. Join thousands of researchers and practitioners."
+                    : `We will notify you when ${market.name}-specific legal guides, provider flows, and tracker support are ready.`
+                }
+                signupLocation="guide"
+                marketCode={market.code}
+                offerSlug={market.code === "us" ? "guide_research_digest" : "market_guide_waitlist"}
               />
             </section>
 

@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
-import { BreadcrumbNav, MedicalDisclaimer } from "@/components";
+import { BreadcrumbNav, MedicalDisclaimer, EmailCapture, PageTracker } from "@/components";
 import { isValidLocale } from "@/lib/i18n";
 import { localeAlternates } from "@/lib/locale-params";
+import { getRequestMarket } from "@/lib/request-market";
 import { siteConfig } from "@/lib/siteConfig";
 
 /* ── Theme ─────────────────────────────────────────────────────────────── */
@@ -29,14 +30,17 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
+  const market = await getRequestMarket();
 
   const alt = localeAlternates(siteConfig.domain, "/tools", locale);
+  const titleSuffix = market.code === "us" ? "" : ` for ${market.name}`;
+  const descriptor = market.code === "us" ? "for the US market" : `for users in ${market.name}`;
 
   return {
     ...generateSEO({
-      title: "Free Peptide & GLP-1 Tools — 7 Free Clinical Tools",
+      title: `Free Peptide & GLP-1 Tools — 9 Free Clinical Tools${titleSuffix}`,
       description:
-        "Free peptide and GLP-1 tools: peptide finder, reconstitution calculator, legal status checker, titration planner, side effect visualizer, interaction checker, and cost calculator. No signup required.",
+        `Free peptide and GLP-1 tools ${descriptor}: peptide finder, reconstitution calculator, legal status checker, titration planner, side effect visualizer, interaction checker, cost calculator, half-life visualizer, and vial supply planner. No signup required.`,
       canonical: alt.canonical,
       siteName: siteConfig.name,
     }),
@@ -147,6 +151,30 @@ const tools = [
     ),
     color: C.success,
   },
+  {
+    title: "Half-Life Visualizer",
+    description:
+      "See how semaglutide, tirzepatide, and liraglutide drug levels decay after each injection. Slide to any day to see the estimated concentration remaining. Based on FDA half-life data.",
+    href: "/tools/half-life-visualizer",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+      </svg>
+    ),
+    color: "#7C3AED",
+  },
+  {
+    title: "Vial Supply Planner",
+    description:
+      "Enter your vial size, dose, and injection frequency to see how many doses you have, when the vial runs out, and exactly when to place your next order. Works for any peptide.",
+    href: "/tools/vial-planner",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
+      </svg>
+    ),
+    color: "#0891B2",
+  },
 ];
 
 /* ── Page ──────────────────────────────────────────────────────────────── */
@@ -157,11 +185,13 @@ export default async function ToolsPage({
 }) {
   const { locale } = await params;
   if (!isValidLocale(locale)) notFound();
+  const market = await getRequestMarket();
 
   const prefix = locale === "en" ? "" : `/${locale}`;
 
   return (
     <>
+      <PageTracker event="market_page_view" params={{ page_family: "tools-index", page_slug: "tools", market: market.code }} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -197,7 +227,90 @@ export default async function ToolsPage({
           </p>
         </div>
 
+        <div
+          className="rounded-xl p-5 mb-10"
+          style={{ backgroundColor: C.bg, border: `1px solid ${C.border}` }}
+        >
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: C.teal }}>
+                Active Market
+              </p>
+              <h2
+                className="text-lg font-bold mb-1"
+                style={{ color: C.navy, fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)" }}
+              >
+                {market.code === "us" ? "US tool assumptions are fully supported" : `${market.name} market selected`}
+              </h2>
+              <p className="text-sm text-gray-600 max-w-3xl">
+                {market.code === "us"
+                  ? "Legal, cost, and provider-related tools are currently calibrated first for the United States."
+                  : `These tools remain useful globally, but legal, cost, and provider assumptions may stay US-first while ${market.name} moves through the rollout pipeline.`}
+              </p>
+            </div>
+            <span
+              className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold"
+              style={{ backgroundColor: "#E6F4F1", color: C.success, border: "1px solid #BFE3D5" }}
+            >
+              {market.name}
+            </span>
+          </div>
+        </div>
+
         {/* ── Tool Cards ────────────────────────────────────────────── */}
+        <section className="mb-12">
+          <div className="flex items-center justify-between gap-3 mb-4">
+            <h2
+              className="text-2xl font-bold"
+              style={{
+                color: C.navy,
+                fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
+              }}
+            >
+              High-Intent Money Paths
+            </h2>
+            <span
+              className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold"
+              style={{ backgroundColor: "#F0F9FF", color: C.teal, border: "1px solid #BAE6FD" }}
+            >
+              Structured, reviewed pages
+            </span>
+          </div>
+          <div className="grid md:grid-cols-2 gap-4">
+            {[
+              {
+                title: "Semaglutide Cost Guide",
+                description:
+                  "Official savings, insurance friction, and provider-routing next steps for semaglutide in the US.",
+                href: "/costs/semaglutide",
+              },
+              {
+                title: "Tirzepatide Tracker Waitlist",
+                description:
+                  "Validate dose logging, refill timing, and symptom-tracking demand before the PWA launches.",
+                href: "/app/tirzepatide-tracker",
+              },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="rounded-xl p-5"
+                style={{ backgroundColor: "#FFFFFF", border: `1px solid ${C.border}` }}
+              >
+                <div className="text-lg font-bold mb-2" style={{ color: C.navy }}>
+                  {item.title}
+                </div>
+                <div className="text-sm leading-relaxed mb-3" style={{ color: "#5A6577" }}>
+                  {item.description}
+                </div>
+                <span className="font-semibold" style={{ color: C.teal }}>
+                  Open page &rarr;
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {tools.map((tool) => (
             <Link
@@ -259,6 +372,19 @@ export default async function ToolsPage({
             </p>
           </div>
         </section>
+
+        <EmailCapture
+          headline={market.code === "us" ? "Get new tools and protocol updates" : `Join the ${market.name} tools waitlist`}
+          description={
+            market.code === "us"
+              ? "Get notified when new calculators, provider flows, and protocol tools go live."
+              : `We will notify you when ${market.name}-specific tools, legal guidance, and tracker support are ready.`
+          }
+          buttonText={market.code === "us" ? "Get Updates" : "Join Waitlist"}
+          signupLocation="tools_index"
+          marketCode={market.code}
+          offerSlug={market.code === "us" ? "tools_updates" : "market_waitlist"}
+        />
 
         <MedicalDisclaimer />
       </div>
