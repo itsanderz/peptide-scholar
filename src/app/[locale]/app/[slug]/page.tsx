@@ -141,13 +141,15 @@ export default async function AppLandingDetailPage({ params }: Props) {
             <p className="text-sm leading-relaxed mb-4" style={{ color: "#1C2028" }}>
               {page.privacySummary}
             </p>
-            <Link
-              href={`/costs/${page.supportedTreatments[0]}`}
-              className="font-semibold"
-              style={{ color: "#3B7A9E" }}
-            >
-              Compare cost and provider paths &rarr;
-            </Link>
+            {page.supportedTreatments.length > 0 && (
+              <Link
+                href={`/costs/${page.supportedTreatments[0]}`}
+                className="font-semibold"
+                style={{ color: "#3B7A9E" }}
+              >
+                Compare cost and provider paths &rarr;
+              </Link>
+            )}
           </div>
         </div>
 
@@ -168,6 +170,27 @@ export default async function AppLandingDetailPage({ params }: Props) {
           <div className="text-sm leading-relaxed" style={{ color: "#5A6577" }}>
             {page.trust.disclaimer}
           </div>
+        </div>
+
+        <div
+          className="rounded-xl p-4 mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-3"
+          style={{ backgroundColor: "#F0FDF4", border: "1px solid #BBF7D0" }}
+        >
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-[0.16em] mb-1" style={{ color: "#047857" }}>
+              Or skip the waitlist
+            </div>
+            <div className="text-sm" style={{ color: "#065F46" }}>
+              The local-first tracker beta is already live for dose logs, symptoms, and reminders.
+            </div>
+          </div>
+          <Link
+            href="/app/tracker"
+            className="inline-block rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap"
+            style={{ backgroundColor: "#047857", color: "#FFFFFF" }}
+          >
+            Open tracker &rarr;
+          </Link>
         </div>
 
         <EmailCapture
