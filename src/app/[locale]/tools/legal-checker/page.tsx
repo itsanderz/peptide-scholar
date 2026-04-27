@@ -33,7 +33,7 @@ export async function generateMetadata({
     ...generateSEO({
       title: "Peptide Legal Status Checker — Is It Legal in Your State?",
       description:
-        "Free tool to check if a peptide is legal in your state. Covers FDA approval status, compounding pharmacy rules, state regulations, and WADA banned status for all 22 peptides across 50 states.",
+        "Free tool to check if a peptide is legal in your state. Covers FDA approval status, compounding pharmacy rules, state regulations, and WADA banned status for all peptides across 50 states.",
       canonical: alt.canonical,
       siteName: siteConfig.name,
     }),
@@ -108,7 +108,7 @@ export default async function LegalCheckerPage({
             priceCurrency: "USD",
           },
           description:
-            "Free tool to check peptide legality by state. Covers FDA approval, compounding rules, WADA banned status, and state-specific regulations for all 22 peptides across 50 US states.",
+            "Free tool to check peptide legality by state. Covers FDA approval, compounding rules, WADA banned status, and state-specific regulations for all peptides across 50 US states.",
           url: `${siteConfig.domain}/tools/legal-checker`,
         }}
       />

@@ -38,9 +38,9 @@ export async function generateMetadata({
 
   return {
     ...generateSEO({
-      title: `Free Peptide & GLP-1 Tools — 9 Free Clinical Tools${titleSuffix}`,
+      title: `Free Peptide & GLP-1 Tools — 11 Free Clinical Tools${titleSuffix}`,
       description:
-        `Free peptide and GLP-1 tools ${descriptor}: peptide finder, reconstitution calculator, legal status checker, titration planner, side effect visualizer, interaction checker, cost calculator, half-life visualizer, and vial supply planner. No signup required.`,
+        `Free peptide and GLP-1 tools ${descriptor}: peptide finder, reconstitution calculator, legal status checker, titration planner, side effect visualizer, interaction checker, cost calculator, half-life visualizer, vial supply planner, cycle planner, and doctor export. No signup required.`,
       canonical: alt.canonical,
       siteName: siteConfig.name,
     }),
@@ -174,6 +174,40 @@ const tools = [
       </svg>
     ),
     color: "#0891B2",
+  },
+  {
+    title: "Cycle Planner",
+    description:
+      "Generate a week-by-week injection schedule for any peptide protocol. Pick your compound, injection frequency, and on/off-cycle duration to see every injection day on a calendar.",
+    href: "/tools/cycle-planner",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+        <line x1="16" y1="2" x2="16" y2="6" />
+        <line x1="8" y1="2" x2="8" y2="6" />
+        <line x1="3" y1="10" x2="21" y2="10" />
+        <circle cx="8" cy="15" r="1.5" fill="white" stroke="none" />
+        <circle cx="12" cy="15" r="1.5" fill="white" stroke="none" />
+        <circle cx="8" cy="19" r="1.5" fill="white" stroke="none" />
+      </svg>
+    ),
+    color: "#2B8A5E",
+  },
+  {
+    title: "Doctor Export",
+    description:
+      "Create a printable medication summary for your healthcare provider. Enter your current medications, doses, symptoms, and questions — then print or copy in one click. Nothing is stored.",
+    href: "/tools/doctor-export",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <line x1="16" y1="13" x2="8" y2="13" />
+        <line x1="16" y1="17" x2="8" y2="17" />
+        <polyline points="10 9 9 9 8 9" />
+      </svg>
+    ),
+    color: "#1A3A5C",
   },
 ];
 

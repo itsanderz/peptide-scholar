@@ -14,9 +14,11 @@ import {
 import {
   getGeneratedAppLandingSlugs,
   getGeneratedCostSlugs,
+  getGeneratedMarketTreatmentSlugs,
+  getGeneratedToolLandingSlugs,
   getGeneratedTreatmentHubSlugs,
+  getMarketCodesWithTreatmentContent,
 } from "@/lib/generated-content";
-import { getDefaultMarket } from "@/lib/market";
 import { LOCALES } from "@/lib/i18n";
 import { getRequestSite } from "@/lib/request-site";
 
@@ -55,14 +57,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   const base = site.domain;
-  const market = getDefaultMarket();
-  const indexableLocales = market.localeSupport
-    .filter((entry) => entry.isIndexable)
-    .map((entry) => entry.locale)
-    .filter(
-      (locale): locale is (typeof LOCALES)[number] =>
-        LOCALES.includes(locale as (typeof LOCALES)[number])
-    );
+  const indexableLocales = LOCALES;
   const peptideSlugs = getAllSlugs();
   const comparisonSlugs = getAllComparisonSlugs();
   const categorySlugs = getAllCategories().map((c) => c.slug);
@@ -75,8 +70,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const providerIntakeSlugs = getAllProviderIntakeModes();
   const treatmentSlugs = getGeneratedTreatmentHubSlugs("us");
   const costSlugs = getGeneratedCostSlugs("us");
+  const toolLandingSlugs = getGeneratedToolLandingSlugs("us");
   const appSlugs = getGeneratedAppLandingSlugs("us");
-  const lastmod = "2026-04-11";
+  const marketTreatmentCodes = getMarketCodesWithTreatmentContent();
+  const marketTreatmentPaths = marketTreatmentCodes.flatMap((code) =>
+    getGeneratedMarketTreatmentSlugs(code).map((slug) => `/markets/${code}/treatments/${slug}`)
+  );
+  const lastmod = "2026-04-13";
 
   const corePaths: string[] = [
     "",
@@ -95,11 +95,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/costs",
     ...costSlugs.map((slug) => `/costs/${slug}`),
     "/app",
+    "/app/tracker",
     ...appSlugs.map((slug) => `/app/${slug}`),
     ...peptideSlugs.map((s) => `/peptides/${s}`),
     ...comparisonSlugs.map((s) => `/compare/${s}`),
     ...categorySlugs.map((c) => `/best-for/${c}`),
-    ...stateSlugs.map((s) => `/legal/${s}`),
+    // State legal pages temporarily removed from sitemap — content under review for sourcing (P0.2)
     "/tools",
     "/tools/peptide-finder",
     "/tools/calculator",
@@ -108,7 +109,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/tools/side-effects",
     "/tools/interaction-checker",
     "/tools/cost-calculator",
+    "/tools/half-life-visualizer",
+    "/tools/vial-planner",
+    "/tools/cycle-planner",
+    "/tools/doctor-export",
+    ...toolLandingSlugs.map((slug) => `/tools/${slug}`),
     "/tools/symptom-checker",
+    "/markets",
+    ...marketTreatmentPaths,
     "/tools/protein-calculator",
     "/guide",
     "/guide/insurance-prior-auth",
@@ -116,6 +124,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/guide/wolverine-stack",
     "/guide/reading-coa",
     "/guide/after-stopping-glp1",
+    "/resources",
     "/blog",
     ...blogSlugs.map((s) => `/blog/${s}`),
     "/glossary",
@@ -125,6 +134,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   return corePaths.flatMap((p) =>
-    entries(base, p, indexableLocales.length > 0 ? indexableLocales : LOCALES, lastmod)
+    entries(base, p, indexableLocales, lastmod)
   );
 }

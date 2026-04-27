@@ -70,7 +70,7 @@ export default async function OGImage() {
             fontSize: "20px",
           }}
         >
-          <span>25 Peptides</span>
+          <span>51 Peptides</span>
           <span>41+ Comparisons</span>
           <span>50 State Guides</span>
           <span>14 Languages</span>

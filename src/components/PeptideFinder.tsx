@@ -3,6 +3,7 @@
 import { useState, useMemo, useCallback } from "react";
 import Link from "next/link";
 import { trackToolUse } from "@/lib/analytics";
+import type { SourcedClaim } from "@/data/peptides";
 
 /* ── Theme ─────────────────────────────────────────────────────────────── */
 const C = {
@@ -27,7 +28,7 @@ interface PeptideItem {
   description: string;
   fdaStatus: string;
   wadaBanned: boolean;
-  benefits: string[];
+  benefits: SourcedClaim[];
   type: string;
 }
 
@@ -1089,7 +1090,7 @@ export default function PeptideFinder({ peptides }: PeptideFinderProps) {
                   {topBenefits.length > 0 && (
                     <ul style={{ margin: "0 0 0.65rem", paddingLeft: "1.25rem", fontSize: "0.85rem", color: "#374151", lineHeight: 1.6 }}>
                       {topBenefits.map((b, i) => (
-                        <li key={i}>{b}</li>
+                        <li key={i}>{b.text}</li>
                       ))}
                     </ul>
                   )}

@@ -21,9 +21,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     ...generateSEO({
-      title: "Browse All 22 Peptides — Evidence Grades & Research",
+      title: "Browse All Peptides — Evidence Grades & Research",
       description:
-        "Explore all 22 peptides with evidence grades (A-D), FDA status, mechanisms, and research data. Filter by category, evidence level, and FDA approval. Every claim cited from PubMed.",
+        "Explore all peptides with evidence grades (A-D), FDA status, mechanisms, and research data. Filter by category, evidence level, and FDA approval. Every claim cited from PubMed.",
       canonical: alt.canonical,
       siteName: siteConfig.name,
     }),
@@ -70,7 +70,7 @@ export default async function PeptidesIndexPage({ params }: Props) {
           "@type": "CollectionPage",
           name: "Browse All Peptides",
           description:
-            "Comprehensive directory of 22 research peptides with evidence grades, FDA status, and mechanisms of action.",
+            "Comprehensive directory of research peptides with evidence grades, FDA status, and mechanisms of action.",
           url: `${siteConfig.domain}/peptides`,
           mainEntity: {
             "@type": "ItemList",

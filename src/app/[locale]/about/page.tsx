@@ -20,7 +20,7 @@ export async function generateMetadata({
     ...generateSEO({
       title: "About — Evidence-Based Peptide Research",
       description:
-        "Learn about PeptideScholar's mission to provide the most accurate, evidence-based peptide reference. Every claim cited from peer-reviewed sources. 22 peptides, 9 categories, 35+ comparisons.",
+        "Learn about PeptideScholar's mission to provide the most accurate, evidence-based peptide reference. Every claim cited from peer-reviewed sources. 51 peptides, 9 categories, 41+ comparisons.",
       canonical: alt.canonical,
       siteName: siteConfig.name,
     }),

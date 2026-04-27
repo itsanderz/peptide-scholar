@@ -454,7 +454,7 @@ export interface HomepageContent {
 export const HOMEPAGE_CONTENT: Record<Locale, HomepageContent> = {
   en: {
     heroTitle: "The Evidence-Based Peptide Reference",
-    heroSubtitle: "Research-backed information on 22 peptides. Every claim cited from peer-reviewed sources.",
+    heroSubtitle: "Research-backed information on 51 peptides. Every claim cited from peer-reviewed sources.",
     categoriesTitle: "Browse by Category",
     featuredTitle: "Featured Peptides",
     disclaimerText: "This site is for informational purposes only. Consult a healthcare professional before using any peptide.",
@@ -489,7 +489,7 @@ export const HOMEPAGE_CONTENT: Record<Locale, HomepageContent> = {
   },
   fr: {
     heroTitle: "La reference peptidique basee sur les preuves",
-    heroSubtitle: "Informations etayees par la recherche sur 22 peptides. Chaque affirmation citee a partir de sources evaluees par des pairs.",
+    heroSubtitle: "Informations etayees par la recherche sur 51 peptides. Chaque affirmation citee a partir de sources evaluees par des pairs.",
     categoriesTitle: "Parcourir par categorie",
     featuredTitle: "Peptides en vedette",
     disclaimerText: "Ce site est fourni a titre informatif uniquement. Consultez un professionnel de sante avant d'utiliser un peptide.",

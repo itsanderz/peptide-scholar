@@ -6,8 +6,10 @@ import type {
   CostContent,
   CtaBlock,
   FaqItem,
+  MarketTreatmentContent,
   SeoBlock,
   SourceCitation,
+  ToolLandingContent,
   TreatmentHubContent,
   TrustBlock,
 } from "@/types/generated-content";
@@ -50,9 +52,51 @@ const COST_FILE_MAP: Record<MarketCode, string[]> = {
 };
 
 const APP_FILE_MAP: Record<MarketCode, string[]> = {
-  us: ["app/us-semaglutide-tracker.json", "app/us-tirzepatide-tracker.json"],
+  us: [
+    "app/us-semaglutide-tracker.json",
+    "app/us-tirzepatide-tracker.json",
+    "app/us-glp1-reminder.json",
+    "app/us-peptide-protocol-tracker.json",
+  ],
   uk: [],
   au: [],
+  sg: [],
+  ae: [],
+  nz: [],
+  de: [],
+  nl: [],
+  fr: [],
+  es: [],
+  hk: [],
+  jp: [],
+  kr: [],
+};
+
+const TOOL_LANDING_FILE_MAP: Record<MarketCode, string[]> = {
+  us: [
+    "tool/us-semaglutide-half-life.json",
+    "tool/us-tirzepatide-half-life.json",
+    "tool/us-semaglutide-vial-calculator.json",
+    "tool/us-tirzepatide-vial-calculator.json",
+  ],
+  uk: [],
+  au: [],
+  sg: [],
+  ae: [],
+  nz: [],
+  de: [],
+  nl: [],
+  fr: [],
+  es: [],
+  hk: [],
+  jp: [],
+  kr: [],
+};
+
+const MARKET_TREATMENT_FILE_MAP: Record<MarketCode, string[]> = {
+  us: [],
+  uk: ["treatment/uk-semaglutide-market-treatment.json"],
+  au: ["treatment/au-tirzepatide-market-treatment.json"],
   sg: [],
   ae: [],
   nz: [],
@@ -236,6 +280,67 @@ function assertAppLandingContent(value: unknown): asserts value is AppLandingCon
   }
 }
 
+function assertMarketTreatmentContent(value: unknown): asserts value is MarketTreatmentContent {
+  if (
+    !isRecord(value) ||
+    !validateMeta(value.meta) ||
+    value.meta.contentType !== "market-treatment" ||
+    !validateSeo(value.seo) ||
+    !validateTrust(value.trust) ||
+    !isString(value.treatmentSlug) ||
+    !isString(value.treatmentName) ||
+    !isString(value.marketSummary) ||
+    !["approved", "restricted", "unapproved"].includes(value.approvalStatus as string) ||
+    !Array.isArray(value.approvedProducts) ||
+    !value.approvedProducts.every(
+      (item) => isRecord(item) && isString(item.slug) && isString(item.name) && isString(item.summary)
+    ) ||
+    !isString(value.costSummary) ||
+    !isString(value.providerPathway) ||
+    !isString(value.onlinePharmacyNotes) ||
+    !isStringArray(value.legalNotes) ||
+    !validateFaqArray(value.faqs) ||
+    !validateCta(value.cta) ||
+    !validateSources(value.sources)
+  ) {
+    throw new Error("Invalid generated market-treatment asset.");
+  }
+
+  if (value.trust.sourceCount !== value.sources.length) {
+    throw new Error(
+      `Invalid generated market-treatment asset '${value.meta.slug}': sourceCount mismatch.`
+    );
+  }
+}
+
+function assertToolLandingContent(value: unknown): asserts value is ToolLandingContent {
+  if (
+    !isRecord(value) ||
+    !validateMeta(value.meta) ||
+    value.meta.contentType !== "tool-landing" ||
+    !validateSeo(value.seo) ||
+    !validateTrust(value.trust) ||
+    !isString(value.toolSlug) ||
+    !isString(value.toolName) ||
+    !isString(value.summary) ||
+    !isStringArray(value.supportedTreatments) ||
+    !isStringArray(value.requiredInputs) ||
+    !isStringArray(value.exampleOutputs) ||
+    !isString(value.appHandoffSummary) ||
+    !validateFaqArray(value.faqs) ||
+    !validateCta(value.cta) ||
+    !validateSources(value.sources)
+  ) {
+    throw new Error("Invalid generated tool-landing asset.");
+  }
+
+  if (value.trust.sourceCount !== value.sources.length) {
+    throw new Error(
+      `Invalid generated tool-landing asset '${value.meta.slug}': sourceCount mismatch.`
+    );
+  }
+}
+
 function parseJsonFile(pathname: string) {
   const raw = readFileSync(join(GENERATED_ROOT, pathname), "utf8");
   return JSON.parse(raw) as unknown;
@@ -305,10 +410,70 @@ export function getGeneratedTreatmentHref(slug: string) {
   return `/treatments/${slug}`;
 }
 
+function loadMarketTreatmentAssets(marketCode: MarketCode) {
+  return MARKET_TREATMENT_FILE_MAP[marketCode].map((pathname) => {
+    const asset = parseJsonFile(pathname);
+    assertMarketTreatmentContent(asset);
+    return asset;
+  });
+}
+
+export function getGeneratedMarketTreatmentContent(
+  slug: string,
+  marketCode: MarketCode
+): MarketTreatmentContent | undefined {
+  return loadMarketTreatmentAssets(marketCode).find((asset) => asset.meta.slug === slug);
+}
+
+export function getGeneratedMarketTreatmentSlugs(marketCode: MarketCode): string[] {
+  return loadMarketTreatmentAssets(marketCode).map((asset) => asset.meta.slug);
+}
+
+export function getGeneratedMarketTreatmentSummaries(marketCode: MarketCode): MarketTreatmentContent[] {
+  return loadMarketTreatmentAssets(marketCode);
+}
+
+export function getMarketCodesWithTreatmentContent(): MarketCode[] {
+  return (Object.keys(MARKET_TREATMENT_FILE_MAP) as MarketCode[]).filter(
+    (code) => MARKET_TREATMENT_FILE_MAP[code].length > 0
+  );
+}
+
+export function getGeneratedMarketTreatmentHref(marketCode: string, slug: string) {
+  return `/markets/${marketCode}/treatments/${slug}`;
+}
+
 export function getGeneratedCostHref(slug: string) {
   return `/costs/${slug}`;
 }
 
 export function getGeneratedAppHref(slug: string) {
   return `/app/${slug}`;
+}
+
+function loadToolLandingAssets(marketCode: MarketCode) {
+  return TOOL_LANDING_FILE_MAP[marketCode].map((pathname) => {
+    const asset = parseJsonFile(pathname);
+    assertToolLandingContent(asset);
+    return asset;
+  });
+}
+
+export function getGeneratedToolLandingContent(
+  slug: string,
+  marketCode: MarketCode = "us"
+): ToolLandingContent | undefined {
+  return loadToolLandingAssets(marketCode).find((asset) => asset.meta.slug === slug);
+}
+
+export function getGeneratedToolLandingSlugs(marketCode: MarketCode = "us"): string[] {
+  return loadToolLandingAssets(marketCode).map((asset) => asset.meta.slug);
+}
+
+export function getGeneratedToolLandingSummaries(marketCode: MarketCode = "us"): ToolLandingContent[] {
+  return loadToolLandingAssets(marketCode);
+}
+
+export function getGeneratedToolLandingHref(slug: string) {
+  return `/tools/${slug}`;
 }

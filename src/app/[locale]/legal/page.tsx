@@ -153,6 +153,34 @@ export default async function LegalIndexPage({ params }: Props) {
         </div>
       </section>
 
+      {/* ── Source Review Notice ───────────────────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-4 pt-6">
+        <div
+          className="rounded-xl p-5 mb-4"
+          style={{ backgroundColor: "#FEF3C7", border: "1px solid #F59E0B" }}
+        >
+          <div className="flex items-start gap-3">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#92400E" strokeWidth="2" className="flex-shrink-0 mt-0.5">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            <div>
+              <h2 className="text-sm font-bold mb-1" style={{ color: "#92400E" }}>
+                Content Under Review
+              </h2>
+              <p className="text-sm leading-relaxed" style={{ color: "#78350F" }}>
+                The state-by-state legal classifications on this page are currently under editorial review for sourcing.
+                The permissive / moderate / restrictive labels and compounding claims have not yet been verified against
+                specific state statutes or regulations. We are actively researching official sources and will update this
+                page with citations. For now, treat this as a general orientation, not legal advice. Always verify current
+                regulations with your state pharmacy board and a licensed attorney.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── Stats Bar ─────────────────────────────────────────────────── */}
       <section className="py-6" style={{ backgroundColor: "#F0F3F7" }}>
         <div className="max-w-4xl mx-auto px-4">

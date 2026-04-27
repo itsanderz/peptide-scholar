@@ -74,7 +74,7 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "The Head-to-Head: SURMOUNT-5",
         paragraphs: [
-          "SURMOUNT-5 was the first published head-to-head RCT comparing tirzepatide 10/15 mg vs semaglutide 2.4 mg in adults with obesity without diabetes. Published in January 2025 (PMID: 39818817), this trial provides the most direct comparison available.",
+          "SURMOUNT-5 was the first published head-to-head RCT comparing tirzepatide 10/15 mg vs semaglutide 2.4 mg in adults with obesity without diabetes. Published in NEJM in 2025, this trial provides the most direct comparison available.",
           "At 72 weeks: tirzepatide produced −20.2% body weight reduction vs −13.7% for semaglutide, a difference of −6.5 percentage points (95% CI: −7.5 to −5.4, p<0.001). Tirzepatide was superior across all pre-specified secondary endpoints.",
         ],
       },
@@ -120,7 +120,7 @@ export const blogPosts: BlogPost[] = [
       { title: "Wilding et al. Once-Weekly Semaglutide in Adults with Overweight or Obesity (STEP 1). NEJM 2021.", pmid: "33567185" },
       { title: "Jastreboff et al. Tirzepatide Once Weekly for the Treatment of Obesity (SURMOUNT-1). NEJM 2022.", pmid: "35658024" },
       { title: "Lincoff et al. Semaglutide and Cardiovascular Outcomes in Obesity without Diabetes (SELECT). NEJM 2024.", pmid: "37952131" },
-      { title: "Wadden et al. Tirzepatide vs Semaglutide for Obesity (SURMOUNT-5). NEJM 2025.", pmid: "39818817" },
+      { title: "Wadden et al. Tirzepatide vs Semaglutide for Obesity (SURMOUNT-5). NEJM 2025." },
     ],
   },
 
@@ -158,7 +158,7 @@ export const blogPosts: BlogPost[] = [
           "The vast majority of BPC-157 research originates from the laboratory of Predrag Sikiric at the University of Zagreb, Croatia. His group has published over 200 papers documenting effects across multiple organ systems in rats and mice. Independent replication is limited but exists.",
         ],
         listItems: [
-          "Tendon and ligament healing: Multiple studies show accelerated healing of surgically severed Achilles tendons in rats, including improved tendon-to-bone reattachment (PMID: 10402434)",
+          "Tendon and ligament healing: Multiple studies show accelerated healing of surgically severed Achilles tendons in rats, including improved tendon-to-bone reattachment",
           "Gastroprotection: Consistent protection against NSAID-induced gastric ulcers, ethanol-induced gastric lesions, and various colitis models — the most robustly replicated effect",
           "Wound healing: Accelerated skin wound closure with improved angiogenesis in rodent models",
           "Bone healing: Some evidence for accelerated bone repair in fracture models",
@@ -203,10 +203,10 @@ export const blogPosts: BlogPost[] = [
       },
     ],
     refs: [
-      { title: "Sikiric et al. Stable gastric pentadecapeptide BPC 157 in trials for inflammatory bowel disease. Curr Pharm Des 2011.", pmid: "21548865" },
-      { title: "Pevec et al. Impact of pentadecapeptide BPC 157 on healing of surgically-removed bone in rabbits. J Orthop Surg Res 2010.", pmid: "20433736" },
-      { title: "Chang et al. The promoting effect of pentadecapeptide BPC 157 on tendon healing involves tendon outgrowth. J Appl Physiol 2011.", pmid: "21204864" },
-      { title: "Sikiric et al. Cytoprotective effect of pentadecapeptide BPC 157 on aspirin-induced gastric lesions. J Physiol Paris 2012.", pmid: "16185771", note: "Gastroprotection rodent model" },
+      { title: "Sikiric et al. Stable gastric pentadecapeptide BPC 157 in trials for inflammatory bowel disease. Curr Pharm Des 2011." },
+      { title: "Pevec et al. Impact of pentadecapeptide BPC 157 on healing of surgically-removed bone in rabbits. J Orthop Surg Res 2010." },
+      { title: "Chang et al. The promoting effect of pentadecapeptide BPC 157 on tendon healing involves tendon outgrowth. J Appl Physiol 2011." },
+      { title: "Sikiric et al. Cytoprotective effect of pentadecapeptide BPC 157 on aspirin-induced gastric lesions. J Physiol Paris 2012.", note: "Gastroprotection rodent model" },
     ],
   },
 
@@ -332,7 +332,7 @@ export const blogPosts: BlogPost[] = [
         heading: "The Strongest Evidence: Topical Skin Care",
         paragraphs: [
           "The most robust human clinical data for GHK-Cu comes from topical cosmetic applications — a regulatory pathway that allows clinical studies without FDA drug approval requirements.",
-          "A 2001 double-blind controlled study by Leyden et al. compared 1% GHK-Cu cream vs vehicle control and vs tretinoin (Retin-A) in women with mild-to-moderate photodamaged skin over 12 weeks (PMID: 11416768). GHK-Cu showed statistically significant improvements in skin laxity, density, thickness, and fine lines — with better tolerability than tretinoin, which caused skin irritation in a significant proportion of participants.",
+          "A 2001 double-blind controlled study by Leyden et al. compared 1% GHK-Cu cream vs vehicle control and vs tretinoin (Retin-A) in women with mild-to-moderate photodamaged skin over 12 weeks. GHK-Cu showed statistically significant improvements in skin laxity, density, thickness, and fine lines — with better tolerability than tretinoin, which caused skin irritation in a significant proportion of participants.",
           "Additional clinical evidence supports topical GHK-Cu for reducing fine lines and wrinkles, improving skin density and firmness, and stimulating dermal collagen — making it one of the few cosmetic peptides with actual RCT-level evidence in humans.",
         ],
       },
@@ -367,10 +367,10 @@ export const blogPosts: BlogPost[] = [
       },
     ],
     refs: [
-      { title: "Pickart L, Margolina A. Regenerative and Protective Actions of the GHK-Cu Peptide. Int J Mol Sci 2018.", pmid: "30200541" },
-      { title: "Leyden JJ et al. Treatment of photodamaged facial skin with a GHK-copper peptide. Cosmetics 2001.", pmid: "11416768" },
-      { title: "Finkley MB et al. Stimulation of elastin expression by copper peptides. Skin Pharmacol 2007.", pmid: "15801978" },
-      { title: "Pickart L. The biological effects of copper chelated to histidyl-lysine glycyl (Gly-His-Lys). Agents Actions 1980.", pmid: "7468871", note: "Original GHK-Cu characterization" },
+      { title: "Pickart L, Margolina A. Regenerative and Protective Actions of the GHK-Cu Peptide. Int J Mol Sci 2018." },
+      { title: "Leyden JJ et al. Treatment of photodamaged facial skin with a GHK-copper peptide. Cosmetics 2001." },
+      { title: "Finkley MB et al. Stimulation of elastin expression by copper peptides. Skin Pharmacol 2007." },
+      { title: "Pickart L. The biological effects of copper chelated to histidyl-lysine glycyl (Gly-His-Lys). Agents Actions 1980.", note: "Original GHK-Cu characterization" },
     ],
   },
 
@@ -580,9 +580,77 @@ export const blogPosts: BlogPost[] = [
       },
     ],
     refs: [
-      { title: "Manning MC et al. Stability of protein pharmaceuticals: an update. Pharm Res 2010.", pmid: "19921420" },
-      { title: "Wang W. Lyophilization and development of solid protein pharmaceuticals. Int J Pharm 2000.", pmid: "10656378" },
+      { title: "Manning MC et al. Stability of protein pharmaceuticals: an update. Pharm Res 2010." },
+      { title: "Wang W. Lyophilization and development of solid protein pharmaceuticals. Int J Pharm 2000." },
       { title: "USP <1> Injections and Implanted Drug Products — Storage and Preparation", note: "Pharmacopeial standards for injectable preparations" },
+    ],
+  },
+  {
+    slug: "fda-semaglutide-shortage-resolved-2025-compounding-enforcement",
+    title: "FDA Semaglutide Shortage: Resolved in 2025 — What It Means for Compounded Versions",
+    excerpt:
+      "The FDA officially resolved the semaglutide drug shortage in early 2025, triggering a phased enforcement timeline that ended compounding pharmacy production of semaglutide copies. Here is the full regulatory timeline and what it means for patients.",
+    publishedAt: "2026-01-15",
+    readingTime: 7,
+    category: "Regulatory",
+    keyTakeaways: [
+      "FDA removed semaglutide from the drug shortage list on February 21, 2025",
+      "503A compounding pharmacies had a grace period ending May 22, 2025 to stop production",
+      "503B outsourcing facilities had until March 19, 2025 to wind down",
+      "Tirzepatide remains on the shortage list as of early 2026 and compounding continues",
+      "Patients on compounded semaglutide should transition to branded Wegovy or Ozempic",
+    ],
+    body: [
+      {
+        paragraphs: [
+          "In February 2025, the FDA formally declared the semaglutide drug shortage resolved — a decision that set off a cascading enforcement timeline affecting millions of patients who had been obtaining compounded semaglutide from pharmacies at a fraction of the branded drug cost.",
+          "This article explains exactly what the FDA declared, the enforcement dates that followed, and the current regulatory status of compounded semaglutide entering 2026.",
+        ],
+      },
+      {
+        heading: "What Is a Drug Shortage and Why Did Semaglutide Qualify?",
+        paragraphs: [
+          "Under Section 506E of the Federal Food, Drug, and Cosmetic Act, the FDA maintains a drug shortage list when a medication is in 'inadequate supply.' From 2022 through early 2025, the explosive demand for semaglutide (Wegovy for weight loss, Ozempic for diabetes) far outpaced Novo Nordisk's manufacturing capacity.",
+          "When a branded drug is in shortage, the FDA exercises enforcement discretion over compounding pharmacies — allowing 503A (retail) and 503B (outsourcing facility) pharmacies to produce copies even when those copies would ordinarily infringe the branded drug's regulatory protections.",
+        ],
+      },
+      {
+        heading: "The February 2025 Shortage Resolution",
+        paragraphs: [
+          "On February 21, 2025, the FDA updated its shortage database to reflect that semaglutide injection — including all doses of Wegovy (2.4 mg) and Ozempic — was no longer in shortage. Novo Nordisk had expanded manufacturing and supply chains had normalized.",
+          "This single database update triggered a legally mandated enforcement clock.",
+        ],
+      },
+      {
+        heading: "The Enforcement Timeline",
+        listItems: [
+          "February 21, 2025: FDA removes semaglutide from the shortage list",
+          "March 19, 2025: 503B outsourcing facilities must cease producing bulk compounded semaglutide",
+          "May 22, 2025: 503A retail compounding pharmacies must cease producing patient-specific compounded semaglutide",
+          "After May 22, 2025: FDA begins active enforcement — warning letters, injunctions, and seizures for non-compliant pharmacies",
+        ],
+      },
+      {
+        heading: "What Changed for Patients",
+        paragraphs: [
+          "Patients who had been paying $100–$300/month for compounded semaglutide faced an abrupt transition back to branded pricing — Wegovy lists at approximately $1,350/month without insurance. GoodRx and manufacturer savings programs (Novo Nordisk's NovoCare) provide some relief, but access gaps remain.",
+          "Notably, the shortage resolution did not affect tirzepatide (Mounjaro, Zepbound). As of early 2026, tirzepatide remains on the FDA shortage list, meaning compounded tirzepatide continues to be available from 503A and 503B pharmacies in the near term.",
+        ],
+      },
+      {
+        heading: "Legal Challenges and Current Status",
+        paragraphs: [
+          "Multiple compounding pharmacy trade groups filed legal challenges to the FDA's shortage determination, arguing the supply data was incomplete. As of mid-2025, courts had not issued injunctions blocking enforcement. FDA warning letters to non-compliant pharmacies began arriving in June 2025.",
+          "Patients seeking lower-cost options should consult their prescribers about manufacturer programs, insurance coverage appeals, or tirzepatide as an alternative (which remains compoundable while the shortage persists).",
+        ],
+        callout: "The shortage resolution only affects semaglutide. Tirzepatide compounding remains legal while that shortage persists.",
+      },
+    ],
+    refs: [
+      { title: "FDA Drug Shortage Database — Semaglutide Injection", note: "FDA removed semaglutide from shortage list February 21, 2025" },
+      { title: "FDA Guidance: Compounding of Drugs on the Drug Shortage List (Section 503A)", note: "FD&C Act Section 503A enforcement framework" },
+      { title: "FDA Guidance: Compounding of Drugs on the Drug Shortage List (Section 503B)", note: "FD&C Act Section 503B outsourcing facility framework" },
+      { title: "Novo Nordisk Annual Report 2024 — Supply Chain", note: "Novo Nordisk manufacturing capacity expansion data" },
     ],
   },
 ];

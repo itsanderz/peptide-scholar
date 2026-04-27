@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     ...generateSEO({
       title: `Are Peptides Legal in ${stateInfo.stateName}? (${new Date().getFullYear()}) — Complete Guide`,
-      description: `Are peptides legal in ${stateInfo.stateName}? ${stateInfo.stateName} has a ${stateInfo.stance} stance on peptide regulation. ${stateInfo.compoundingAllowed ? "Compounding is allowed." : "Compounding is restricted."} See status for all 22 peptides.`,
+      description: `Are peptides legal in ${stateInfo.stateName}? ${stateInfo.stateName} has a ${stateInfo.stance} stance on peptide regulation. ${stateInfo.compoundingAllowed ? "Compounding is allowed." : "Compounding is restricted."} See status for all peptides.`,
       canonical: alt.canonical,
       siteName: "PeptideScholar",
     }),
@@ -121,6 +121,31 @@ export default async function StateLegalPage({ params }: Props) {
       />
 
       <div className="max-w-5xl mx-auto px-4 py-8">
+        {/* ── Source Review Notice ────────────────────────────────────── */}
+        <div
+          className="rounded-xl p-5 mb-6"
+          style={{ backgroundColor: "#FEF3C7", border: "1px solid #F59E0B" }}
+        >
+          <div className="flex items-start gap-3">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#92400E" strokeWidth="2" className="flex-shrink-0 mt-0.5">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            <div>
+              <h2 className="text-sm font-bold mb-1" style={{ color: "#92400E" }}>
+                Content Under Review
+              </h2>
+              <p className="text-sm leading-relaxed" style={{ color: "#78350F" }}>
+                The legal classification and claims for {stateInfo.stateName} are currently under editorial review for sourcing.
+                These labels have not yet been verified against specific state statutes or regulations.
+                Treat this as a general orientation only — not legal advice. Always verify current regulations with your
+                state pharmacy board and a licensed attorney.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <BreadcrumbNav crumbs={crumbs} />
 
         {/* ── Title + Stance Badge ────────────────────────────────────── */}

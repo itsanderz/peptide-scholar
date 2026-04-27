@@ -105,6 +105,9 @@ export function ResourceBox({ title = "Recommended Resources", resources }: Reso
               ) : (
                 <a
                   href={resource.ctaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  data-affiliate={resource.ctaUrl.includes("amazon.com") ? "amazon-product" : undefined}
                   className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-md transition-colors"
                   style={{
                     backgroundColor: "#3B7A9E",

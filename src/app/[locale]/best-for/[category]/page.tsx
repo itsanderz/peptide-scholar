@@ -11,7 +11,9 @@ import {
   CategoryNav,
   FAQ,
   ApprovedCategoryRouteCard,
+  AffiliateProductGrid,
 } from "@/components";
+import { getProductSectionsForCategory } from "@/data/affiliate-products";
 import { PageTracker } from "@/components/PageTracker";
 import { isValidLocale } from "@/lib/i18n";
 import { withLocaleParams, localeAlternates } from "@/lib/locale-params";
@@ -70,6 +72,7 @@ export default async function CategoryPage({ params }: Props) {
     D: peptides.filter((p) => p.evidenceLevel === "D").length,
   };
   const approvedPeptides = peptides.filter((p) => p.fdaStatus === "approved");
+  const affiliateSections = getProductSectionsForCategory(category);
 
   const crumbs = [
     { label: "Home", href: "/" },
@@ -265,6 +268,15 @@ export default async function CategoryPage({ params }: Props) {
             <CategoryNav categories={categoriesWithCount} currentSlug={category} />
           </div>
         </div>
+
+        {affiliateSections.map((section) => (
+          <AffiliateProductGrid
+            key={section.heading}
+            heading={section.heading}
+            subheading={section.subheading}
+            products={section.products}
+          />
+        ))}
 
         {/* ── FAQ ────────────────────────────────────────────────────── */}
         <FAQ items={faqItems} title={`${cat.name} Peptides: FAQ`} />

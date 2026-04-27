@@ -109,7 +109,7 @@ export default async function PeptideStateLegalPage({ params }: Props) {
     },
     {
       question: `What are the side effects of ${peptide.name}?`,
-      answer: `Known side effects of ${peptide.name} include: ${peptide.sideEffects.slice(0, 3).join(", ")}. ${peptide.evidenceLevel === "C" || peptide.evidenceLevel === "D" ? "Note that human safety data is limited since this peptide has not undergone full clinical trials. " : ""}Always discuss potential side effects with your healthcare provider before starting any peptide therapy.`,
+      answer: `Known side effects of ${peptide.name} include: ${peptide.sideEffects.slice(0, 3).map((c) => c.text).join(", ")}. ${peptide.evidenceLevel === "C" || peptide.evidenceLevel === "D" ? "Note that human safety data is limited since this peptide has not undergone full clinical trials. " : ""}Always discuss potential side effects with your healthcare provider before starting any peptide therapy.`,
     },
   ];
 

@@ -177,6 +177,21 @@ export function trackVialPlanner(peptide: string, vialMg: number, frequency: str
   });
 }
 
+export function trackCyclePlanner(compound: string, onWeeks: number, frequency: string) {
+  trackEvent("cycle_planner", {
+    compound,
+    on_weeks: onWeeks,
+    frequency,
+  });
+}
+
+export function trackDoctorExport(exportFormat: string, medicationCount: number) {
+  trackEvent("doctor_export", {
+    export_format: exportFormat,
+    medication_count: medicationCount,
+  });
+}
+
 export const trackOutboundClick = (url: string, context: string) =>
   trackEvent("outbound_click", { link_url: url, link_context: context });
 
@@ -309,3 +324,35 @@ export const trackToolSave = (market: string, tool: string, saveTarget: string) 
     tool_name: tool,
     save_target: saveTarget,
   });
+
+// ── Tracker Events ───────────────────────────────────────────────────────────
+
+export function trackTrackerDoseLog(compound: string) {
+  trackEvent("tracker_dose_logged", { compound });
+}
+
+export function trackTrackerSymptomLog(symptomCount: number) {
+  trackEvent("tracker_symptom_logged", { symptom_count: symptomCount });
+}
+
+export function trackTrackerExport(exportFormat: string) {
+  trackEvent("tracker_export", { export_format: exportFormat });
+}
+
+export function trackTrackerReminderSet(compound: string, dayOfWeek: number) {
+  trackEvent("tracker_reminder_set", { compound, day_of_week: dayOfWeek });
+}
+
+// ── Arena (protocol benchmark) Events ────────────────────────────────────────
+
+export function trackArenaVote(goal: string, winnerSlug: string, loserSlug: string) {
+  trackEvent("arena_vote", { goal, winner: winnerSlug, loser: loserSlug });
+}
+
+export function trackArenaSkip(goal: string, slugA: string, slugB: string) {
+  trackEvent("arena_skip", { goal, slug_a: slugA, slug_b: slugB });
+}
+
+export function trackArenaGoalChange(goal: string) {
+  trackEvent("arena_goal_change", { goal });
+}

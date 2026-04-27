@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllBlogPosts, getBlogPostBySlug, getBlogSlugs } from "@/data/blog-posts";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
-import { BreadcrumbNav, AdSlot, EmailCapture, PageTracker } from "@/components";
+import { BreadcrumbNav, AdSlot, EmailCapture, PageTracker, AffiliateProductGrid } from "@/components";
+import { getProductSectionsForBlogPost } from "@/data/affiliate-products";
 import { isValidLocale } from "@/lib/i18n";
 import { withLocaleParams, localeAlternates } from "@/lib/locale-params";
 import { getRequestMarket } from "@/lib/request-market";
@@ -59,6 +60,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   const allPosts = getAllBlogPosts().filter((p) => p.slug !== slug).slice(0, 3);
   const catStyle = CATEGORY_COLORS[post.category] ?? { bg: "#F0F3F7", text: "#1A3A5C" };
+  const affiliateSections = getProductSectionsForBlogPost(slug);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -218,6 +220,15 @@ export default async function BlogPostPage({ params }: Props) {
         </article>
 
         <AdSlot className="my-8" />
+
+        {affiliateSections.map((section) => (
+          <AffiliateProductGrid
+            key={section.heading}
+            heading={section.heading}
+            subheading={section.subheading}
+            products={section.products}
+          />
+        ))}
 
         <div className="mb-8">
           <EmailCapture

@@ -1,3 +1,17 @@
+/**
+ * ⚠️ DEPRECATION WARNING (P0.2)
+ *
+ * This file contains UNSOURCED legal assertions about US state peptide regulations.
+ * No statutes, regulations, or official sources are cited.
+ * It was temporarily removed from public routes (sitemap, nav) on 2026-04-26
+ * pending a complete sourcing overhaul.
+ *
+ * Current legitimate uses:
+ * - Provider routing internal logic (not public claims)
+ *
+ * Do NOT use this data for public-facing legal advice until every claim
+ * is backed by a specific statute, regulation, or official source.
+ */
 export interface StateLegalRow {
   stateName: string;
   stateSlug: string;

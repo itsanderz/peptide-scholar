@@ -2,7 +2,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 
 const GENERATED_ROOT = join(process.cwd(), "src", "data", "generated");
-const VALID_CONTENT_TYPES = new Set(["treatment-hub", "cost", "app-landing"]);
+const VALID_CONTENT_TYPES = new Set(["treatment-hub", "market-treatment", "cost", "tool-landing", "app-landing"]);
 const VALID_REVIEW_STATES = new Set([
   "draft",
   "generated",
@@ -154,6 +154,36 @@ function validateTreatmentHubAsset(asset, filePath) {
   }
 }
 
+function validateMarketTreatmentAsset(asset, filePath) {
+  validateMeta(asset.meta, filePath);
+  validateSeo(asset.seo, filePath, "/markets/");
+  validateTrust(asset.trust, asset.sources, filePath);
+  validateFaqs(asset.faqs, filePath);
+  validateCta(asset.cta, filePath);
+  validateSourceList(asset.sources, filePath);
+
+  assert(asset.meta.contentType === "market-treatment", `${filePath}: contentType must be 'market-treatment'`);
+  assert(isNonEmptyString(asset.treatmentSlug), `${filePath}: treatmentSlug is required`);
+  assert(isNonEmptyString(asset.treatmentName), `${filePath}: treatmentName is required`);
+  assert(isNonEmptyString(asset.marketSummary), `${filePath}: marketSummary is required`);
+  assert(
+    ["approved", "restricted", "unapproved"].includes(asset.approvalStatus),
+    `${filePath}: approvalStatus must be approved | restricted | unapproved`
+  );
+  assert(isNonEmptyString(asset.costSummary), `${filePath}: costSummary is required`);
+  assert(isNonEmptyString(asset.providerPathway), `${filePath}: providerPathway is required`);
+  assert(isNonEmptyString(asset.onlinePharmacyNotes), `${filePath}: onlinePharmacyNotes is required`);
+  assert(isStringArray(asset.legalNotes), `${filePath}: legalNotes must be a non-empty string array`);
+  assert(Array.isArray(asset.approvedProducts) && asset.approvedProducts.length > 0, `${filePath}: approvedProducts must be a non-empty array`);
+
+  for (const product of asset.approvedProducts) {
+    assert(product && typeof product === "object", `${filePath}: approved product must be an object`);
+    assert(isNonEmptyString(product.slug), `${filePath}: approved product slug is required`);
+    assert(isNonEmptyString(product.name), `${filePath}: approved product name is required`);
+    assert(isNonEmptyString(product.summary), `${filePath}: approved product summary is required`);
+  }
+}
+
 function validateCostAsset(asset, filePath) {
   validateMeta(asset.meta, filePath);
   validateSeo(asset.seo, filePath, "/costs/");
@@ -191,10 +221,30 @@ function validateAppAsset(asset, filePath) {
   assert(isNonEmptyString(asset.availabilitySummary), `${filePath}: availabilitySummary is required`);
 }
 
+function validateToolLandingAsset(asset, filePath) {
+  validateMeta(asset.meta, filePath);
+  validateSeo(asset.seo, filePath, "/tools/");
+  validateTrust(asset.trust, asset.sources, filePath);
+  validateFaqs(asset.faqs, filePath);
+  validateCta(asset.cta, filePath);
+  validateSourceList(asset.sources, filePath);
+
+  assert(asset.meta.contentType === "tool-landing", `${filePath}: contentType must be 'tool-landing'`);
+  assert(isNonEmptyString(asset.toolSlug), `${filePath}: toolSlug is required`);
+  assert(isNonEmptyString(asset.toolName), `${filePath}: toolName is required`);
+  assert(isNonEmptyString(asset.summary), `${filePath}: summary is required`);
+  assert(isStringArray(asset.supportedTreatments), `${filePath}: supportedTreatments must be a non-empty string array`);
+  assert(isStringArray(asset.requiredInputs), `${filePath}: requiredInputs must be a non-empty string array`);
+  assert(isStringArray(asset.exampleOutputs), `${filePath}: exampleOutputs must be a non-empty string array`);
+  assert(isNonEmptyString(asset.appHandoffSummary), `${filePath}: appHandoffSummary is required`);
+}
+
 function main() {
   const files = walkJsonFiles(GENERATED_ROOT);
   let treatmentCount = 0;
+  let marketTreatmentCount = 0;
   let costCount = 0;
+  let toolCount = 0;
   let appCount = 0;
 
   assert(files.length > 0, "No generated JSON assets found.");
@@ -209,9 +259,21 @@ function main() {
       continue;
     }
 
+    if (asset?.meta?.contentType === "market-treatment") {
+      validateMarketTreatmentAsset(asset, relativePath);
+      marketTreatmentCount += 1;
+      continue;
+    }
+
     if (asset?.meta?.contentType === "cost") {
       validateCostAsset(asset, relativePath);
       costCount += 1;
+      continue;
+    }
+
+    if (asset?.meta?.contentType === "tool-landing") {
+      validateToolLandingAsset(asset, relativePath);
+      toolCount += 1;
       continue;
     }
 
@@ -230,7 +292,9 @@ function main() {
         ok: true,
         filesValidated: files.length,
         treatmentAssets: treatmentCount,
+        marketTreatmentAssets: marketTreatmentCount,
         costAssets: costCount,
+        toolLandingAssets: toolCount,
         appAssets: appCount,
       },
       null,

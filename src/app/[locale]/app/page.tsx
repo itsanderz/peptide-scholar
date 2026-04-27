@@ -19,7 +19,7 @@ export async function generateMetadata({
   return generateSEO({
     title: "Tracker Waitlists | PeptideScholar",
     description:
-      "PeptideScholar tracker waitlists for semaglutide and tirzepatide workflows, built to validate adherence, reminder, and export demand before full app launch.",
+      "PeptideScholar tracker waitlists for GLP-1 and research peptide workflows, built to validate adherence, reminder, and protocol-logging demand before full app launch.",
     canonical: `${siteConfig.domain}/app`,
     siteName: siteConfig.name,
   });
@@ -72,9 +72,35 @@ export default async function AppIndexPage({
             Tracker Waitlists
           </h1>
           <p className="text-lg text-gray-600 max-w-3xl">
-            These pages are the first app-intent surfaces in the schema-driven content system. They are designed to
-            validate real demand before the full PWA build, not to overpromise a finished app.
+            GLP-1 trackers, injection reminders, and research peptide protocol logs — each designed to
+            validate real adherence demand before the full PWA build, not to overpromise a finished app.
           </p>
+        </div>
+
+        <div
+          className="rounded-2xl p-6 mb-8"
+          style={{ backgroundColor: "#ECFDF5", border: "1px solid #A7F3D0" }}
+        >
+          <div
+            className="text-xs font-semibold uppercase tracking-[0.18em] mb-2"
+            style={{ color: "#047857" }}
+          >
+            Live now &mdash; no waitlist
+          </div>
+          <h2 className="text-2xl font-bold mb-2" style={{ color: "#065F46" }}>
+            Try the free tracker (beta)
+          </h2>
+          <p className="text-sm leading-relaxed mb-4" style={{ color: "#065F46" }}>
+            Local-first dose log, symptom tracker, and injection reminders. Everything stays in your
+            browser &mdash; no account or sync required.
+          </p>
+          <Link
+            href="/app/tracker"
+            className="inline-block rounded-lg px-4 py-2 text-sm font-semibold"
+            style={{ backgroundColor: "#047857", color: "#FFFFFF" }}
+          >
+            Open tracker &rarr;
+          </Link>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">

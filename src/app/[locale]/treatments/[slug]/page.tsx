@@ -10,8 +10,11 @@ import {
   ProviderIntentCard,
   SourceCitationList,
   TreatmentMoneyLinks,
+  AffiliateProductGrid,
 } from "@/components";
+import { affiliateCatalog } from "@/data/affiliate-products";
 import { generateSEO } from "@/components/SEOHead";
+import { EditorialTreatmentView } from "@/components/editorial/EditorialTreatmentView";
 import {
   getGeneratedTreatmentHubContent,
   getGeneratedTreatmentHubSlugs,
@@ -19,6 +22,8 @@ import {
 import { isValidLocale } from "@/lib/i18n";
 import { getRequestMarket } from "@/lib/request-market";
 import { siteConfig } from "@/lib/siteConfig";
+
+const EDITORIAL_PILOT_SLUGS = new Set(["semaglutide"]);
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>;
@@ -50,12 +55,18 @@ export default async function TreatmentDetailPage({ params }: Props) {
   if (!hub) notFound();
 
   const market = await getRequestMarket();
+  const useEditorial = EDITORIAL_PILOT_SLUGS.has(slug);
 
   return (
     <>
       <PageTracker
         event="market_page_view"
-        params={{ page_family: "treatment_detail", page_slug: slug, market: market.code }}
+        params={{
+          page_family: "treatment_detail",
+          page_slug: slug,
+          market: market.code,
+          design_variant: useEditorial ? "editorial" : "standard",
+        }}
       />
       <JsonLd
         data={{
@@ -71,6 +82,9 @@ export default async function TreatmentDetailPage({ params }: Props) {
         }}
       />
 
+      {useEditorial ? (
+        <EditorialTreatmentView hub={hub} market={market} />
+      ) : (
       <div className="max-w-5xl mx-auto px-4 py-8">
         <BreadcrumbNav
           crumbs={[
@@ -258,6 +272,20 @@ export default async function TreatmentDetailPage({ params }: Props) {
           </Link>
         </div>
 
+        {/* Affiliate: GLP-1 support essentials */}
+        <AffiliateProductGrid
+          heading="GLP-1 Support Essentials"
+          subheading="Products to help manage common side effects and optimize outcomes during semaglutide or tirzepatide treatment."
+          products={affiliateCatalog["glp1-support"]}
+        />
+
+        {/* Affiliate: Progress tracking tools */}
+        <AffiliateProductGrid
+          heading="Progress Tracking Tools"
+          subheading="Monitor weight, body composition, and nutrition to stay on track and maximize results."
+          products={affiliateCatalog["nutrition"]}
+        />
+
         {/* Trust block */}
         <div
           className="rounded-xl p-5 mb-8"
@@ -283,6 +311,7 @@ export default async function TreatmentDetailPage({ params }: Props) {
           <MedicalDisclaimer compact />
         </div>
       </div>
+      )}
     </>
   );
 }

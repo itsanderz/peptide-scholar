@@ -110,7 +110,7 @@ export const medicationTimelines: MedicationTimeline[] = [
     generalNotes: "72.9% of semaglutide recipients reported any GI side effect. 98.1% were mild-to-moderate. Only 4.3% discontinued due to GI events (vs 0.7% placebo). Side effects are most common during dose escalation and decrease after reaching maintenance dose.",
     source: "Wharton et al. (2022) — Gastrointestinal tolerability of semaglutide 2.4mg. Diabetes Obes Metab.",
     sourceUrl: "https://pmc.ncbi.nlm.nih.gov/articles/PMC9293236/",
-    pmid: "35441470",
+    pmid: "34514682",
   },
   {
     slug: "tirzepatide-zepbound",

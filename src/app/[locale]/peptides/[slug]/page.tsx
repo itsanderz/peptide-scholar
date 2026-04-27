@@ -8,13 +8,15 @@ import {
   BreadcrumbNav, FAQ, AdSlot, EvidenceBadge, ReferenceList,
   MedicalDisclaimer, PeptideCard, PeptideSidebar, DosingTable, ResearchCard,
   LegalStatusBadge, MoleculeDecoration, ReviewedBadge, ProviderCTA, ResourceBox,
-  EmailCapture, ApprovedTreatmentRouteCard, TreatmentMoneyLinks,
+  ClaimSource, TrustBadge, ApprovedTreatmentRouteCard, TreatmentMoneyLinks, AffiliateProductGrid, EmailCapture,
 } from "@/components";
+import { getProductSectionsForPeptide } from "@/data/affiliate-products";
 import { isValidLocale } from "@/lib/i18n";
 import { withLocaleParams, localeAlternates } from "@/lib/locale-params";
 import { getRequestMarketCode } from "@/lib/request-market";
 import { PageTracker } from "@/components/PageTracker";
 import { getGeneratedTreatmentHubSlugs } from "@/lib/generated-content";
+import { amazonSearch } from "@/lib/affiliate";
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>;
@@ -32,10 +34,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!peptide) return {};
 
   const alt = localeAlternates("https://peptidescholar.com", `/peptides/${slug}`, locale);
+  const year = new Date().getFullYear();
+  const defaultTitle = `${peptide.name}${peptide.brandNames.length > 0 ? ` (${peptide.brandNames.slice(0, 2).join("/")})` : ""}: Benefits, Side Effects & Dosing Guide (${year})`;
+
   return {
     ...generateSEO({
-      title: `${peptide.name}${peptide.brandNames.length > 0 ? ` (${peptide.brandNames.slice(0, 2).join("/")})` : ""}: Benefits, Side Effects & Dosing Guide (${new Date().getFullYear()})`,
-      description: `${peptide.name} ${peptide.evidenceLevel === "A" ? "is FDA-approved" : "research"}: benefits, side effects, dosing, mechanism of action, and legal status. Evidence level ${peptide.evidenceLevel}. ${peptide.refs.length} cited studies. ${peptide.fdaStatus === "approved" ? `Brands: ${peptide.brandNames.join(", ")}.` : "Not FDA approved."}`,
+      title: peptide.seoTitle?.replace("(2026)", `(${year})`) ?? defaultTitle,
+      description: `${peptide.name} ${peptide.evidenceLevel === "A" ? "is FDA-approved" : "research"}: benefits, side effects, dosing, mechanism of action, and legal status. Evidence level ${peptide.evidenceLevel}. ${peptide.refs.length} cited studies. ${peptide.fdaStatus === "approved" ? `Brands: ${peptide.brandNames.join(", ")}.` : "Not FDA approved."}${peptide.wadaBanned ? " WADA prohibited." : ""}`,
       canonical: alt.canonical,
       siteName: "PeptideScholar",
     }),
@@ -52,6 +57,11 @@ export default async function PeptideDetailPage({ params }: Props) {
   if (!peptide) notFound();
 
   const comparisons = getComparisonsForPeptide(slug);
+  const affiliateSections = getProductSectionsForPeptide({
+    fdaStatus: peptide.fdaStatus,
+    category: peptide.category,
+    routes: peptide.routes,
+  });
 
   // Resolve related peptides
   const relatedPeptides = peptide.relatedPeptides
@@ -123,6 +133,7 @@ export default async function PeptideDetailPage({ params }: Props) {
                     {peptide.name}
                   </h1>
                   <EvidenceBadge level={peptide.evidenceLevel} />
+                  <TrustBadge peptide={peptide} />
                 </div>
                 <p className="text-sm text-gray-500 mb-3">
                   {peptide.type}
@@ -193,7 +204,7 @@ export default async function PeptideDetailPage({ params }: Props) {
                 Benefits
               </h2>
               <ul className="space-y-2">
-                {peptide.benefits.map((benefit, i) => (
+                {peptide.benefits.map((claim, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <svg
                       width="18"
@@ -206,7 +217,7 @@ export default async function PeptideDetailPage({ params }: Props) {
                     >
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
-                    <span className="text-gray-700 text-sm leading-relaxed">{benefit}</span>
+                    <ClaimSource claim={claim} refs={peptide.refs} />
                   </li>
                 ))}
               </ul>
@@ -231,7 +242,7 @@ export default async function PeptideDetailPage({ params }: Props) {
                 Side Effects
               </h2>
               <ul className="space-y-2">
-                {peptide.sideEffects.map((effect, i) => (
+                {peptide.sideEffects.map((claim, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <svg
                       width="18"
@@ -246,7 +257,7 @@ export default async function PeptideDetailPage({ params }: Props) {
                       <line x1="12" y1="8" x2="12" y2="12" />
                       <line x1="12" y1="16" x2="12.01" y2="16" />
                     </svg>
-                    <span className="text-gray-700 text-sm leading-relaxed">{effect}</span>
+                    <ClaimSource claim={claim} refs={peptide.refs} />
                   </li>
                 ))}
               </ul>
@@ -380,7 +391,7 @@ export default async function PeptideDetailPage({ params }: Props) {
                   description: "Evidence-based reference guide covering mechanisms, research, and clinical applications.",
                   type: "book",
                   ctaText: "View on Amazon",
-                  ctaUrl: "/guide",
+                  ctaUrl: amazonSearch("peptide protocols handbook"),
                 },
                 {
                   title: "Third-Party Peptide Testing",
@@ -391,6 +402,16 @@ export default async function PeptideDetailPage({ params }: Props) {
                 },
               ]}
             />
+
+            {/* Affiliate Product Sections */}
+            {affiliateSections.map((section, i) => (
+              <AffiliateProductGrid
+                key={i}
+                heading={section.heading}
+                subheading={section.subheading}
+                products={section.products}
+              />
+            ))}
 
             {/* FAQ */}
             {peptide.faqs.length > 0 && (

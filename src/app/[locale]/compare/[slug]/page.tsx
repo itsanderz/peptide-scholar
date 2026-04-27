@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { getPeptideBySlug } from "@/data/peptides";
 import { getComparisonBySlug, getAllComparisonSlugs } from "@/data/comparisons";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
-import { BreadcrumbNav, FAQ, AdSlot, ComparisonGrid, EvidenceBadge, MedicalDisclaimer, ReviewedBadge, EmailCapture, ProviderIntentCard, ApprovedComparisonRouteCard, TreatmentMoneyLinks } from "@/components";
+import { BreadcrumbNav, FAQ, AdSlot, ComparisonGrid, EvidenceBadge, MedicalDisclaimer, ReviewedBadge, EmailCapture, ProviderIntentCard, ApprovedComparisonRouteCard, TreatmentMoneyLinks, AffiliateProductGrid } from "@/components";
+import { getProductSectionsForComparison } from "@/data/affiliate-products";
 import { PageTracker } from "@/components/PageTracker";
 import { isValidLocale } from "@/lib/i18n";
 import { withLocaleParams, localeAlternates } from "@/lib/locale-params";
@@ -75,6 +76,10 @@ export default async function ComparisonPage({ params }: Props) {
   ];
   const approvedPeptides = [peptideA, peptideB].filter((peptide) => peptide.fdaStatus === "approved");
   const providerTreatmentSlug = approvedPeptides.length === 1 ? approvedPeptides[0].slug : "general";
+  const affiliateSections = getProductSectionsForComparison([
+    { fdaStatus: peptideA.fdaStatus, category: peptideA.category, routes: peptideA.routes },
+    { fdaStatus: peptideB.fdaStatus, category: peptideB.category, routes: peptideB.routes },
+  ]);
 
   return (
     <>
@@ -350,6 +355,15 @@ export default async function ComparisonPage({ params }: Props) {
 
         {/* ── Ad Slot ────────────────────────────────────────────────── */}
         <AdSlot className="mb-8" />
+
+        {affiliateSections.map((section) => (
+          <AffiliateProductGrid
+            key={section.heading}
+            heading={section.heading}
+            subheading={section.subheading}
+            products={section.products}
+          />
+        ))}
 
         {/* ── FAQ ────────────────────────────────────────────────────── */}
         <FAQ items={faqItems} title={`${comparison.peptideAName} vs ${comparison.peptideBName}: FAQ`} />

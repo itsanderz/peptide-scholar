@@ -1,5 +1,4 @@
-import { getDefaultMarket } from "@/lib/market";
-import { LOCALES, type Locale } from "./i18n";
+import { LOCALES, DEFAULT_LOCALE, type Locale } from "./i18n";
 
 /**
  * Locales to pre-render at build time.
@@ -39,13 +38,7 @@ export function localeParams(): { locale: string }[] {
  * English pages use clean URLs (no prefix), other locales get /{locale}/path.
  */
 export function localeAlternates(baseDomain: string, path: string, currentLocale: string) {
-  const market = getDefaultMarket();
-  const supportedLocales = market.localeSupport
-    .filter((entry) => entry.isIndexable)
-    .map((entry) => entry.locale)
-    .filter((locale): locale is Locale => LOCALES.includes(locale as Locale));
-  const alternatesLocales = supportedLocales.length > 0 ? supportedLocales : LOCALES;
-  const defaultLocale = market.defaultLocale;
+  const defaultLocale = DEFAULT_LOCALE;
   const defaultUrl = `${baseDomain}${path}`;
   return {
     canonical:
@@ -53,7 +46,7 @@ export function localeAlternates(baseDomain: string, path: string, currentLocale
     languages: {
       "x-default": defaultUrl,
       ...Object.fromEntries(
-        alternatesLocales.map((l) => [
+        LOCALES.map((l) => [
           l,
           l === defaultLocale ? defaultUrl : `${baseDomain}/${l}${path}`,
         ])
