@@ -1,0 +1,105 @@
+{
+  "meta": {
+    "id": "au-tirzepatide-market-treatment",
+    "slug": "tirzepatide",
+    "locale": "en",
+    "market": "au",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "email-capture",
+    "indexable": true,
+    "generatedAt": "2026-04-13",
+    "reviewedAt": "2026-04-13",
+    "lastUpdated": "2026-04-13",
+    "contentType": "market-treatment"
+  },
+  "seo": {
+    "title": "Tirzepatide in Australia — Mounjaro TGA Registration, PBS Access and Cost",
+    "description": "TGA-registered tirzepatide in Australia. How Mounjaro is prescribed for type 2 diabetes, what PBS subsidies apply, what private prescriptions cost, and what TGA advertising rules mean for patients.",
+    "canonicalPath": "/markets/au/treatments/tirzepatide",
+    "keywords": [
+      "tirzepatide Australia",
+      "Mounjaro Australia TGA",
+      "tirzepatide PBS Australia",
+      "Mounjaro cost Australia",
+      "tirzepatide prescription Australia"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-13",
+    "sourceCount": 3,
+    "disclaimer": "This page summarises Australian tirzepatide access based on publicly available TGA, PBS, and government data. Regulatory status, PBS listings, and prescribing rules change regularly. Verify current availability and eligibility with a registered Australian prescriber or directly via the TGA and PBS websites."
+  },
+  "treatmentSlug": "tirzepatide",
+  "treatmentName": "Tirzepatide",
+  "marketSummary": "In Australia, tirzepatide is TGA-registered as Mounjaro for type 2 diabetes management and listed on the PBS for eligible patients. As of this review, tirzepatide is not separately TGA-registered for chronic weight management in Australia. The Zepbound brand (the US weight management product) does not hold a distinct TGA registration. Prescribers may use tirzepatide off-label for weight management at their clinical discretion.",
+  "approvalStatus": "approved",
+  "approvalScope": "Type 2 diabetes (Mounjaro) — TGA registered and PBS listed",
+  "approvedProducts": [
+    {
+      "slug": "mounjaro",
+      "name": "Mounjaro",
+      "summary": "Tirzepatide subcutaneous injection TGA-registered for type 2 diabetes management in adults. PBS listed for eligible T2D patients, providing subsidised access under the Pharmaceutical Benefits Scheme."
+    }
+  ],
+  "costSummary": "PBS-eligible T2D patients access Mounjaro at the standard PBS patient contribution — substantially lower than private prescription cost. Private prescriptions for T2D or off-label weight management use typically range from AUD $300 to $650 per month depending on dose and pharmacy. Consultation fees are additional.",
+  "providerPathway": "Australian patients access tirzepatide through a GP or endocrinologist who can write a PBS prescription for eligible T2D patients. Private prescribing for weight management is available from some GPs and obesity medicine specialists. Medicare-rebated telehealth consultations are available for patients who meet the telehealth eligibility criteria.",
+  "onlinePharmacyNotes": "Online prescribing and dispensing is available through AHPRA-registered practitioners and pharmacies. Patients should verify that any online prescriber is registered with AHPRA and that dispensed products are TGA-registered therapeutic goods, not unapproved imports or compounded alternatives.",
+  "legalNotes": [
+    "Tirzepatide (Mounjaro) requires a valid Australian prescription from an AHPRA-registered prescriber. Purchasing without a prescription is illegal.",
+    "The Therapeutic Goods Act 1989 prohibits advertising prescription-only medicines to the general public. This applies to tirzepatide the same way it applies to semaglutide and other GLP-1 medicines.",
+    "Tirzepatide for weight management is currently off-label in Australia and PBS subsidy does not apply to non-T2D indications. A separate TGA registration would be required before an approved weight management pathway could exist."
+  ],
+  "faqs": [
+    {
+      "question": "Is tirzepatide approved for weight loss in Australia?",
+      "answer": "As of this review, tirzepatide is TGA-registered in Australia only for type 2 diabetes under the Mounjaro brand. The Zepbound brand (tirzepatide for weight management, FDA-approved in the US) does not hold a separate TGA registration. Prescribers may use Mounjaro off-label for weight management at their discretion, but this is not PBS-subsidised."
+    },
+    {
+      "question": "Can I get Mounjaro on the PBS in Australia?",
+      "answer": "Yes, if you have type 2 diabetes and meet the PBS listing criteria. Speak to your GP or endocrinologist, who will assess your eligibility and write a PBS prescription if appropriate. Patients outside the T2D PBS criteria will pay private prescription prices."
+    },
+    {
+      "question": "How much does Mounjaro cost privately in Australia?",
+      "answer": "Private Mounjaro prescriptions in Australia typically cost AUD $300–$650 per month depending on dose and pharmacy. PBS-eligible T2D patients pay the standard PBS patient contribution, which is significantly lower. Consultation fees are charged separately by most providers."
+    },
+    {
+      "question": "Can I order Mounjaro online in Australia?",
+      "answer": "Yes, from AHPRA-registered practitioners and TGA-approved pharmacies. The TGA monitors and acts against suppliers of unapproved or counterfeit therapeutic goods. Verify that any service you use employs an AHPRA-registered prescriber and uses a Pharmacy Board-registered dispensary."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Join the Australia waitlist",
+    "primaryHref": "/app/tirzepatide-tracker",
+    "secondaryLabel": "Use the vial supply planner",
+    "secondaryHref": "/tools/vial-planner",
+    "notes": "Australian provider routing and cost tools are in development. Join the waitlist to be notified when AU-specific features launch."
+  },
+  "sources": [
+    {
+      "id": "tga-mounjaro-artg",
+      "authority": "TGA",
+      "title": "Australian Register of Therapeutic Goods — Mounjaro (tirzepatide)",
+      "url": "https://www.tga.gov.au/products/australian-register-of-therapeutic-goods",
+      "publishedAt": "2023",
+      "claimType": "regulatory"
+    },
+    {
+      "id": "pbs-tirzepatide",
+      "authority": "PBS",
+      "title": "Pharmaceutical Benefits Scheme — tirzepatide listing",
+      "url": "https://www.pbs.gov.au/pbs/home",
+      "publishedAt": "2024",
+      "claimType": "pricing"
+    },
+    {
+      "id": "tga-advertising-prohibition",
+      "authority": "TGA",
+      "title": "Advertising prescription medicine Ozempic is prohibited",
+      "url": "https://www.tga.gov.au/advertising-prescription-medicine-ozempic-semaglutide-prohibited",
+      "publishedAt": "2025",
+      "claimType": "regulatory"
+    }
+  ]
+}

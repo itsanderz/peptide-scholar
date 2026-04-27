@@ -1,0 +1,103 @@
+{
+  "meta": {
+    "id": "us-tirzepatide-vial-calculator",
+    "slug": "tirzepatide-vial-calculator",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "tool-embed",
+    "indexable": true,
+    "generatedAt": "2026-04-13",
+    "reviewedAt": "2026-04-13",
+    "lastUpdated": "2026-04-13",
+    "contentType": "tool-landing"
+  },
+  "seo": {
+    "title": "Tirzepatide Vial Calculator — Doses Per Vial and Refill Timing",
+    "description": "Calculate how many doses are in your tirzepatide vial and when to reorder. Works for 2.5 mg through 15 mg weekly protocols from compounded or brand-name Mounjaro or Zepbound supplies.",
+    "canonicalPath": "/tools/tirzepatide-vial-calculator",
+    "keywords": [
+      "tirzepatide vial calculator",
+      "how many doses in a tirzepatide vial",
+      "mounjaro vial doses",
+      "compounded tirzepatide vial",
+      "tirzepatide refill calculator"
+    ]
+  },
+  "trust": {
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-13",
+    "sourceCount": 3,
+    "disclaimer": "Dose calculations are based on standard vial concentrations and are intended for planning reference only. Actual doses, concentrations, and reconstitution volumes vary between compounding pharmacies and brands. Always follow the specific instructions provided by your prescribing physician and dispensing pharmacy."
+  },
+  "toolSlug": "vial-planner",
+  "toolName": "Vial Depletion Planner",
+  "summary": "Tirzepatide is available as brand-name Mounjaro (T2D) and Zepbound (weight management) autoinjector pens, and as compounded tirzepatide from licensed 503A and 503B compounding pharmacies in the US. Compounded tirzepatide vials typically come at concentrations of 5 mg/mL or 10 mg/mL. The vial calculator takes your vial specs and weekly dose to show how many doses your supply contains, when you will deplete it, and how early to reorder to avoid running out.",
+  "supportedTreatments": [
+    "tirzepatide"
+  ],
+  "requiredInputs": [
+    "Vial volume (mL)",
+    "Concentration (mg/mL)",
+    "Weekly dose (mg)",
+    "Protocol start date"
+  ],
+  "exampleOutputs": [
+    "Total doses available in the vial",
+    "Projected depletion date",
+    "Suggested reorder date (7-day lead time by default)",
+    "Weekly draw volume in mL"
+  ],
+  "appHandoffSummary": "The vial planner feeds into the PeptideScholar tirzepatide tracker, which stores your supply log and sends optional low-supply alerts calibrated to your depletion date.",
+  "faqs": [
+    {
+      "question": "How many doses are in a compounded tirzepatide vial?",
+      "answer": "It depends on concentration and vial size. A common compounded tirzepatide vial is 2 mL at 10 mg/mL (20 mg total). At a 5 mg weekly dose, that vial contains 4 doses (4 weeks). At a 2.5 mg weekly dose, the same vial contains 8 doses. Enter your exact vial specs into the calculator for a precise count."
+    },
+    {
+      "question": "What concentration is compounded tirzepatide?",
+      "answer": "US compounding pharmacies typically supply tirzepatide at 5 mg/mL or 10 mg/mL. Vial sizes of 1 mL, 2 mL, and 5 mL are common. Verify the exact concentration printed on your pharmacy label before drawing a dose, as using the wrong concentration can cause dosing errors."
+    },
+    {
+      "question": "Is Mounjaro the same as compounded tirzepatide?",
+      "answer": "They contain the same active molecule (tirzepatide), but Mounjaro is a brand-name autoinjector pen with a fixed dose per click. Compounded tirzepatide is supplied as a multi-dose vial requiring a separate syringe. The vial calculator is primarily designed for the vial-and-syringe format. Mounjaro pen users can still model supply by entering the pen's total drug content."
+    },
+    {
+      "question": "How far ahead should I reorder compounded tirzepatide?",
+      "answer": "Most compounding pharmacies take 3–7 business days for fulfillment and shipping. Ordering when you have 7–10 days left is a safe buffer. The vial planner includes a configurable lead-time alert to flag the reorder point before you deplete your current supply."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Open the Vial Planner",
+    "primaryHref": "/tools/vial-planner",
+    "secondaryLabel": "Join the tirzepatide tracker waitlist",
+    "secondaryHref": "/app/tirzepatide-tracker",
+    "notes": "The planner runs in your browser with no account required. Enter your vial size and dose to get your depletion schedule."
+  },
+  "sources": [
+    {
+      "id": "mounjaro-pi-dosing-2023",
+      "authority": "FDA / Eli Lilly",
+      "title": "Mounjaro (tirzepatide) Prescribing Information — Dosage and Administration",
+      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/215866s006lbl.pdf",
+      "publishedAt": "2023",
+      "claimType": "clinical"
+    },
+    {
+      "id": "zepbound-pi-dosing-2023",
+      "authority": "FDA / Eli Lilly",
+      "title": "Zepbound (tirzepatide) Prescribing Information — Dosage and Administration",
+      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/217806s000lbl.pdf",
+      "publishedAt": "2023",
+      "claimType": "clinical"
+    },
+    {
+      "id": "fda-503b-compounding-2024",
+      "authority": "FDA",
+      "title": "Compounding and the FDA: Questions and Answers — 503B Outsourcing Facilities",
+      "url": "https://www.fda.gov/drugs/human-drug-compounding/compounding-and-fda-questions-and-answers",
+      "publishedAt": "2024",
+      "claimType": "regulatory"
+    }
+  ]
+}

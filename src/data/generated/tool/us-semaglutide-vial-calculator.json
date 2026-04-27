@@ -1,0 +1,103 @@
+{
+  "meta": {
+    "id": "us-semaglutide-vial-calculator",
+    "slug": "semaglutide-vial-calculator",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "tool-embed",
+    "indexable": true,
+    "generatedAt": "2026-04-13",
+    "reviewedAt": "2026-04-13",
+    "lastUpdated": "2026-04-13",
+    "contentType": "tool-landing"
+  },
+  "seo": {
+    "title": "Semaglutide Vial Calculator — Doses Per Vial and Refill Timing",
+    "description": "Calculate how many doses are in your semaglutide vial and when to order your next refill. Works for 0.25 mg, 0.5 mg, 1 mg, and 2.4 mg weekly protocols from compounded or brand-name vials.",
+    "canonicalPath": "/tools/semaglutide-vial-calculator",
+    "keywords": [
+      "semaglutide vial calculator",
+      "how many doses in a semaglutide vial",
+      "semaglutide refill timing",
+      "compounded semaglutide vial doses",
+      "semaglutide injection calculator"
+    ]
+  },
+  "trust": {
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-13",
+    "sourceCount": 3,
+    "disclaimer": "Dose calculations are based on standard vial concentrations and are intended for planning reference only. Actual doses, concentrations, and reconstitution volumes vary between compounding pharmacies and brands. Always follow the specific instructions provided by your prescribing physician and dispensing pharmacy."
+  },
+  "toolSlug": "vial-planner",
+  "toolName": "Vial Depletion Planner",
+  "summary": "Semaglutide vials come in varying total volumes and concentrations depending on whether you are using a brand-name autoinjector pen or a compounded vial-and-syringe format. For compounded semaglutide, the concentration is typically 5 mg/mL or 10 mg/mL, but pharmacies vary. The vial calculator lets you enter your exact vial size and concentration to see how many weekly doses it contains, when you will run out, and how far in advance to reorder to avoid a supply gap.",
+  "supportedTreatments": [
+    "semaglutide"
+  ],
+  "requiredInputs": [
+    "Vial volume (mL)",
+    "Concentration (mg/mL)",
+    "Weekly dose (mg)",
+    "Protocol start date"
+  ],
+  "exampleOutputs": [
+    "Total doses available in the vial",
+    "Projected depletion date",
+    "Suggested reorder date (7-day lead time by default)",
+    "Weekly draw volume in mL"
+  ],
+  "appHandoffSummary": "The vial planner feeds into the PeptideScholar semaglutide tracker, which stores your supply log and sends optional low-supply alerts before your projected depletion date.",
+  "faqs": [
+    {
+      "question": "How many doses are in a semaglutide vial?",
+      "answer": "It depends on the vial size and concentration. A common compounded semaglutide vial is 2 mL at 5 mg/mL (10 mg total). At a 0.5 mg weekly dose, that vial contains 20 doses (about 20 weeks). At a 1 mg weekly dose, the same vial contains 10 doses. Use the calculator to enter your exact vial specs."
+    },
+    {
+      "question": "What concentration is compounded semaglutide?",
+      "answer": "Compounding pharmacies in the US typically supply semaglutide at 5 mg/mL or 10 mg/mL, though some use different concentrations. Always verify the concentration on your pharmacy label before calculating draw volumes. Brand-name Ozempic and Wegovy pens deliver fixed doses per click — the vial calculator is most relevant for compounded vial-and-syringe protocols."
+    },
+    {
+      "question": "When should I reorder semaglutide to avoid a gap?",
+      "answer": "Most compounding pharmacies take 3–7 business days to fill and ship. A safe rule of thumb is to reorder when you have 7–10 days of supply remaining. The vial planner defaults to a 7-day lead time alert, which you can adjust based on your pharmacy's typical turnaround."
+    },
+    {
+      "question": "Does the calculator work for Wegovy or Ozempic pens?",
+      "answer": "Brand-name pens (Wegovy, Ozempic) deliver fixed doses per pen and are not vial-based, so the vial calculator is less relevant. However, you can still use it to model total supply by entering the pen's total drug content as the vial volume. The pen dose counts per click are listed on the brand prescribing information."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Open the Vial Planner",
+    "primaryHref": "/tools/vial-planner",
+    "secondaryLabel": "Join the semaglutide tracker waitlist",
+    "secondaryHref": "/app/semaglutide-tracker",
+    "notes": "The planner runs in your browser with no account required. Enter your vial specs to see your depletion timeline."
+  },
+  "sources": [
+    {
+      "id": "fda-compounding-semaglutide-2024",
+      "authority": "FDA",
+      "title": "FDA Update on Compounded Semaglutide — Shortage Status",
+      "url": "https://www.fda.gov/drugs/drug-shortages/fda-updates-shortage-semaglutide-active-pharmaceutical-ingredient",
+      "publishedAt": "2024",
+      "claimType": "regulatory"
+    },
+    {
+      "id": "ozempic-pi-dosing-2023",
+      "authority": "FDA / Novo Nordisk",
+      "title": "Ozempic (semaglutide) Prescribing Information — Dosage and Administration",
+      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/209637s012lbl.pdf",
+      "publishedAt": "2023",
+      "claimType": "clinical"
+    },
+    {
+      "id": "wegovy-pi-dosing-2023",
+      "authority": "FDA / Novo Nordisk",
+      "title": "Wegovy (semaglutide) Prescribing Information — Dosage and Administration",
+      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/215256s007lbl.pdf",
+      "publishedAt": "2023",
+      "claimType": "clinical"
+    }
+  ]
+}

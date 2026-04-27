@@ -1,0 +1,115 @@
+{
+  "meta": {
+    "id": "uk-semaglutide-market-treatment",
+    "slug": "semaglutide",
+    "locale": "en",
+    "market": "uk",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "app-waitlist",
+    "indexable": true,
+    "generatedAt": "2026-04-13",
+    "reviewedAt": "2026-04-13",
+    "lastUpdated": "2026-04-13",
+    "contentType": "market-treatment"
+  },
+  "seo": {
+    "title": "Semaglutide in the UK — Wegovy, Ozempic, NHS Access and Private Cost",
+    "description": "MHRA-approved semaglutide pathways in the UK. How Wegovy and Ozempic are accessed on the NHS and privately, what NICE TA875 means for eligible patients, and what private prescriptions currently cost.",
+    "canonicalPath": "/markets/uk/treatments/semaglutide",
+    "keywords": [
+      "semaglutide UK",
+      "Wegovy UK NHS",
+      "Ozempic UK prescription",
+      "semaglutide MHRA approved",
+      "semaglutide UK cost private"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-13",
+    "sourceCount": 3,
+    "disclaimer": "This page summarises UK-specific semaglutide access based on publicly available MHRA, NICE, and NHS data. Product availability, NHS eligibility criteria, and private pricing change frequently. Always verify current status with your GP or a UK-licensed prescriber."
+  },
+  "treatmentSlug": "semaglutide",
+  "treatmentName": "Semaglutide",
+  "marketSummary": "In the United Kingdom, semaglutide is an MHRA-regulated prescription medicine available as Wegovy (weight management) and Ozempic (type 2 diabetes). NHS access exists through a NICE-approved pathway with eligibility criteria. Private prescribing is widely available from UK-licensed providers.",
+  "approvalStatus": "approved",
+  "approvalScope": "Weight management (Wegovy) and type 2 diabetes (Ozempic, Rybelsus) — MHRA approved",
+  "approvedProducts": [
+    {
+      "slug": "wegovy",
+      "name": "Wegovy",
+      "summary": "Semaglutide 2.4 mg subcutaneous injection MHRA-approved for chronic weight management in adults with obesity or overweight with weight-related comorbidities. NICE-recommended (TA875) through specialist weight management pathways."
+    },
+    {
+      "slug": "ozempic",
+      "name": "Ozempic",
+      "summary": "Semaglutide 0.5 mg, 1 mg, and 2 mg subcutaneous injection MHRA-approved for type 2 diabetes. Available on NHS prescription under standard T2D prescribing."
+    },
+    {
+      "slug": "rybelsus",
+      "name": "Rybelsus",
+      "summary": "Oral semaglutide tablet MHRA-approved for type 2 diabetes. An oral alternative for patients who prefer not to self-inject."
+    }
+  ],
+  "costSummary": "Private Wegovy prescriptions in the UK typically range from £175 to £350 per month depending on dose and provider. NHS access through the NICE-approved pathway is substantially lower cost but requires eligibility and a specialist referral. Ozempic is available on NHS under standard T2D prescriptions at the standard NHS prescription charge.",
+  "providerPathway": "UK patients can access semaglutide via NHS GP referral into a specialist weight management service (NICE TA875 pathway for Wegovy) or via private telehealth and in-person providers. Multiple CQC-registered UK telehealth platforms offer private Wegovy and Ozempic prescribing with online consultations.",
+  "onlinePharmacyNotes": "Online prescribing is legal in the UK when delivered by a CQC-registered service using MHRA-licensed prescribers. Patients should confirm that any online provider and dispensing pharmacy holds current CQC and GPhC registration before purchasing.",
+  "legalNotes": [
+    "Semaglutide requires a valid UK prescription. Purchasing without a prescription or from unlicensed sources is illegal.",
+    "Direct-to-consumer advertising of prescription-only medicines is prohibited under the Human Medicines Regulations 2012.",
+    "Supply shortages have periodically affected Wegovy and Ozempic UK availability. The MHRA publishes current shortage information on GOV.UK."
+  ],
+  "faqs": [
+    {
+      "question": "Can I get Wegovy on the NHS in the UK?",
+      "answer": "Yes, but through a restricted pathway. NICE approved Wegovy (TA875) for NHS use in England via specialist weight management services. Eligibility includes BMI thresholds and weight-related comorbidities. Scotland, Wales, and Northern Ireland have separate approval bodies and may differ on access. Private prescribing is the faster alternative for many patients."
+    },
+    {
+      "question": "How much does Wegovy cost privately in the UK?",
+      "answer": "Private Wegovy in the UK typically costs £175–£350 per month, varying by dose, provider, and pharmacy. This usually excludes the initial consultation fee and any follow-up appointments. Prices have decreased since launch as more private providers have entered the market."
+    },
+    {
+      "question": "Is Ozempic the same as Wegovy in the UK?",
+      "answer": "No. Both contain semaglutide, but they serve different clinical purposes. Ozempic (0.5–2 mg) is approved for type 2 diabetes; Wegovy (2.4 mg) is approved for weight management. Prescribing Ozempic for weight loss is off-label, which is at the prescriber's discretion and is not the same as the NICE-approved Wegovy pathway."
+    },
+    {
+      "question": "Is it legal to buy semaglutide online in the UK?",
+      "answer": "Yes, from a CQC-registered service with a GPhC-registered pharmacy. The UK has seen cases of counterfeit and unlicensed semaglutide products sold online. Always verify CQC and GPhC registration before purchasing from any online provider."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Join the UK waitlist",
+    "primaryHref": "/app/semaglutide-tracker",
+    "secondaryLabel": "Use the half-life visualizer",
+    "secondaryHref": "/tools/half-life-visualizer",
+    "notes": "UK provider routing is not yet live. Join the app waitlist to be notified when UK-specific features and provider tools launch."
+  },
+  "sources": [
+    {
+      "id": "mhra-wegovy-uk-2023",
+      "authority": "MHRA / GOV.UK",
+      "title": "Regulatory approval of Wegovy (semaglutide) — UK",
+      "url": "https://www.gov.uk/government/publications/regulatory-approval-of-wegovy-semaglutide",
+      "publishedAt": "2023",
+      "claimType": "regulatory"
+    },
+    {
+      "id": "nice-ta875-semaglutide-2023",
+      "authority": "NICE",
+      "title": "Semaglutide 2.4 mg for managing overweight and obesity (TA875)",
+      "url": "https://www.nice.org.uk/guidance/ta875",
+      "publishedAt": "2023",
+      "claimType": "regulatory"
+    },
+    {
+      "id": "nhs-semaglutide-wegovy-2024",
+      "authority": "NHS",
+      "title": "Semaglutide (Wegovy) — NHS medicine information",
+      "url": "https://www.nhs.uk/medicines/semaglutide-wegovy/",
+      "publishedAt": "2024",
+      "claimType": "clinical"
+    }
+  ]
+}

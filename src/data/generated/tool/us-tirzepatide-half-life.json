@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "id": "us-tirzepatide-half-life",
+    "slug": "tirzepatide-half-life",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "tool-embed",
+    "indexable": true,
+    "generatedAt": "2026-04-13",
+    "reviewedAt": "2026-04-13",
+    "lastUpdated": "2026-04-13",
+    "contentType": "tool-landing"
+  },
+  "seo": {
+    "title": "Tirzepatide Half-Life Calculator — Plasma Levels and Clearance",
+    "description": "Tirzepatide has an ~118-hour (approximately 5-day) half-life, supporting weekly dosing. Use the interactive visualizer to see how Mounjaro or Zepbound plasma levels build and clear across your injection schedule.",
+    "canonicalPath": "/tools/tirzepatide-half-life",
+    "keywords": [
+      "tirzepatide half life",
+      "tirzepatide half life calculator",
+      "how long does tirzepatide stay in your system",
+      "mounjaro half life",
+      "tirzepatide clearance"
+    ]
+  },
+  "trust": {
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-13",
+    "sourceCount": 3,
+    "disclaimer": "This tool and content are for informational purposes only. Pharmacokinetic estimates are based on published FDA-label population data and do not account for individual variation in renal function, body composition, or co-medications. Do not use this tool to make clinical decisions without consulting your prescribing physician."
+  },
+  "toolSlug": "half-life-visualizer",
+  "toolName": "Half-Life Visualizer",
+  "summary": "Tirzepatide has an elimination half-life of approximately 118 hours (about 5 days) — shorter than semaglutide but still long enough to support once-weekly subcutaneous dosing. As a dual GIP/GLP-1 receptor agonist, tirzepatide has a distinct molecular structure from semaglutide; its half-life is driven by albumin binding via a C20 fatty diacid modification. The visualizer models concentration buildup across injection cycles and projects how long tirzepatide remains pharmacologically active after the last dose.",
+  "supportedTreatments": [
+    "tirzepatide"
+  ],
+  "requiredInputs": [
+    "Starting dose (2.5 mg, 5 mg, 7.5 mg, 10 mg, 12.5 mg, or 15 mg)",
+    "Number of weeks to model (1–24)",
+    "Day of week for injection"
+  ],
+  "exampleOutputs": [
+    "Week-by-week plasma concentration curve",
+    "Estimated time to steady-state (approximately 4 weeks of weekly dosing)",
+    "Projected clearance date after final dose",
+    "Annotation showing steady-state band"
+  ],
+  "appHandoffSummary": "The half-life visualizer pairs with the PeptideScholar tirzepatide dose tracker, which lets you log actual injection dates alongside the pharmacokinetic model. The tracker also provides optional refill reminders timed to your supply.",
+  "faqs": [
+    {
+      "question": "What is the half-life of tirzepatide?",
+      "answer": "The elimination half-life of tirzepatide is approximately 118 hours, or about 5 days. This is published in the FDA-approved prescribing information for both Mounjaro and Zepbound. The half-life is achieved through a C20 fatty diacid that binds tirzepatide to albumin in plasma, slowing renal clearance."
+    },
+    {
+      "question": "How long does tirzepatide stay in your system?",
+      "answer": "After the final injection, approximately 5 half-lives are needed for drug concentrations to fall to negligible levels. For tirzepatide, that is roughly 5 × 5 days = 25 days. Clinical effects on appetite and blood glucose wane progressively over this window as concentrations decline."
+    },
+    {
+      "question": "How does tirzepatide's half-life compare to semaglutide?",
+      "answer": "Tirzepatide has a shorter half-life (~118 h) than semaglutide (~168 h). Both support once-weekly dosing, but tirzepatide clears somewhat faster after stopping. In the steady-state curve, tirzepatide shows slightly more trough-to-peak fluctuation between weekly injections than semaglutide."
+    },
+    {
+      "question": "How long does it take tirzepatide to reach steady state?",
+      "answer": "Steady-state plasma concentrations are reached after approximately 4 weeks of once-weekly dosing, according to the FDA prescribing information. This is slightly faster than semaglutide due to tirzepatide's shorter half-life."
+    },
+    {
+      "question": "Does tirzepatide dose affect clearance time?",
+      "answer": "No. The half-life of tirzepatide is consistent across doses (2.5 mg to 15 mg) because the same molecular modification governs clearance. Higher doses raise steady-state concentrations proportionally, but the shape of the clearance curve is the same."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Open the Half-Life Visualizer",
+    "primaryHref": "/tools/half-life-visualizer",
+    "secondaryLabel": "Join the tirzepatide tracker waitlist",
+    "secondaryHref": "/app/tirzepatide-tracker",
+    "notes": "The visualizer runs entirely in your browser. Select Tirzepatide in the compound dropdown to model your schedule."
+  },
+  "sources": [
+    {
+      "id": "mounjaro-pi-pk-2023",
+      "authority": "FDA / Eli Lilly",
+      "title": "Mounjaro (tirzepatide) Prescribing Information — Clinical Pharmacology",
+      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/215866s006lbl.pdf",
+      "publishedAt": "2023",
+      "claimType": "clinical"
+    },
+    {
+      "id": "zepbound-pi-pk-2023",
+      "authority": "FDA / Eli Lilly",
+      "title": "Zepbound (tirzepatide) Prescribing Information — Clinical Pharmacology",
+      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/217806s000lbl.pdf",
+      "publishedAt": "2023",
+      "claimType": "clinical"
+    },
+    {
+      "id": "tirzepatide-pk-review-2022",
+      "authority": "Clinical Pharmacokinetics",
+      "title": "Clinical Pharmacology of Tirzepatide",
+      "url": "https://link.springer.com/article/10.1007/s40262-022-01163-4",
+      "publishedAt": "2022",
+      "claimType": "clinical"
+    }
+  ]
+}

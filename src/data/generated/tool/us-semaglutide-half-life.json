@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "id": "us-semaglutide-half-life",
+    "slug": "semaglutide-half-life",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "tool-embed",
+    "indexable": true,
+    "generatedAt": "2026-04-13",
+    "reviewedAt": "2026-04-13",
+    "lastUpdated": "2026-04-13",
+    "contentType": "tool-landing"
+  },
+  "seo": {
+    "title": "Semaglutide Half-Life Calculator — How Long It Stays Active",
+    "description": "Semaglutide has an ~168-hour (7-day) half-life, which is why it is dosed weekly. Use the interactive visualizer to see how plasma levels build, plateau, and clear across your injection schedule.",
+    "canonicalPath": "/tools/semaglutide-half-life",
+    "keywords": [
+      "semaglutide half life",
+      "semaglutide half life calculator",
+      "how long does semaglutide stay in your system",
+      "semaglutide plasma levels",
+      "semaglutide clearance time"
+    ]
+  },
+  "trust": {
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-13",
+    "sourceCount": 3,
+    "disclaimer": "This tool and content are for informational purposes only. Pharmacokinetic estimates are based on published FDA-label population data and do not account for individual variation in renal function, body composition, or co-medications. Do not use this tool to make clinical decisions without consulting your prescribing physician."
+  },
+  "toolSlug": "half-life-visualizer",
+  "toolName": "Half-Life Visualizer",
+  "summary": "Semaglutide has a pharmacokinetic half-life of approximately 168 hours (7 days) — the longest of any approved GLP-1 receptor agonist. This exceptionally long half-life is what makes once-weekly dosing practical and enables the drug to maintain near-steady plasma concentrations between injections. The visualizer models how drug concentration builds across multiple injection cycles and shows how long meaningful drug levels persist after the final dose.",
+  "supportedTreatments": [
+    "semaglutide"
+  ],
+  "requiredInputs": [
+    "Starting dose (0.25 mg, 0.5 mg, 1 mg, or 2.4 mg)",
+    "Number of weeks to model (1–24)",
+    "Day of week for injection"
+  ],
+  "exampleOutputs": [
+    "Week-by-week plasma concentration curve",
+    "Estimated time to steady-state (approximately 4–5 weeks of weekly dosing)",
+    "Projected clearance date after final dose",
+    "Annotation showing steady-state band"
+  ],
+  "appHandoffSummary": "The half-life visualizer feeds directly into the PeptideScholar dose tracker, which lets you log actual injection dates and overlay them against the pharmacokinetic model. The tracker also sends optional refill reminders calibrated to your dose schedule.",
+  "faqs": [
+    {
+      "question": "What is the half-life of semaglutide?",
+      "answer": "The elimination half-life of semaglutide is approximately 168 hours, or about 7 days. This is published in the FDA-approved prescribing information for both Wegovy and Ozempic. The long half-life is achieved through albumin binding and fatty-acid modification, which slow renal clearance and reduce degradation."
+    },
+    {
+      "question": "How long does semaglutide stay in your system?",
+      "answer": "After the final injection, it takes approximately 5 half-lives for a drug to clear to negligible levels. For semaglutide, that is roughly 5 × 7 days = 35 days. At that point, plasma concentrations have dropped to under 3% of peak steady-state levels. The drug is not fully undetectable on sensitive assays, but pharmacological effects are essentially gone."
+    },
+    {
+      "question": "How long does it take semaglutide to reach steady state?",
+      "answer": "Steady-state plasma concentrations are reached after approximately 4 to 5 weeks of once-weekly dosing. The FDA label reports that steady-state is achieved after 4 to 5 injections. At steady state, trough-to-peak fluctuation is relatively low compared to shorter-acting GLP-1 agonists."
+    },
+    {
+      "question": "Does semaglutide dose affect how long it lasts?",
+      "answer": "The half-life of semaglutide is consistent across doses (0.25 mg to 2.4 mg) because the same molecular modification drives clearance. Higher doses produce proportionally higher plasma concentrations at steady state, but the time-course shape and clearance rate are similar. The visualizer reflects this: changing the dose shifts the concentration scale but not the shape of the curve."
+    },
+    {
+      "question": "Why does semaglutide have such a long half-life?",
+      "answer": "Semaglutide is modified with a C18 fatty diacid chain that binds strongly to albumin in plasma. This albumin binding slows renal filtration (albumin is too large to filter freely) and protects the peptide from enzymatic degradation. The result is a half-life roughly 50–100 times longer than native GLP-1."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Open the Half-Life Visualizer",
+    "primaryHref": "/tools/half-life-visualizer",
+    "secondaryLabel": "Join the dose tracker waitlist",
+    "secondaryHref": "/app/semaglutide-tracker",
+    "notes": "The visualizer runs entirely in your browser — no account required. Select Semaglutide in the compound dropdown to model your schedule."
+  },
+  "sources": [
+    {
+      "id": "wegovy-pi-pk-2023",
+      "authority": "FDA / Novo Nordisk",
+      "title": "Wegovy (semaglutide) Prescribing Information — Clinical Pharmacology",
+      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/215256s007lbl.pdf",
+      "publishedAt": "2023",
+      "claimType": "clinical"
+    },
+    {
+      "id": "ozempic-pi-pk-2023",
+      "authority": "FDA / Novo Nordisk",
+      "title": "Ozempic (semaglutide) Prescribing Information — Clinical Pharmacology",
+      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/209637s012lbl.pdf",
+      "publishedAt": "2023",
+      "claimType": "clinical"
+    },
+    {
+      "id": "semaglutide-pk-review-2021",
+      "authority": "Clinical Pharmacokinetics",
+      "title": "Clinical Pharmacokinetics and Pharmacodynamics of Semaglutide",
+      "url": "https://link.springer.com/article/10.1007/s40262-021-01025-x",
+      "publishedAt": "2021",
+      "claimType": "clinical"
+    }
+  ]
+}

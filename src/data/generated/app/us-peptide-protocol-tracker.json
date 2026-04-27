@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "id": "us-peptide-protocol-tracker",
+    "slug": "peptide-protocol-tracker",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "app-waitlist",
+    "indexable": true,
+    "generatedAt": "2026-04-13",
+    "reviewedAt": "2026-04-13",
+    "lastUpdated": "2026-04-13",
+    "contentType": "app-landing"
+  },
+  "seo": {
+    "title": "Peptide Protocol Tracker — Log Your Research Compound Schedule",
+    "description": "A private protocol log for research peptides. Track compound, dose, frequency, cycle dates, injection site, and effect notes — stored locally, no account required.",
+    "canonicalPath": "/app/peptide-protocol-tracker",
+    "keywords": [
+      "peptide protocol tracker",
+      "peptide tracker app",
+      "research peptide log",
+      "bpc-157 tracker",
+      "peptide cycle tracker"
+    ]
+  },
+  "trust": {
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-13",
+    "sourceCount": 3,
+    "disclaimer": "This landing page describes a planned protocol logging tool. Research peptides are not FDA-approved for human use. This tracker is designed as a personal record-keeping aid only — not a clinical, diagnostic, or prescribing tool. Nothing on this page constitutes medical advice or an endorsement of self-administration of any substance."
+  },
+  "appUseCaseSlug": "peptide-protocol-tracker",
+  "title": "Peptide Protocol Tracker",
+  "summary": "Research peptides are typically used on multi-week on/off cycles with specific daily or twice-daily injection schedules. Tracking them in a general notes app quickly becomes fragmented — protocol details, cycle dates, injection logs, and effect observations end up spread across different places. The Peptide Protocol Tracker gives you a single private workspace to record your active compound, dose, frequency, cycle start and end dates, injection site rotation, and freeform notes. Everything is stored locally on your device.",
+  "supportedTreatments": [
+    "bpc-157",
+    "tb-500",
+    "ipamorelin",
+    "cjc-1295",
+    "pt-141",
+    "sermorelin",
+    "tesamorelin",
+    "kisspeptin",
+    "selank",
+    "semax"
+  ],
+  "supportedFeatures": [
+    "Multi-compound protocol log (up to 6 active compounds)",
+    "Cycle date tracking with on/off week calendar",
+    "Daily and twice-daily injection schedule support",
+    "Injection site rotation log",
+    "Freeform effect and observation notes per dose",
+    "Protocol summary export for personal records"
+  ],
+  "privacySummary": "All protocol data is stored locally in your browser. No account is required. No compound names, doses, or notes are sent to PeptideScholar servers. The tracker does not share data with third parties and does not use the data for any commercial purpose.",
+  "availabilitySummary": "The Peptide Protocol Tracker is planned as part of the PeptideScholar tool suite. Join the waitlist to receive early access when the first web version launches. The first release will be a local-only web app with no cloud sync.",
+  "faqs": [
+    {
+      "question": "What types of peptides does the tracker support?",
+      "answer": "The tracker is designed for any research peptide that follows a defined dose, frequency, and cycle structure. Initial compound presets include BPC-157, TB-500, Ipamorelin, CJC-1295, PT-141, Sermorelin, Tesamorelin, and others. You can also enter custom compound names for compounds not in the preset list."
+    },
+    {
+      "question": "Does the tracker provide dosing advice?",
+      "answer": "No. The tracker records what you log — it does not suggest doses, recommend protocols, or provide medical guidance. It is a personal record-keeping tool, not a clinical recommendation engine."
+    },
+    {
+      "question": "Is my protocol data private?",
+      "answer": "Yes. All data is stored in your browser's local storage. Nothing is sent to any server. If you clear your browser data, your logs are deleted. Cross-device sync is planned as a future opt-in feature, but the default and initial version is entirely local."
+    },
+    {
+      "question": "Can I use this for GLP-1 peptides like semaglutide?",
+      "answer": "The dedicated Semaglutide Tracker and Tirzepatide Tracker (linked below) are better choices for GLP-1 protocols — they have GLP-1-specific features like dose escalation schedules and refill timing. The Protocol Tracker is designed for research peptide use cases where a more flexible, compound-agnostic log is more useful."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Join the Protocol Tracker waitlist",
+    "primaryHref": "/app/peptide-protocol-tracker",
+    "secondaryLabel": "Use the cycle planner",
+    "secondaryHref": "/tools/cycle-planner",
+    "notes": "Use the cycle planner now to model injection schedules before the full tracker launches."
+  },
+  "sources": [
+    {
+      "id": "fda-research-use-only-2023",
+      "authority": "FDA",
+      "title": "Research Use Only Products and In Vitro Diagnostic Products",
+      "url": "https://www.fda.gov/medical-devices/in-vitro-diagnostics/research-use-only-products-and-in-vitro-diagnostic-products",
+      "publishedAt": "2023",
+      "claimType": "regulatory"
+    },
+    {
+      "id": "clinicaltrials-bpc157-2024",
+      "authority": "ClinicalTrials.gov",
+      "title": "ClinicalTrials.gov — BPC-157 Studies Registry",
+      "url": "https://clinicaltrials.gov/search?term=BPC-157",
+      "publishedAt": "2024",
+      "claimType": "clinical"
+    },
+    {
+      "id": "therapeutic-peptides-review-2022",
+      "authority": "Nature Reviews Drug Discovery",
+      "title": "Therapeutic peptides: current status and future directions",
+      "url": "https://www.nature.com/articles/s41573-022-00586-9",
+      "publishedAt": "2022",
+      "claimType": "clinical"
+    }
+  ]
+}

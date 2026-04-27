@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "id": "us-glp1-reminder",
+    "slug": "glp1-reminder",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "app-waitlist",
+    "indexable": true,
+    "generatedAt": "2026-04-13",
+    "reviewedAt": "2026-04-13",
+    "lastUpdated": "2026-04-13",
+    "contentType": "app-landing"
+  },
+  "seo": {
+    "title": "GLP-1 Injection Reminder App — Weekly Dose Alerts for Semaglutide and Tirzepatide",
+    "description": "A weekly injection reminder and dose escalation scheduler for semaglutide, tirzepatide, and liraglutide. Stores your injection schedule locally — no account required.",
+    "canonicalPath": "/app/glp1-reminder",
+    "keywords": [
+      "glp1 reminder app",
+      "semaglutide injection reminder",
+      "tirzepatide weekly reminder",
+      "wegovy reminder app",
+      "glp-1 dose schedule app"
+    ]
+  },
+  "trust": {
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-13",
+    "sourceCount": 3,
+    "disclaimer": "This landing page describes a planned reminder workflow. Reminder tools are adherence aids, not medical devices. Missed dose decisions, dose escalation timing, and injection technique should still follow official prescribing information and clinician guidance."
+  },
+  "appUseCaseSlug": "glp1-reminder",
+  "title": "GLP-1 Weekly Reminder",
+  "summary": "GLP-1 receptor agonists require consistent weekly dosing to maintain steady-state plasma concentrations. Missing injections — or spacing them unevenly — disrupts the plasma level plateau that underpins the drug's effectiveness. The GLP-1 Reminder is a lightweight, privacy-first scheduler that stores your injection day, sends browser-based alerts before each weekly dose, and tracks your escalation schedule so you always know what dose comes next.",
+  "supportedTreatments": [
+    "semaglutide",
+    "tirzepatide",
+    "liraglutide"
+  ],
+  "supportedFeatures": [
+    "Weekly injection day reminder with configurable alert timing",
+    "Dose escalation schedule tracking (e.g. 0.25 mg → 0.5 mg → 1 mg → 2.4 mg)",
+    "Next injection countdown with days-remaining display",
+    "Missed dose flag with official guidance link",
+    "Refill timing alert based on pen or vial supply count"
+  ],
+  "privacySummary": "Reminder schedules are stored locally in your browser. No account is required and no injection data is sent to PeptideScholar servers. The reminder uses browser notification permissions only — no background data collection.",
+  "availabilitySummary": "The GLP-1 Reminder is in development as part of the PeptideScholar tracker suite. Join the waitlist to receive early access when the web-based version launches.",
+  "faqs": [
+    {
+      "question": "Why does a GLP-1 reminder app matter if I already set a phone alarm?",
+      "answer": "A generic phone alarm can tell you it is injection day, but it cannot track your current dose tier, flag when you are due to escalate, count down your remaining supply, or link to official missed-dose guidance. The GLP-1 Reminder wraps all of these into a single workflow so you do not have to maintain a spreadsheet alongside your alarm."
+    },
+    {
+      "question": "What happens if I miss a dose?",
+      "answer": "The reminder app will flag the missed injection and link directly to the official prescribing information for your medication. For semaglutide (Wegovy/Ozempic) and tirzepatide (Zepbound/Mounjaro), the FDA-approved labeling describes the missed dose window and when to skip versus take the late dose. The app does not give independent missed-dose advice."
+    },
+    {
+      "question": "Does the reminder app work for daily GLP-1 drugs like liraglutide?",
+      "answer": "Yes. The reminder supports daily injection schedules (liraglutide/Saxenda, Victoza) as well as weekly schedules. Daily injection users can configure morning or evening alerts and the same dose escalation tracking applies."
+    },
+    {
+      "question": "Will the reminder sync across devices?",
+      "answer": "The first version stores data locally in your browser. Cross-device sync is on the roadmap as an opt-in feature, planned for a later release after the core local-first version is stable. Join the waitlist to track when sync features become available."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Join the GLP-1 Reminder waitlist",
+    "primaryHref": "/app/glp1-reminder",
+    "secondaryLabel": "View the half-life visualizer",
+    "secondaryHref": "/tools/half-life-visualizer",
+    "notes": "The waitlist gets early access and release notes. Use the half-life visualizer now to understand the pharmacokinetics behind consistent weekly dosing."
+  },
+  "sources": [
+    {
+      "id": "glp1-adherence-review-2022",
+      "authority": "Diabetes Therapy",
+      "title": "Adherence to GLP-1 Receptor Agonist Therapy: A Systematic Review",
+      "url": "https://link.springer.com/article/10.1007/s13300-022-01262-8",
+      "publishedAt": "2022",
+      "claimType": "clinical"
+    },
+    {
+      "id": "wegovy-missed-dose-pi-2023",
+      "authority": "FDA / Novo Nordisk",
+      "title": "Wegovy (semaglutide) Prescribing Information — Missed Dose Instructions",
+      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/215256s007lbl.pdf",
+      "publishedAt": "2023",
+      "claimType": "clinical"
+    },
+    {
+      "id": "mounjaro-missed-dose-pi-2023",
+      "authority": "FDA / Eli Lilly",
+      "title": "Mounjaro (tirzepatide) Prescribing Information — Missed Dose Instructions",
+      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/215866s006lbl.pdf",
+      "publishedAt": "2023",
+      "claimType": "clinical"
+    }
+  ]
+}
