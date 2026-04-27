@@ -7,9 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "validate:generated": "node scripts/validate-generated-content.mjs"
+    "validate:generated": "node scripts/validate-generated-content.mjs",
+    "validate:pmids": "node scripts/verify-pmids.mjs",
+    "validate:all": "npm run validate:generated && npm run validate:pmids"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "next": "16.1.6",
     "playwright": "^1.58.2",
     "react": "19.2.3",

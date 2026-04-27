@@ -5,9 +5,12 @@ import Link from "next/link";
 import Script from "next/script";
 import { ThemeProvider } from "@/lib/ThemeProvider";
 import { Footer, MarketSelector } from "@/components";
+import { Navbar } from "@/components/Navbar";
+import { buildNavConfig } from "@/lib/nav-config";
 import { type Locale } from "@/lib/i18n";
 import { getRequestMarket } from "@/lib/request-market";
 import { getRequestSite } from "@/lib/request-site";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const libreFranklin = Libre_Franklin({
@@ -72,44 +75,48 @@ export default async function RootLayout({
   const site = await getRequestSite();
   const plausibleDomain = new URL(site.domain).hostname;
   const mainSite = "https://peptidescholar.com";
-  const navLinks =
-    site.capabilities.showMainNavigation
-      ? [
-          { label: "Home", href: "/" },
-          { label: "Treatments", href: "/treatments" },
-          { label: "Peptides", href: "/peptides" },
-          { label: "Providers", href: "/providers" },
-          { label: "Costs", href: "/costs" },
-          { label: "Tools", href: "/tools" },
-          { label: "Guide", href: "/guide" },
-          { label: "Legal", href: "/legal" },
-        ]
-      : [
-          { label: "Main Site", href: mainSite },
-          { label: "Contact", href: `${mainSite}/contact` },
-        ];
-  const footerLinks =
-    site.capabilities.showMainNavigation
-      ? [
-          { label: "Home", href: "/" },
-          { label: "Treatments", href: "/treatments" },
-          { label: "Browse Peptides", href: "/peptides" },
-          { label: "Compare", href: "/compare" },
-          { label: "Providers", href: "/providers" },
-          { label: "Costs", href: "/costs" },
-          { label: "Legal", href: "/legal" },
-          { label: "Tools", href: "/tools" },
-          { label: "Blog", href: "/blog" },
-          { label: "Glossary", href: "/glossary" },
-          { label: "About", href: "/about" },
-          { label: "Contact", href: "/contact" },
-          { label: "Disclaimer", href: "/disclaimer" },
-        ]
-      : [
-          { label: "Main Site", href: mainSite },
-          { label: "Contact", href: `${mainSite}/contact` },
-          { label: "Disclaimer", href: `${mainSite}/disclaimer` },
-        ];
+  const navConfig = buildNavConfig(site.capabilities.showMainNavigation, mainSite);
+  const footerColumns = site.capabilities.showMainNavigation
+    ? [
+        {
+          heading: "Treatments",
+          links: [
+            { label: "All Treatments", href: "/treatments" },
+            { label: "Browse Peptides", href: "/peptides" },
+            { label: "Compare", href: "/compare" },
+            { label: "Costs", href: "/costs" },
+          ],
+        },
+        {
+          heading: "Tools",
+          links: [
+            { label: "All Tools", href: "/tools" },
+            { label: "Legal Status", href: "/legal" },
+            { label: "Find Providers", href: "/providers" },
+          ],
+        },
+        {
+          heading: "Learn",
+          links: [
+            { label: "Blog", href: "/blog" },
+            { label: "Glossary", href: "/glossary" },
+            { label: "About", href: "/about" },
+            { label: "Contact", href: "/contact" },
+          ],
+        },
+      ]
+    : undefined;
+
+  const footerLegalLinks = site.capabilities.showMainNavigation
+    ? [
+        { label: "Disclaimer", href: "/disclaimer" },
+        { label: "Contact", href: "/contact" },
+      ]
+    : [
+        { label: "Main Site", href: mainSite },
+        { label: "Contact", href: `${mainSite}/contact` },
+        { label: "Disclaimer", href: `${mainSite}/disclaimer` },
+      ];
 
   return (
     <html lang={locale}>
@@ -126,14 +133,14 @@ export default async function RootLayout({
             }),
           }}
         />
-        {process.env.NEXT_PUBLIC_GA_ID && (
+        {process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID && (
           <>
             <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID}`}
               strategy="afterInteractive"
             />
             <Script id="ga4-init" strategy="afterInteractive">
-              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_ID}');`}
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID}');`}
             </Script>
           </>
         )}
@@ -152,9 +159,11 @@ export default async function RootLayout({
           src="https://plausible.io/js/script.js"
           strategy="afterInteractive"
         />
-        <Script id="clarity-init" strategy="afterInteractive">
-          {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","w0ukcbj8hy");`}
-        </Script>
+        {process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID && (
+          <Script id="clarity-init" strategy="afterInteractive">
+            {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID}");`}
+          </Script>
+        )}
         <ThemeProvider theme={site.theme}>
           <header
             className="sticky top-0 z-50 border-b-2"
@@ -163,43 +172,39 @@ export default async function RootLayout({
               borderBottomColor: site.theme.colors.accent,
             }}
           >
-            <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
-              <Link href="/" className="flex items-center gap-2">
-                <div
-                  className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm"
-                  style={{ backgroundColor: site.theme.colors.secondary, color: "#FFFFFF" }}
-                >
-                  {site.shortName}
-                </div>
-                <span className="text-white font-bold text-lg tracking-tight" style={{ fontFamily: "var(--font-libre-franklin)" }}>
-                  {site.name}
-                </span>
-              </Link>
-              <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-                {navLinks.map((item) => (
-                  <Link key={item.label} href={item.href} className="text-white/80 hover:text-white transition-colors">
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
-              <div className="flex items-center gap-3">
-                {site.capabilities.showMarketSelector && (
-                  <>
-                    <span
-                      className="hidden xl:inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold"
-                      style={{
-                        backgroundColor: "rgba(255,255,255,0.08)",
-                        color: "rgba(255,255,255,0.82)",
-                        border: "1px solid rgba(255,255,255,0.14)",
-                      }}
-                    >
-                      {market.name}
-                    </span>
-                    <MarketSelector currentMarket={market.code} />
-                  </>
-                )}
-              </div>
-            </div>
+            <Navbar
+              config={navConfig}
+              accentColor={site.theme.colors.accent}
+              logo={
+                <Link href="/" className="flex items-center gap-2">
+                  <div
+                    className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm"
+                    style={{ backgroundColor: site.theme.colors.secondary, color: "#FFFFFF" }}
+                  >
+                    {site.shortName}
+                  </div>
+                  <span className="text-white font-bold text-lg tracking-tight" style={{ fontFamily: "var(--font-libre-franklin)" }}>
+                    {site.name}
+                  </span>
+                </Link>
+              }
+            >
+              {site.capabilities.showMarketSelector && (
+                <>
+                  <span
+                    className="hidden xl:inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold"
+                    style={{
+                      backgroundColor: "rgba(255,255,255,0.08)",
+                      color: "rgba(255,255,255,0.82)",
+                      border: "1px solid rgba(255,255,255,0.14)",
+                    }}
+                  >
+                    {market.name}
+                  </span>
+                  <MarketSelector currentMarket={market.code} />
+                </>
+              )}
+            </Navbar>
           </header>
 
           {site.launchState !== "live" && site.betaMessage && (
@@ -221,9 +226,11 @@ export default async function RootLayout({
 
           <Footer
             siteName={site.name}
-            links={footerLinks}
+            columns={footerColumns}
+            legalLinks={footerLegalLinks}
           />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
