@@ -56,13 +56,15 @@ export function EditorialTreatmentView({ hub, market }: Props) {
               <div className="mt-10 flex flex-wrap items-center gap-6">
                 <Link
                   href={hub.cta.primaryHref || "/providers"}
-                  className="inline-flex items-center gap-3 px-6 py-3 text-sm font-semibold"
+                  className="inline-flex items-center gap-3 px-6 py-3 text-[11px] sm:text-sm font-semibold leading-none"
                   style={{
                     ...editorialFont.meta,
                     backgroundColor: EDITORIAL.ink,
                     color: EDITORIAL.paper,
                     letterSpacing: "0.04em",
                     textTransform: "uppercase",
+                    minHeight: 48,
+                    border: `1px solid ${EDITORIAL.ink}`,
                   }}
                 >
                   {hub.cta.primaryLabel} &rarr;

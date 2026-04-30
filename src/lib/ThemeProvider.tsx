@@ -27,6 +27,11 @@ export function ThemeProvider({ theme, children }: { theme: SiteTheme; children:
     "--color-warning": theme.colors.warning,
     "--font-heading": theme.fonts.heading,
     "--font-body": theme.fonts.body,
+    "--black": theme.colors.primary,
+    "--bone": theme.colors.bg,
+    "--concrete": theme.colors.bgAlt,
+    "--lime": theme.colors.accent,
+    "--blue": theme.colors.secondary,
   } as React.CSSProperties;
 
   return (

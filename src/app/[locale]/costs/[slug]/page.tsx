@@ -10,7 +10,9 @@ import {
   ProviderIntentCard,
   SourceCitationList,
 } from "@/components";
+import { EnrichedCostContentRenderer } from "@/components/EnrichedCostContent";
 import { generateSEO } from "@/components/SEOHead";
+import { getEnrichedCost, hasEnrichedCostContent } from "@/data/cost-enrichment";
 import { getGeneratedCostContent, getGeneratedCostSlugs } from "@/lib/generated-content";
 import { isValidLocale } from "@/lib/i18n";
 import { getRequestMarket } from "@/lib/request-market";
@@ -30,11 +32,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = getGeneratedCostContent(slug, "us");
   if (!page) return {};
 
+  const isEnriched = hasEnrichedCostContent(slug);
+
   return generateSEO({
     title: page.seo.title,
     description: page.seo.description,
     canonical: `${siteConfig.domain}${page.seo.canonicalPath}`,
     siteName: siteConfig.name,
+    // Cost pages are noindexed until deep-dive enrichment is added (prevents thin-content AdSense risk)
+    robots: isEnriched
+      ? undefined
+      : { index: false, follow: false, googleBot: { index: false, follow: false } },
   });
 }
 
@@ -46,6 +54,7 @@ export default async function CostDetailPage({ params }: Props) {
   if (!page) notFound();
 
   const market = await getRequestMarket();
+  const enriched = hasEnrichedCostContent(slug) ? getEnrichedCost(slug) : undefined;
 
   return (
     <>
@@ -63,7 +72,7 @@ export default async function CostDetailPage({ params }: Props) {
         }}
       />
 
-      <div className="max-w-5xl mx-auto px-4 py-8">
+      <div className="container py-8 legacy-index-page">
         <BreadcrumbNav
           crumbs={[
             { label: "Home", href: "/" },
@@ -135,6 +144,13 @@ export default async function CostDetailPage({ params }: Props) {
             {page.priorAuthSummary}
           </div>
         </div>
+
+        {/* Deep-dive cost enrichment */}
+        {enriched && (
+          <div className="mb-10">
+            <EnrichedCostContentRenderer content={enriched} treatmentName={page.treatmentName} />
+          </div>
+        )}
 
         <ProviderIntentCard
           marketCode={market.code}

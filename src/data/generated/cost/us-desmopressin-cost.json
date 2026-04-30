@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "id": "us-desmopressin-cost",
+    "slug": "desmopressin",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "cost"
+  },
+  "seo": {
+    "title": "Desmopressin Cost Guide: Insurance, Cash Pay, and Savings",
+    "description": "US-first desmopressin cost guide covering insurance pathways, cash-pay options, prior authorization, and what to verify before starting treatment.",
+    "canonicalPath": "/costs/desmopressin",
+    "keywords": [
+      "desmopressin cost",
+      "desmopressin insurance coverage",
+      "desmopressin cash pay",
+      "desmopressin savings card"
+    ]
+  },
+  "trust": {
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 2,
+    "disclaimer": "Pricing, savings eligibility, and coverage rules can change quickly. Verify all current figures and terms directly on official brand pages before acting."
+  },
+  "treatmentSlug": "desmopressin",
+  "treatmentName": "Desmopressin",
+  "marketSummary": "In the United States, Desmopressin costs depend on brand, pharmacy, insurance design, and whether the patient qualifies for manufacturer savings programs.",
+  "listPrice": "Verify current pricing directly on official DDAVP pages before starting, because list pricing, self-pay offers, and eligibility terms can change.",
+  "cashPayRange": "Official cash-pay pricing varies by pharmacy and dose. Contact multiple pharmacies or use a prescription discount service for current rates.",
+  "insuranceSummary": "Commercial coverage for Desmopressin varies by plan and indication. Prior authorization is commonly required.",
+  "couponSummary": "Manufacturer savings programs may reduce out-of-pocket cost for eligible commercially insured patients.",
+  "priorAuthSummary": "Prior authorization is common and may require documentation of diagnosis, prior treatments, and clinical need.",
+  "faqs": [
+    {
+      "question": "What is the safest way to check current Desmopressin pricing?",
+      "answer": "Use official brand pages first, then confirm the exact cash-pay or insured amount with the prescribing service and dispensing pharmacy."
+    },
+    {
+      "question": "Does insurance always cover Desmopressin?",
+      "answer": "No. Coverage depends on the specific plan, indication, and whether prior authorization is approved. Some plans may require step therapy or documentation of medical necessity."
+    },
+    {
+      "question": "Are there manufacturer savings programs for Desmopressin?",
+      "answer": "Many branded peptide therapies offer savings cards or patient assistance programs. Eligibility typically requires commercial insurance and may exclude government programs like Medicare or Medicaid."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a desmopressin provider",
+    "primaryHref": "/providers?treatment=desmopressin",
+    "secondaryLabel": "Use the cost calculator",
+    "secondaryHref": "/tools/cost-calculator",
+    "notes": "Use provider matching when you need help comparing insured and self-pay treatment paths."
+  },
+  "sources": [
+    {
+      "id": "desmopressin-cost-ref-1",
+      "authority": "N Engl J Med",
+      "title": "Copeptin in the Diagnosis of Diabetes Insipidus.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30382699/",
+      "publishedAt": "2018",
+      "claimType": "clinical"
+    },
+    {
+      "id": "desmopressin-cost-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Desmopressin",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

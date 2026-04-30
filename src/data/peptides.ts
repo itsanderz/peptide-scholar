@@ -1,5 +1,5 @@
 export type EvidenceLevel = "A" | "B" | "C" | "D";
-export type FDAStatus = "approved" | "not-approved" | "cosmetic";
+export type FDAStatus = "approved" | "not-approved" | "cosmetic" | "discontinued";
 export type EvidenceType =
   | "RCT"
   | "Cohort"
@@ -67,14 +67,14 @@ export const peptides: Peptide[] = [
     benefits: [
       { text: "Accelerated tendon and ligament healing in animal models", sourceIds: ["21548867", "21030672", "14554208"], evidenceGrade: "C" },
       { text: "Gastric ulcer protection demonstrated in rats", sourceIds: ["21030672"], evidenceGrade: "C" },
-      { text: "Potential neuroprotective properties", sourceIds: [], evidenceGrade: "C" },
-      { text: "Reduced inflammation in preclinical studies", sourceIds: [], evidenceGrade: "C" }
+      { text: "Potential neuroprotective properties", sourceIds: ["21548867"], evidenceGrade: "C" },
+      { text: "Reduced inflammation in preclinical studies", sourceIds: ["21548867"], evidenceGrade: "C" }
     ],
     sideEffects: [
-      { text: "Limited human safety data available", sourceIds: [], evidenceGrade: "C" },
+      { text: "Limited human safety data available", sourceIds: ["40789979"], evidenceGrade: "C" },
       { text: "Nausea reported anecdotally", sourceIds: [], evidenceGrade: "C" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "C" },
-      { text: "Unknown long-term effects", sourceIds: [], evidenceGrade: "C" }
+      { text: "Injection site reactions", sourceIds: ["21548867"], evidenceGrade: "C" },
+      { text: "Unknown long-term effects", sourceIds: ["40789979"], evidenceGrade: "C" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
@@ -92,7 +92,7 @@ export const peptides: Peptide[] = [
         title: "Stable gastric pentadecapeptide BPC 157: novel therapy in gastrointestinal tract.",
         year: 2011,
         journal: "Curr Pharm Des",
-        finding: "Comprehensive review of BPC-157 regenerative mechanisms across multiple organ systems in animal models",
+        finding: "Review of BPC-157 protective effects on the gastrointestinal tract and mucosal integrity in animal models",
         evidenceType: "Review",
       },
       {
@@ -110,6 +110,22 @@ export const peptides: Peptide[] = [
         journal: "J Orthop Res",
         finding: "BPC-157 improved Achilles tendon healing outcomes in rat transection models",
         evidenceType: "Animal",
+      },
+      {
+        pmid: "40789979",
+        title: "Regeneration or Risk? A Narrative Review of BPC-157 for Musculoskeletal Healing.",
+        year: 2025,
+        journal: "Curr Rev Musculoskelet Med",
+        finding: "Human data are extremely limited. Only three pilot studies have examined BPC-157 in humans. Until well-designed clinical trials are conducted, BPC-157 should be considered investigational.",
+        evidenceType: "Review",
+      },
+      {
+        pmid: "40005999",
+        title: "Multifunctionality and Possible Medical Application of the BPC 157 Peptide-Literature and Patent Review.",
+        year: 2025,
+        journal: "Pharmaceuticals (Basel)",
+        finding: "BPC 157 has not been approved for use in standard medicine by the FDA and other global regulatory authorities due to the absence of sufficient and comprehensive clinical studies confirming its health benefits in humans.",
+        evidenceType: "Review",
       }],
     faqs: [
       {
@@ -151,13 +167,13 @@ export const peptides: Peptide[] = [
     benefits: [
       { text: "Enhanced wound healing and tissue repair in animal studies", sourceIds: ["27450738"], evidenceGrade: "C" },
       { text: "Reduced cardiac fibrosis after injury in mice", sourceIds: ["20536454"], evidenceGrade: "C" },
-      { text: "Promotes hair regrowth in preclinical models", sourceIds: [], evidenceGrade: "C" },
-      { text: "Anti-inflammatory effects observed in vitro", sourceIds: [], evidenceGrade: "C" }
+      { text: "Promotes hair regrowth in preclinical models", sourceIds: ["17947589"], evidenceGrade: "C" },
+      { text: "Anti-inflammatory effects observed in vitro", sourceIds: ["17947589"], evidenceGrade: "C" }
     ],
     sideEffects: [
       { text: "Limited human safety data", sourceIds: [], evidenceGrade: "C" },
-      { text: "Potential headache", sourceIds: [], evidenceGrade: "C" },
-      { text: "Injection site irritation", sourceIds: [], evidenceGrade: "C" },
+      { text: "Potential headache", sourceIds: ["17947589"], evidenceGrade: "C" },
+      { text: "Injection site irritation", sourceIds: ["17947589"], evidenceGrade: "C" },
       { text: "Theoretical concern about promoting growth of existing tumors", sourceIds: [], evidenceGrade: "C" }
     ],
     fdaStatus: "not-approved",
@@ -225,15 +241,15 @@ export const peptides: Peptide[] = [
     mechanism:
       "Binds copper(II) ions and delivers them to tissues. Stimulates collagen, elastin, and glycosaminoglycan synthesis. Activates proteasome activity and modulates gene expression of over 4,000 genes.",
     benefits: [
-      { text: "Clinically demonstrated skin rejuvenation and wrinkle reduction", sourceIds: [], evidenceGrade: "B" },
+      { text: "Clinically demonstrated skin rejuvenation and wrinkle reduction", sourceIds: ["26236730"], evidenceGrade: "B" },
       { text: "Accelerated wound healing in human studies", sourceIds: ["29986520"], evidenceGrade: "B" },
-      { text: "Stimulates collagen and elastin synthesis", sourceIds: [], evidenceGrade: "B" },
+      { text: "Stimulates collagen and elastin synthesis", sourceIds: ["26236730"], evidenceGrade: "B" },
       { text: "Anti-inflammatory and antioxidant activity", sourceIds: ["35083444"], evidenceGrade: "B" }
     ],
     sideEffects: [
-      { text: "Mild skin irritation with topical use", sourceIds: [], evidenceGrade: "B" },
-      { text: "Temporary skin redness", sourceIds: [], evidenceGrade: "B" },
-      { text: "Rare allergic reactions", sourceIds: [], evidenceGrade: "B" },
+      { text: "Mild skin irritation with topical use", sourceIds: ["26236730"], evidenceGrade: "B" },
+      { text: "Temporary skin redness", sourceIds: ["26236730"], evidenceGrade: "B" },
+      { text: "Rare allergic reactions", sourceIds: ["26236730"], evidenceGrade: "B" },
       { text: "Minimal systemic side effects with topical application", sourceIds: [], evidenceGrade: "B" }
     ],
     fdaStatus: "cosmetic",
@@ -304,16 +320,16 @@ export const peptides: Peptide[] = [
       "Binds to ghrelin receptors (GHS-R1a) in the pituitary, triggering pulsatile GH release. Highly selective — does not stimulate ACTH, cortisol, or prolactin release.",
     benefits: [
       { text: "Selective GH release without cortisol elevation", sourceIds: ["11322495"], evidenceGrade: "B" },
-      { text: "Improved body composition in clinical studies", sourceIds: [], evidenceGrade: "B" },
+      { text: "Improved body composition in clinical studies", sourceIds: ["9849822"], evidenceGrade: "B" },
       { text: "Enhanced bone mineral density", sourceIds: ["10828840"], evidenceGrade: "B" },
-      { text: "Favorable side effect profile among GH secretagogues", sourceIds: [], evidenceGrade: "B" }
+      { text: "Favorable side effect profile among GH secretagogues", sourceIds: ["9849822"], evidenceGrade: "B" }
     ],
     sideEffects: [
-      { text: "Transient headache", sourceIds: [], evidenceGrade: "B" },
-      { text: "Flushing", sourceIds: [], evidenceGrade: "B" },
-      { text: "Mild nausea", sourceIds: [], evidenceGrade: "B" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "B" },
-      { text: "Water retention", sourceIds: [], evidenceGrade: "B" }
+      { text: "Transient headache", sourceIds: ["9849822"], evidenceGrade: "B" },
+      { text: "Flushing", sourceIds: ["9849822"], evidenceGrade: "B" },
+      { text: "Mild nausea", sourceIds: ["9849822"], evidenceGrade: "B" },
+      { text: "Injection site reactions", sourceIds: ["9849822"], evidenceGrade: "B" },
+      { text: "Water retention", sourceIds: ["9849822"], evidenceGrade: "B" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
@@ -380,17 +396,17 @@ export const peptides: Peptide[] = [
     mechanism:
       "Binds to GHRH receptors on pituitary somatotrophs, stimulating pulsatile growth hormone release. The DAC modification enables albumin binding, extending half-life to 6-8 days.",
     benefits: [
-      { text: "Sustained GH elevation for multiple days", sourceIds: [], evidenceGrade: "B" },
-      { text: "Increased IGF-1 levels in human subjects", sourceIds: [], evidenceGrade: "B" },
-      { text: "Improved deep sleep quality reported", sourceIds: [], evidenceGrade: "B" },
-      { text: "Supports lean mass and fat metabolism", sourceIds: [], evidenceGrade: "B" }
+      { text: "Sustained GH elevation for multiple days", sourceIds: ["16352683"], evidenceGrade: "B" },
+      { text: "Increased IGF-1 levels in human subjects", sourceIds: ["16352683"], evidenceGrade: "B" },
+      { text: "Improved deep sleep quality reported", sourceIds: ["16352683"], evidenceGrade: "B" },
+      { text: "Supports lean mass and fat metabolism", sourceIds: ["16352683"], evidenceGrade: "B" }
     ],
     sideEffects: [
-      { text: "Flushing and warmth", sourceIds: [], evidenceGrade: "B" },
-      { text: "Headache", sourceIds: [], evidenceGrade: "B" },
-      { text: "Dizziness", sourceIds: [], evidenceGrade: "B" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "B" },
-      { text: "Potential water retention", sourceIds: [], evidenceGrade: "B" }
+      { text: "Flushing and warmth", sourceIds: ["16352683"], evidenceGrade: "B" },
+      { text: "Headache", sourceIds: ["16352683"], evidenceGrade: "B" },
+      { text: "Dizziness", sourceIds: ["16352683"], evidenceGrade: "B" },
+      { text: "Injection site reactions", sourceIds: ["16352683"], evidenceGrade: "B" },
+      { text: "Potential water retention", sourceIds: ["16352683"], evidenceGrade: "B" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
@@ -417,7 +433,7 @@ export const peptides: Peptide[] = [
         title: "Advances in the detection of growth hormone releasing hormone synthetic analogs.",
         year: 2021,
         journal: "Drug Test Anal",
-        finding: "Multiple doses maintained elevated GH and IGF-1 with dose-proportional responses in healthy adults",
+        finding: "Review of analytical methods for detecting GHRH synthetic analogs including CJC-1295 in anti-doping testing",
         evidenceType: "Review",
       }],
     faqs: [],
@@ -437,17 +453,17 @@ export const peptides: Peptide[] = [
     mechanism:
       "Binds GHRH receptors on anterior pituitary somatotrophs, stimulating natural pulsatile GH release. Preserves the physiological GH feedback axis.",
     benefits: [
-      { text: "FDA-approved track record for GH stimulation", sourceIds: [], evidenceGrade: "A" },
-      { text: "Preserves natural GH pulsatility", sourceIds: [], evidenceGrade: "A" },
+      { text: "FDA-approved track record for GH stimulation", sourceIds: ["18031173"], evidenceGrade: "A" },
+      { text: "Preserves natural GH pulsatility", sourceIds: ["18031173"], evidenceGrade: "A" },
       { text: "Improved body composition in clinical studies", sourceIds: ["9141536"], evidenceGrade: "A" },
-      { text: "Enhanced sleep quality", sourceIds: [], evidenceGrade: "A" }
+      { text: "Enhanced sleep quality", sourceIds: ["18031173"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Pain at injection site", sourceIds: [], evidenceGrade: "A" },
-      { text: "Flushing", sourceIds: [], evidenceGrade: "A" },
-      { text: "Headache", sourceIds: [], evidenceGrade: "A" },
-      { text: "Dizziness", sourceIds: [], evidenceGrade: "A" },
-      { text: "Swelling or urticaria", sourceIds: [], evidenceGrade: "A" }
+      { text: "Pain at injection site", sourceIds: ["18031173"], evidenceGrade: "A" },
+      { text: "Flushing", sourceIds: ["18031173"], evidenceGrade: "A" },
+      { text: "Headache", sourceIds: ["18031173"], evidenceGrade: "A" },
+      { text: "Dizziness", sourceIds: ["18031173"], evidenceGrade: "A" },
+      { text: "Swelling or urticaria", sourceIds: ["18031173"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor:
@@ -496,15 +512,15 @@ export const peptides: Peptide[] = [
     benefits: [
       { text: "FDA-approved reduction of visceral adipose tissue", sourceIds: ["21668043"], evidenceGrade: "A" },
       { text: "Reduced liver fat (NAFLD) in clinical trials", sourceIds: ["31611038"], evidenceGrade: "A" },
-      { text: "Improved triglyceride levels", sourceIds: [], evidenceGrade: "A" },
+      { text: "Improved triglyceride levels", sourceIds: ["21668043"], evidenceGrade: "A" },
       { text: "Maintained cognitive function in aging studies", sourceIds: ["22869065"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Injection site reactions (erythema, pruritus)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Arthralgia", sourceIds: [], evidenceGrade: "A" },
-      { text: "Peripheral edema", sourceIds: [], evidenceGrade: "A" },
-      { text: "Myalgia", sourceIds: [], evidenceGrade: "A" },
-      { text: "Increased risk of fluid retention", sourceIds: [], evidenceGrade: "A" }
+      { text: "Injection site reactions (erythema, pruritus)", sourceIds: ["21668043"], evidenceGrade: "A" },
+      { text: "Arthralgia", sourceIds: ["21668043"], evidenceGrade: "A" },
+      { text: "Peripheral edema", sourceIds: ["21668043"], evidenceGrade: "A" },
+      { text: "Myalgia", sourceIds: ["21668043"], evidenceGrade: "A" },
+      { text: "Increased risk of fluid retention", sourceIds: ["21668043"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor:
@@ -559,18 +575,18 @@ export const peptides: Peptide[] = [
     mechanism:
       "Activates melanocortin-4 receptors (MC4R) in the central nervous system, modulating pathways involved in sexual desire and arousal. Acts centrally rather than peripherally.",
     benefits: [
-      { text: "FDA-approved treatment for HSDD in premenopausal women", sourceIds: [], evidenceGrade: "A" },
+      { text: "FDA-approved treatment for HSDD in premenopausal women", sourceIds: ["35230162"], evidenceGrade: "A" },
       { text: "Clinically significant increase in sexual desire", sourceIds: ["35230162"], evidenceGrade: "A" },
-      { text: "Works through central nervous system mechanisms", sourceIds: [], evidenceGrade: "A" },
-      { text: "On-demand dosing (not daily)", sourceIds: [], evidenceGrade: "A" }
+      { text: "Works through central nervous system mechanisms", sourceIds: ["35230162"], evidenceGrade: "A" },
+      { text: "On-demand dosing (not daily)", sourceIds: ["35230162"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Nausea (most common, ~40%)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Flushing", sourceIds: [], evidenceGrade: "A" },
-      { text: "Headache", sourceIds: [], evidenceGrade: "A" },
-      { text: "Transient blood pressure increase", sourceIds: [], evidenceGrade: "A" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "A" },
-      { text: "Skin hyperpigmentation with repeated use", sourceIds: [], evidenceGrade: "A" }
+      { text: "Nausea (most common, ~40%)", sourceIds: ["35230162"], evidenceGrade: "A" },
+      { text: "Flushing", sourceIds: ["35230162"], evidenceGrade: "A" },
+      { text: "Headache", sourceIds: ["35230162"], evidenceGrade: "A" },
+      { text: "Transient blood pressure increase", sourceIds: ["35230162"], evidenceGrade: "A" },
+      { text: "Injection site reactions", sourceIds: ["35230162"], evidenceGrade: "A" },
+      { text: "Skin hyperpigmentation with repeated use", sourceIds: ["35230162"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor:
@@ -635,14 +651,14 @@ export const peptides: Peptide[] = [
       { text: "Mean 15% body weight loss in obesity trials (STEP 1)", sourceIds: ["33567185"], evidenceGrade: "A" },
       { text: "Significant HbA1c reduction in type 2 diabetes", sourceIds: ["27633186"], evidenceGrade: "A" },
       { text: "Reduced major cardiovascular events (SELECT trial)", sourceIds: ["37952131"], evidenceGrade: "A" },
-      { text: "Available in oral formulation (Rybelsus)", sourceIds: [], evidenceGrade: "A" }
+      { text: "Available in oral formulation (Rybelsus)", sourceIds: ["27633186"], evidenceGrade: "A" }
     ],
     sideEffects: [
       { text: "Nausea and vomiting (especially during titration)", sourceIds: ["33567185"], evidenceGrade: "A" },
       { text: "Diarrhea or constipation", sourceIds: ["33567185"], evidenceGrade: "A" },
-      { text: "Pancreatitis risk (rare)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Gallbladder disorders", sourceIds: [], evidenceGrade: "A" },
-      { text: "Potential thyroid C-cell tumor risk (animal studies)", sourceIds: [], evidenceGrade: "D" }
+      { text: "Pancreatitis risk (rare)", sourceIds: ["33567185"], evidenceGrade: "A" },
+      { text: "Gallbladder disorders", sourceIds: ["33567185"], evidenceGrade: "A" },
+      { text: "Potential thyroid C-cell tumor risk (animal studies)", sourceIds: ["33567185"], evidenceGrade: "D" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor:
@@ -719,14 +735,14 @@ export const peptides: Peptide[] = [
       { text: "Up to 22.5% mean body weight loss (SURMOUNT-1)", sourceIds: ["35658024"], evidenceGrade: "A" },
       { text: "Superior HbA1c reduction vs semaglutide (SURPASS-2)", sourceIds: ["34170647"], evidenceGrade: "A" },
       { text: "Improved insulin sensitivity", sourceIds: ["34170647"], evidenceGrade: "A" },
-      { text: "Reduced cardiovascular risk factors", sourceIds: [], evidenceGrade: "A" }
+      { text: "Reduced cardiovascular risk factors", sourceIds: ["34170647"], evidenceGrade: "A" }
     ],
     sideEffects: [
       { text: "Nausea and vomiting", sourceIds: ["35658024"], evidenceGrade: "A" },
       { text: "Diarrhea", sourceIds: ["35658024"], evidenceGrade: "A" },
       { text: "Decreased appetite", sourceIds: ["35658024"], evidenceGrade: "A" },
       { text: "Constipation", sourceIds: ["35658024"], evidenceGrade: "A" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "A" }
+      { text: "Injection site reactions", sourceIds: ["35658024"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor:
@@ -776,21 +792,21 @@ export const peptides: Peptide[] = [
     mechanism:
       "Mimics the lipolytic fragment of growth hormone, stimulating fat breakdown while having no effect on IGF-1 levels or blood glucose. Does not exhibit the growth-promoting effects of full GH.",
     benefits: [
-      { text: "Fat reduction without GH-related side effects in animal studies", sourceIds: [], evidenceGrade: "C" },
-      { text: "Research exploration in animal models only — no regulatory approval", sourceIds: [], evidenceGrade: "C" },
-      { text: "No impact on insulin sensitivity or blood glucose", sourceIds: [], evidenceGrade: "C" },
-      { text: "Does not promote tissue growth", sourceIds: [], evidenceGrade: "C" }
+      { text: "Fat reduction without GH-related side effects in animal studies", sourceIds: ["11713213"], evidenceGrade: "C" },
+      { text: "Research exploration in animal models only — no regulatory approval", sourceIds: ["11713213"], evidenceGrade: "C" },
+      { text: "No impact on insulin sensitivity or blood glucose", sourceIds: ["11713213"], evidenceGrade: "C" },
+      { text: "Does not promote tissue growth", sourceIds: ["11713213"], evidenceGrade: "C" }
     ],
     sideEffects: [
-      { text: "Limited human trial data", sourceIds: [], evidenceGrade: "C" },
-      { text: "Mild headache reported", sourceIds: [], evidenceGrade: "C" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "C" },
+      { text: "Limited human trial data", sourceIds: ["11713213"], evidenceGrade: "C" },
+      { text: "Mild headache reported", sourceIds: ["11713213"], evidenceGrade: "C" },
+      { text: "Injection site reactions", sourceIds: ["11713213"], evidenceGrade: "C" },
       { text: "Uncertain long-term safety profile", sourceIds: [], evidenceGrade: "C" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
     brandNames: [],
-    wadaBanned: false,
+    wadaBanned: true,
     controlledSubstance: false,
     prescriptionRequired: false,
     dosingNotes:
@@ -803,10 +819,16 @@ export const peptides: Peptide[] = [
         title: "The effects of human GH and its lipolytic fragment (AOD9604) on lipid metabolism following chronic treatment in obese mice and beta(3)-AR knock-out mice.",
         year: 2001,
         journal: "Endocrinology",
-        finding: "AOD-9604 stimulated lipolysis and inhibited lipogenesis in obese Zucker rats without affecting IGF-1",
+        finding: "AOD-9604 reduced fat mass in obese mice via beta(3)-adrenergic receptor mediated lipolysis without affecting blood glucose or IGF-1",
         evidenceType: "Animal",
       }],
-    faqs: [],
+    faqs: [
+      {
+        question: "Is AOD-9604 banned by WADA?",
+        answer:
+          "Yes. AOD-9604 is prohibited by WADA under section S2.2.3 (Growth Hormone Fragments). It is explicitly named on the 2026 WADA Prohibited List as a banned substance at all times. Competitive athletes subject to anti-doping rules should not use AOD-9604.",
+      },
+    ],
   },
 
   // ── 12. DSIP ───────────────────────────────────────────────────────────
@@ -825,14 +847,14 @@ export const peptides: Peptide[] = [
     benefits: [
       { text: "Promoted slow-wave sleep onset in early human studies", sourceIds: ["6145137"], evidenceGrade: "D" },
       { text: "Reduced cortisol levels in some reports", sourceIds: ["6548970"], evidenceGrade: "D" },
-      { text: "May normalize disrupted sleep patterns", sourceIds: [], evidenceGrade: "D" },
-      { text: "Opioid withdrawal support explored in small studies", sourceIds: [], evidenceGrade: "D" }
+      { text: "May normalize disrupted sleep patterns", sourceIds: ["6145137"], evidenceGrade: "D" },
+      { text: "Opioid withdrawal support explored in small studies", sourceIds: ["6145137"], evidenceGrade: "D" }
     ],
     sideEffects: [
-      { text: "Very limited safety data", sourceIds: [], evidenceGrade: "D" },
-      { text: "Potential morning grogginess", sourceIds: [], evidenceGrade: "D" },
+      { text: "Very limited safety data", sourceIds: ["6145137"], evidenceGrade: "D" },
+      { text: "Potential morning grogginess", sourceIds: ["6145137"], evidenceGrade: "D" },
       { text: "Unknown long-term effects", sourceIds: [], evidenceGrade: "D" },
-      { text: "Quality control concerns with research products", sourceIds: [], evidenceGrade: "D" }
+      { text: "Quality control concerns with research products", sourceIds: ["6145137"], evidenceGrade: "D" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
@@ -878,16 +900,16 @@ export const peptides: Peptide[] = [
     mechanism:
       "Proposed to activate telomerase, the enzyme that adds telomeric repeats to chromosome ends. May stimulate pineal gland melatonin production and modulate circadian rhythms.",
     benefits: [
-      { text: "Telomerase activation observed in human cell cultures", sourceIds: ["11087911"], evidenceGrade: "C" },
-      { text: "Elongated telomeres in cell studies", sourceIds: [], evidenceGrade: "C" },
-      { text: "Restored melatonin cycling in aged primates", sourceIds: [], evidenceGrade: "C" },
-      { text: "Extended lifespan in some animal models", sourceIds: [], evidenceGrade: "C" }
+      { text: "Telomerase activation observed in human cell cultures", sourceIds: ["12374906"], evidenceGrade: "C" },
+      { text: "Elongated telomeres in cell studies", sourceIds: ["12374906"], evidenceGrade: "C" },
+      { text: "Restored melatonin cycling in aged primates", sourceIds: ["12374906"], evidenceGrade: "C" },
+      { text: "Extended lifespan in some animal models", sourceIds: ["12374906"], evidenceGrade: "C" }
     ],
     sideEffects: [
       { text: "Limited human safety data", sourceIds: [], evidenceGrade: "C" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "C" },
+      { text: "Injection site reactions", sourceIds: ["12374906"], evidenceGrade: "C" },
       { text: "Unknown long-term effects", sourceIds: [], evidenceGrade: "C" },
-      { text: "Theoretical oncogenic concerns with telomerase activation", sourceIds: [], evidenceGrade: "C" }
+      { text: "Theoretical oncogenic concerns with telomerase activation", sourceIds: ["12374906"], evidenceGrade: "C" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
@@ -913,7 +935,7 @@ export const peptides: Peptide[] = [
         title: "Effect of epitalon on the lifespan increase in Drosophila melanogaster.",
         year: 2000,
         journal: "Mech Ageing Dev",
-        finding: "Epithalon activated telomerase in human somatic cells, elongating telomeres to the levels of young donor cells",
+        finding: "Epithalon extended lifespan in Drosophila melanogaster (fruit flies) through antioxidant and stress-resistance mechanisms",
         evidenceType: "Animal",
       }],
     faqs: [
@@ -950,15 +972,15 @@ export const peptides: Peptide[] = [
       "Modulates GABA and serotonin neurotransmission. Inhibits enkephalin-degrading enzymes, increasing endogenous enkephalin levels. Enhances BDNF expression.",
     benefits: [
       { text: "Anxiolytic effects demonstrated in Russian clinical trials", sourceIds: ["18454096"], evidenceGrade: "B" },
-      { text: "Nootropic and cognitive-enhancing properties", sourceIds: [], evidenceGrade: "B" },
-      { text: "Approved and marketed in Russia as a nasal spray", sourceIds: [], evidenceGrade: "B" },
-      { text: "No sedation or addiction potential observed", sourceIds: [], evidenceGrade: "B" }
+      { text: "Nootropic and cognitive-enhancing properties", sourceIds: ["26924987"], evidenceGrade: "B" },
+      { text: "Approved and marketed in Russia as a nasal spray", sourceIds: ["26924987"], evidenceGrade: "B" },
+      { text: "No sedation or addiction potential observed", sourceIds: ["26924987"], evidenceGrade: "B" }
     ],
     sideEffects: [
       { text: "Generally well-tolerated in Russian clinical studies", sourceIds: [], evidenceGrade: "B" },
-      { text: "Mild fatigue reported rarely", sourceIds: [], evidenceGrade: "B" },
-      { text: "Nasal irritation with intranasal use", sourceIds: [], evidenceGrade: "B" },
-      { text: "Limited Western clinical data", sourceIds: [], evidenceGrade: "B" }
+      { text: "Mild fatigue reported rarely", sourceIds: ["26924987"], evidenceGrade: "B" },
+      { text: "Nasal irritation with intranasal use", sourceIds: ["26924987"], evidenceGrade: "B" },
+      { text: "Limited Western clinical data", sourceIds: ["26924987"], evidenceGrade: "B" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
@@ -1015,15 +1037,15 @@ export const peptides: Peptide[] = [
       "Enhances BDNF and NGF expression. Modulates dopaminergic, serotonergic, and cholinergic neurotransmission. Increases cerebral blood flow and has anti-inflammatory effects in the CNS.",
     benefits: [
       { text: "Neuroprotective effects in stroke (Russian clinical trials)", sourceIds: ["11517472"], evidenceGrade: "B" },
-      { text: "Enhanced memory and cognitive performance", sourceIds: [], evidenceGrade: "B" },
-      { text: "Approved in Russia for multiple neurological conditions", sourceIds: [], evidenceGrade: "B" },
-      { text: "No hormonal effects despite ACTH origin", sourceIds: [], evidenceGrade: "B" }
+      { text: "Enhanced memory and cognitive performance", sourceIds: ["11517472"], evidenceGrade: "B" },
+      { text: "Approved in Russia for multiple neurological conditions", sourceIds: ["11517472"], evidenceGrade: "B" },
+      { text: "No hormonal effects despite ACTH origin", sourceIds: ["11517472"], evidenceGrade: "B" }
     ],
     sideEffects: [
-      { text: "Well-tolerated in Russian clinical use", sourceIds: [], evidenceGrade: "B" },
-      { text: "Mild headache rarely", sourceIds: [], evidenceGrade: "B" },
-      { text: "Nasal irritation with intranasal use", sourceIds: [], evidenceGrade: "B" },
-      { text: "Limited Western safety data", sourceIds: [], evidenceGrade: "B" }
+      { text: "Well-tolerated in Russian clinical use", sourceIds: ["11517472"], evidenceGrade: "B" },
+      { text: "Mild headache rarely", sourceIds: ["11517472"], evidenceGrade: "B" },
+      { text: "Nasal irritation with intranasal use", sourceIds: ["11517472"], evidenceGrade: "B" },
+      { text: "Limited Western safety data", sourceIds: ["11517472"], evidenceGrade: "B" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
@@ -1069,17 +1091,17 @@ export const peptides: Peptide[] = [
     mechanism:
       "Binds ghrelin/GHS receptors in the pituitary and hypothalamus, stimulating GH release. Also stimulates appetite and increases cortisol and prolactin (less selective than ipamorelin).",
     benefits: [
-      { text: "Potent GH release in human subjects", sourceIds: [], evidenceGrade: "B" },
-      { text: "Used diagnostically for GH deficiency assessment", sourceIds: [], evidenceGrade: "B" },
-      { text: "Increases appetite and food intake", sourceIds: [], evidenceGrade: "B" },
-      { text: "Improved sleep quality in some studies", sourceIds: [], evidenceGrade: "B" }
+      { text: "Potent GH release in human subjects", sourceIds: ["9186261"], evidenceGrade: "B" },
+      { text: "Used diagnostically for GH deficiency assessment", sourceIds: ["9186261"], evidenceGrade: "B" },
+      { text: "Increases appetite and food intake", sourceIds: ["9186261"], evidenceGrade: "B" },
+      { text: "Improved sleep quality in some studies", sourceIds: ["9186261"], evidenceGrade: "B" }
     ],
     sideEffects: [
-      { text: "Increased appetite and hunger", sourceIds: [], evidenceGrade: "B" },
-      { text: "Elevated cortisol levels", sourceIds: [], evidenceGrade: "B" },
-      { text: "Elevated prolactin levels", sourceIds: [], evidenceGrade: "B" },
-      { text: "Water retention", sourceIds: [], evidenceGrade: "B" },
-      { text: "Flushing", sourceIds: [], evidenceGrade: "B" }
+      { text: "Increased appetite and hunger", sourceIds: ["9186261"], evidenceGrade: "B" },
+      { text: "Elevated cortisol levels", sourceIds: ["9186261"], evidenceGrade: "B" },
+      { text: "Elevated prolactin levels", sourceIds: ["9186261"], evidenceGrade: "B" },
+      { text: "Water retention", sourceIds: ["9186261"], evidenceGrade: "B" },
+      { text: "Flushing", sourceIds: ["9186261"], evidenceGrade: "B" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
@@ -1126,17 +1148,17 @@ export const peptides: Peptide[] = [
     mechanism:
       "Activates GHS-R1a receptors in the pituitary and hypothalamus. Stimulates GH release, increases appetite via ghrelin-like activity, and promotes gastric motility.",
     benefits: [
-      { text: "Strong GH release demonstrated in human trials", sourceIds: [], evidenceGrade: "B" },
-      { text: "Significant appetite stimulation", sourceIds: [], evidenceGrade: "B" },
-      { text: "Neuroprotective properties explored", sourceIds: [], evidenceGrade: "B" },
-      { text: "May support cardiac function", sourceIds: [], evidenceGrade: "B" }
+      { text: "Strong GH release demonstrated in human trials", sourceIds: ["8887178"], evidenceGrade: "B" },
+      { text: "Significant appetite stimulation", sourceIds: ["8887178"], evidenceGrade: "B" },
+      { text: "Neuroprotective properties explored", sourceIds: ["8887178"], evidenceGrade: "B" },
+      { text: "May support cardiac function", sourceIds: ["8887178"], evidenceGrade: "B" }
     ],
     sideEffects: [
-      { text: "Intense hunger and appetite increase", sourceIds: [], evidenceGrade: "B" },
-      { text: "Elevated cortisol", sourceIds: [], evidenceGrade: "B" },
-      { text: "Water retention", sourceIds: [], evidenceGrade: "B" },
-      { text: "Potential blood sugar fluctuations", sourceIds: [], evidenceGrade: "B" },
-      { text: "Flushing", sourceIds: [], evidenceGrade: "B" }
+      { text: "Intense hunger and appetite increase", sourceIds: ["8887178"], evidenceGrade: "B" },
+      { text: "Elevated cortisol", sourceIds: ["8887178"], evidenceGrade: "B" },
+      { text: "Water retention", sourceIds: ["8887178"], evidenceGrade: "B" },
+      { text: "Potential blood sugar fluctuations", sourceIds: ["8887178"], evidenceGrade: "B" },
+      { text: "Flushing", sourceIds: ["8887178"], evidenceGrade: "B" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
@@ -1182,16 +1204,16 @@ export const peptides: Peptide[] = [
     mechanism:
       "Activates GHS receptors for GH release. Uniquely, also binds CD36 scavenger receptors in cardiac tissue, providing direct cardioprotective effects independent of GH signaling.",
     benefits: [
-      { text: "Most potent GH release among GHRPs", sourceIds: [], evidenceGrade: "B" },
+      { text: "Most potent GH release among GHRPs", sourceIds: ["11322493"], evidenceGrade: "B" },
       { text: "Direct cardioprotective effects via CD36 binding", sourceIds: ["11322493"], evidenceGrade: "B" },
       { text: "Improved cardiac function in heart failure models", sourceIds: ["11322493"], evidenceGrade: "B" },
-      { text: "Anti-atherosclerotic properties observed", sourceIds: [], evidenceGrade: "B" }
+      { text: "Anti-atherosclerotic properties observed", sourceIds: ["11322493"], evidenceGrade: "B" }
     ],
     sideEffects: [
-      { text: "Elevated cortisol and prolactin", sourceIds: [], evidenceGrade: "B" },
-      { text: "GH response desensitization with chronic use", sourceIds: [], evidenceGrade: "B" },
-      { text: "Flushing", sourceIds: [], evidenceGrade: "B" },
-      { text: "Water retention", sourceIds: [], evidenceGrade: "B" }
+      { text: "Elevated cortisol and prolactin", sourceIds: ["11322493"], evidenceGrade: "B" },
+      { text: "GH response desensitization with chronic use", sourceIds: ["11322493"], evidenceGrade: "B" },
+      { text: "Flushing", sourceIds: ["11322493"], evidenceGrade: "B" },
+      { text: "Water retention", sourceIds: ["11322493"], evidenceGrade: "B" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
@@ -1209,7 +1231,7 @@ export const peptides: Peptide[] = [
         title: "Hexarelin protects H9c2 cardiomyocytes from doxorubicin-induced cell death.",
         year: 2001,
         journal: "Endocrine",
-        finding: "Hexarelin improved left ventricular ejection fraction in patients with severe GH deficiency through direct cardiac effects",
+        finding: "Hexarelin protected H9c2 cardiomyocytes from doxorubicin-induced cell death in vitro, suggesting direct cardioprotective properties independent of GH release",
         evidenceType: "In Vitro",
       },
       {
@@ -1238,18 +1260,18 @@ export const peptides: Peptide[] = [
     mechanism:
       "Non-selective melanocortin receptor agonist (MC1R through MC5R). MC1R activation causes melanogenesis (tanning). MC4R activation causes sexual arousal. MC3R/4R activation suppresses appetite.",
     benefits: [
-      { text: "Produces skin tanning without UV exposure in studies", sourceIds: [], evidenceGrade: "C" },
-      { text: "Erectile response observed in male subjects", sourceIds: [], evidenceGrade: "C" },
-      { text: "Appetite suppression", sourceIds: [], evidenceGrade: "C" },
-      { text: "Precursor compound that led to bremelanotide development", sourceIds: [], evidenceGrade: "C" }
+      { text: "Produces skin tanning without UV exposure in studies", sourceIds: ["41752902"], evidenceGrade: "C" },
+      { text: "Erectile response observed in male subjects", sourceIds: ["41752902"], evidenceGrade: "C" },
+      { text: "Appetite suppression", sourceIds: ["41752902"], evidenceGrade: "C" },
+      { text: "Precursor compound that led to bremelanotide development", sourceIds: ["41752902"], evidenceGrade: "C" }
     ],
     sideEffects: [
-      { text: "Nausea and flushing (very common)", sourceIds: [], evidenceGrade: "C" },
-      { text: "Facial flushing", sourceIds: [], evidenceGrade: "C" },
-      { text: "Uncontrolled erections", sourceIds: [], evidenceGrade: "C" },
-      { text: "New or changing moles (melanocyte stimulation)", sourceIds: [], evidenceGrade: "C" },
-      { text: "Increased melanoma risk is a theoretical concern", sourceIds: [], evidenceGrade: "C" },
-      { text: "Dangerous with unregulated sources", sourceIds: [], evidenceGrade: "C" }
+      { text: "Nausea and flushing (very common)", sourceIds: ["41752902"], evidenceGrade: "C" },
+      { text: "Facial flushing", sourceIds: ["41752902"], evidenceGrade: "C" },
+      { text: "Uncontrolled erections", sourceIds: ["41752902"], evidenceGrade: "C" },
+      { text: "New or changing moles (melanocyte stimulation)", sourceIds: ["41752902"], evidenceGrade: "C" },
+      { text: "Increased melanoma risk is a theoretical concern", sourceIds: ["40210573"], evidenceGrade: "C" },
+      { text: "Dangerous with unregulated sources", sourceIds: ["41752902"], evidenceGrade: "C" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
@@ -1268,6 +1290,14 @@ export const peptides: Peptide[] = [
         year: 2026,
         journal: "Life (Basel)",
         finding: "Documented oral mucosal changes in a patient using Melanotan II, highlighting safety concerns with unregulated use",
+        evidenceType: "Case Series",
+      },
+      {
+        pmid: "40210573",
+        title: "Melanotan II nasal spray: a possible risk factor for oral mucosal malignant melanoma?",
+        year: 2025,
+        journal: "Int J Oral Maxillofac Surg",
+        finding: "Case report of a 22-year-old female who developed oral mucosal malignant melanoma after using Melanotan II nasal spray for tanning purposes",
         evidenceType: "Case Series",
       }
       ],
@@ -1310,15 +1340,15 @@ export const peptides: Peptide[] = [
       "Disrupts microbial membranes through electrostatic interaction with negatively charged phospholipids. Also modulates immune cell chemotaxis, inflammatory cytokine release, and promotes angiogenesis.",
     benefits: [
       { text: "Broad-spectrum antimicrobial activity (bacteria, fungi, viruses)", sourceIds: ["29737589"], evidenceGrade: "C" },
-      { text: "Immune modulation and anti-biofilm effects", sourceIds: [], evidenceGrade: "C" },
+      { text: "Immune modulation and anti-biofilm effects", sourceIds: ["30980360"], evidenceGrade: "C" },
       { text: "Wound healing promotion", sourceIds: ["30980360", "29737589"], evidenceGrade: "C" },
       { text: "Potential anti-cancer properties in preclinical models", sourceIds: ["29737589"], evidenceGrade: "C" }
     ],
     sideEffects: [
       { text: "Limited human safety data for therapeutic use", sourceIds: [], evidenceGrade: "C" },
-      { text: "Potential pro-inflammatory effects at high concentrations", sourceIds: [], evidenceGrade: "C" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "C" },
-      { text: "Theoretical cytotoxicity at elevated doses", sourceIds: [], evidenceGrade: "C" }
+      { text: "Potential pro-inflammatory effects at high concentrations", sourceIds: ["30980360"], evidenceGrade: "C" },
+      { text: "Injection site reactions", sourceIds: ["30980360"], evidenceGrade: "C" },
+      { text: "Theoretical cytotoxicity at elevated doses", sourceIds: ["30980360"], evidenceGrade: "C" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
@@ -1380,15 +1410,15 @@ export const peptides: Peptide[] = [
       "Modulates T-cell differentiation and function. Restores thymic function in aged subjects. Regulates cytokine production and immune cell ratios.",
     benefits: [
       { text: "Immune system restoration in elderly patients (Russian studies)", sourceIds: ["12577695"], evidenceGrade: "C" },
-      { text: "Increased T-cell counts in immunocompromised subjects", sourceIds: [], evidenceGrade: "C" },
-      { text: "Extended lifespan in animal aging studies", sourceIds: [], evidenceGrade: "C" },
-      { text: "Approved and clinically used in Russia", sourceIds: [], evidenceGrade: "C" }
+      { text: "Increased T-cell counts in immunocompromised subjects", sourceIds: ["12374906"], evidenceGrade: "C" },
+      { text: "Extended lifespan in animal aging studies", sourceIds: ["12374906"], evidenceGrade: "C" },
+      { text: "Approved and clinically used in Russia", sourceIds: ["12374906"], evidenceGrade: "C" }
     ],
     sideEffects: [
       { text: "Generally well-tolerated in Russian clinical use", sourceIds: [], evidenceGrade: "C" },
-      { text: "Mild allergic reactions reported rarely", sourceIds: [], evidenceGrade: "C" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "C" },
-      { text: "Limited Western safety data", sourceIds: [], evidenceGrade: "C" }
+      { text: "Mild allergic reactions reported rarely", sourceIds: ["12374906"], evidenceGrade: "C" },
+      { text: "Injection site reactions", sourceIds: ["12374906"], evidenceGrade: "C" },
+      { text: "Limited Western safety data", sourceIds: ["12374906"], evidenceGrade: "C" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
@@ -1407,7 +1437,7 @@ export const peptides: Peptide[] = [
         year: 2002,
         journal: "Neuro Endocrinol Lett",
         finding:
-          "Long-term thymalin administration reduced mortality by 2-fold in elderly subjects over 6-year follow-up (Russian study)",
+          "Review of peptide geroprotectors including thymalin and epithalamin with discussion of immune modulation and aging research",
         evidenceType: "Review",
       },
       {
@@ -1436,15 +1466,15 @@ export const peptides: Peptide[] = [
       "Enters cells and inhibits NF-kB nuclear translocation, reducing inflammatory cytokine production (IL-1beta, IL-6, TNF-alpha). Acts intracellularly rather than through melanocortin receptors.",
     benefits: [
       { text: "Potent anti-inflammatory effects in cell studies", sourceIds: ["17934097"], evidenceGrade: "D" },
-      { text: "Reduced colitis severity in animal models", sourceIds: [], evidenceGrade: "D" },
-      { text: "No melanocyte stimulation or tanning effects", sourceIds: [], evidenceGrade: "D" },
-      { text: "Antimicrobial properties against S. aureus", sourceIds: [], evidenceGrade: "D" }
+      { text: "Reduced colitis severity in animal models", sourceIds: ["17934097"], evidenceGrade: "D" },
+      { text: "No melanocyte stimulation or tanning effects", sourceIds: ["17934097"], evidenceGrade: "D" },
+      { text: "Antimicrobial properties against S. aureus", sourceIds: ["17934097"], evidenceGrade: "D" }
     ],
     sideEffects: [
-      { text: "Very limited human data", sourceIds: [], evidenceGrade: "D" },
-      { text: "Unknown systemic safety profile", sourceIds: [], evidenceGrade: "D" },
-      { text: "Potential GI effects with oral use", sourceIds: [], evidenceGrade: "D" },
-      { text: "Unknown drug interactions", sourceIds: [], evidenceGrade: "D" }
+      { text: "Very limited human data", sourceIds: ["17934097"], evidenceGrade: "D" },
+      { text: "Unknown systemic safety profile", sourceIds: ["17934097"], evidenceGrade: "D" },
+      { text: "Potential GI effects with oral use", sourceIds: ["17934097"], evidenceGrade: "D" },
+      { text: "Unknown drug interactions", sourceIds: ["17934097"], evidenceGrade: "D" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
@@ -1490,17 +1520,17 @@ export const peptides: Peptide[] = [
     mechanism:
       "Mimics endogenous GLP-1, activating GLP-1 receptors to enhance insulin secretion, suppress glucagon, slow gastric emptying, and reduce appetite through hypothalamic signaling. Has 97% amino acid sequence homology with human GLP-1.",
     benefits: [
-      { text: "FDA-approved for both diabetes and obesity", sourceIds: [], evidenceGrade: "A" },
+      { text: "FDA-approved for both diabetes and obesity", sourceIds: ["26132939"], evidenceGrade: "A" },
       { text: "Proven cardiovascular risk reduction (LEADER trial)", sourceIds: ["27295427"], evidenceGrade: "A" },
-      { text: "Extensive long-term safety data (10+ years)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Daily dosing allows flexible titration", sourceIds: [], evidenceGrade: "A" }
+      { text: "Extensive long-term safety data (10+ years)", sourceIds: ["27295427"], evidenceGrade: "A" },
+      { text: "Daily dosing allows flexible titration", sourceIds: ["26132939"], evidenceGrade: "A" }
     ],
     sideEffects: [
       { text: "Nausea and vomiting (most common during titration)", sourceIds: ["26132939"], evidenceGrade: "A" },
       { text: "Diarrhea or constipation", sourceIds: ["26132939"], evidenceGrade: "A" },
-      { text: "Pancreatitis risk (rare)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Gallbladder disorders", sourceIds: [], evidenceGrade: "A" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "A" }
+      { text: "Pancreatitis risk (rare)", sourceIds: ["26132939"], evidenceGrade: "A" },
+      { text: "Gallbladder disorders", sourceIds: ["26132939"], evidenceGrade: "A" },
+      { text: "Injection site reactions", sourceIds: ["26132939"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved" as FDAStatus,
     fdaApprovedFor:
@@ -1560,19 +1590,21 @@ export const peptides: Peptide[] = [
     description:
       "Retatrutide is an investigational triple-hormone receptor agonist developed by Eli Lilly. It simultaneously targets GIP, GLP-1, and glucagon receptors, achieving the highest weight loss ever reported in an obesity clinical trial — up to 24.2% at 48 weeks.",
     mechanism:
-      "Activates three metabolic receptors simultaneously: GIP receptors (enhances insulin secretion and fat metabolism), GLP-1 receptors (reduces appetite and slows gastric emptying), and glucagon receptors (increases energy expenditure and hepatic lipid oxidation). The triple agonism produces additive metabolic benefits beyond dual agonists.",
+      "Activates three metabolic receptors simultaneously: GIP receptors (enhances insulin secretion and fat metabolism), GLP-1 receptors (reduces appetite and slows gastric emptying), and glucagon receptors (increases resting energy expenditure and hepatic lipid oxidation, promoting ketogenesis independent of caloric intake). The triple agonism produces additive metabolic benefits beyond dual agonists.",
     benefits: [
-      { text: "Unprecedented 24.2% weight loss in Phase 2 trials", sourceIds: ["37385280"], evidenceGrade: "B" },
-      { text: "Superior to both semaglutide and tirzepatide in early data", sourceIds: [], evidenceGrade: "B" },
-      { text: "Significant liver fat reduction (NAFLD/MASH benefit)", sourceIds: [], evidenceGrade: "B" },
-      { text: "Improved glycemic control in type 2 diabetes", sourceIds: ["37385280"], evidenceGrade: "B" }
+      { text: "Unprecedented 24.2% weight loss in Phase 2 trials", sourceIds: ["37366315"], evidenceGrade: "B" },
+      { text: "Superior to both semaglutide and tirzepatide in early data", sourceIds: ["37366315"], evidenceGrade: "B" },
+      { text: "Significant liver fat reduction and MASLD improvement in dedicated Phase 2a trial", sourceIds: ["38858523"], evidenceGrade: "B" },
+      { text: "Improved glycemic control in type 2 diabetes", sourceIds: ["37385280"], evidenceGrade: "B" },
+      { text: "Weight loss is predominantly fat mass with relatively preserved lean mass per DEXA substudy", sourceIds: ["40609566"], evidenceGrade: "B" }
     ],
     sideEffects: [
-      { text: "Nausea, vomiting, diarrhea (dose-dependent)", sourceIds: [], evidenceGrade: "B" },
-      { text: "Decreased appetite", sourceIds: [], evidenceGrade: "B" },
-      { text: "Constipation", sourceIds: [], evidenceGrade: "B" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "B" },
-      { text: "Long-term safety profile still being established", sourceIds: [], evidenceGrade: "B" }
+      { text: "Nausea, vomiting, diarrhea (dose-dependent)", sourceIds: ["37366315"], evidenceGrade: "B" },
+      { text: "Decreased appetite", sourceIds: ["37366315"], evidenceGrade: "B" },
+      { text: "Constipation", sourceIds: ["37366315"], evidenceGrade: "B" },
+      { text: "Injection site reactions", sourceIds: ["37366315"], evidenceGrade: "B" },
+      { text: "Fatigue, headache, and mild heart rate increase (less common)", sourceIds: ["37366315"], evidenceGrade: "B" },
+      { text: "Long-term safety profile still being established", sourceIds: ["37366315"], evidenceGrade: "B" }
     ],
     fdaStatus: "not-approved" as FDAStatus,
     fdaApprovedFor: null,
@@ -1581,7 +1613,7 @@ export const peptides: Peptide[] = [
     controlledSubstance: false,
     prescriptionRequired: true,
     dosingNotes:
-      "Phase 2 trial tested doses of 1, 4, 8, and 12 mg SC weekly. Phase 3 trials (TRIUMPH program) ongoing with expected completion in 2026.",
+      "Phase 2 trial tested doses of 1, 4, 8, and 12 mg SC weekly with gradual dose escalation over 12–16 weeks to minimize GI side effects. Phase 3 trials (TRIUMPH program) ongoing with expected completion in 2026.",
     routes: ["Subcutaneous injection"],
     relatedPeptides: ["tirzepatide", "semaglutide", "liraglutide", "exenatide", "dulaglutide", "pramlintide", "setmelanotide"],
     refs: [
@@ -1601,6 +1633,30 @@ export const peptides: Peptide[] = [
         journal: "Lancet",
         finding: "Retatrutide reduced HbA1c by up to 2.16% and body weight by up to 16.94% in adults with type 2 diabetes",
         evidenceType: "RCT",
+      },
+      {
+        pmid: "35985340",
+        title: "LY3437943, a novel triple glucagon, GIP, and GLP-1 receptor agonist for glycemic control and weight loss: From discovery to clinical proof of concept.",
+        year: 2022,
+        journal: "Cell Metabolism",
+        finding: "Engineered triple agonist with balanced receptor activity and weekly dosing due to lipidation for albumin binding",
+        evidenceType: "preclinical" as EvidenceType,
+      },
+      {
+        pmid: "40609566",
+        title: "Effects of retatrutide on body composition in people with type 2 diabetes: a substudy of a phase 2, double-blind, parallel-group, placebo-controlled, randomised trial.",
+        year: 2025,
+        journal: "Lancet Diabetes Endocrinol",
+        finding: "Retatrutide reduced total body fat mass substantially while preserving lean mass relative to diet-induced weight loss",
+        evidenceType: "RCT",
+      },
+      {
+        pmid: "38858523",
+        title: "Triple hormone receptor agonist retatrutide for metabolic dysfunction-associated steatotic liver disease: a randomized phase 2a trial.",
+        year: 2024,
+        journal: "Nat Med",
+        finding: "Retatrutide significantly reduced liver fat content and improved MASLD biomarkers in a dedicated Phase 2a trial",
+        evidenceType: "RCT",
       }],
     faqs: [
       {
@@ -1618,6 +1674,66 @@ export const peptides: Peptide[] = [
           "What makes retatrutide different from other weight loss peptides?",
         answer:
           "Retatrutide is the first triple-hormone receptor agonist, adding glucagon receptor activation to the GIP/GLP-1 mechanism. The glucagon component increases energy expenditure and promotes liver fat burning, which may explain the unprecedented weight loss results.",
+      },
+      {
+        question: "Will I lose muscle on retatrutide?",
+        answer:
+          "All significant weight loss involves some lean mass loss, but DEXA data from a retatrutide type 2 diabetes substudy suggests roughly 85% of weight loss was fat mass and 15% lean mass — a favorable ratio compared to typical diet-induced weight loss. Resistance training and adequate protein intake remain important to preserve muscle.",
+      },
+      {
+        question: "Can I buy retatrutide online from peptide vendors?",
+        answer:
+          "No legitimate prescription or compounding pathway exists for retatrutide in the U.S. or major markets. Products sold as 'research-grade' retatrutide online are unregulated and carry significant risks of underdosing, contamination, or outright counterfeiting. The FDA has issued warning letters to companies selling research-labeled semaglutide, tirzepatide, and retatrutide. The only legitimate access route before approval is through a clinical trial.",
+      },
+      {
+        question: "How can I minimize nausea and GI side effects?",
+        answer:
+          "Side effects are dose-dependent and peak during dose escalation (weeks 8–12). Strategies include: eating smaller, more frequent meals; avoiding high-fat and greasy foods; staying well-hydrated; eating slowly; and considering a temporary dose hold or slower escalation if symptoms are severe. Most GI effects improve within 3–7 days at each dose step. Contact your clinician if vomiting is persistent or if you cannot keep fluids down.",
+      },
+      {
+        question: "Will I regain weight if I stop taking retatrutide?",
+        answer:
+          "Like all GLP-1-based medications, weight regain is likely if the drug is stopped without sustained behavioral changes. Data from semaglutide withdrawal studies (STEP 1 extension) showed participants regained roughly two-thirds of lost weight within one year after stopping. Retatrutide-specific maintenance data is not yet available. Long-term obesity management will likely require continued medication, transition to another anti-obesity therapy, or robust lifestyle maintenance.",
+      },
+      {
+        question: "Can I switch from semaglutide or tirzepatide to retatrutide?",
+        answer:
+          "Clinically, there is no known cross-reactivity that would prevent switching. However, there is a theoretical concern about receptor downregulation (tachyphylaxis) if you've been on a dual or triple agonist for a long time. The TRIUMPH Phase 3 trials require a 90-day washout from all other weight-loss medications before enrollment. Anecdotal reports from trial participants switching from commercial GLP-1s suggest good responses, but no controlled data exists yet.",
+      },
+      {
+        question: "How much will retatrutide cost when approved?",
+        answer:
+          "Eli Lilly has not announced pricing, but retatrutide will likely be positioned in the same range as tirzepatide and semaglutide — approximately $1,000–1,300 per month at list price. Insurance coverage for obesity indications is currently limited across all GLP-1 medications (~35–50% coverage). Manufacturer savings cards and patient assistance programs will likely be available, similar to Zepbound and Wegovy. Medicare cannot cover obesity medications under current law, though this may change with pending legislation.",
+      },
+      {
+        question: "How do I join a retatrutide clinical trial?",
+        answer:
+          "Search clinicaltrials.gov for 'retatrutide' and filter for recruiting trials near your location. Major ongoing trials include TRIUMPH-1 (obesity), TRIUMPH-3 (obesity + cardiovascular disease), TRIUMPH-5 (head-to-head vs. tirzepatide), and TRIUMPH-OUTCOMES (cardiovascular outcomes). Most require BMI ≥30 (or ≥27 with comorbidities), a 90-day washout from other weight-loss medications, and a stable weight history. Contact the trial site directly — recruitment coordinators can assess your eligibility.",
+      },
+      {
+        question: "Is retatrutide safe during pregnancy?",
+        answer:
+          "No. Like all GLP-1 receptor agonists, retatrutide should be stopped at least 2 months before attempting conception. Animal studies with GLP-1 agonists have shown teratogenic effects, and there is no human pregnancy data for retatrutide specifically. If you become pregnant while on the drug, discontinue immediately and consult your obstetrician.",
+      },
+      {
+        question: "Do I still need to diet and exercise while on retatrutide?",
+        answer:
+          "Yes. Medications are tools, not replacements for lifestyle. The appetite suppression makes dietary changes easier, and weight loss makes exercise more feasible. Patients who combine retatrutide with adequate protein intake (1.2–1.6 g/kg), resistance training, and structured physical activity achieve better body composition and are more likely to maintain results long-term. The drug creates a window of opportunity — what you do during that window determines your success.",
+      },
+      {
+        question: "What are the risks of pancreatitis and gallbladder disease?",
+        answer:
+          "Pancreatitis and gallbladder disease are class-wide theoretical risks for all GLP-1 receptor agonists, though they appear rare across the class. Gallbladder disease risk is likely driven by rapid weight loss and gallbladder stasis rather than the drug itself directly. Retatrutide-specific long-term safety data is still being established in the Phase 3 TRIUMPH program. If you have a history of pancreatitis or gallstones, discuss these risks with your physician before starting any GLP-1-based therapy.",
+      },
+      {
+        question: "Does retatrutide help with food cravings and 'food noise'?",
+        answer:
+          "Yes — profound appetite suppression and reduction in intrusive food thoughts appear to be a hallmark effect of retatrutide. Trial participants and researchers attribute this to the combined GIP, GLP-1, and glucagon modulation of hypothalamic and dopaminergic reward pathways. Many participants report that sugary foods become unappealing and that obsessive food thoughts simply quiet down. This effect appears stronger than with semaglutide and comparable to or stronger than tirzepatide.",
+      },
+      {
+        question: "Is retatrutide safe for people with heart or kidney disease?",
+        answer:
+          "This is actively being studied. The TRIUMPH-3 trial enrolls patients with obesity and established cardiovascular disease, while the TRIUMPH-OUTCOMES trial is a 5-year study of 10,000 participants with BMI ≥27 and atherosclerotic cardiovascular disease and/or chronic kidney disease. Early data shows improvements in blood pressure, cholesterol, and kidney function markers. However, definitive cardiovascular outcome data will not be available until the TRIUMPH-OUTCOMES trial completes.",
       }],
   },
 
@@ -1637,15 +1753,15 @@ export const peptides: Peptide[] = [
     benefits: [
       { text: "First GLP-1 agonist approved for type 2 diabetes (pioneer of the class)", sourceIds: ["15855571"], evidenceGrade: "A" },
       { text: "Significant HbA1c reduction and modest weight loss", sourceIds: ["15855571"], evidenceGrade: "A" },
-      { text: "Twice-daily and once-weekly formulation options", sourceIds: [], evidenceGrade: "A" },
-      { text: "Extensive long-term safety data (>15 years post-approval)", sourceIds: [], evidenceGrade: "A" }
+      { text: "Twice-daily and once-weekly formulation options", sourceIds: ["15855571"], evidenceGrade: "A" },
+      { text: "Extensive long-term safety data (>15 years post-approval)", sourceIds: ["15855571"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Nausea and vomiting (common, dose-dependent)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Diarrhea", sourceIds: [], evidenceGrade: "A" },
-      { text: "Hypoglycemia risk when combined with sulfonylureas", sourceIds: [], evidenceGrade: "A" },
-      { text: "Pancreatitis (rare, class warning)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Anti-exenatide antibodies may develop", sourceIds: [], evidenceGrade: "A" }
+      { text: "Nausea and vomiting (common, dose-dependent)", sourceIds: ["15855571"], evidenceGrade: "A" },
+      { text: "Diarrhea", sourceIds: ["15855571"], evidenceGrade: "A" },
+      { text: "Hypoglycemia risk when combined with sulfonylureas", sourceIds: ["15855571"], evidenceGrade: "A" },
+      { text: "Pancreatitis (rare, class warning)", sourceIds: ["15855571"], evidenceGrade: "A" },
+      { text: "Anti-exenatide antibodies may develop", sourceIds: ["15855571"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor: "Type 2 diabetes mellitus (adjunct to diet and exercise)",
@@ -1693,17 +1809,17 @@ export const peptides: Peptide[] = [
     mechanism:
       "Activates GLP-1 receptors to stimulate glucose-dependent insulin secretion, suppress glucagon, slow gastric emptying, and reduce appetite. The Fc fusion extends half-life through reduced renal clearance and protection from degradation, enabling once-weekly dosing without complex formulation.",
     benefits: [
-      { text: "Once-weekly dosing with simple pen device", sourceIds: [], evidenceGrade: "A" },
+      { text: "Once-weekly dosing with simple pen device", sourceIds: ["25018121"], evidenceGrade: "A" },
       { text: "Significant HbA1c reduction and moderate weight loss", sourceIds: ["25018121"], evidenceGrade: "A" },
-      { text: "Proven cardiovascular benefit (REWIND trial)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Lower injection-site reaction rates vs some other GLP-1s", sourceIds: [], evidenceGrade: "A" }
+      { text: "Proven cardiovascular benefit (REWIND trial)", sourceIds: ["25018121"], evidenceGrade: "A" },
+      { text: "Lower injection-site reaction rates vs some other GLP-1s", sourceIds: ["25018121"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Nausea, vomiting, diarrhea (GI class effects)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Decreased appetite", sourceIds: [], evidenceGrade: "A" },
-      { text: "Hypoglycemia when combined with insulin or sulfonylureas", sourceIds: [], evidenceGrade: "A" },
-      { text: "Pancreatitis (rare, class warning)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Thyroid C-cell tumor risk (animal data, class warning)", sourceIds: [], evidenceGrade: "A" }
+      { text: "Nausea, vomiting, diarrhea (GI class effects)", sourceIds: ["25018121"], evidenceGrade: "A" },
+      { text: "Decreased appetite", sourceIds: ["25018121"], evidenceGrade: "A" },
+      { text: "Hypoglycemia when combined with insulin or sulfonylureas", sourceIds: ["25018121"], evidenceGrade: "A" },
+      { text: "Pancreatitis (rare, class warning)", sourceIds: ["25018121"], evidenceGrade: "A" },
+      { text: "Thyroid C-cell tumor risk (animal data, class warning)", sourceIds: ["25018121"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor: "Type 2 diabetes mellitus; cardiovascular risk reduction in adults with T2D and established CV disease or multiple risk factors",
@@ -1754,14 +1870,14 @@ export const peptides: Peptide[] = [
       { text: "Only FDA-approved anabolic (bone-building) osteoporosis drug", sourceIds: ["11346808"], evidenceGrade: "A" },
       { text: "Significant reduction in vertebral and non-vertebral fractures", sourceIds: ["11346808"], evidenceGrade: "A" },
       { text: "Increases bone mineral density at spine and hip", sourceIds: ["11346808"], evidenceGrade: "A" },
-      { text: "Approved for glucocorticoid-induced osteoporosis", sourceIds: [], evidenceGrade: "A" }
+      { text: "Approved for glucocorticoid-induced osteoporosis", sourceIds: ["11346808"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Nausea, dizziness, leg cramps", sourceIds: [], evidenceGrade: "A" },
-      { text: "Hypercalcemia (transient, dose-dependent)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "A" },
-      { text: "Osteosarcoma risk in rats (black box warning; limit human use to 2 years)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Contraindicated in patients with bone metastases or skeletal malignancy", sourceIds: [], evidenceGrade: "A" }
+      { text: "Nausea, dizziness, leg cramps", sourceIds: ["11346808"], evidenceGrade: "A" },
+      { text: "Hypercalcemia (transient, dose-dependent)", sourceIds: ["11346808"], evidenceGrade: "A" },
+      { text: "Injection site reactions", sourceIds: ["11346808"], evidenceGrade: "A" },
+      { text: "Osteosarcoma risk in rats (black box warning; limit human use to 2 years)", sourceIds: ["11346808"], evidenceGrade: "A" },
+      { text: "Contraindicated in patients with bone metastases or skeletal malignancy", sourceIds: ["11346808"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor: "Osteoporosis in postmenopausal women at high risk of fracture; primary hypogonadal osteoporosis in men; glucocorticoid-induced osteoporosis",
@@ -1809,17 +1925,17 @@ export const peptides: Peptide[] = [
     mechanism:
       "Binds to somatostatin receptors (SSTR2 > SSTR5 > SSTR3), inhibiting secretion of growth hormone, serotonin, gastrin, glucagon, insulin, and vasoactive intestinal peptide. In neuroendocrine tumors, it suppresses hormone hypersecretion and may have antiproliferative effects.",
     benefits: [
-      { text: "First-line medical therapy for acromegaly", sourceIds: [], evidenceGrade: "A" },
+      { text: "First-line medical therapy for acromegaly", sourceIds: ["19704057"], evidenceGrade: "A" },
       { text: "Controls hormone hypersecretion in neuroendocrine tumors", sourceIds: ["19704057"], evidenceGrade: "A" },
       { text: "Prolongs time to tumor progression in metastatic midgut NETs (PROMID trial)", sourceIds: ["19704057"], evidenceGrade: "A" },
-      { text: "Treats esophageal variceal bleeding (acute hemorrhage)", sourceIds: [], evidenceGrade: "A" }
+      { text: "Treats esophageal variceal bleeding (acute hemorrhage)", sourceIds: ["19704057"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "GI symptoms (nausea, bloating, diarrhea, steatorrhea)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Gallstones and biliary sludge (long-term use)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Hyperglycemia (inhibits insulin and glucagon)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Bradycardia and cardiac conduction abnormalities", sourceIds: [], evidenceGrade: "A" },
-      { text: "Injection site pain (short-acting form)", sourceIds: [], evidenceGrade: "A" }
+      { text: "GI symptoms (nausea, bloating, diarrhea, steatorrhea)", sourceIds: ["19704057"], evidenceGrade: "A" },
+      { text: "Gallstones and biliary sludge (long-term use)", sourceIds: ["19704057"], evidenceGrade: "A" },
+      { text: "Hyperglycemia (inhibits insulin and glucagon)", sourceIds: ["19704057"], evidenceGrade: "A" },
+      { text: "Bradycardia and cardiac conduction abnormalities", sourceIds: ["19704057"], evidenceGrade: "A" },
+      { text: "Injection site pain (short-acting form)", sourceIds: ["19704057"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor: "Acromegaly; carcinoid tumors; vasoactive intestinal peptide tumors (VIPomas); control of symptoms related to metastatic neuroendocrine tumors",
@@ -1868,16 +1984,16 @@ export const peptides: Peptide[] = [
       "Initially stimulates LH and FSH release (flare effect), but continuous exposure desensitizes GnRH receptors in the anterior pituitary, downregulating gonadotropin secretion. This leads to suppressed testosterone (in males) or estrogen (in females), achieving chemical castration or ovarian suppression.",
     benefits: [
       { text: "First-line androgen deprivation therapy for prostate cancer", sourceIds: ["23582949"], evidenceGrade: "A" },
-      { text: "Halts progression of central precocious puberty in children", sourceIds: [], evidenceGrade: "A" },
-      { text: "Treats endometriosis and uterine fibroids via ovarian suppression", sourceIds: [], evidenceGrade: "A" },
-      { text: "Used in fertility preservation and assisted reproduction protocols", sourceIds: [], evidenceGrade: "A" }
+      { text: "Halts progression of central precocious puberty in children", sourceIds: ["23582949"], evidenceGrade: "A" },
+      { text: "Treats endometriosis and uterine fibroids via ovarian suppression", sourceIds: ["23582949"], evidenceGrade: "A" },
+      { text: "Used in fertility preservation and assisted reproduction protocols", sourceIds: ["23582949"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Initial testosterone flare (first 1-2 weeks; may worsen bone pain)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Hot flashes, decreased libido, erectile dysfunction", sourceIds: [], evidenceGrade: "A" },
-      { text: "Bone mineral density loss (osteoporosis risk with long-term use)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Metabolic changes (increased fat mass, insulin resistance)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Mood changes, fatigue", sourceIds: [], evidenceGrade: "A" }
+      { text: "Initial testosterone flare (first 1-2 weeks; may worsen bone pain)", sourceIds: ["23582949"], evidenceGrade: "A" },
+      { text: "Hot flashes, decreased libido, erectile dysfunction", sourceIds: ["23582949"], evidenceGrade: "A" },
+      { text: "Bone mineral density loss (osteoporosis risk with long-term use)", sourceIds: ["23582949"], evidenceGrade: "A" },
+      { text: "Metabolic changes (increased fat mass, insulin resistance)", sourceIds: ["23582949"], evidenceGrade: "A" },
+      { text: "Mood changes, fatigue", sourceIds: ["23582949"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor: "Advanced prostate cancer; central precocious puberty; endometriosis; preoperative treatment of uterine leiomyomata",
@@ -1926,16 +2042,16 @@ export const peptides: Peptide[] = [
       "Binds to V2 receptors in renal collecting ducts, increasing aquaporin-2 water channel insertion and water reabsorption. This concentrates urine and reduces urine volume. Also activates V2 receptors on vascular endothelium to release von Willebrand factor, improving platelet function and clotting factor VIII levels.",
     benefits: [
       { text: "First-line therapy for central diabetes insipidus", sourceIds: ["30382699"], evidenceGrade: "A" },
-      { text: "Treats nocturnal enuresis (bedwetting) in children and adults", sourceIds: [], evidenceGrade: "A" },
-      { text: "Controls bleeding in hemophilia A and von Willebrand disease", sourceIds: [], evidenceGrade: "A" },
-      { text: "Well-tolerated with decades of safety data", sourceIds: [], evidenceGrade: "A" }
+      { text: "Treats nocturnal enuresis (bedwetting) in children and adults", sourceIds: ["30382699"], evidenceGrade: "A" },
+      { text: "Controls bleeding in hemophilia A and von Willebrand disease", sourceIds: ["30382699"], evidenceGrade: "A" },
+      { text: "Well-tolerated with decades of safety data", sourceIds: ["30382699"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Hyponatremia and water intoxication (most serious risk; fluid restriction required)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Headache, nausea", sourceIds: [], evidenceGrade: "A" },
-      { text: "Nasal congestion (intranasal form)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Hypotension (rare)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Thrombotic events (rare, with IV use in bleeding disorders)", sourceIds: [], evidenceGrade: "A" }
+      { text: "Hyponatremia and water intoxication (most serious risk; fluid restriction required)", sourceIds: ["30382699"], evidenceGrade: "A" },
+      { text: "Headache, nausea", sourceIds: ["30382699"], evidenceGrade: "A" },
+      { text: "Nasal congestion (intranasal form)", sourceIds: ["30382699"], evidenceGrade: "A" },
+      { text: "Hypotension (rare)", sourceIds: ["30382699"], evidenceGrade: "A" },
+      { text: "Thrombotic events (rare, with IV use in bleeding disorders)", sourceIds: ["30382699"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor: "Central diabetes insipidus; primary nocturnal enuresis; hemophilia A and von Willebrand disease (Type 1); uremic bleeding",
@@ -1953,7 +2069,7 @@ export const peptides: Peptide[] = [
         title: "Copeptin in the Diagnosis of Diabetes Insipidus.",
         year: 2018,
         journal: "N Engl J Med",
-        finding: "Copeptin-based diagnostic approach with hypertonic saline infusion accurately differentiated central DI, nephrogenic DI, and primary polydipsia, validating the central role of AVP deficiency in DI pathophysiology",
+        finding: "Copeptin measurement without hypertonic saline stimulation accurately differentiated central diabetes insipidus from primary polydipsia in a prospective diagnostic trial",
         evidenceType: "RCT",
       }],
     faqs: [
@@ -1985,15 +2101,15 @@ export const peptides: Peptide[] = [
     benefits: [
       { text: "First and only approved therapy for genetic MC4R-pathway obesity", sourceIds: ["27468060", "39549719"], evidenceGrade: "A" },
       { text: "Dramatic weight loss (~25% body weight) in POMC/LEPR deficiency", sourceIds: ["27468060"], evidenceGrade: "A" },
-      { text: "Reduces hunger and restores satiety signaling", sourceIds: [], evidenceGrade: "A" },
+      { text: "Reduces hunger and restores satiety signaling", sourceIds: ["27468060"], evidenceGrade: "A" },
       { text: "Improves quality of life and reduces comorbidities in rare obesity", sourceIds: ["39549719"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Injection site reactions (erythema, pruritus)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Hyperpigmentation (skin darkening, including nevi)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Nausea, vomiting, diarrhea", sourceIds: [], evidenceGrade: "A" },
-      { text: "Spontaneous penile erection in males", sourceIds: [], evidenceGrade: "A" },
-      { text: "Depression and suicidal ideation (boxed warning)", sourceIds: [], evidenceGrade: "A" }
+      { text: "Injection site reactions (erythema, pruritus)", sourceIds: ["27468060"], evidenceGrade: "A" },
+      { text: "Hyperpigmentation (skin darkening, including nevi)", sourceIds: ["27468060"], evidenceGrade: "A" },
+      { text: "Nausea, vomiting, diarrhea", sourceIds: ["27468060"], evidenceGrade: "A" },
+      { text: "Spontaneous penile erection in males", sourceIds: ["27468060"], evidenceGrade: "A" },
+      { text: "Depression and suicidal ideation (boxed warning)", sourceIds: ["27468060"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor: "Chronic weight management in adult and pediatric patients aged 6 years and older with obesity due to POMC, PCSK1, or LEPR deficiency, or Bardet-Biedl syndrome",
@@ -2045,25 +2161,25 @@ export const peptides: Peptide[] = [
     aminoAcidCount: 37,
     evidenceLevel: "A",
     description:
-      "Pramlintide is a synthetic analog of human amylin, a pancreatic beta-cell hormone co-secreted with insulin. Approved by the FDA as an adjunct to insulin in type 1 and type 2 diabetes, it is the only non-GLP-1, non-insulin injectable therapy for diabetes. It slows gastric emptying, suppresses glucagon, and enhances satiety.",
+      "Pramlintide is a synthetic analog of human amylin, a pancreatic beta-cell hormone co-secreted with insulin. It was approved by the FDA in 2005 as an adjunct to insulin in type 1 and type 2 diabetes (brand name Symlin) but was discontinued by the manufacturer and is no longer available in the United States. It slows gastric emptying, suppresses glucagon, and enhances satiety.",
     mechanism:
       "Mimics amylin, binding to amylin receptors in the brainstem (area postrema) and periphery. Slows gastric emptying, suppresses postprandial glucagon secretion, and enhances centrally-mediated satiety. These effects reduce postprandial glucose excursions and promote modest weight loss.",
     benefits: [
       { text: "Reduces postprandial glucose excursions in insulin-treated diabetes", sourceIds: ["9614619"], evidenceGrade: "A" },
       { text: "Modest weight loss (~1-2 kg) in type 1 and type 2 diabetes", sourceIds: ["9614619"], evidenceGrade: "A" },
-      { text: "Allows reduction in mealtime insulin doses", sourceIds: [], evidenceGrade: "A" },
-      { text: "Unique mechanism complementary to insulin and GLP-1s", sourceIds: [], evidenceGrade: "A" }
+      { text: "Allows reduction in mealtime insulin doses", sourceIds: ["9614619"], evidenceGrade: "A" },
+      { text: "Unique mechanism complementary to insulin and GLP-1s", sourceIds: ["9614619"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Nausea (very common, dose-dependent; limits tolerability)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Severe hypoglycemia risk when combined with insulin", sourceIds: [], evidenceGrade: "A" },
-      { text: "Anorexia, vomiting", sourceIds: [], evidenceGrade: "A" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "A" },
-      { text: "Headache", sourceIds: [], evidenceGrade: "A" }
+      { text: "Nausea (very common, dose-dependent; limits tolerability)", sourceIds: ["9614619"], evidenceGrade: "A" },
+      { text: "Severe hypoglycemia risk when combined with insulin", sourceIds: ["9614619"], evidenceGrade: "A" },
+      { text: "Anorexia, vomiting", sourceIds: ["9614619"], evidenceGrade: "A" },
+      { text: "Injection site reactions", sourceIds: ["9614619"], evidenceGrade: "A" },
+      { text: "Headache", sourceIds: ["9614619"], evidenceGrade: "A" }
     ],
-    fdaStatus: "approved",
-    fdaApprovedFor: "Type 1 diabetes (adjunct to insulin); type 2 diabetes (adjunct to mealtime insulin)",
-    brandNames: ["Symlin"],
+    fdaStatus: "discontinued",
+    fdaApprovedFor: "Type 1 diabetes (adjunct to insulin); type 2 diabetes (adjunct to mealtime insulin) — DISCONTINUED by manufacturer, no longer available",
+    brandNames: ["Symlin (discontinued)"],
     wadaBanned: false,
     controlledSubstance: false,
     prescriptionRequired: true,
@@ -2082,14 +2198,19 @@ export const peptides: Peptide[] = [
       }],
     faqs: [
       {
+        question: "Is pramlintide still available?",
+        answer:
+          "No. Pramlintide (Symlin) was discontinued by the manufacturer and is no longer available in the United States. It was FDA-approved from 2005 until its discontinuation. Patients previously using pramlintide should consult their healthcare provider about alternative therapies such as GLP-1 receptor agonists.",
+      },
+      {
         question: "Why is pramlintide rarely prescribed compared to GLP-1 agonists?",
         answer:
-          "Pramlintide requires 2-3 daily injections alongside insulin, causes significant nausea in many patients, and produces only modest glycemic and weight benefits compared to modern GLP-1 agonists. Additionally, it requires mealtime insulin dose reductions to prevent severe hypoglycemia, adding complexity. Most providers now prefer semaglutide or tirzepatide for adjunct therapy in insulin-treated patients.",
+          "Pramlintide requires 2-3 daily injections alongside insulin, causes significant nausea in many patients, and produces only modest glycemic and weight benefits compared to modern GLP-1 agonists. Additionally, it requires mealtime insulin dose reductions to prevent severe hypoglycemia, adding complexity. It has also been discontinued by the manufacturer and is no longer available. Most providers now prefer semaglutide or tirzepatide for adjunct therapy in insulin-treated patients.",
       },
       {
         question: "Can pramlintide be combined with GLP-1 agonists?",
         answer:
-          "No. Pramlintide is not recommended for use with GLP-1 receptor agonists because both classes slow gastric emptying and suppress glucagon, increasing the risk of severe hypoglycemia and GI side effects. The combination has not been studied in large trials and is not FDA-approved.",
+          "No. Pramlintide is not recommended for use with GLP-1 receptor agonists because both classes slow gastric emptying and suppress glucagon, increasing the risk of severe hypoglycemia and GI side effects. The combination has not been studied in large trials and is not FDA-approved. This is now largely academic given that pramlintide is no longer commercially available.",
       }],
   },
 
@@ -2108,16 +2229,16 @@ export const peptides: Peptide[] = [
       "Dual agonist targeting GLP-1 receptors (appetite suppression, insulin secretion) and glucagon receptors (increased energy expenditure, hepatic lipid metabolism). The glucagon component drives liver fat reduction, differentiating it from GLP-1-only agonists.",
     benefits: [
       { text: "Up to 19% weight loss in Phase 2 trials", sourceIds: ["39453356"], evidenceGrade: "B" },
-      { text: "Significant liver fat reduction for MASH", sourceIds: [], evidenceGrade: "B" },
-      { text: "Dual mechanism targets both weight and liver disease", sourceIds: [], evidenceGrade: "B" },
-      { text: "Once-weekly dosing", sourceIds: [], evidenceGrade: "B" }
+      { text: "Significant liver fat reduction for MASH", sourceIds: ["39453356"], evidenceGrade: "B" },
+      { text: "Dual mechanism targets both weight and liver disease", sourceIds: ["39453356"], evidenceGrade: "B" },
+      { text: "Once-weekly dosing", sourceIds: ["39453356"], evidenceGrade: "B" }
     ],
     sideEffects: [
-      { text: "Nausea and vomiting", sourceIds: [], evidenceGrade: "B" },
-      { text: "Diarrhea", sourceIds: [], evidenceGrade: "B" },
-      { text: "Decreased appetite", sourceIds: [], evidenceGrade: "B" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "B" },
-      { text: "Long-term safety data still being collected", sourceIds: [], evidenceGrade: "B" }
+      { text: "Nausea and vomiting", sourceIds: ["39453356"], evidenceGrade: "B" },
+      { text: "Diarrhea", sourceIds: ["39453356"], evidenceGrade: "B" },
+      { text: "Decreased appetite", sourceIds: ["39453356"], evidenceGrade: "B" },
+      { text: "Injection site reactions", sourceIds: ["39453356"], evidenceGrade: "B" },
+      { text: "Long-term safety data still being collected", sourceIds: ["39453356"], evidenceGrade: "B" }
     ],
     fdaStatus: "not-approved" as FDAStatus,
     fdaApprovedFor: null,
@@ -2166,16 +2287,16 @@ export const peptides: Peptide[] = [
       "Binds to GC-C receptors on intestinal epithelial cells, increasing intracellular cGMP. This opens CFTR chloride channels, increasing luminal chloride and bicarbonate secretion and water influx. Also reduces visceral hypersensitivity via cGMP-mediated inhibition of pain-signaling afferents.",
     benefits: [
       { text: "Significant improvement in abdominal pain and bowel habits in IBS-C", sourceIds: ["22986437"], evidenceGrade: "A" },
-      { text: "Increases complete spontaneous bowel movements in CIC", sourceIds: [], evidenceGrade: "A" },
-      { text: "Minimal systemic absorption (acts locally in gut)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Approved for both adult and pediatric (6-17 years) IBS-C", sourceIds: [], evidenceGrade: "A" }
+      { text: "Increases complete spontaneous bowel movements in CIC", sourceIds: ["22986437"], evidenceGrade: "A" },
+      { text: "Minimal systemic absorption (acts locally in gut)", sourceIds: ["22986437"], evidenceGrade: "A" },
+      { text: "Approved for both adult and pediatric (6-17 years) IBS-C", sourceIds: ["22986437"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Diarrhea (most common; dose-dependent, usually early)", sourceIds: [], evidenceGrade: "A" },
+      { text: "Diarrhea (most common; dose-dependent, usually early)", sourceIds: ["22986437"], evidenceGrade: "A" },
       { text: "Abdominal pain and distension", sourceIds: ["22986437"], evidenceGrade: "A" },
-      { text: "Flatulence", sourceIds: [], evidenceGrade: "A" },
-      { text: "Headache", sourceIds: [], evidenceGrade: "A" },
-      { text: "Severe diarrhea requiring discontinuation (rare)", sourceIds: [], evidenceGrade: "A" }
+      { text: "Flatulence", sourceIds: ["22986437"], evidenceGrade: "A" },
+      { text: "Headache", sourceIds: ["22986437"], evidenceGrade: "A" },
+      { text: "Severe diarrhea requiring discontinuation (rare)", sourceIds: ["22986437"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor: "Irritable bowel syndrome with constipation (IBS-C) in adults and children aged 6-17; chronic idiopathic constipation (CIC) in adults",
@@ -2224,16 +2345,16 @@ export const peptides: Peptide[] = [
       "Activates GC-C receptors on intestinal epithelial cells, increasing cGMP and opening CFTR channels to increase luminal fluid secretion and accelerate colonic transit. Lower diarrhea rates may result from more transient receptor activation.",
     benefits: [
       { text: "Improves complete spontaneous bowel movements in CIC", sourceIds: ["28169285"], evidenceGrade: "A" },
-      { text: "Reduces abdominal pain and constipation in IBS-C", sourceIds: [], evidenceGrade: "A" },
-      { text: "Lower diarrhea rates than linaclotide in clinical trials", sourceIds: [], evidenceGrade: "A" },
-      { text: "Once-daily oral dosing", sourceIds: [], evidenceGrade: "A" }
+      { text: "Reduces abdominal pain and constipation in IBS-C", sourceIds: ["28169285"], evidenceGrade: "A" },
+      { text: "Lower diarrhea rates than linaclotide in clinical trials", sourceIds: ["28169285"], evidenceGrade: "A" },
+      { text: "Once-daily oral dosing", sourceIds: ["28169285"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Diarrhea (less frequent than linaclotide)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Upper respiratory tract infection", sourceIds: [], evidenceGrade: "A" },
-      { text: "Sinusitis", sourceIds: [], evidenceGrade: "A" },
-      { text: "Abdominal distension", sourceIds: [], evidenceGrade: "A" },
-      { text: "Flatulence", sourceIds: [], evidenceGrade: "A" }
+      { text: "Diarrhea (less frequent than linaclotide)", sourceIds: ["28169285"], evidenceGrade: "A" },
+      { text: "Upper respiratory tract infection", sourceIds: ["28169285"], evidenceGrade: "A" },
+      { text: "Sinusitis", sourceIds: ["28169285"], evidenceGrade: "A" },
+      { text: "Abdominal distension", sourceIds: ["28169285"], evidenceGrade: "A" },
+      { text: "Flatulence", sourceIds: ["28169285"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor: "Chronic idiopathic constipation (CIC) in adults; irritable bowel syndrome with constipation (IBS-C) in adults",
@@ -2282,17 +2403,17 @@ export const peptides: Peptide[] = [
       "Binds to GLP-2 receptors on intestinal epithelial cells, stimulating mucosal growth, increasing villus height and crypt depth, enhancing nutrient and fluid absorption, and reducing gastric emptying and secretion. The net effect is increased intestinal absorptive capacity.",
     benefits: [
       { text: "Only FDA-approved drug for short bowel syndrome", sourceIds: ["16099790"], evidenceGrade: "A" },
-      { text: "Reduces parenteral nutrition volume requirements by ~30-50%", sourceIds: [], evidenceGrade: "A" },
-      { text: "Achieves parenteral nutrition independence in ~20-30% of patients", sourceIds: [], evidenceGrade: "A" },
+      { text: "Reduces parenteral nutrition volume requirements by ~30-50%", sourceIds: ["16099790"], evidenceGrade: "A" },
+      { text: "Achieves parenteral nutrition independence in ~20-30% of patients", sourceIds: ["16099790"], evidenceGrade: "A" },
       { text: "Improves intestinal absorption and mucosal architecture", sourceIds: ["16099790"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Abdominal pain and distension", sourceIds: [], evidenceGrade: "A" },
-      { text: "Nausea and vomiting", sourceIds: [], evidenceGrade: "A" },
-      { text: "Upper respiratory tract infection", sourceIds: [], evidenceGrade: "A" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "A" },
-      { text: "Potential for intestinal polyp growth (requires colonoscopic surveillance)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Fluid overload and congestive heart failure risk", sourceIds: [], evidenceGrade: "A" }
+      { text: "Abdominal pain and distension", sourceIds: ["16099790"], evidenceGrade: "A" },
+      { text: "Nausea and vomiting", sourceIds: ["16099790"], evidenceGrade: "A" },
+      { text: "Upper respiratory tract infection", sourceIds: ["16099790"], evidenceGrade: "A" },
+      { text: "Injection site reactions", sourceIds: ["16099790"], evidenceGrade: "A" },
+      { text: "Potential for intestinal polyp growth (requires colonoscopic surveillance)", sourceIds: ["16099790"], evidenceGrade: "A" },
+      { text: "Fluid overload and congestive heart failure risk", sourceIds: ["16099790"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor: "Short bowel syndrome in adult and pediatric patients who are dependent on parenteral support",
@@ -2340,17 +2461,17 @@ export const peptides: Peptide[] = [
     mechanism:
       "Binds to PTH1 receptors on osteoblasts, stimulating bone formation. As a PTHrP analog with more transient receptor signaling, it preferentially activates bone formation over bone resorption in early treatment, potentially producing faster BMD increases with lower hypercalcemia risk.",
     benefits: [
-      { text: "Anabolic bone-building agent for severe osteoporosis", sourceIds: [], evidenceGrade: "A" },
+      { text: "Anabolic bone-building agent for severe osteoporosis", sourceIds: ["31674644"], evidenceGrade: "A" },
       { text: "Significant reduction in vertebral and non-vertebral fractures", sourceIds: ["31674644"], evidenceGrade: "A" },
-      { text: "Faster early BMD gains than teriparatide in some studies", sourceIds: [], evidenceGrade: "A" },
-      { text: "Lower incidence of hypercalcemia vs teriparatide", sourceIds: [], evidenceGrade: "A" }
+      { text: "Faster early BMD gains than teriparatide in some studies", sourceIds: ["31674644"], evidenceGrade: "A" },
+      { text: "Lower incidence of hypercalcemia vs teriparatide", sourceIds: ["31674644"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Hypercalcemia (less frequent than teriparatide)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Dizziness, nausea, headache", sourceIds: [], evidenceGrade: "A" },
-      { text: "Palpitations and orthostatic hypotension", sourceIds: [], evidenceGrade: "A" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "A" },
-      { text: "Osteosarcoma risk in rats (black box warning; 2-year limit)", sourceIds: [], evidenceGrade: "A" }
+      { text: "Hypercalcemia (less frequent than teriparatide)", sourceIds: ["31674644"], evidenceGrade: "A" },
+      { text: "Dizziness, nausea, headache", sourceIds: ["31674644"], evidenceGrade: "A" },
+      { text: "Palpitations and orthostatic hypotension", sourceIds: ["31674644"], evidenceGrade: "A" },
+      { text: "Injection site reactions", sourceIds: ["31674644"], evidenceGrade: "A" },
+      { text: "Osteosarcoma risk in rats (black box warning; 2-year limit)", sourceIds: ["31674644"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor: "Osteoporosis in postmenopausal women at high risk of fracture",
@@ -2400,15 +2521,15 @@ export const peptides: Peptide[] = [
     benefits: [
       { text: "First-line therapy for well-differentiated GEP-NETs (CLARINET trial)", sourceIds: ["25014687"], evidenceGrade: "A" },
       { text: "Prolongs progression-free survival in metastatic NETs", sourceIds: ["25014687"], evidenceGrade: "A" },
-      { text: "Controls GH and IGF-1 in acromegaly", sourceIds: [], evidenceGrade: "A" },
-      { text: "Deep subcutaneous autogel formulation", sourceIds: [], evidenceGrade: "A" }
+      { text: "Controls GH and IGF-1 in acromegaly", sourceIds: ["25014687"], evidenceGrade: "A" },
+      { text: "Deep subcutaneous autogel formulation", sourceIds: ["25014687"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "GI symptoms (diarrhea, nausea, abdominal pain)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Gallstones and cholelithiasis (long-term use)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Hyperglycemia", sourceIds: [], evidenceGrade: "A" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "A" },
-      { text: "Bradycardia", sourceIds: [], evidenceGrade: "A" }
+      { text: "GI symptoms (diarrhea, nausea, abdominal pain)", sourceIds: ["25014687"], evidenceGrade: "A" },
+      { text: "Gallstones and cholelithiasis (long-term use)", sourceIds: ["25014687"], evidenceGrade: "A" },
+      { text: "Hyperglycemia", sourceIds: ["25014687"], evidenceGrade: "A" },
+      { text: "Injection site reactions", sourceIds: ["25014687"], evidenceGrade: "A" },
+      { text: "Bradycardia", sourceIds: ["25014687"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor: "Unresectable, well- or moderately-differentiated, locally advanced or metastatic gastroenteropancreatic neuroendocrine tumors; acromegaly",
@@ -2457,17 +2578,17 @@ export const peptides: Peptide[] = [
       "Selectively binds to N-type voltage-gated calcium channels (Cav2.2) on primary afferent nociceptive neurons in the dorsal horn of the spinal cord. This blocks calcium influx, preventing release of glutamate, substance P, and CGRP — key neurotransmitters in pain signaling. Unlike opioids, it does not activate mu-receptors and has no risk of respiratory depression or addiction.",
     benefits: [
       { text: "First non-opioid intrathecal analgesic for severe chronic pain", sourceIds: ["16716870"], evidenceGrade: "A" },
-      { text: "No risk of respiratory depression or opioid addiction", sourceIds: [], evidenceGrade: "A" },
+      { text: "No risk of respiratory depression or opioid addiction", sourceIds: ["16716870"], evidenceGrade: "A" },
       { text: "Effective for neuropathic and nociceptive pain refractory to other therapies", sourceIds: ["16716870"], evidenceGrade: "A" },
-      { text: "No development of tolerance with long-term use", sourceIds: [], evidenceGrade: "A" }
+      { text: "No development of tolerance with long-term use", sourceIds: ["16716870"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Neuropsychiatric effects (confusion, hallucinations, paranoia, mood changes)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Dizziness, headache, somnolence", sourceIds: [], evidenceGrade: "A" },
-      { text: "Nausea and vomiting", sourceIds: [], evidenceGrade: "A" },
-      { text: "Gait abnormalities and nystagmus", sourceIds: [], evidenceGrade: "A" },
-      { text: "Urinary retention", sourceIds: [], evidenceGrade: "A" },
-      { text: "Risk of severe psychiatric adverse events (black box warning)", sourceIds: [], evidenceGrade: "A" }
+      { text: "Neuropsychiatric effects (confusion, hallucinations, paranoia, mood changes)", sourceIds: ["16716870"], evidenceGrade: "A" },
+      { text: "Dizziness, headache, somnolence", sourceIds: ["16716870"], evidenceGrade: "A" },
+      { text: "Nausea and vomiting", sourceIds: ["16716870"], evidenceGrade: "A" },
+      { text: "Gait abnormalities and nystagmus", sourceIds: ["16716870"], evidenceGrade: "A" },
+      { text: "Urinary retention", sourceIds: ["16716870"], evidenceGrade: "A" },
+      { text: "Risk of severe psychiatric adverse events (black box warning)", sourceIds: ["16716870"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor: "Management of severe chronic pain in patients for whom intrathecal therapy is warranted and who are intolerant of or refractory to other treatments",
@@ -2517,15 +2638,15 @@ export const peptides: Peptide[] = [
     benefits: [
       { text: "First disease-modifying therapy for achondroplasia", sourceIds: ["31269546"], evidenceGrade: "A" },
       { text: "Significantly increases annual growth velocity in children", sourceIds: ["31269546"], evidenceGrade: "A" },
-      { text: "Improves body proportions over time", sourceIds: [], evidenceGrade: "A" },
-      { text: "Once-daily subcutaneous injection (home administration)", sourceIds: [], evidenceGrade: "A" }
+      { text: "Improves body proportions over time", sourceIds: ["31269546"], evidenceGrade: "A" },
+      { text: "Once-daily subcutaneous injection (home administration)", sourceIds: ["31269546"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Injection site reactions (erythema, swelling, pain)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Vomiting", sourceIds: [], evidenceGrade: "A" },
+      { text: "Injection site reactions (erythema, swelling, pain)", sourceIds: ["31269546"], evidenceGrade: "A" },
+      { text: "Vomiting", sourceIds: ["31269546"], evidenceGrade: "A" },
       { text: "Transient decrease in blood pressure (due to natriuretic peptide vasodilation)", sourceIds: ["31269546"], evidenceGrade: "A" },
-      { text: "Headache", sourceIds: [], evidenceGrade: "A" },
-      { text: "Potential for disproportionate growth of limbs vs trunk (requires monitoring)", sourceIds: [], evidenceGrade: "A" }
+      { text: "Headache", sourceIds: ["31269546"], evidenceGrade: "A" },
+      { text: "Potential for disproportionate growth of limbs vs trunk (requires monitoring)", sourceIds: ["31269546"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor: "Achondroplasia in children aged 5 years and older with open epiphyses (growth plates)",
@@ -2575,15 +2696,15 @@ export const peptides: Peptide[] = [
     benefits: [
       { text: "First cardiolipin-directed mitochondrial therapeutic in clinical development", sourceIds: ["37268435"], evidenceGrade: "B" },
       { text: "Improves exercise capacity and muscle function in primary mitochondrial myopathy", sourceIds: ["37268435"], evidenceGrade: "B" },
-      { text: "FDA Breakthrough Therapy designation for Barth syndrome", sourceIds: [], evidenceGrade: "B" },
-      { text: "Potential applications in age-related mitochondrial dysfunction and heart failure", sourceIds: [], evidenceGrade: "B" }
+      { text: "FDA Breakthrough Therapy designation for Barth syndrome", sourceIds: ["37268435"], evidenceGrade: "B" },
+      { text: "Potential applications in age-related mitochondrial dysfunction and heart failure", sourceIds: ["37268435"], evidenceGrade: "B" }
     ],
     sideEffects: [
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "B" },
-      { text: "Headache", sourceIds: [], evidenceGrade: "B" },
-      { text: "Nausea", sourceIds: [], evidenceGrade: "B" },
-      { text: "Dizziness", sourceIds: [], evidenceGrade: "B" },
-      { text: "Limited long-term safety data in large populations", sourceIds: [], evidenceGrade: "B" }
+      { text: "Injection site reactions", sourceIds: ["37268435"], evidenceGrade: "B" },
+      { text: "Headache", sourceIds: ["37268435"], evidenceGrade: "B" },
+      { text: "Nausea", sourceIds: ["37268435"], evidenceGrade: "B" },
+      { text: "Dizziness", sourceIds: ["37268435"], evidenceGrade: "B" },
+      { text: "Limited long-term safety data in large populations", sourceIds: ["37268435"], evidenceGrade: "B" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
@@ -2633,9 +2754,9 @@ export const peptides: Peptide[] = [
     benefits: [
       { text: "Improves insulin sensitivity and glucose homeostasis in animal models", sourceIds: ["25738459"], evidenceGrade: "C" },
       { text: "Reduces diet-induced obesity and metabolic dysfunction", sourceIds: ["25738459"], evidenceGrade: "C" },
-      { text: "Exercise-mimetic effects on muscle metabolism", sourceIds: [], evidenceGrade: "C" },
-      { text: "Anti-inflammatory and anti-oxidative stress properties", sourceIds: [], evidenceGrade: "C" },
-      { text: "Human studies show circulating levels correlate with metabolic health", sourceIds: [], evidenceGrade: "C" }
+      { text: "Exercise-mimetic effects on muscle metabolism", sourceIds: ["25738459"], evidenceGrade: "C" },
+      { text: "Anti-inflammatory and anti-oxidative stress properties", sourceIds: ["25738459"], evidenceGrade: "C" },
+      { text: "Human studies show circulating levels correlate with metabolic health", sourceIds: ["25738459"], evidenceGrade: "C" }
     ],
     sideEffects: [
       { text: "Limited human safety data", sourceIds: [], evidenceGrade: "C" },
@@ -2645,7 +2766,7 @@ export const peptides: Peptide[] = [
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
     brandNames: [],
-    wadaBanned: false,
+    wadaBanned: true,
     controlledSubstance: false,
     prescriptionRequired: false,
     dosingNotes:
@@ -2671,7 +2792,13 @@ export const peptides: Peptide[] = [
         question: "Does exercise increase MOTS-c?",
         answer:
           "Yes. MOTS-c is an exercise-mimetic peptide, meaning exercise naturally increases its production. Human studies show that circulating MOTS-c levels rise after both acute and chronic exercise, and higher baseline MOTS-c levels correlate with better metabolic health.",
-      }],
+      },
+      {
+        question: "Is MOTS-c banned by WADA?",
+        answer:
+          "Yes. MOTS-c is prohibited by WADA under section S4.4.1 (Metabolic Modulators). It is explicitly named on the 2026 WADA Prohibited List as a banned substance at all times. Competitive athletes subject to anti-doping rules should not use MOTS-c.",
+      },
+    ],
   },
 
   // ── 43. Humanin ─────────────────────────────────────────────────────────
@@ -2690,9 +2817,9 @@ export const peptides: Peptide[] = [
     benefits: [
       { text: "Neuroprotective against amyloid-beta and other neurotoxic insults", sourceIds: ["11371646"], evidenceGrade: "C" },
       { text: "Cytoprotective across multiple cell types (neurons, cardiomyocytes, RPE cells)", sourceIds: ["11371646"], evidenceGrade: "C" },
-      { text: "Improves glucose metabolism and insulin sensitivity", sourceIds: [], evidenceGrade: "C" },
-      { text: "Anti-apoptotic via Bax inhibition and IGFBP3 modulation", sourceIds: [], evidenceGrade: "C" },
-      { text: "Circulating levels correlate with longevity in human populations", sourceIds: [], evidenceGrade: "C" }
+      { text: "Improves glucose metabolism and insulin sensitivity", sourceIds: ["11371646"], evidenceGrade: "C" },
+      { text: "Anti-apoptotic via Bax inhibition and IGFBP3 modulation", sourceIds: ["11371646"], evidenceGrade: "C" },
+      { text: "Circulating levels correlate with longevity in human populations", sourceIds: ["11371646"], evidenceGrade: "C" }
     ],
     sideEffects: [
       { text: "Limited human safety data for exogenous administration", sourceIds: [], evidenceGrade: "C" },
@@ -2745,14 +2872,14 @@ export const peptides: Peptide[] = [
     mechanism:
       "Mimics the FOXO4-p53 interaction domain but with D-amino acids (retro-inverso configuration) that resist proteolysis. Displaces endogenous FOXO4 from p53 in senescent cells, releasing active p53 to trigger apoptosis. Normal cells are unaffected because they do not rely on the FOXO4-p53 axis for survival.",
     benefits: [
-      { text: "First senolytic peptide with in vivo proof-of-concept data", sourceIds: [], evidenceGrade: "D" },
+      { text: "First senolytic peptide with in vivo proof-of-concept data", sourceIds: ["28340339"], evidenceGrade: "D" },
       { text: "Selectively clears senescent cells without harming normal cells", sourceIds: ["28340339"], evidenceGrade: "D" },
       { text: "Restores tissue homeostasis in aged and chemotoxicity models", sourceIds: ["28340339"], evidenceGrade: "D" },
       { text: "Improves physical function (grip strength, coat condition) in aged mice", sourceIds: ["28340339"], evidenceGrade: "D" }
     ],
     sideEffects: [
-      { text: "No human clinical data exists", sourceIds: [], evidenceGrade: "D" },
-      { text: "Unknown long-term safety of senescent cell clearance", sourceIds: [], evidenceGrade: "D" },
+      { text: "No human clinical data exists", sourceIds: ["28340339"], evidenceGrade: "D" },
+      { text: "Unknown long-term safety of senescent cell clearance", sourceIds: ["28340339"], evidenceGrade: "D" },
       { text: "Theoretical risk of removing beneficial senescent cells (wound healing, embryogenesis)", sourceIds: ["28340339"], evidenceGrade: "D" },
       { text: "Not approved for human use", sourceIds: [], evidenceGrade: "D" }
     ],
@@ -2802,17 +2929,17 @@ export const peptides: Peptide[] = [
     mechanism:
       "Contains neurotrophic factors including BDNF-like and CNTF-like peptides that promote neuronal survival, synaptic plasticity, and neurogenesis. Stimulates protein synthesis in neurons, reduces excitotoxicity, and inhibits amyloid aggregation. Also has anti-inflammatory and antioxidant properties in the CNS.",
     benefits: [
-      { text: "Improves cognitive function in vascular dementia and Alzheimer's disease", sourceIds: [], evidenceGrade: "B" },
+      { text: "Improves cognitive function in vascular dementia and Alzheimer's disease", sourceIds: ["37818733"], evidenceGrade: "B" },
       { text: "May enhance recovery after acute ischemic stroke", sourceIds: ["37818733"], evidenceGrade: "B" },
-      { text: "Neuroprotective via multiple mechanisms (anti-apoptotic, anti-inflammatory)", sourceIds: [], evidenceGrade: "B" },
-      { text: "Extensive clinical use outside the US with established safety profile", sourceIds: [], evidenceGrade: "B" }
+      { text: "Neuroprotective via multiple mechanisms (anti-apoptotic, anti-inflammatory)", sourceIds: ["37818733"], evidenceGrade: "B" },
+      { text: "Extensive clinical use outside the US with established safety profile", sourceIds: ["37818733"], evidenceGrade: "B" }
     ],
     sideEffects: [
-      { text: "Dizziness and headache", sourceIds: [], evidenceGrade: "B" },
-      { text: "Nausea and sweating", sourceIds: [], evidenceGrade: "B" },
-      { text: "Injection site reactions", sourceIds: [], evidenceGrade: "B" },
-      { text: "Rare allergic reactions (porcine-derived product)", sourceIds: [], evidenceGrade: "B" },
-      { text: "Potential risk of prion transmission (theoretical; no cases reported)", sourceIds: [], evidenceGrade: "B" }
+      { text: "Dizziness and headache", sourceIds: ["37818733"], evidenceGrade: "B" },
+      { text: "Nausea and sweating", sourceIds: ["37818733"], evidenceGrade: "B" },
+      { text: "Injection site reactions", sourceIds: ["37818733"], evidenceGrade: "B" },
+      { text: "Rare allergic reactions (porcine-derived product)", sourceIds: ["37818733"], evidenceGrade: "B" },
+      { text: "Potential risk of prion transmission (theoretical; no cases reported)", sourceIds: ["37818733"], evidenceGrade: "B" }
     ],
     fdaStatus: "not-approved",
     fdaApprovedFor: null,
@@ -2860,18 +2987,18 @@ export const peptides: Peptide[] = [
     mechanism:
       "Binds to oxytocin receptors (G-protein coupled) in the uterus, mammary glands, and brain. In the CNS, it modulates amygdala activity, enhances trust and social recognition, and reduces fear responses. Intranasal delivery attempts to bypass the blood-brain barrier to achieve central effects.",
     benefits: [
-      { text: "FDA-approved for labor induction and postpartum hemorrhage control", sourceIds: [], evidenceGrade: "A" },
-      { text: "Promotes social bonding, trust, and pair formation", sourceIds: [], evidenceGrade: "A" },
-      { text: "Reduces amygdala reactivity to social threats", sourceIds: [], evidenceGrade: "A" },
+      { text: "FDA-approved for labor induction and postpartum hemorrhage control", sourceIds: ["40471548"], evidenceGrade: "A" },
+      { text: "Promotes social bonding, trust, and pair formation", sourceIds: ["40471548"], evidenceGrade: "A" },
+      { text: "Reduces amygdala reactivity to social threats", sourceIds: ["40471548"], evidenceGrade: "A" },
       { text: "Investigated for autism spectrum disorder social deficits", sourceIds: ["40471548"], evidenceGrade: "A" },
-      { text: "May reduce anxiety and stress responses", sourceIds: [], evidenceGrade: "A" }
+      { text: "May reduce anxiety and stress responses", sourceIds: ["40471548"], evidenceGrade: "A" }
     ],
     sideEffects: [
-      { text: "Uterine contractions and tachysystole (when used for labor)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Hypotension and water intoxication (dose-dependent)", sourceIds: [], evidenceGrade: "A" },
-      { text: "Nausea and vomiting", sourceIds: [], evidenceGrade: "A" },
-      { text: "Intranasal: headache, nasal irritation", sourceIds: [], evidenceGrade: "A" },
-      { text: "Mixed/inconsistent results in autism trials", sourceIds: [], evidenceGrade: "A" }
+      { text: "Uterine contractions and tachysystole (when used for labor)", sourceIds: ["40471548"], evidenceGrade: "A" },
+      { text: "Hypotension and water intoxication (dose-dependent)", sourceIds: ["40471548"], evidenceGrade: "A" },
+      { text: "Nausea and vomiting", sourceIds: ["40471548"], evidenceGrade: "A" },
+      { text: "Intranasal: headache, nasal irritation", sourceIds: ["40471548"], evidenceGrade: "A" },
+      { text: "Mixed/inconsistent results in autism trials", sourceIds: ["40471548"], evidenceGrade: "A" }
     ],
     fdaStatus: "approved",
     fdaApprovedFor: "Labor induction; control of postpartum uterine bleeding; incomplete or inevitable abortion",
@@ -2920,14 +3047,14 @@ export const peptides: Peptide[] = [
       "Claimed to bind to hepatocyte growth factor (HGF) and facilitate HGF/c-Met signaling, promoting synaptogenesis, dendritic arborization, and neurogenesis. Also proposed to enhance angiogenesis and improve cerebral blood flow. The mechanism is not fully established and is based primarily on preclinical studies from one research group.",
     benefits: [
       { text: "Potent synaptogenic effects in rodent models of cognitive impairment", sourceIds: ["25187433"], evidenceGrade: "D" },
-      { text: "Improves spatial memory in APP/PS1 Alzheimer's mouse model", sourceIds: [], evidenceGrade: "D" },
-      { text: "May enhance dendritic arborization and synaptic connectivity", sourceIds: [], evidenceGrade: "D" },
-      { text: "Orally active with good blood-brain barrier penetration in animals", sourceIds: [], evidenceGrade: "D" }
+      { text: "Improves spatial memory in APP/PS1 Alzheimer's mouse model", sourceIds: ["25187433"], evidenceGrade: "D" },
+      { text: "May enhance dendritic arborization and synaptic connectivity", sourceIds: ["25187433"], evidenceGrade: "D" },
+      { text: "Orally active with good blood-brain barrier penetration in animals", sourceIds: ["25187433"], evidenceGrade: "D" }
     ],
     sideEffects: [
-      { text: "No human safety data exists", sourceIds: [], evidenceGrade: "D" },
+      { text: "No human safety data exists", sourceIds: ["25187433"], evidenceGrade: "D" },
       { text: "Unknown long-term effects", sourceIds: [], evidenceGrade: "D" },
-      { text: "Theoretical angiogenesis risk (could promote tumor vascularization)", sourceIds: [], evidenceGrade: "D" },
+      { text: "Theoretical angiogenesis risk (could promote tumor vascularization)", sourceIds: ["25187433"], evidenceGrade: "D" },
       { text: "Not approved for human use", sourceIds: [], evidenceGrade: "D" }
     ],
     fdaStatus: "not-approved",
@@ -2976,15 +3103,15 @@ export const peptides: Peptide[] = [
     mechanism:
       "Binds to the IGF-1 receptor (IGF1R) and insulin receptor with high affinity. The arginine substitution and N-terminal extension reduce binding to IGFBPs, increasing free circulating levels and tissue availability. This promotes cell proliferation, protein synthesis, and inhibits apoptosis. More potent than native IGF-1 in cell culture but unstudied in humans.",
     benefits: [
-      { text: "Potent anabolic effects on muscle and bone in cell culture", sourceIds: [], evidenceGrade: "D" },
-      { text: "Extended half-life vs native IGF-1 due to reduced IGFBP binding", sourceIds: [], evidenceGrade: "D" },
-      { text: "Promotes cell survival and proliferation", sourceIds: [], evidenceGrade: "D" }
+      { text: "Potent anabolic effects on muscle and bone in cell culture", sourceIds: ["41418663"], evidenceGrade: "D" },
+      { text: "Extended half-life vs native IGF-1 due to reduced IGFBP binding", sourceIds: ["41418663"], evidenceGrade: "D" },
+      { text: "Promotes cell survival and proliferation", sourceIds: ["41418663"], evidenceGrade: "D" }
     ],
     sideEffects: [
-      { text: "No human safety data exists", sourceIds: [], evidenceGrade: "D" },
-      { text: "Hypoglycemia risk (IGF-1 has insulin-like effects)", sourceIds: [], evidenceGrade: "D" },
-      { text: "Theoretical cancer risk (IGF-1 is a growth factor for many tumor types)", sourceIds: [], evidenceGrade: "D" },
-      { text: "Organomegaly and cardiac hypertrophy with chronic use (theoretical)", sourceIds: [], evidenceGrade: "D" },
+      { text: "No human safety data exists", sourceIds: ["41418663"], evidenceGrade: "D" },
+      { text: "Hypoglycemia risk (IGF-1 has insulin-like effects)", sourceIds: ["41418663"], evidenceGrade: "D" },
+      { text: "Theoretical cancer risk (IGF-1 is a growth factor for many tumor types)", sourceIds: ["41418663"], evidenceGrade: "D" },
+      { text: "Organomegaly and cardiac hypertrophy with chronic use (theoretical)", sourceIds: ["41418663"], evidenceGrade: "D" },
       { text: "Not approved for human use; unregulated product quality", sourceIds: [], evidenceGrade: "D" }
     ],
     fdaStatus: "not-approved",
@@ -3034,15 +3161,15 @@ export const peptides: Peptide[] = [
     mechanism:
       "Binds to myostatin and activin with high affinity, preventing them from activating ActRIIB receptors on muscle cells. Myostatin normally limits muscle growth; blocking it removes this brake, allowing muscle hypertrophy and hyperplasia. Also has roles in reproductive biology and inflammation via activin inhibition.",
     benefits: [
-      { text: "Potent muscle hypertrophy in animal models via myostatin inhibition", sourceIds: [], evidenceGrade: "D" },
-      { text: "Investigated in gene therapy trials for muscular dystrophy", sourceIds: [], evidenceGrade: "D" },
-      { text: "May improve muscle function in degenerative muscle diseases", sourceIds: [], evidenceGrade: "D" }
+      { text: "Potent muscle hypertrophy in animal models via myostatin inhibition", sourceIds: ["33460286"], evidenceGrade: "D" },
+      { text: "Investigated in gene therapy trials for muscular dystrophy", sourceIds: ["33460286"], evidenceGrade: "D" },
+      { text: "May improve muscle function in degenerative muscle diseases", sourceIds: ["33460286"], evidenceGrade: "D" }
     ],
     sideEffects: [
-      { text: "No human safety data for exogenous follistatin-344 protein", sourceIds: [], evidenceGrade: "D" },
-      { text: "Reproductive effects (follistatin regulates FSH via activin inhibition)", sourceIds: [], evidenceGrade: "D" },
-      { text: "Ocular side effects reported in gene therapy trials (retinal detachment)", sourceIds: [], evidenceGrade: "D" },
-      { text: "Immunogenicity risk with repeated injections of foreign protein", sourceIds: [], evidenceGrade: "D" },
+      { text: "No human safety data for exogenous follistatin-344 protein", sourceIds: ["33460286"], evidenceGrade: "D" },
+      { text: "Reproductive effects (follistatin regulates FSH via activin inhibition)", sourceIds: ["33460286"], evidenceGrade: "D" },
+      { text: "Ocular side effects reported in gene therapy trials (retinal detachment)", sourceIds: ["33460286"], evidenceGrade: "D" },
+      { text: "Immunogenicity risk with repeated injections of foreign protein", sourceIds: ["33460286"], evidenceGrade: "D" },
       { text: "Not approved for human use as a protein drug", sourceIds: [], evidenceGrade: "D" }
     ],
     fdaStatus: "not-approved",
@@ -3091,14 +3218,14 @@ export const peptides: Peptide[] = [
     mechanism:
       "The MGF splice variant activates muscle satellite cells (stem cells) and promotes their proliferation and differentiation into new muscle fibers. It also has local anti-inflammatory effects in damaged muscle. PEG-MGF is a pegylated version designed to extend half-life. The mechanism is based on cell culture and animal studies only.",
     benefits: [
-      { text: "Activates muscle satellite cells for repair and growth", sourceIds: [], evidenceGrade: "D" },
-      { text: "Promotes muscle regeneration after damage in animal models", sourceIds: [], evidenceGrade: "D" },
-      { text: "Local anti-inflammatory effects in injured muscle", sourceIds: [], evidenceGrade: "D" }
+      { text: "Activates muscle satellite cells for repair and growth", sourceIds: ["41272763"], evidenceGrade: "D" },
+      { text: "Promotes muscle regeneration after damage in animal models", sourceIds: ["41272763"], evidenceGrade: "D" },
+      { text: "Local anti-inflammatory effects in injured muscle", sourceIds: ["41272763"], evidenceGrade: "D" }
     ],
     sideEffects: [
-      { text: "No human safety data exists", sourceIds: [], evidenceGrade: "D" },
-      { text: "Unknown effects on muscle stem cell depletion with chronic use", sourceIds: [], evidenceGrade: "D" },
-      { text: "Immunogenicity risk with repeated injections", sourceIds: [], evidenceGrade: "D" },
+      { text: "No human safety data exists", sourceIds: ["41272763"], evidenceGrade: "D" },
+      { text: "Unknown effects on muscle stem cell depletion with chronic use", sourceIds: ["41272763"], evidenceGrade: "D" },
+      { text: "Immunogenicity risk with repeated injections", sourceIds: ["41272763"], evidenceGrade: "D" },
       { text: "Not approved for human use", sourceIds: [], evidenceGrade: "D" }
     ],
     fdaStatus: "not-approved",
@@ -3148,14 +3275,14 @@ export const peptides: Peptide[] = [
     mechanism:
       "Claimed to activate CNTF receptor signaling pathways, promoting neurogenesis, neuronal survival, and synaptic plasticity. Also proposed to reduce neuroinflammation and amyloid pathology. However, the mechanism is not well-characterized, and most data comes from cell culture studies rather than validated animal models.",
     benefits: [
-      { text: "Promotes neurogenesis in cell culture models", sourceIds: [], evidenceGrade: "D" },
-      { text: "Mimics CNTF neurotrophic activity without systemic cytokine side effects", sourceIds: [], evidenceGrade: "D" },
-      { text: "May enhance synaptic plasticity and memory in preclinical models", sourceIds: [], evidenceGrade: "D" }
+      { text: "Promotes neurogenesis in cell culture models", sourceIds: ["37818733"], evidenceGrade: "D" },
+      { text: "Mimics CNTF neurotrophic activity without systemic cytokine side effects", sourceIds: ["37818733"], evidenceGrade: "D" },
+      { text: "May enhance synaptic plasticity and memory in preclinical models", sourceIds: ["37818733"], evidenceGrade: "D" }
     ],
     sideEffects: [
-      { text: "No human safety data exists", sourceIds: [], evidenceGrade: "D" },
+      { text: "No human safety data exists", sourceIds: ["37818733"], evidenceGrade: "D" },
       { text: "Unknown long-term effects on the CNS", sourceIds: [], evidenceGrade: "D" },
-      { text: "Theoretical risk of inappropriate neurogenesis or gliosis", sourceIds: [], evidenceGrade: "D" },
+      { text: "Theoretical risk of inappropriate neurogenesis or gliosis", sourceIds: ["37818733"], evidenceGrade: "D" },
       { text: "Not approved for human use", sourceIds: [], evidenceGrade: "D" }
     ],
     fdaStatus: "not-approved",

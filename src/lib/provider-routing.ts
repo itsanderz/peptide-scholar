@@ -29,6 +29,13 @@ export interface ProviderStateGuidance {
 function scorePartner(partner: ProviderPartner, input: ProviderRoutingInput) {
   let score = 0;
 
+  // Live partners get a massive priority bonus
+  if (partner.partnerStatus === "live-partner") {
+    score += 15;
+  } else if (partner.partnerStatus === "partner-ready") {
+    score += 5;
+  }
+
   if (partner.markets.includes(input.marketCode)) score += 4;
   if (partner.treatments.includes(input.treatmentSlug)) score += 5;
   else if (partner.treatments.includes("general")) score += 2;
@@ -49,6 +56,40 @@ function scorePartner(partner: ProviderPartner, input: ProviderRoutingInput) {
   }
 
   return score;
+}
+
+/**
+ * Get the single best live partner for a peptide + market.
+ * Used for direct "Get Started" CTAs on peptide pages.
+ */
+export function getBestLivePartnerForPeptide(
+  treatmentSlug: string,
+  marketCode: MarketCode
+): ProviderPartner | null {
+  if (!canShowProviderReferrals(marketCode)) return null;
+
+  const livePartners = providerPartners.filter(
+    (p) => p.partnerStatus === "live-partner" && p.markets.includes(marketCode)
+  );
+
+  if (livePartners.length === 0) return null;
+
+  // Score each live partner for this specific peptide
+  const scored = livePartners.map((partner) => ({
+    partner,
+    score: scorePartner(partner, {
+      marketCode,
+      treatmentSlug,
+      goal: "education-first",
+      state: "",
+      insuranceStatus: "either",
+      budgetBand: "unsure",
+      urgency: "researching",
+    }),
+  }));
+
+  scored.sort((a, b) => b.score - a.score);
+  return scored[0]?.partner ?? null;
 }
 
 export function getProviderMatches(input: ProviderRoutingInput): ProviderRoutingResult {

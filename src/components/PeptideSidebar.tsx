@@ -8,7 +8,7 @@ interface PeptideSidebarProps {
   aminoAcidCount: number | null;
   category: string;
   evidenceLevel: "A" | "B" | "C" | "D";
-  fdaStatus: "approved" | "not-approved" | "cosmetic";
+  fdaStatus: "approved" | "not-approved" | "cosmetic" | "discontinued";
   fdaApprovedFor: string | null;
   wadaBanned: boolean;
   controlledSubstance: boolean;
@@ -25,23 +25,15 @@ function SidebarSection({
   children: React.ReactNode;
 }) {
   return (
-    <div style={{ marginBottom: "1rem" }}>
-      <h4
-        style={{
-          fontSize: "0.7rem",
-          fontWeight: 700,
-          textTransform: "uppercase",
-          letterSpacing: "0.06em",
-          color: "var(--color-text-muted, #6b7280)",
-          marginBottom: "0.35rem",
-          fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-        }}
-      >
-        {title}
-      </h4>
+    <section className="pd-side-section">
+      <p className="pd-side-lbl">{title}</p>
       {children}
-    </div>
+    </section>
   );
+}
+
+function InfoValue({ children }: { children: React.ReactNode }) {
+  return <p className="pd-rel-name" style={{ textTransform: "none" }}>{children}</p>;
 }
 
 export function PeptideSidebar({
@@ -59,57 +51,28 @@ export function PeptideSidebar({
   comparisonSlugs,
 }: PeptideSidebarProps) {
   return (
-    <aside
-      style={{
-        position: "sticky",
-        top: "1.5rem",
-        border: "1px solid var(--color-border, #e5e7eb)",
-        borderRadius: "0.75rem",
-        padding: "1.25rem",
-        backgroundColor: "var(--color-surface, #ffffff)",
-        maxWidth: "320px",
-        width: "100%",
-      }}
-    >
-      <h3
-        style={{
-          fontSize: "1rem",
-          fontWeight: 700,
-          color: "var(--color-primary, #1A3A5C)",
-          marginBottom: "1rem",
-          paddingBottom: "0.6rem",
-          borderBottom: "1px solid var(--color-border, #e5e7eb)",
-          fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-        }}
-      >
-        Quick Facts: {name}
-      </h3>
+    <aside className="pd-side-card">
+      <h2 className="pd-side-title">Quick Facts: {name}</h2>
 
       <SidebarSection title="Type">
-        <p style={{ fontSize: "0.875rem", color: "var(--color-text, #1A3A5C)", margin: 0 }}>
-          {type}
-        </p>
+        <InfoValue>{type}</InfoValue>
       </SidebarSection>
 
       {aminoAcidCount !== null && (
-        <SidebarSection title="Amino Acids">
-          <p style={{ fontSize: "0.875rem", color: "var(--color-text, #1A3A5C)", margin: 0 }}>
-            {aminoAcidCount}
-          </p>
+        <SidebarSection title="Amino acids">
+          <InfoValue>{aminoAcidCount}</InfoValue>
         </SidebarSection>
       )}
 
       <SidebarSection title="Category">
-        <p style={{ fontSize: "0.875rem", color: "var(--color-text, #1A3A5C)", margin: 0 }}>
-          {category}
-        </p>
+        <InfoValue>{category}</InfoValue>
       </SidebarSection>
 
-      <SidebarSection title="Evidence Level">
+      <SidebarSection title="Evidence level">
         <EvidenceBadge level={evidenceLevel} />
       </SidebarSection>
 
-      <SidebarSection title="Legal Status">
+      <SidebarSection title="Legal status">
         <LegalStatusBadge
           fdaStatus={fdaStatus}
           prescriptionRequired={prescriptionRequired}
@@ -119,40 +82,18 @@ export function PeptideSidebar({
       </SidebarSection>
 
       {fdaApprovedFor && (
-        <SidebarSection title="FDA Approved For">
-          <p style={{ fontSize: "0.85rem", color: "var(--color-text, #1A3A5C)", margin: 0, lineHeight: 1.5 }}>
-            {fdaApprovedFor}
-          </p>
+        <SidebarSection title="FDA approved for">
+          <p className="pd-research-finding">{fdaApprovedFor}</p>
         </SidebarSection>
       )}
 
       {relatedPeptides.length > 0 && (
-        <SidebarSection title="Related Peptides">
-          <ul
-            style={{
-              listStyle: "none",
-              padding: 0,
-              margin: 0,
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.25rem",
-            }}
-          >
+        <SidebarSection title="Related peptides">
+          <ul className="pd-related">
             {relatedPeptides.map((p) => (
               <li key={p.slug}>
-                <Link
-                  href={`/peptides/${p.slug}`}
-                  style={{
-                    display: "block",
-                    padding: "0.35rem 0",
-                    fontSize: "0.85rem",
-                    color: "var(--color-secondary, #3B7A9E)",
-                    textDecoration: "none",
-                    minHeight: "48px",
-                    lineHeight: "48px",
-                  }}
-                >
-                  {p.name}
+                <Link href={`/peptides/${p.slug}`} className="pd-rel-card">
+                  <span className="pd-rel-name">{p.name}</span>
                 </Link>
               </li>
             ))}
@@ -162,31 +103,11 @@ export function PeptideSidebar({
 
       {comparisonSlugs.length > 0 && (
         <SidebarSection title="Compare">
-          <ul
-            style={{
-              listStyle: "none",
-              padding: 0,
-              margin: 0,
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.25rem",
-            }}
-          >
+          <ul className="pd-related">
             {comparisonSlugs.map((c) => (
               <li key={c.slug}>
-                <Link
-                  href={`/compare/${c.slug}`}
-                  style={{
-                    display: "block",
-                    padding: "0.35rem 0",
-                    fontSize: "0.85rem",
-                    color: "var(--color-secondary, #3B7A9E)",
-                    textDecoration: "none",
-                    minHeight: "48px",
-                    lineHeight: "48px",
-                  }}
-                >
-                  {c.label}
+                <Link href={`/compare/${c.slug}`} className="pd-rel-card">
+                  <span className="pd-rel-name">{c.label}</span>
                 </Link>
               </li>
             ))}

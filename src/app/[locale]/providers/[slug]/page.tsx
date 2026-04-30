@@ -93,7 +93,7 @@ export default async function ProviderPartnerPage({ params }: Props) {
         }}
       />
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="container py-8 legacy-index-page">
         <BreadcrumbNav
           crumbs={[
             { label: "Home", href: "/" },
@@ -240,18 +240,47 @@ export default async function ProviderPartnerPage({ params }: Props) {
           </ul>
         </section>
 
-        <ProviderIntentCard
-          marketCode={market.code}
-          location="provider_detail"
-          treatmentSlug={partner.treatments.find((value) => value !== "general") ?? "general"}
-          headline={providerEnabled ? "Want this route prioritized?" : `Want rollout updates for ${market.name}?`}
-          description={
-            providerEnabled
-              ? "Use the provider matcher to package your state, budget, insurance, and urgency details so this routing profile can be prioritized correctly."
-              : `Save your treatment preferences and we will notify you when this routing profile becomes active in ${market.name}.`
-          }
-          buttonText={providerEnabled ? "Use provider matcher" : "Join provider rollout"}
-        />
+        {partner.partnerStatus === "live-partner" && partner.externalUrl ? (
+          <div
+            className="rounded-xl p-6 mb-8"
+            style={{ backgroundColor: "#ECFDF5", border: "2px solid #5EEAD4" }}
+          >
+            <h3 className="text-xl font-bold mb-2" style={{ color: "#065F46" }}>
+              Start Your Visit at {partner.name}
+            </h3>
+            <p className="text-sm leading-relaxed mb-4" style={{ color: "#047857" }}>
+              {partner.description}
+            </p>
+            <a
+              href={partner.externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-colors"
+              style={{ backgroundColor: "#0D9488", color: "#FFFFFF", textDecoration: "none" }}
+            >
+              {partner.nextStepLabel}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </a>
+            <p className="text-[11px] mt-3" style={{ color: "#6B7280" }}>
+              PeptideScholar may receive compensation from provider referrals. This does not influence our editorial content.
+            </p>
+          </div>
+        ) : (
+          <ProviderIntentCard
+            marketCode={market.code}
+            location="provider_detail"
+            treatmentSlug={partner.treatments.find((value) => value !== "general") ?? "general"}
+            headline={providerEnabled ? "Want this route prioritized?" : `Want rollout updates for ${market.name}?`}
+            description={
+              providerEnabled
+                ? "Use the provider matcher to package your state, budget, insurance, and urgency details so this routing profile can be prioritized correctly."
+                : `Save your treatment preferences and we will notify you when this routing profile becomes active in ${market.name}.`
+            }
+            buttonText={providerEnabled ? "Use provider matcher" : "Join provider rollout"}
+          />
+        )}
 
         <div className="mt-8">
           <MedicalDisclaimer compact />

@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "id": "us-sermorelin-treatment-hub",
+    "slug": "sermorelin",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Sermorelin Treatment Guide: Geref, Cost and Provider Paths",
+    "description": "US-first sermorelin treatment hub covering approved product paths, cost friction, provider selection, and clinical evidence.",
+    "canonicalPath": "/treatments/sermorelin",
+    "keywords": [
+      "sermorelin treatment guide",
+      "sermorelin provider",
+      "sermorelin treatment path",
+      "sermorelin cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 3,
+    "disclaimer": "This hub summarizes official sermorelin treatment pathways at a high level. Indication fit, coverage, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "sermorelin",
+  "treatmentName": "Sermorelin",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, Sermorelin is an FDA-approved peptide therapy. Diagnosis and treatment of growth hormone deficiency in children",
+  "overview": "Sermorelin is the shortest fully functional fragment of GHRH (amino acids 1-29). It was the first GHRH analog approved by the FDA, marketed as Geref for diagnostic and therapeutic use. Geref was subsequently discontinued in the U.S. market, though sermorelin remains available through compounding pharmacies. Geref was subsequently discontinued in the U.S. market, though sermorelin remains available through compounding pharmacies.",
+  "approvedProducts": [
+    {
+      "slug": "geref",
+      "name": "Geref",
+      "summary": "Branded sermorelin pathway. Diagnosis and treatment of growth hormone deficiency in children"
+    }
+  ],
+  "benefits": [
+    "FDA-approved track record for GH stimulation",
+    "Preserves natural GH pulsatility",
+    "Improved body composition in clinical studies",
+    "Enhanced sleep quality"
+  ],
+  "sideEffects": [
+    "Pain at injection site",
+    "Flushing",
+    "Headache",
+    "Dizziness"
+  ],
+  "routes": [
+    "Subcutaneous injection"
+  ],
+  "costSummary": "Sermorelin costs vary by brand, pharmacy, and insurance design. As an FDA-approved medication, coverage may be available but often requires prior authorization and documentation of the approved indication.",
+  "providerSummary": "The highest-value next step is finding a provider experienced in growth hormone secretagogues who can evaluate whether Sermorelin fits the patient's clinical profile and insurance constraints.",
+  "appSummary": "Sermorelin treatment creates tracking demand for dose timing, symptom logging, and refill management to support long-term adherence.",
+  "faqs": [],
+  "cta": {
+    "primaryLabel": "Find a sermorelin provider",
+    "primaryHref": "/providers?treatment=sermorelin",
+    "secondaryLabel": "Review sermorelin costs",
+    "secondaryHref": "/costs/sermorelin",
+    "notes": "Use the provider matcher when Sermorelin already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "sermorelin-ref-1",
+      "authority": "BioDrugs",
+      "title": "Sermorelin: a review of its use in the diagnosis and treatment of children with idiopathic growth hormone deficiency.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18031173/",
+      "publishedAt": "1999",
+      "claimType": "review"
+    },
+    {
+      "id": "sermorelin-ref-2",
+      "authority": "J Clin Endocrinol Metab",
+      "title": "Endocrine and metabolic effects of long-term administration of [Nle27]growth hormone-releasing hormone-(1-29)-NH2 in age-advanced men and women.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/9141536/",
+      "publishedAt": "1997",
+      "claimType": "review"
+    },
+    {
+      "id": "sermorelin-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Sermorelin",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

@@ -5,6 +5,8 @@ export type ProviderBudgetBand = "under-200" | "200-500" | "500-plus" | "unsure"
 export type ProviderUrgencyBand = "this-week" | "this-month" | "researching";
 export type ProviderIntakeMode = "telehealth" | "hybrid";
 
+export type ProviderPartnerStatus = "internal-routing-profile" | "partner-ready" | "live-partner";
+
 export interface ProviderPartner {
   slug: string;
   name: string;
@@ -22,8 +24,14 @@ export interface ProviderPartner {
   nextStepLabel: string;
   verificationSummary?: string;
   leadDestinationKey?: string;
-  partnerStatus?: "internal-routing-profile" | "partner-ready";
+  partnerStatus?: ProviderPartnerStatus;
   proofSignals?: string[];
+  /** External URL for live partners — user is redirected here on conversion */
+  externalUrl?: string;
+  /** Commission model for tracking */
+  commissionType?: "cpa" | "revshare" | "hybrid" | "none";
+  /** Estimated patient acquisition value (for internal ROI tracking) */
+  estimatedPayout?: number;
 }
 
 export interface ProviderDirectoryFilters {
@@ -38,6 +46,77 @@ export interface ProviderDirectoryFilters {
 }
 
 export const providerPartners: ProviderPartner[] = [
+  // ── LIVE PARTNERS (Real external providers with affiliate tracking) ────────
+  {
+    slug: "henry-meds",
+    name: "Henry Meds",
+    markets: ["us"],
+    treatments: ["semaglutide", "tirzepatide", "general"],
+    goals: ["weight-management", "metabolic-health", "education-first"],
+    insurancePreferences: ["cash-pay", "either"],
+    budgetBands: ["under-200", "200-500", "unsure"],
+    urgencyBands: ["this-week", "this-month", "researching"],
+    supportedStates: null,
+    intakeMode: "telehealth",
+    turnaroundLabel: "Same-week telehealth visits",
+    description:
+      "Henry Meds offers affordable cash-pay GLP-1 programs starting under $200/month. No insurance required. Board-certified clinicians. Medication included in most plans.",
+    bestFit: "Budget-conscious GLP-1 patients",
+    nextStepLabel: "Start at Henry Meds",
+    verificationSummary: "Verified telehealth provider offering compounded and branded GLP-1 medications in the United States.",
+    partnerStatus: "live-partner",
+    proofSignals: ["Cash-pay from $149/mo", "Telehealth in 50 states", "Semaglutide + Tirzepatide"],
+    externalUrl: "https://henrymeds.com",
+    commissionType: "cpa",
+    estimatedPayout: 75,
+  },
+  {
+    slug: "ro-body",
+    name: "Ro Body",
+    markets: ["us"],
+    treatments: ["semaglutide", "tirzepatide", "general"],
+    goals: ["weight-management", "metabolic-health", "education-first"],
+    insurancePreferences: ["insured", "cash-pay", "either"],
+    budgetBands: ["200-500", "500-plus", "unsure"],
+    urgencyBands: ["this-month", "researching"],
+    supportedStates: null,
+    intakeMode: "telehealth",
+    turnaroundLabel: "Insurance and cash-pay options",
+    description:
+      "Ro Body provides comprehensive weight management with both insurance navigation and cash-pay options. Includes ongoing coaching and metabolic monitoring.",
+    bestFit: "Insurance + coaching seekers",
+    nextStepLabel: "Check eligibility at Ro",
+    verificationSummary: "Verified telehealth provider with insurance support and cash-pay alternatives for GLP-1 treatments.",
+    partnerStatus: "live-partner",
+    proofSignals: ["Insurance accepted", "Coaching included", "Ongoing metabolic monitoring"],
+    externalUrl: "https://ro.co/body",
+    commissionType: "cpa",
+    estimatedPayout: 100,
+  },
+  {
+    slug: "nuimage-medical",
+    name: "NuImage Medical",
+    markets: ["us"],
+    treatments: ["sermorelin", "tesamorelin", "semaglutide", "general"],
+    goals: ["hormone-support", "weight-management", "education-first"],
+    insurancePreferences: ["cash-pay", "either"],
+    budgetBands: ["200-500", "500-plus", "unsure"],
+    urgencyBands: ["this-month", "researching"],
+    supportedStates: null,
+    intakeMode: "telehealth",
+    turnaroundLabel: "Hormone + weight loss telehealth",
+    description:
+      "NuImage Medical specializes in hormone optimization and medical weight loss via telehealth. Offers sermorelin, tesamorelin, and GLP-1 protocols with lab monitoring.",
+    bestFit: "Hormone + peptide combination therapy",
+    nextStepLabel: "Start consultation at NuImage",
+    verificationSummary: "Verified telehealth provider specializing in hormone optimization and peptide therapies.",
+    partnerStatus: "live-partner",
+    proofSignals: ["Hormone specialization", "Lab monitoring included", "Sermorelin + Tesamorelin available"],
+    externalUrl: "https://nuimagemedical.com",
+    commissionType: "revshare",
+    estimatedPayout: 150,
+  },
+  // ── INTERNAL ROUTING PROFILES (Fallback when no live partner matches) ─────
   {
     slug: "insurance-navigation-clinic",
     name: "Insurance Navigation Route",

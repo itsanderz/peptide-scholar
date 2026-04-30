@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "id": "us-ziconotide-treatment-hub",
+    "slug": "ziconotide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Ziconotide Treatment Guide: Prialt, Cost and Provider Paths",
+    "description": "US-first ziconotide treatment hub covering approved product paths, cost friction, provider selection, and clinical evidence.",
+    "canonicalPath": "/treatments/ziconotide",
+    "keywords": [
+      "ziconotide treatment guide",
+      "ziconotide provider",
+      "ziconotide treatment path",
+      "ziconotide cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 2,
+    "disclaimer": "This hub summarizes official ziconotide treatment pathways at a high level. Indication fit, coverage, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "ziconotide",
+  "treatmentName": "Ziconotide",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, Ziconotide is an FDA-approved peptide therapy. Management of severe chronic pain in patients for whom intrathecal therapy is warranted and who are intolerant of or refractory to other treatments",
+  "overview": "Ziconotide is a synthetic peptide analog of omega-conotoxin MVIIA, derived from the venom of the cone snail Conus magus. It is the first non-opioid intrathecal analgesic approved by the FDA for severe chronic pain. It acts by blocking N-type calcium channels in the spinal cord, preventing neurotransmitter release from pain-signaling neurons.",
+  "approvedProducts": [
+    {
+      "slug": "prialt",
+      "name": "Prialt",
+      "summary": "Branded ziconotide pathway. Management of severe chronic pain in patients for whom intrathecal therapy is warranted and who are intolerant of or refractory to other treatments"
+    }
+  ],
+  "benefits": [
+    "First non-opioid intrathecal analgesic for severe chronic pain",
+    "No risk of respiratory depression or opioid addiction",
+    "Effective for neuropathic and nociceptive pain refractory to other therapies",
+    "No development of tolerance with long-term use"
+  ],
+  "sideEffects": [
+    "Neuropsychiatric effects (confusion, hallucinations, paranoia, mood changes)",
+    "Dizziness, headache, somnolence",
+    "Nausea and vomiting",
+    "Gait abnormalities and nystagmus"
+  ],
+  "routes": [
+    "Intrathecal infusion"
+  ],
+  "costSummary": "Ziconotide costs vary by brand, pharmacy, and insurance design. As an FDA-approved medication, coverage may be available but often requires prior authorization and documentation of the approved indication.",
+  "providerSummary": "The highest-value next step is finding a provider experienced in sleep & stress who can evaluate whether Ziconotide fits the patient's clinical profile and insurance constraints.",
+  "appSummary": "Ziconotide treatment creates tracking demand for dose timing, symptom logging, and refill management to support long-term adherence.",
+  "faqs": [
+    {
+      "question": "Why is ziconotide given intrathecally?",
+      "answer": "Ziconotide does not cross the blood-brain barrier in therapeutic amounts and would require extremely high systemic doses to achieve spinal analgesia, causing severe side effects. Intrathecal delivery (directly into the cerebrospinal fluid via an implanted pump) allows precise targeting of spinal cord N-type calcium channels with minimal systemic exposure. This route is essential for both efficacy and safety."
+    },
+    {
+      "question": "Is ziconotide an opioid?",
+      "answer": "No. Ziconotide is not an opioid and does not interact with mu, kappa, or delta opioid receptors. It is a calcium channel blocker derived from cone snail venom. This means it has zero risk of respiratory depression, opioid-induced hyperalgesia, or addiction. However, it carries a black box warning for severe neuropsychiatric adverse effects (psychosis, hallucinations, paranoia) that require careful patient selection and monitoring."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a ziconotide provider",
+    "primaryHref": "/providers?treatment=ziconotide",
+    "secondaryLabel": "Review ziconotide costs",
+    "secondaryHref": "/costs/ziconotide",
+    "notes": "Use the provider matcher when Ziconotide already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "ziconotide-ref-1",
+      "authority": "J Pain Symptom Manage",
+      "title": "A randomized, double-blind, placebo-controlled study of intrathecal ziconotide in adults with severe chronic pain.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16716870/",
+      "publishedAt": "2006",
+      "claimType": "clinical"
+    },
+    {
+      "id": "ziconotide-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Ziconotide",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

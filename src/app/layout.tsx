@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
-import { Libre_Franklin, Source_Serif_4 } from "next/font/google";
+import { Inter_Tight, IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
 import Link from "next/link";
 import Script from "next/script";
 import { ThemeProvider } from "@/lib/ThemeProvider";
@@ -13,10 +13,16 @@ import { getRequestSite } from "@/lib/request-site";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const libreFranklin = Libre_Franklin({
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-libre-franklin",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-inter-tight",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-ibm-plex-mono",
 });
 
 const sourceSerif4 = Source_Serif_4({
@@ -74,33 +80,44 @@ export default async function RootLayout({
   const market = await getRequestMarket();
   const site = await getRequestSite();
   const plausibleDomain = new URL(site.domain).hostname;
+  const initialPathname = headersList.get("x-pathname") || "/";
   const mainSite = "https://peptidescholar.com";
   const navConfig = buildNavConfig(site.capabilities.showMainNavigation, mainSite);
   const footerColumns = site.capabilities.showMainNavigation
     ? [
         {
-          heading: "Treatments",
+          heading: "Browse",
           links: [
-            { label: "All Treatments", href: "/treatments" },
-            { label: "Browse Peptides", href: "/peptides" },
-            { label: "Compare", href: "/compare" },
-            { label: "Costs", href: "/costs" },
+            { label: "All Peptides", href: "/peptides" },
+            { label: "Comparisons", href: "/compare" },
+            { label: "Research Blog", href: "/blog" },
+            { label: "Tools", href: "/tools" },
           ],
         },
         {
-          heading: "Tools",
+          heading: "Care Paths",
           links: [
-            { label: "All Tools", href: "/tools" },
-            { label: "Legal Status", href: "/legal" },
-            { label: "Find Providers", href: "/providers" },
+            { label: "Treatments", href: "/treatments" },
+            { label: "Costs", href: "/costs" },
+            { label: "Providers", href: "/providers" },
           ],
         },
         {
           heading: "Learn",
           links: [
-            { label: "Blog", href: "/blog" },
-            { label: "Glossary", href: "/glossary" },
             { label: "About", href: "/about" },
+            { label: "Methodology", href: "/methodology" },
+            { label: "Guide", href: "/guide" },
+            { label: "Glossary", href: "/glossary" },
+          ],
+        },
+        {
+          heading: "Specialty",
+          links: [
+            { label: "Legal Status", href: "/legal" },
+            { label: "Pets", href: "/pets" },
+            { label: "Labs", href: "/labs" },
+            { label: "Stack", href: "/stack" },
             { label: "Contact", href: "/contact" },
           ],
         },
@@ -120,7 +137,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={`${libreFranklin.variable} ${sourceSerif4.variable} ${sourceSerif4.className} antialiased`}>
+      <body className={`${interTight.variable} ${ibmPlexMono.variable} ${sourceSerif4.variable} antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -165,58 +182,36 @@ export default async function RootLayout({
           </Script>
         )}
         <ThemeProvider theme={site.theme}>
-          <header
-            className="sticky top-0 z-50 border-b-2"
-            style={{
-              backgroundColor: site.theme.colors.primary,
-              borderBottomColor: site.theme.colors.accent,
-            }}
-          >
+          <header className="nb-header">
             <Navbar
               config={navConfig}
               accentColor={site.theme.colors.accent}
+              initialPathname={initialPathname}
               logo={
-                <Link href="/" className="flex items-center gap-2">
-                  <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm"
-                    style={{ backgroundColor: site.theme.colors.secondary, color: "#FFFFFF" }}
-                  >
-                    {site.shortName}
+                <Link href="/" className="nb-logo">
+                  <div className="nb-logo-mark">
+                    <span className="font-bold text-[10px]" style={{ color: "#050505" }}>
+                      {site.shortName}
+                    </span>
                   </div>
-                  <span className="text-white font-bold text-lg tracking-tight" style={{ fontFamily: "var(--font-libre-franklin)" }}>
-                    {site.name}
-                  </span>
+                  <span className="nb-logo-text text-[#edeae3]">{site.name}</span>
                 </Link>
               }
             >
               {site.capabilities.showMarketSelector && (
-                <>
-                  <span
-                    className="hidden xl:inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold"
-                    style={{
-                      backgroundColor: "rgba(255,255,255,0.08)",
-                      color: "rgba(255,255,255,0.82)",
-                      border: "1px solid rgba(255,255,255,0.14)",
-                    }}
-                  >
+                <div className="nb-header-utilities">
+                  <span className="nb-header-market-pill hidden xl:inline-flex">
                     {market.name}
                   </span>
-                  <MarketSelector currentMarket={market.code} />
-                </>
+                  <MarketSelector currentMarket={market.code} className="nb-header-utility-control" />
+                </div>
               )}
             </Navbar>
           </header>
 
           {site.launchState !== "live" && site.betaMessage && (
-            <section
-              className="border-b px-4 py-3"
-              style={{
-                backgroundColor: "#FFFBEB",
-                borderColor: "#FCD34D",
-                color: "#92400E",
-              }}
-            >
-              <div className="max-w-6xl mx-auto text-sm leading-relaxed">
+            <section className="border-b px-4 py-3" style={{ backgroundColor: "#FFFBEB", borderColor: "#FCD34D", color: "#92400E" }}>
+              <div className="max-w-6xl mx-auto font-mono text-xs leading-relaxed">
                 <strong className="font-semibold">Planned Site Variant:</strong> {site.betaMessage}
               </div>
             </section>

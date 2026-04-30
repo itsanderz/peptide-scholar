@@ -27,8 +27,7 @@ export function MarketSelector({
   }
 
   return (
-    <label className={`flex items-center gap-2 text-xs ${className}`} style={{ color: "rgba(255,255,255,0.82)" }}>
-      <span className="hidden lg:inline">Market</span>
+    <div className={className}>
       <select
         aria-label="Select market"
         defaultValue={currentMarket}
@@ -47,6 +46,6 @@ export function MarketSelector({
           </option>
         ))}
       </select>
-    </label>
+    </div>
   );
 }

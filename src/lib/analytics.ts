@@ -270,6 +270,19 @@ export const trackProviderPartnerContactIntent = (
     ...(treatmentSlug ? { treatment_slug: treatmentSlug } : {}),
   });
 
+export const trackProviderConversion = (
+  market: string,
+  partnerSlug: string,
+  treatmentSlug: string,
+  commissionType?: string
+) =>
+  trackEvent("provider_conversion", {
+    market,
+    partner_slug: partnerSlug,
+    treatment_slug: treatmentSlug,
+    ...(commissionType ? { commission_type: commissionType } : {}),
+  });
+
 export const trackProviderDirectoryFilter = (
   market: string,
   treatmentSlug: string,

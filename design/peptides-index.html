@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peptides Index — Neobrutalist Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #050505;
+      --bone: #edeae3;
+      --concrete: #cfcfc9;
+      --lime: #d8e628;
+      --blue: #5d75c7;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      background: var(--bone);
+      color: var(--black);
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+    @media (min-width: 768px) { .container { padding: 0 32px; } }
+
+    .header { border-bottom: 1px solid var(--black); background: var(--black); position: sticky; top: 0; z-index: 100; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    .logo { display: flex; align-items: center; gap: 8px; }
+    .logo-mark { width: 28px; height: 28px; background: var(--bone); display: flex; align-items: center; justify-content: center; }
+    .logo-mark span { color: var(--bone); font-weight: 700; font-size: 10px; }
+    .logo-text { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: -0.02em; }
+    .nav { display: none; }
+    @media (min-width: 768px) { .nav { display: flex; align-items: center; gap: 0; } .nav a { padding: 8px 14px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; transition: background .15s; } .nav a:hover { background: var(--black); color: var(--bone); } }
+
+    .btn-lime {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; background: var(--lime); color: var(--black);
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500;
+      border: 1px solid var(--black); cursor: pointer;
+      transition: filter .15s, transform .05s;
+    }
+    .btn-lime:hover { filter: brightness(0.92); }
+
+    /* Hero */
+    .hero { border-bottom: 1px solid var(--black); background: var(--black); color: var(--bone); padding: 64px 0; position: relative; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 30% 50%, var(--blue) 0px, transparent 400px); opacity: 0.08; }
+    .hero-title { font-family: 'Inter Tight', sans-serif; font-weight: 900; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 0.92; text-transform: uppercase; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .hero-sub { font-size: 13px; opacity: 0.5; max-width: 500px; line-height: 1.7; }
+
+    /* Stats bar */
+    .stats { border-bottom: 1px solid var(--black); background: var(--concrete); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-item { padding: 20px; text-align: center; border-right: 1px solid var(--black); }
+    .stat-item:last-child { border-right: none; }
+    .stat-value { font-family: 'Inter Tight', sans-serif; font-weight: 900; font-size: 24px; line-height: 1; }
+    .stat-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.5; margin-top: 4px; }
+
+    /* Evidence explainer */
+    .explainer { border-bottom: 1px solid var(--black); padding: 32px 0; }
+    .explainer-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 640px) { .explainer-grid { grid-template-columns: repeat(4, 1fr); } }
+    .grade-card { padding: 16px; border: 1px solid var(--black); display: flex; gap: 12px; align-items: flex-start; }
+    .grade-letter { flex-shrink: 0; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; background: var(--black); color: var(--bone); }
+    .grade-desc { font-size: 11px; opacity: 0.6; line-height: 1.6; }
+    .grade-a .grade-letter { background: var(--lime); color: var(--black); }
+    .grade-b .grade-letter { background: var(--blue); color: var(--bone); }
+    .grade-c .grade-letter { background: var(--concrete); color: var(--black); }
+    .grade-d .grade-letter { background: var(--gray, #8a8a84); color: var(--bone); }
+
+    /* Filters */
+    .filters { border-bottom: 1px solid var(--black); padding: 20px 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .filter-btn { padding: 6px 14px; border: 1px solid var(--black); font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; cursor: pointer; background: transparent; font-family: 'IBM Plex Mono', monospace; transition: background .15s, color .15s; }
+    .filter-btn:hover { background: var(--concrete); }
+    .filter-btn.active { background: var(--black); color: var(--bone); }
+    .filter-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.4; margin-right: 8px; }
+
+    /* Search */
+    .search-bar { display: flex; align-items: center; gap: 8px; border: 1px solid var(--black); padding: 0 14px; background: var(--black); margin-left: auto; }
+    .search-bar input { border: none; background: transparent; padding: 10px 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; outline: none; width: 180px; }
+    .search-bar input::placeholder { opacity: 0.3; text-transform: uppercase; font-size: 10px; letter-spacing: 0.05em; }
+    .search-bar .search-icon { opacity: 0.3; font-size: 14px; }
+
+    /* Peptide listing */
+    .listing { padding: 32px 0 64px; }
+    .peptide-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--black); }
+    @media (min-width: 640px) { .peptide-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) { .peptide-grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+    .peptide-card {
+      background: var(--black); padding: 24px; border: 1px solid var(--black);
+      display: flex; flex-direction: column; transition: background .15s;
+      position: relative; overflow: hidden;
+    }
+    .peptide-card:hover { background: #e5e2db; }
+    .peptide-card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; }
+    .peptide-card-name { font-family: 'Inter Tight', sans-serif; font-weight: 800; font-size: 16px; text-transform: uppercase; letter-spacing: -0.02em; }
+    .peptide-card-evidence { flex-shrink: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 10px; border: 1px solid var(--black); }
+    .peptide-card-evidence.a { background: var(--lime); color: var(--black); }
+    .peptide-card-evidence.b { background: var(--blue); color: var(--bone); }
+    .peptide-card-evidence.c { background: var(--concrete); color: var(--black); }
+    .peptide-card-evidence.d { background: var(--gray, #8a8a84); color: var(--bone); }
+    .peptide-card-category { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.4; margin-bottom: 8px; }
+    .peptide-card-desc { font-size: 11px; opacity: 0.6; line-height: 1.6; flex: 1; }
+    .peptide-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--black); border-top-style: dashed; }
+    .peptide-card-fda { font-size: 8px; text-transform: uppercase; letter-spacing: 0.1em; padding: 2px 8px; border: 1px solid var(--black); }
+    .peptide-card-arrow { font-size: 14px; opacity: 0.2; transition: transform .15s, opacity .15s; }
+    .peptide-card:hover .peptide-card-arrow { transform: translateX(4px); opacity: 0.5; }
+
+    .pagination { display: flex; align-items: center; justify-content: center; gap: 4px; margin-top: 32px; }
+    .page-btn { padding: 8px 14px; border: 1px solid var(--black); font-size: 11px; font-family: 'IBM Plex Mono', monospace; background: transparent; cursor: pointer; transition: background .15s; }
+    .page-btn:hover { background: var(--concrete); }
+    .page-btn.active { background: var(--black); color: var(--bone); }
+    .page-btn-dots { border: none; padding: 8px 4px; opacity: 0.3; }
+
+    .footer { background: var(--black); color: var(--bone); margin-top: 0; }
+    .footer-grid { display: grid; grid-template-columns: 1fr; gap: 32px; padding: 48px 0; border-bottom: 1px solid rgba(237,234,227,0.15); }
+    @media (min-width: 768px) { .footer-grid { grid-template-columns: 4fr 2fr 2fr 2fr; gap: 0; padding: 64px 0; } .footer-brand { border-right: 1px solid rgba(237,234,227,0.15); padding-right: 32px; } .footer-col { padding-left: 32px; } }
+    .footer-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+    .footer-logo-mark { width: 28px; height: 28px; background: var(--black); display: flex; align-items: center; justify-content: center; }
+    .footer-logo-mark span { color: var(--black); font-weight: 700; font-size: 10px; }
+    .footer-logo-text { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: -0.02em; }
+    .footer-desc { font-size: 11px; opacity: 0.5; line-height: 1.7; max-width: 260px; }
+    .footer-heading { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; opacity: 0.4; margin-bottom: 12px; }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a { font-size: 11px; opacity: 0.7; transition: opacity .15s; }
+    .footer-links a:hover { opacity: 1; }
+    .footer-bottom { display: flex; flex-direction: column; gap: 12px; padding: 24px 0; align-items: flex-start; }
+    @media (min-width: 640px) { .footer-bottom { flex-direction: row; align-items: center; justify-content: space-between; } }
+    .footer-copy { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.3; }
+    .footer-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border: 1px solid rgba(237,234,227,0.25); }
+    .footer-badge-dot { width: 6px; height: 6px; background: var(--lime); }
+    .footer-badge-text { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark"><span>PS</span></div>
+        <span class="logo-text">PeptideScholar</span>
+      </a>
+      <nav class="nav">
+        <a href="/peptides">Peptides</a>
+        <a href="/about">About</a>
+        <a href="/blog">Research</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <a href="/peptides" class="btn-lime">Browse All</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container" style="position:relative;z-index:1">
+      <h1 class="hero-title">Browse All Peptides</h1>
+      <p class="hero-sub">Every peptide graded A through D for evidence strength. Search, filter, and compare — with every claim backed by PubMed citations.</p>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat-item"><div class="stat-value">113</div><div class="stat-label">Peptides</div></div>
+      <div class="stat-item"><div class="stat-value">8</div><div class="stat-label">FDA-Approved</div></div>
+      <div class="stat-item"><div class="stat-value">10</div><div class="stat-label">Categories</div></div>
+      <div class="stat-item"><div class="stat-value">35+</div><div class="stat-label">Comparisons</div></div>
+    </div>
+  </section>
+
+  <!-- Evidence Explain -->
+  <section class="explainer">
+    <div class="container explainer-grid">
+      <div class="grade-card grade-a"><div class="grade-letter">A</div><div class="grade-desc">FDA-approved with robust clinical evidence</div></div>
+      <div class="grade-card grade-b"><div class="grade-letter">B</div><div class="grade-desc">Supported by human clinical studies</div></div>
+      <div class="grade-card grade-c"><div class="grade-letter">C</div><div class="grade-desc">Preclinical (animal/in vitro) evidence only</div></div>
+      <div class="grade-card grade-d"><div class="grade-letter">D</div><div class="grade-desc">Very limited or no published evidence</div></div>
+    </div>
+  </section>
+
+  <!-- Filters -->
+  <section class="filters">
+    <div class="container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:0">
+      <span class="filter-label">Category</span>
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Weight Loss</button>
+      <button class="filter-btn">Performance</button>
+      <button class="filter-btn">Recovery</button>
+      <button class="filter-btn">Anti-Aging</button>
+      <button class="filter-btn">Skin &amp; Hair</button>
+
+      <div class="search-bar">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="Search peptides...">
+      </div>
+    </div>
+  </section>
+
+  <!-- Listing -->
+  <section class="listing">
+    <div class="container" style="padding:0 16px">
+      <div class="peptide-grid">
+        <a href="/peptides/retatrutide" class="peptide-card">
+          <div class="peptide-card-header">
+            <span class="peptide-card-name">Retatrutide</span>
+            <span class="peptide-card-evidence b">B</span>
+          </div>
+          <div class="peptide-card-category">Weight Loss · Triple Agonist</div>
+          <div class="peptide-card-desc">Triple GLP-1/GIP/glucagon agonist. Up to 24% weight loss in Phase II trials. Currently in Phase III.</div>
+          <div class="peptide-card-footer">
+            <span class="peptide-card-fda">Phase III</span>
+            <span class="peptide-card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="/peptides/tirzepatide" class="peptide-card">
+          <div class="peptide-card-header">
+            <span class="peptide-card-name">Tirzepatide</span>
+            <span class="peptide-card-evidence a">A</span>
+          </div>
+          <div class="peptide-card-category">Weight Loss · Dual Agonist</div>
+          <div class="peptide-card-desc">FDA-approved GLP-1/GIP dual agonist for T2DM and obesity. Up to 22.5% weight loss.</div>
+          <div class="peptide-card-footer">
+            <span class="peptide-card-fda" style="background:var(--lime);border-color:transparent">FDA Approved</span>
+            <span class="peptide-card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="/peptides/semaglutide" class="peptide-card">
+          <div class="peptide-card-header">
+            <span class="peptide-card-name">Semaglutide</span>
+            <span class="peptide-card-evidence a">A</span>
+          </div>
+          <div class="peptide-card-category">Weight Loss · GLP-1 Agonist</div>
+          <div class="peptide-card-desc">FDA-approved GLP-1 agonist (Ozempic/Wegovy). Up to 14.9% weight loss at 68 weeks.</div>
+          <div class="peptide-card-footer">
+            <span class="peptide-card-fda" style="background:var(--lime);border-color:transparent">FDA Approved</span>
+            <span class="peptide-card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="/peptides/survodutide" class="peptide-card">
+          <div class="peptide-card-header">
+            <span class="peptide-card-name">Survodutide</span>
+            <span class="peptide-card-evidence b">B</span>
+          </div>
+          <div class="peptide-card-category">Weight Loss · Dual Agonist</div>
+          <div class="peptide-card-desc">GLP-1/glucagon dual agonist. Up to 18.7% weight loss in Phase II. Phase III ongoing.</div>
+          <div class="peptide-card-footer">
+            <span class="peptide-card-fda">Phase III</span>
+            <span class="peptide-card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="/peptides/bpc-157" class="peptide-card">
+          <div class="peptide-card-header">
+            <span class="peptide-card-name">BPC-157</span>
+            <span class="peptide-card-evidence c">C</span>
+          </div>
+          <div class="peptide-card-category">Recovery · Healing</div>
+          <div class="peptide-card-desc">Body protection compound. Preclinical evidence for GI healing, tendon repair, and tissue regeneration.</div>
+          <div class="peptide-card-footer">
+            <span class="peptide-card-fda">Not Approved</span>
+            <span class="peptide-card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="/peptides/ss-31" class="peptide-card">
+          <div class="peptide-card-header">
+            <span class="peptide-card-name">SS-31</span>
+            <span class="peptide-card-evidence b">B</span>
+          </div>
+          <div class="peptide-card-category">Anti-Aging · Mitochondrial</div>
+          <div class="peptide-card-desc">Mitochondrial-targeted peptide. Phase II human data for mitochondrial dysfunction and aging.</div>
+          <div class="peptide-card-footer">
+            <span class="peptide-card-fda">Phase II</span>
+            <span class="peptide-card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="/peptides/motilin" class="peptide-card">
+          <div class="peptide-card-header">
+            <span class="peptide-card-name">Motilin</span>
+            <span class="peptide-card-evidence d">D</span>
+          </div>
+          <div class="peptide-card-category">GI · Motility</div>
+          <div class="peptide-card-desc">Endogenous peptide regulating GI motility. Limited published research on therapeutic applications.</div>
+          <div class="peptide-card-footer">
+            <span class="peptide-card-fda">Not Approved</span>
+            <span class="peptide-card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="/peptides/ghk-cu" class="peptide-card">
+          <div class="peptide-card-header">
+            <span class="peptide-card-name">GHK-Cu</span>
+            <span class="peptide-card-evidence b">B</span>
+          </div>
+          <div class="peptide-card-category">Skin · Anti-Aging</div>
+          <div class="peptide-card-desc">Copper-binding peptide with human studies for wound healing, skin rejuvenation, and hair growth.</div>
+          <div class="peptide-card-footer">
+            <span class="peptide-card-fda">Cosmetic</span>
+            <span class="peptide-card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="/peptides/mots-c" class="peptide-card">
+          <div class="peptide-card-header">
+            <span class="peptide-card-name">MOTS-c</span>
+            <span class="peptide-card-evidence c">C</span>
+          </div>
+          <div class="peptide-card-category">Metabolic · Mitochondrial</div>
+          <div class="peptide-card-desc">Mitochondrial-derived peptide. Preclinical evidence for metabolic regulation and exercise mimetic effects.</div>
+          <div class="peptide-card-footer">
+            <span class="peptide-card-fda">Not Approved</span>
+            <span class="peptide-card-arrow">→</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="pagination">
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <span class="page-btn-dots">...</span>
+        <button class="page-btn">13</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-mark"><span>PS</span></div>
+            <span class="footer-logo-text">PeptideScholar</span>
+          </div>
+          <p class="footer-desc">Evidence-based peptide reference. Every claim cited from PubMed. No hype. Just data.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Browse</div>
+          <div class="footer-links">
+            <a href="/peptides">All Peptides</a>
+            <a href="/compare">Comparisons</a>
+            <a href="/blog">Research Blog</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <div class="footer-links">
+            <a href="/about">About</a>
+            <a href="/methodology">Methodology</a>
+            <a href="/contact">Contact</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Legal</div>
+          <div class="footer-links">
+            <a href="/disclaimer">Disclaimer</a>
+            <a href="/legal">Legal Status</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 PeptideScholar</span>
+        <span class="footer-badge">
+          <span class="footer-badge-dot"></span>
+          <span class="footer-badge-text">Research Use Only</span>
+        </span>
+      </div>
+    </div>
+  </footer></body>
+</html>

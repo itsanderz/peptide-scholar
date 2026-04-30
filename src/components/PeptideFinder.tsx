@@ -1179,6 +1179,7 @@ export default function PeptideFinder({ peptides }: PeptideFinderProps) {
   /* ── Render ──────────────────────────────────────────────────────────── */
   return (
     <div
+      className="finder-shell"
       style={{
         backgroundColor: C.surface,
         borderRadius: "1rem",

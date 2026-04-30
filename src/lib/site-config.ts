@@ -1,6 +1,6 @@
 import { scientificTheme, type SiteTheme } from "@/lib/theme";
 
-export type SiteKey = "main" | "pets" | "labs";
+export type SiteKey = "main" | "pets" | "labs" | "stack";
 
 export interface SiteDefinition {
   key: SiteKey;
@@ -97,10 +97,18 @@ export const siteDefinitions: Record<SiteKey, SiteDefinition> = {
       description:
         "Planned veterinary-focused peptide education and decision support for animal-health contexts. Not yet launched.",
       colors: {
-        primary: "#0F4C5C",
-        primaryDark: "#0B3440",
-        secondary: "#2D8C7F",
-        accent: "#C06C3F",
+        primary: "#050505",
+        primaryDark: "#000000",
+        secondary: "#5d75c7",
+        accent: "#d8e628",
+        bg: "#edeae3",
+        bgAlt: "#cfcfc9",
+        surface: "#edeae3",
+        text: "#050505",
+        textMuted: "#6b6b66",
+        border: "#050505",
+        success: "#2B8A5E",
+        warning: "#D4912A",
       },
     }),
   },
@@ -131,10 +139,61 @@ export const siteDefinitions: Record<SiteKey, SiteDefinition> = {
       description:
         "Planned experimental tools, data products, and workflows from PeptideScholar. Not yet launched.",
       colors: {
-        primary: "#1F2937",
-        primaryDark: "#111827",
+        primary: "#050505",
+        primaryDark: "#000000",
         secondary: "#0EA5E9",
         accent: "#F59E0B",
+        bg: "#edeae3",
+        bgAlt: "#cfcfc9",
+        surface: "#edeae3",
+        text: "#050505",
+        textMuted: "#6b6b66",
+        border: "#050505",
+        success: "#2B8A5E",
+        warning: "#D4912A",
+      },
+      layout: "catalog",
+    }),
+  },
+  stack: {
+    key: "stack",
+    name: "PeptideScholar Stack",
+    shortName: "PST",
+    domain: "https://stack.peptidescholar.com",
+    hostnames: ["stack.peptidescholar.com"],
+    tagline: "Combination Research And Stack Planning",
+    description:
+      "Planned stack-focused peptide combination education, routing, and safety-first planning tools. Not yet launched.",
+    launchState: "planned",
+    contentAudience: "research",
+    noindexByDefault: true,
+    capabilities: {
+      showMarketSelector: false,
+      showAds: false,
+      showMainNavigation: false,
+      allowPublicSitemap: false,
+    },
+    betaMessage:
+      "Stack is reserved for combination workflows, symptom-first discovery, and caution-led planning tools. Public content is not yet launched on this subdomain.",
+    theme: createTheme({
+      name: "PeptideScholar Stack",
+      domain: "https://stack.peptidescholar.com",
+      tagline: "Combination Research And Stack Planning",
+      description:
+        "Planned stack-focused peptide combination education, routing, and safety-first planning tools. Not yet launched.",
+      colors: {
+        primary: "#050505",
+        primaryDark: "#000000",
+        secondary: "#B5D436",
+        accent: "#D97706",
+        bg: "#edeae3",
+        bgAlt: "#cfcfc9",
+        surface: "#edeae3",
+        text: "#050505",
+        textMuted: "#6b6b66",
+        border: "#050505",
+        success: "#2B8A5E",
+        warning: "#D4912A",
       },
       layout: "catalog",
     }),

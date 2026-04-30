@@ -89,7 +89,7 @@ export default async function ProviderStatePage({ params }: Props) {
         }}
       />
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="container py-8 legacy-index-page">
         <BreadcrumbNav
           crumbs={[
             { label: "Home", href: "/" },

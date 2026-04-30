@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "id": "us-octreotide-treatment-hub",
+    "slug": "octreotide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Octreotide Treatment Guide: Sandostatin, Sandostatin LAR Depot, Cost and Provider Paths",
+    "description": "US-first octreotide treatment hub covering approved product paths, cost friction, provider selection, and clinical evidence.",
+    "canonicalPath": "/treatments/octreotide",
+    "keywords": [
+      "octreotide treatment guide",
+      "octreotide provider",
+      "octreotide treatment path",
+      "octreotide cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 2,
+    "disclaimer": "This hub summarizes official octreotide treatment pathways at a high level. Indication fit, coverage, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "octreotide",
+  "treatmentName": "Octreotide",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, Octreotide is an FDA-approved peptide therapy. Acromegaly; carcinoid tumors; vasoactive intestinal peptide tumors (VIPomas); control of symptoms related to metastatic neuroendocrine tumors",
+  "overview": "Octreotide is a synthetic cyclic octapeptide analog of somatostatin, approved by the FDA for acromegaly, carcinoid tumors, and vasoactive intestinal peptide (VIP)-secreting tumors. It is one of the most important peptide drugs in oncology and endocrinology.",
+  "approvedProducts": [
+    {
+      "slug": "sandostatin",
+      "name": "Sandostatin",
+      "summary": "Branded octreotide pathway. Acromegaly; carcinoid tumors; vasoactive intestinal peptide tumors (VIPomas); control of symptoms related to metastatic neuroendocrine tumors"
+    },
+    {
+      "slug": "sandostatin-lar-depot",
+      "name": "Sandostatin LAR Depot",
+      "summary": "Branded octreotide pathway. Acromegaly; carcinoid tumors; vasoactive intestinal peptide tumors (VIPomas); control of symptoms related to metastatic neuroendocrine tumors"
+    }
+  ],
+  "benefits": [
+    "First-line medical therapy for acromegaly",
+    "Controls hormone hypersecretion in neuroendocrine tumors",
+    "Prolongs time to tumor progression in metastatic midgut NETs (PROMID trial)",
+    "Treats esophageal variceal bleeding (acute hemorrhage)"
+  ],
+  "sideEffects": [
+    "GI symptoms (nausea, bloating, diarrhea, steatorrhea)",
+    "Gallstones and biliary sludge (long-term use)",
+    "Hyperglycemia (inhibits insulin and glucagon)",
+    "Bradycardia and cardiac conduction abnormalities"
+  ],
+  "routes": [
+    "Subcutaneous injection",
+    "Intramuscular injection",
+    "Intravenous"
+  ],
+  "costSummary": "Octreotide costs vary by brand, pharmacy, and insurance design. As an FDA-approved medication, coverage may be available but often requires prior authorization and documentation of the approved indication.",
+  "providerSummary": "The highest-value next step is finding a provider experienced in immune support who can evaluate whether Octreotide fits the patient's clinical profile and insurance constraints.",
+  "appSummary": "Octreotide treatment creates tracking demand for dose timing, symptom logging, and refill management to support long-term adherence.",
+  "faqs": [
+    {
+      "question": "What is the difference between Sandostatin and Sandostatin LAR?",
+      "answer": "Sandostatin is the short-acting form given by subcutaneous or intravenous injection every 8 hours. It is used for acute bleeding (esophageal varices) or to stabilize patients before switching to long-acting therapy. Sandostatin LAR Depot is a long-acting release formulation given by intramuscular injection every 4 weeks, designed for chronic maintenance therapy in acromegaly and neuroendocrine tumors."
+    },
+    {
+      "question": "Does octreotide cure neuroendocrine tumors?",
+      "answer": "No. Octreotide controls symptoms (flushing, diarrhea) and may slow tumor growth, but it does not cure neuroendocrine tumors. The PROMID trial showed it prolonged time to tumor progression by approximately 8 months in well-differentiated metastatic midgut NETs. For curative intent, surgery is required when feasible. Lutetium-177 DOTATATE (a radiolabeled somatostatin analog) is used for progressive disease."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a octreotide provider",
+    "primaryHref": "/providers?treatment=octreotide",
+    "secondaryLabel": "Review octreotide costs",
+    "secondaryHref": "/costs/octreotide",
+    "notes": "Use the provider matcher when Octreotide already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "octreotide-ref-1",
+      "authority": "J Clin Oncol",
+      "title": "Placebo-controlled, double-blind, prospective, randomized study on the effect of octreotide LAR in the control of tumor growth in patients with metastatic neuroendocrine midgut tumors: a report from the PROMID Study Group.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19704057/",
+      "publishedAt": "2009",
+      "claimType": "clinical"
+    },
+    {
+      "id": "octreotide-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Octreotide",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

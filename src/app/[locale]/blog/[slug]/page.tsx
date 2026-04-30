@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllBlogPosts, getBlogPostBySlug, getBlogSlugs } from "@/data/blog-posts";
 import { generateSEO, JsonLd } from "@/components/SEOHead";
 import { BreadcrumbNav, AdSlot, EmailCapture, PageTracker, AffiliateProductGrid } from "@/components";
 import { getProductSectionsForBlogPost } from "@/data/affiliate-products";
+import { getPrimaryReviewerForTopic, getAuthorById } from "@/data/content-authors";
+import { AuthorBio } from "@/components/AuthorBio";
+import { MedicalReviewBadge } from "@/components/MedicalReviewBadge";
+import { ContentDate } from "@/components/ContentDate";
 import { isValidLocale } from "@/lib/i18n";
 import { withLocaleParams, localeAlternates } from "@/lib/locale-params";
 import { getRequestMarket } from "@/lib/request-market";
+import { getBlogImageSrc } from "@/lib/blog-image";
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>;
@@ -62,18 +68,31 @@ export default async function BlogPostPage({ params }: Props) {
   const catStyle = CATEGORY_COLORS[post.category] ?? { bg: "#F0F3F7", text: "#1A3A5C" };
   const affiliateSections = getProductSectionsForBlogPost(slug);
 
+  // Resolve author and medical reviewer
+  const author = getAuthorById(post.authorId ?? "peptide-scholar-editorial");
+  const reviewer = post.reviewerId
+    ? getAuthorById(post.reviewerId)
+    : getPrimaryReviewerForTopic(post.title + " " + post.excerpt);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
     datePublished: post.publishedAt,
-    dateModified: post.publishedAt,
+    dateModified: post.updatedAt ?? post.publishedAt,
     author: {
-      "@type": "Organization",
-      name: "PeptideScholar Editorial Team",
-      url: "https://peptidescholar.com/about",
+      "@type": author?.role === "medical-reviewer" ? "Person" : "Organization",
+      name: author?.name ?? "PeptideScholar Editorial Team",
+      ...(author?.credentials ? { description: author.credentials } : {}),
     },
+    reviewedBy: reviewer
+      ? {
+          "@type": "Person",
+          name: reviewer.name,
+          description: reviewer.credentials,
+        }
+      : undefined,
     publisher: {
       "@type": "Organization",
       name: "PeptideScholar",
@@ -113,8 +132,19 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </div>
 
+        {/* Hero Image */}
+        <div className="mt-6 mb-6 relative overflow-hidden rounded-xl" style={{ aspectRatio: "1200/630" }}>
+          <Image
+            src={getBlogImageSrc(post.slug)}
+            alt={post.title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 800px"
+          />
+        </div>
+
         {/* Article Header */}
-        <header className="mt-6 mb-8">
+        <header className="mb-8">
           <div className="flex items-center gap-3 mb-4">
             <span
               className="text-xs font-bold px-2.5 py-1 rounded-full"
@@ -139,7 +169,33 @@ export default async function BlogPostPage({ params }: Props) {
           >
             {post.excerpt}
           </p>
+
+          {/* Author & Date */}
+          <div className="mt-6">
+            <ContentDate
+              publishedAt={post.publishedAt}
+              updatedAt={post.updatedAt}
+              reviewedAt={post.updatedAt ?? post.publishedAt}
+            />
+          </div>
+
+          {author && (
+            <div className="mt-4">
+              <AuthorBio author={author} compact showBio={false} />
+            </div>
+          )}
         </header>
+
+        {/* Medical Review Badge */}
+        {reviewer && (
+          <div className="mb-6">
+            <MedicalReviewBadge
+              reviewerName={reviewer.name}
+              reviewerCredentials={reviewer.credentials}
+              reviewedAt={post.updatedAt ?? post.publishedAt}
+            />
+          </div>
+        )}
 
         {/* Key Takeaways */}
         <div
@@ -283,6 +339,24 @@ export default async function BlogPostPage({ params }: Props) {
                 </li>
               ))}
             </ol>
+          </section>
+        )}
+
+        {/* Author & Reviewer Bios */}
+        {(author || reviewer) && (
+          <section className="mt-10 pt-8" style={{ borderTop: "1px solid #D0D7E2" }}>
+            <h2
+              className="text-xl font-bold mb-5"
+              style={{ color: "#1A3A5C", fontFamily: "var(--font-libre-franklin)" }}
+            >
+              About the Authors
+            </h2>
+            <div className="space-y-4">
+              {author && <AuthorBio author={author} showCredentials showBio />}
+              {reviewer && reviewer.id !== author?.id && (
+                <AuthorBio author={reviewer} showCredentials showBio />
+              )}
+            </div>
           </section>
         )}
 

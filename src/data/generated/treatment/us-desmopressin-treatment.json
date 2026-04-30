@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "id": "us-desmopressin-treatment-hub",
+    "slug": "desmopressin",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Desmopressin Treatment Guide: DDAVP, Nocdurna, Stimate, Cost and Provider Paths",
+    "description": "US-first desmopressin treatment hub covering approved product paths, cost friction, provider selection, and clinical evidence.",
+    "canonicalPath": "/treatments/desmopressin",
+    "keywords": [
+      "desmopressin treatment guide",
+      "desmopressin provider",
+      "desmopressin treatment path",
+      "desmopressin cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 2,
+    "disclaimer": "This hub summarizes official desmopressin treatment pathways at a high level. Indication fit, coverage, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "desmopressin",
+  "treatmentName": "Desmopressin",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, Desmopressin is an FDA-approved peptide therapy. Central diabetes insipidus; primary nocturnal enuresis; hemophilia A and von Willebrand disease (Type 1); uremic bleeding",
+  "overview": "Desmopressin is a synthetic analog of arginine vasopressin (antidiuretic hormone) with enhanced V2 receptor selectivity and prolonged duration. It is one of the most widely prescribed peptide drugs globally, used for central diabetes insipidus, nocturnal enuresis, and bleeding disorders.",
+  "approvedProducts": [
+    {
+      "slug": "ddavp",
+      "name": "DDAVP",
+      "summary": "Branded desmopressin pathway. Central diabetes insipidus; primary nocturnal enuresis; hemophilia A and von Willebrand disease (Type 1); uremic bleeding"
+    },
+    {
+      "slug": "nocdurna",
+      "name": "Nocdurna",
+      "summary": "Branded desmopressin pathway. Central diabetes insipidus; primary nocturnal enuresis; hemophilia A and von Willebrand disease (Type 1); uremic bleeding"
+    },
+    {
+      "slug": "stimate",
+      "name": "Stimate",
+      "summary": "Branded desmopressin pathway. Central diabetes insipidus; primary nocturnal enuresis; hemophilia A and von Willebrand disease (Type 1); uremic bleeding"
+    }
+  ],
+  "benefits": [
+    "First-line therapy for central diabetes insipidus",
+    "Treats nocturnal enuresis (bedwetting) in children and adults",
+    "Controls bleeding in hemophilia A and von Willebrand disease",
+    "Well-tolerated with decades of safety data"
+  ],
+  "sideEffects": [
+    "Hyponatremia and water intoxication (most serious risk; fluid restriction required)",
+    "Headache, nausea",
+    "Nasal congestion (intranasal form)",
+    "Hypotension (rare)"
+  ],
+  "routes": [
+    "Oral",
+    "Intranasal",
+    "Subcutaneous injection",
+    "Intravenous"
+  ],
+  "costSummary": "Desmopressin costs vary by brand, pharmacy, and insurance design. As an FDA-approved medication, coverage may be available but often requires prior authorization and documentation of the approved indication.",
+  "providerSummary": "The highest-value next step is finding a provider experienced in sleep & stress who can evaluate whether Desmopressin fits the patient's clinical profile and insurance constraints.",
+  "appSummary": "Desmopressin treatment creates tracking demand for dose timing, symptom logging, and refill management to support long-term adherence.",
+  "faqs": [
+    {
+      "question": "Why is desmopressin banned by WADA?",
+      "answer": "Desmopressin is on the WADA Prohibited List as a masking agent. By stimulating release of von Willebrand factor, it can alter blood parameters and potentially mask blood doping. It is banned in-competition. Athletes with legitimate medical need (e.g., diabetes insipidus) may apply for a Therapeutic Use Exemption (TUE)."
+    },
+    {
+      "question": "What is the main safety concern with desmopressin?",
+      "answer": "Hyponatremia (low blood sodium) is the most serious risk. Desmopressin concentrates urine by promoting water reabsorption; if patients drink excessive fluids while on desmopressin, water retention can dilute blood sodium to dangerous levels, causing seizures or cerebral edema. Patients must follow fluid restriction guidelines, especially when starting therapy or changing dose."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a desmopressin provider",
+    "primaryHref": "/providers?treatment=desmopressin",
+    "secondaryLabel": "Review desmopressin costs",
+    "secondaryHref": "/costs/desmopressin",
+    "notes": "Use the provider matcher when Desmopressin already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "desmopressin-ref-1",
+      "authority": "N Engl J Med",
+      "title": "Copeptin in the Diagnosis of Diabetes Insipidus.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30382699/",
+      "publishedAt": "2018",
+      "claimType": "clinical"
+    },
+    {
+      "id": "desmopressin-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Desmopressin",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

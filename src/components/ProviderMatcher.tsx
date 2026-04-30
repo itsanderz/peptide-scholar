@@ -160,7 +160,7 @@ export function ProviderMatcher({
   if (submitted) {
     return (
       <div
-        className="rounded-2xl p-6"
+        className="tool-shell rounded-2xl p-6"
         style={{ backgroundColor: "#ECFDF5", border: "1px solid #A7F3D0" }}
       >
         <h2 className="text-xl font-bold mb-3" style={{ color: "#065F46" }}>
@@ -242,7 +242,7 @@ export function ProviderMatcher({
 
   return (
     <div
-      className="rounded-2xl p-6 md:p-8"
+      className="tool-shell rounded-2xl p-6 md:p-8"
       style={{ backgroundColor: "#FFFFFF", border: "1px solid #D0D7E2" }}
     >
       <div className="mb-6">

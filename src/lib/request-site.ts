@@ -14,7 +14,7 @@ export async function getRequestHost() {
 export async function getRequestSiteKey(): Promise<SiteKey> {
   const headersList = await headers();
   const headerSite = headersList.get("x-site");
-  if (headerSite === "main" || headerSite === "pets" || headerSite === "labs") {
+  if (headerSite === "main" || headerSite === "pets" || headerSite === "labs" || headerSite === "stack") {
     return headerSite;
   }
 

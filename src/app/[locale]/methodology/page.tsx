@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { generateSEO } from "@/components/SEOHead";
 import { BreadcrumbNav } from "@/components";
@@ -35,31 +36,35 @@ const evidenceLevels = [
   {
     grade: "A",
     label: "Strong",
-    color: "#2B8A5E",
+    accentClass: "a",
+    maxPoints: 40,
     description:
-      "Multiple high-quality randomized controlled trials (RCTs) or systematic reviews with consistent results. At least one large, well-powered trial. FDA approval typically falls in this category.",
+      "Multiple high-quality randomized controlled trials or systematic reviews with consistent results. At least one large, well-powered trial. FDA approval typically falls in this category.",
     examples: ["Semaglutide (STEP 1-5, SELECT)", "Tirzepatide (SURMOUNT-1, SURPASS-2)", "Teriparatide (FREEDOM trial)"],
   },
   {
     grade: "B",
     label: "Moderate",
-    color: "#3B7A9E",
+    accentClass: "b",
+    maxPoints: 30,
     description:
-      "Limited RCTs, single large trial, or multiple smaller trials with some methodological limitations. Evidence is promising but not as robust as Grade A. May include Phase 2 data or well-designed cohort studies.",
+      "Limited RCTs, a single large trial, or multiple smaller trials with some methodological limitations. Evidence is promising but not as robust as Grade A. May include Phase 2 data or well-designed cohort studies.",
     examples: ["Retatrutide (Phase 2 data only)", "Bremelanotide (two Phase 3 trials)", "Tesamorelin (smaller RCTs)"],
   },
   {
     grade: "C",
     label: "Limited",
-    color: "#E09F3E",
+    accentClass: "c",
+    maxPoints: 20,
     description:
-      "Primarily preclinical data (animal studies, in vitro research), case series, or small human pilot studies. Some human evidence exists but is insufficient for strong conclusions. No regulatory approval.",
+      "Primarily preclinical data, case series, or small human pilot studies. Some human evidence exists but is insufficient for strong conclusions. No regulatory approval.",
     examples: ["BPC-157 (animal studies only)", "TB-500 (preclinical)", "GHK-Cu (small cosmetic trials)"],
   },
   {
     grade: "D",
     label: "Very Weak / Theoretical",
-    color: "#D4553A",
+    accentClass: "d",
+    maxPoints: 10,
     description:
       "No human data. Evidence is limited to in vitro studies, theoretical mechanisms, or anecdotal reports. High uncertainty. Often includes research chemicals and novel compounds with minimal published literature.",
     examples: ["FOXO4-DRI (mouse studies only)", "Dihexa (rodent models)", "P21 (no human trials)"],
@@ -77,19 +82,47 @@ const trustFactors = [
     title: "Claim Sourcing Coverage",
     max: 30,
     description:
-      "We evaluate what percentage of individual benefit and side-effect claims have direct PubMed citations. 75%+ coverage earns 30 points, 50%+ earns 20, 25%+ earns 10. Unsourced claims reduce transparency.",
+      "We evaluate what percentage of individual benefit and side-effect claims have direct PubMed citations. Seventy-five percent or higher earns 30 points, 50 percent earns 20, and 25 percent earns 10.",
   },
   {
     title: "Reference Depth",
     max: 20,
     description:
-      "The number and quality of cited studies matters. Peptides with 5+ verified references earn 20 points, 3+ earn 15, and 1+ earn 10. We verify every PMID against the NCBI PubMed database.",
+      "The number and quality of cited studies matters. Peptides with five or more verified references earn 20 points, three or more earn 15, and one or more earns 10. Every PMID is verified against PubMed.",
   },
   {
     title: "Grade Consistency",
     max: 10,
     description:
-      "Every individual claim should carry an explicit evidence grade. When 100% of claims are graded, the peptide earns 10 bonus points. This ensures users see claim-level reliability, not just peptide-level averages.",
+      "Every individual claim should carry an explicit evidence grade. When 100 percent of claims are graded, the peptide earns a 10-point bonus. This keeps reliability visible at the claim level.",
+  },
+];
+
+const scoreBands = [
+  { range: "85-100", label: "Excellent", tone: "a" },
+  { range: "70-84", label: "Good", tone: "b" },
+  { range: "55-69", label: "Moderate", tone: "c" },
+  { range: "0-54", label: "Fair / Low", tone: "d" },
+];
+
+const sourcingPoints = [
+  "Inline citations connect claims on peptide pages directly to the reference list.",
+  "Automated verification checks every PMID against the NCBI PubMed database and flags mismatches.",
+  "Claim-level grading shows when individual claims are weaker or stronger than the page-wide evidence grade.",
+];
+
+const caveats = [
+  {
+    title: "Evidence level does not equal safety.",
+    body: "A peptide with Grade A evidence may still have meaningful side effects or be inappropriate for some people. A Grade D peptide is not automatically unsafe; it usually means the human evidence is missing.",
+  },
+  {
+    title: "Publication bias still exists.",
+    body: "Positive results are more likely to be published than null or negative results. The grades reflect the published literature, not the total universe of unpublished data.",
+  },
+  {
+    title: "This is not medical advice.",
+    body: "PeptideScholar is an educational resource. Nothing on this site constitutes diagnosis, treatment, or personal medical guidance.",
   },
 ];
 
@@ -107,219 +140,150 @@ export default async function MethodologyPage({
   const prefix = locale === "en" ? "" : `/${locale}`;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      <BreadcrumbNav
-        crumbs={[
-          { label: "Home", href: `${prefix}/` },
-          { label: "Methodology", href: `${prefix}/methodology` },
-        ]}
-      />
+    <div className="methodology-page">
+      <section className="methodology-hero">
+        <div className="methodology-shell">
+          <BreadcrumbNav
+            crumbs={[
+              { label: "Home", href: `${prefix}/` },
+              { label: "Methodology", href: `${prefix}/methodology` },
+            ]}
+          />
 
-      <h1
-        className="text-3xl md:text-4xl font-bold text-[#1A3A5C] mb-4"
-        style={{ fontFamily: "Libre Franklin, system-ui, sans-serif" }}
-      >
-        Methodology
-      </h1>
-
-      <p
-        className="text-lg text-[#5A6577] mb-8 leading-relaxed"
-        style={{ fontFamily: "Source Serif 4, Georgia, serif" }}
-      >
-        PeptideScholar is built on a simple principle: every claim should be
-        traceable to its source, and every source should be verified. This page
-        explains how we evaluate evidence, calculate trust scores, and maintain
-        editorial rigor.
-      </p>
-
-      {/* Evidence Levels */}
-      <section className="mb-12">
-        <h2
-          className="text-2xl font-bold text-[#1A3A5C] mb-4"
-          style={{ fontFamily: "Libre Franklin, system-ui, sans-serif" }}
-        >
-          Evidence Levels
-        </h2>
-        <p
-          className="text-[#1C2028] leading-relaxed mb-6"
-          style={{ fontFamily: "Source Serif 4, Georgia, serif" }}
-        >
-          Each peptide receives an overall evidence grade from A (strongest) to D
-          (weakest) based on the quantity, quality, and consistency of published
-          research. These grades are not recommendations for use — they indicate
-          how much confidence the scientific community has in the available data.
-        </p>
-
-        <div className="space-y-4">
-          {evidenceLevels.map((level) => (
-            <div
-              key={level.grade}
-              className="bg-white border border-[#D0D7E2] rounded-lg p-5 hover:shadow-md transition-shadow"
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm"
-                  style={{ backgroundColor: level.color }}
-                >
-                  {level.grade}
-                </div>
-                <div>
-                  <div className="font-bold text-[#1A3A5C]">{level.label}</div>
-                  <div className="text-xs text-gray-500">
-                    Max trust contribution: {level.grade === "A" ? 40 : level.grade === "B" ? 30 : level.grade === "C" ? 20 : 10} pts
-                  </div>
-                </div>
-              </div>
-              <p className="text-sm text-[#1C2028] leading-relaxed mb-2">
-                {level.description}
-              </p>
-              <div className="text-xs text-gray-500">
-                <span className="font-semibold">Examples:</span>{" "}
-                {level.examples.join(", ")}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Trust Score */}
-      <section className="mb-12">
-        <h2
-          className="text-2xl font-bold text-[#1A3A5C] mb-4"
-          style={{ fontFamily: "Libre Franklin, system-ui, sans-serif" }}
-        >
-          Trust Score Calculation
-        </h2>
-        <p
-          className="text-[#1C2028] leading-relaxed mb-6"
-          style={{ fontFamily: "Source Serif 4, Georgia, serif" }}
-        >
-          The trust score (0-100) displayed on every peptide page is a composite
-          metric designed to give users an at-a-glance sense of how well-supported
-          the content is. It is calculated from four independent factors:
-        </p>
-
-        <div className="space-y-4">
-          {trustFactors.map((factor, i) => (
-            <div
-              key={i}
-              className="bg-gray-50 border border-[#D0D7E2] rounded-lg p-5"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="font-bold text-[#1A3A5C]">{factor.title}</h3>
-                <span className="text-xs font-semibold text-[#3B7A9E] bg-blue-50 px-2 py-0.5 rounded">
-                  Max +{factor.max}
-                </span>
-              </div>
-              <p className="text-sm text-[#1C2028] leading-relaxed">
-                {factor.description}
+          <div className="methodology-hero-grid">
+            <div>
+              <div className="methodology-eyebrow">Editorial Method</div>
+              <h1 className="methodology-title">Methodology</h1>
+              <p className="methodology-intro">
+                Every claim should be traceable to its source, and every source should be verifiable.
+                This page explains how PeptideScholar evaluates evidence, calculates trust scores, and
+                keeps editorial standards explicit.
               </p>
             </div>
-          ))}
-        </div>
 
-        <div className="mt-6 bg-white border border-[#D0D7E2] rounded-lg p-5">
-          <h3 className="font-bold text-[#1A3A5C] mb-2">Score Interpretation</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-            <div className="text-center p-2 rounded bg-green-50">
-              <div className="font-bold text-green-700">85-100</div>
-              <div className="text-green-600 text-xs">Excellent</div>
-            </div>
-            <div className="text-center p-2 rounded bg-blue-50">
-              <div className="font-bold text-blue-700">70-84</div>
-              <div className="text-blue-600 text-xs">Good</div>
-            </div>
-            <div className="text-center p-2 rounded bg-amber-50">
-              <div className="font-bold text-amber-700">55-69</div>
-              <div className="text-amber-600 text-xs">Moderate</div>
-            </div>
-            <div className="text-center p-2 rounded bg-red-50">
-              <div className="font-bold text-red-700">0-54</div>
-              <div className="text-red-600 text-xs">Fair / Low</div>
+            <div className="methodology-summary-card">
+              <div className="methodology-summary-label">What This Covers</div>
+              <ul className="methodology-summary-list">
+                <li>Evidence grading from A through D</li>
+                <li>Trust score weighting across four inputs</li>
+                <li>PubMed-backed sourcing and verification rules</li>
+                <li>Limits, caveats, and transparency standards</li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Sourcing Policy */}
-      <section className="mb-12">
-        <h2
-          className="text-2xl font-bold text-[#1A3A5C] mb-4"
-          style={{ fontFamily: "Libre Franklin, system-ui, sans-serif" }}
-        >
-          Sourcing Policy
-        </h2>
-        <div className="space-y-4 text-[#1C2028] leading-relaxed" style={{ fontFamily: "Source Serif 4, Georgia, serif" }}>
+      <section className="methodology-shell methodology-section">
+        <div className="methodology-section-head">
+          <div className="section-title">Evidence Levels</div>
           <p>
-            Every benefit and side-effect claim on PeptideScholar is stored as a{" "}
-            <strong>SourcedClaim</strong> — an object that links the claim text to
-            specific PubMed IDs and an explicit evidence grade. This schema
-            enables:
+            Each peptide receives an overall grade from A to D based on the quantity, quality, and
+            consistency of published research. These grades are not recommendations for use. They
+            reflect how much confidence the available literature supports.
           </p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>
-              <strong>Inline citations</strong> — numbered superscript links on
-              peptide pages that jump directly to the reference list.
-            </li>
-            <li>
-              <strong>Automated verification</strong> — nightly scripts check
-              that every PMID exists in the NCBI PubMed database and flag
-              mismatches.
-            </li>
-            <li>
-              <strong>Claim-level grading</strong> — users see not just that a
-              peptide is "Grade C" but that individual claims within that page
-              may vary in reliability.
-            </li>
-          </ul>
-          <p>
-            We do not fabricate PMIDs. In April 2026, we removed 47 fabricated
-            references and implemented automated verification to prevent
-            recurrence. See our{" "}
-            <a href={`${prefix}/changelog`} className="text-[#3B7A9E] underline">
-              credibility changelog
-            </a>{" "}
-            for a complete transparency log.
-          </p>
+        </div>
+
+        <div className="methodology-evidence-grid">
+          {evidenceLevels.map((level) => (
+            <article key={level.grade} className={`methodology-evidence-card ${level.accentClass}`}>
+              <div className="methodology-evidence-top">
+                <div className={`methodology-grade-badge ${level.accentClass}`}>{level.grade}</div>
+                <div>
+                  <h2>{level.label}</h2>
+                  <div className="methodology-meta">Max trust contribution: {level.maxPoints} pts</div>
+                </div>
+              </div>
+              <p>{level.description}</p>
+              <div className="methodology-examples">
+                <span>Examples</span>
+                <p>{level.examples.join(", ")}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
-      {/* Limitations */}
-      <section className="mb-8">
-        <h2
-          className="text-2xl font-bold text-[#1A3A5C] mb-4"
-          style={{ fontFamily: "Libre Franklin, system-ui, sans-serif" }}
-        >
-          Limitations & Caveats
-        </h2>
-        <div className="space-y-3 text-[#1C2028] leading-relaxed" style={{ fontFamily: "Source Serif 4, Georgia, serif" }}>
+      <section className="methodology-shell methodology-section">
+        <div className="methodology-section-head">
+          <div className="section-title">Trust Score Calculation</div>
           <p>
-            <strong>Evidence level ≠ safety.</strong> A peptide with Grade A
-            evidence may still have significant side effects or be inappropriate
-            for certain individuals. Conversely, a Grade D peptide is not
-            necessarily dangerous — it simply lacks human data.
+            The trust score shown on each peptide page is a 0-100 composite that gives readers a fast
+            signal about how well supported a page is. It comes from four independent factors.
           </p>
-          <p>
-            <strong>Publication bias.</strong> Positive results are more likely to
-            be published than negative or null results. Our evidence grades do not
-            correct for this bias; they reflect the published literature as it
-            exists.
-          </p>
-          <p>
-            <strong>Non-medical advice.</strong> PeptideScholar is an educational
-            resource. Nothing on this site constitutes medical advice, diagnosis,
-            or treatment recommendations. Always consult a qualified healthcare
-            provider.
-          </p>
+        </div>
+
+        <div className="methodology-factor-grid">
+          {trustFactors.map((factor) => (
+            <article key={factor.title} className="methodology-factor-card">
+              <div className="methodology-factor-top">
+                <h3>{factor.title}</h3>
+                <span>+{factor.max}</span>
+              </div>
+              <p>{factor.description}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="methodology-score-band-wrap">
+          <div className="methodology-band-heading">Score Interpretation</div>
+          <div className="methodology-score-bands">
+            {scoreBands.map((band) => (
+              <div key={band.range} className={`methodology-score-band ${band.tone}`}>
+                <strong>{band.range}</strong>
+                <span>{band.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <div className="mt-10 pt-6 border-t border-[#D0D7E2]">
-        <p className="text-sm text-[#5A6577] text-center">
-          Last updated April 2026. Methodology may evolve as our verification
-          infrastructure improves.
-        </p>
-      </div>
+      <section className="methodology-shell methodology-section">
+        <div className="methodology-two-col">
+          <div>
+            <div className="section-title">Sourcing Policy</div>
+            <p className="methodology-copy">
+              Every benefit and side-effect claim on PeptideScholar is stored as a sourced claim that
+              links text to specific PubMed IDs and an explicit evidence grade. That structure makes
+              citations, verification, and claim-level reliability visible instead of implied.
+            </p>
+            <ul className="methodology-list">
+              {sourcingPoints.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+            <p className="methodology-copy">
+              We do not fabricate PMIDs. In April 2026, we removed 47 fabricated references and put
+              automated verification in place to prevent recurrence. See the{" "}
+              <Link href={`${prefix}/changelog`}>credibility changelog</Link> for the public record.
+            </p>
+          </div>
+
+          <aside className="methodology-callout">
+            <div className="methodology-callout-label">Verification Standard</div>
+            <p>
+              Editorial trust is not just citation count. A page only earns high confidence when the
+              studies are real, the claims are individually graded, and the references are deep enough
+              to support the summary.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section className="methodology-shell methodology-section methodology-section-last">
+        <div className="section-title">Limitations & Caveats</div>
+        <div className="methodology-caveat-grid">
+          {caveats.map((item) => (
+            <article key={item.title} className="methodology-caveat-card">
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+        <div className="methodology-footer-note">
+          Last updated April 2026. Methodology will continue to evolve as verification infrastructure improves.
+        </div>
+      </section>
     </div>
   );
 }

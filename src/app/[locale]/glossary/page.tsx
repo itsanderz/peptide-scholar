@@ -108,7 +108,7 @@ export default async function GlossaryPage({
     <>
       <JsonLd data={jsonLd} />
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="legacy-info-page legacy-glossary-page max-w-4xl mx-auto px-4 py-8">
         <BreadcrumbNav
           crumbs={[
             { label: "Home", href: `${prefix}/` },

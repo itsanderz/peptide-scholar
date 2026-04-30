@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "id": "us-lanreotide-treatment-hub",
+    "slug": "lanreotide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Lanreotide Treatment Guide: Somatuline Depot, Cost and Provider Paths",
+    "description": "US-first lanreotide treatment hub covering approved product paths, cost friction, provider selection, and clinical evidence.",
+    "canonicalPath": "/treatments/lanreotide",
+    "keywords": [
+      "lanreotide treatment guide",
+      "lanreotide provider",
+      "lanreotide treatment path",
+      "lanreotide cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 2,
+    "disclaimer": "This hub summarizes official lanreotide treatment pathways at a high level. Indication fit, coverage, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "lanreotide",
+  "treatmentName": "Lanreotide",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, Lanreotide is an FDA-approved peptide therapy. Unresectable, well- or moderately-differentiated, locally advanced or metastatic gastroenteropancreatic neuroendocrine tumors; acromegaly",
+  "overview": "Lanreotide is a synthetic somatostatin analog approved by the FDA for gastroenteropancreatic neuroendocrine tumors (GEP-NETs) and acromegaly. It is a long-acting depot formulation given every 4 weeks.",
+  "approvedProducts": [
+    {
+      "slug": "somatuline-depot",
+      "name": "Somatuline Depot",
+      "summary": "Branded lanreotide pathway. Unresectable, well- or moderately-differentiated, locally advanced or metastatic gastroenteropancreatic neuroendocrine tumors; acromegaly"
+    }
+  ],
+  "benefits": [
+    "First-line therapy for well-differentiated GEP-NETs (CLARINET trial)",
+    "Prolongs progression-free survival in metastatic NETs",
+    "Controls GH and IGF-1 in acromegaly",
+    "Deep subcutaneous autogel formulation"
+  ],
+  "sideEffects": [
+    "GI symptoms (diarrhea, nausea, abdominal pain)",
+    "Gallstones and cholelithiasis (long-term use)",
+    "Hyperglycemia",
+    "Injection site reactions"
+  ],
+  "routes": [
+    "Subcutaneous injection"
+  ],
+  "costSummary": "Lanreotide costs vary by brand, pharmacy, and insurance design. As an FDA-approved medication, coverage may be available but often requires prior authorization and documentation of the approved indication.",
+  "providerSummary": "The highest-value next step is finding a provider experienced in immune support who can evaluate whether Lanreotide fits the patient's clinical profile and insurance constraints.",
+  "appSummary": "Lanreotide treatment creates tracking demand for dose timing, symptom logging, and refill management to support long-term adherence.",
+  "faqs": [
+    {
+      "question": "How does lanreotide compare to octreotide?",
+      "answer": "Both are somatostatin analogs with similar efficacy. Lanreotide is given as deep subcutaneous injection every 4 weeks (Somatuline Depot) vs octreotide LAR intramuscularly every 4 weeks. Lanreotide's autogel formulation allows patient self-administration after training. Efficacy for NETs and acromegaly is comparable. Choice often depends on formulation preference, cost, and insurance coverage."
+    },
+    {
+      "question": "Can lanreotide shrink neuroendocrine tumors?",
+      "answer": "Lanreotide primarily stabilizes tumor growth rather than shrinking tumors. The CLARINET trial showed it prolonged progression-free survival by preventing tumor growth, with objective tumor shrinkage in a minority of patients (~10%). For tumor reduction, peptide receptor radionuclide therapy (PRRT) with lutetium-177 DOTATATE is more effective."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a lanreotide provider",
+    "primaryHref": "/providers?treatment=lanreotide",
+    "secondaryLabel": "Review lanreotide costs",
+    "secondaryHref": "/costs/lanreotide",
+    "notes": "Use the provider matcher when Lanreotide already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "lanreotide-ref-1",
+      "authority": "N Engl J Med",
+      "title": "Lanreotide in metastatic enteropancreatic neuroendocrine tumors.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/25014687/",
+      "publishedAt": "2014",
+      "claimType": "clinical"
+    },
+    {
+      "id": "lanreotide-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Lanreotide",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

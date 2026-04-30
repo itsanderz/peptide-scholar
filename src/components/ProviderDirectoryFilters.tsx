@@ -41,7 +41,7 @@ export function ProviderDirectoryFilters({
 
   return (
     <section
-      className="rounded-xl p-5 mb-8"
+      className="tool-shell rounded-xl p-5 mb-8"
       style={{ backgroundColor: "#FFFFFF", border: "1px solid #D0D7E2" }}
     >
       <div className="flex flex-wrap items-start justify-between gap-3 mb-4">

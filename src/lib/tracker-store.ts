@@ -32,10 +32,34 @@ export interface ReminderConfig {
   timeMM: number; // 0 or 30
 }
 
+export interface ProtocolPeptide {
+  name: string;
+  compound?: CompoundSlug;
+  doseAmount: string;
+  doseUnit: string;
+  timing: string;
+  frequency: string;
+  daysOfWeek?: number[]; // 0=Sun … 6=Sat; omitted = daily
+}
+
+export interface ProtocolEntry {
+  id: string;
+  name: string;
+  templateId: string;
+  peptides: ProtocolPeptide[];
+  startDate: string; // yyyy-mm-dd
+  endDate: string;   // yyyy-mm-dd
+  status: "planned" | "active" | "completed" | "stopped";
+  dailyCheckoffs: Record<string, boolean>;
+  glp1Type?: string;
+  createdAt: string;
+}
+
 export interface TrackerData {
   doseLog: DoseEntry[];
   symptomLog: SymptomEntry[];
   reminder: ReminderConfig | null;
+  protocols: ProtocolEntry[];
   schemaVersion: number;
 }
 
@@ -45,6 +69,7 @@ const DEFAULT_DATA: TrackerData = {
   doseLog: [],
   symptomLog: [],
   reminder: null,
+  protocols: [],
   schemaVersion: 1,
 };
 
@@ -57,6 +82,7 @@ export function loadTrackerData(): TrackerData {
       doseLog: parsed.doseLog ?? [],
       symptomLog: parsed.symptomLog ?? [],
       reminder: parsed.reminder ?? null,
+      protocols: parsed.protocols ?? [],
       schemaVersion: parsed.schemaVersion ?? 1,
     };
   } catch {
@@ -99,6 +125,57 @@ export function deleteSymptomEntry(id: string): TrackerData {
 export function setReminderConfig(config: ReminderConfig | null): TrackerData {
   const data = loadTrackerData();
   data.reminder = config;
+  saveTrackerData(data);
+  return data;
+}
+
+export function addProtocol(entry: ProtocolEntry): TrackerData {
+  const data = loadTrackerData();
+  data.protocols = [entry, ...data.protocols];
+  saveTrackerData(data);
+  return data;
+}
+
+export function updateProtocol(id: string, updates: Partial<ProtocolEntry>): TrackerData {
+  const data = loadTrackerData();
+  data.protocols = data.protocols.map((p) => (p.id === id ? { ...p, ...updates } : p));
+  saveTrackerData(data);
+  return data;
+}
+
+export function deleteProtocol(id: string): TrackerData {
+  const data = loadTrackerData();
+  data.protocols = data.protocols.filter((p) => p.id !== id);
+  saveTrackerData(data);
+  return data;
+}
+
+export function logProtocolDoses(protocolId: string, date: string): TrackerData {
+  const data = loadTrackerData();
+  const protocol = data.protocols.find((p) => p.id === protocolId);
+  if (!protocol) return data;
+
+  protocol.dailyCheckoffs[date] = true;
+
+  const day = new Date(date).getDay();
+  for (const peptide of protocol.peptides) {
+    const activeDays = peptide.daysOfWeek ?? getDefaultActiveDays(peptide.frequency);
+    if (!activeDays.includes(day)) continue;
+
+    const entry: DoseEntry = {
+      id: generateId(),
+      compound: peptide.compound || "other",
+      brand: peptide.name,
+      doseAmount: peptide.doseAmount,
+      doseUnit: peptide.doseUnit,
+      date,
+      site: "",
+      notes: `From protocol: ${protocol.name}`,
+      createdAt: new Date().toISOString(),
+    };
+    data.doseLog = [entry, ...data.doseLog];
+  }
+
   saveTrackerData(data);
   return data;
 }
@@ -188,3 +265,188 @@ export const SEVERITY_LABELS: Record<number, string> = {
   4: "Moderate–Severe",
   5: "Severe",
 };
+
+// ── Protocol Templates & Helpers ────────────────────────────────────────────
+
+export const PROTOCOL_TEMPLATES: {
+  id: string;
+  name: string;
+  peptides: ProtocolPeptide[];
+  defaultLengthDays: number;
+}[] = [
+  {
+    id: "wolverine",
+    name: "Wolverine Stack (Healing)",
+    peptides: [
+      { name: "BPC-157", doseAmount: "500", doseUnit: "mcg", timing: "Morning", frequency: "daily" },
+      { name: "TB-500", doseAmount: "500", doseUnit: "mcg", timing: "Morning", frequency: "daily" },
+    ],
+    defaultLengthDays: 56,
+  },
+  {
+    id: "gh-optimization",
+    name: "GH Optimization",
+    peptides: [
+      { name: "CJC-1295", doseAmount: "100", doseUnit: "mcg", timing: "Bedtime", frequency: "5 on / 2 off", daysOfWeek: [1, 2, 3, 4, 5] },
+      { name: "Ipamorelin", doseAmount: "100", doseUnit: "mcg", timing: "Bedtime", frequency: "5 on / 2 off", daysOfWeek: [1, 2, 3, 4, 5] },
+    ],
+    defaultLengthDays: 84,
+  },
+  {
+    id: "cognitive",
+    name: "Cognitive Support",
+    peptides: [
+      { name: "Semax", doseAmount: "500", doseUnit: "mcg", timing: "Nasal AM", frequency: "daily" },
+      { name: "Selank", doseAmount: "500", doseUnit: "mcg", timing: "Nasal PM", frequency: "daily" },
+    ],
+    defaultLengthDays: 56,
+  },
+  {
+    id: "glp1",
+    name: "GLP-1 Weight Loss",
+    peptides: [
+      { name: "Semaglutide", doseAmount: "0.25", doseUnit: "mg", timing: "Weekly", frequency: "weekly", daysOfWeek: [1] },
+    ],
+    defaultLengthDays: 84,
+  },
+  {
+    id: "skin-recovery",
+    name: "Skin & Recovery",
+    peptides: [
+      { name: "GHK-Cu", doseAmount: "2", doseUnit: "mg", timing: "Morning", frequency: "daily" },
+      { name: "BPC-157", doseAmount: "250", doseUnit: "mcg", timing: "Morning", frequency: "daily" },
+    ],
+    defaultLengthDays: 56,
+  },
+  {
+    id: "custom",
+    name: "Custom Protocol",
+    peptides: [],
+    defaultLengthDays: 56,
+  },
+];
+
+export const MONTHLY_COSTS: Record<string, number> = {
+  "BPC-157": 70,
+  "TB-500": 90,
+  "CJC-1295": 75,
+  "Ipamorelin": 60,
+  "Semax": 65,
+  "Selank": 55,
+  "GHK-Cu": 50,
+  "Semaglutide": 1100,
+  "Tirzepatide": 1200,
+};
+
+/** Approximate vial sizes in mcg for duration calculation. */
+const VIAL_SIZES_MCG: Record<string, number> = {
+  "BPC-157": 5000,
+  "TB-500": 5000,
+  "CJC-1295": 2000,
+  "Ipamorelin": 2000,
+  "GHK-Cu": 50000,
+  "Semax": 30000,
+  "Selank": 30000,
+  "Semaglutide": 2000,
+  "Tirzepatide": 10000,
+};
+
+export function getDefaultActiveDays(frequency: string): number[] {
+  if (frequency === "daily") return [0, 1, 2, 3, 4, 5, 6];
+  if (frequency === "5 on / 2 off") return [1, 2, 3, 4, 5];
+  if (frequency === "weekly") return [1];
+  return [0, 1, 2, 3, 4, 5, 6];
+}
+
+export function estimateVialDuration(peptide: ProtocolPeptide): string {
+  const vialMcg = VIAL_SIZES_MCG[peptide.name];
+  if (!vialMcg) return "Unknown";
+  const daily = parseFloat(peptide.doseAmount);
+  if (!daily || daily <= 0) return "Unknown";
+  let dosePerDayMcg = daily;
+  if (peptide.doseUnit === "mg") dosePerDayMcg = daily * 1000;
+  if (peptide.frequency === "weekly") {
+    const weeks = vialMcg / dosePerDayMcg;
+    const days = Math.round(weeks * 7);
+    return `${Math.floor(days / 7)} weeks${days % 7 ? ` ${days % 7} days` : ""}`;
+  }
+  if (peptide.frequency === "5 on / 2 off") {
+    const weeklyDose = dosePerDayMcg * 5;
+    const totalWeeks = vialMcg / weeklyDose;
+    const days = Math.round(totalWeeks * 7);
+    return `${Math.floor(days / 7)} weeks${days % 7 ? ` ${days % 7} days` : ""}`;
+  }
+  const days = Math.round(vialMcg / dosePerDayMcg);
+  return `${Math.floor(days / 7)} weeks${days % 7 ? ` ${days % 7} days` : ""}`;
+}
+
+export function estimateMonthlyCost(peptides: ProtocolPeptide[]): number {
+  return peptides.reduce((sum, p) => {
+    const cost = MONTHLY_COSTS[p.name] ?? 0;
+    if (p.frequency === "weekly") return sum + cost / 4;
+    if (p.frequency === "5 on / 2 off") return sum + (cost * 5) / 7;
+    return sum + cost;
+  }, 0);
+}
+
+export function protocolProgress(protocol: ProtocolEntry): number {
+  const start = new Date(protocol.startDate).getTime();
+  const end = new Date(protocol.endDate).getTime();
+  const now = Date.now();
+  if (now >= end) return 100;
+  if (now <= start) return 0;
+  return Math.round(((now - start) / (end - start)) * 100);
+}
+
+export function daysInProtocol(protocol: ProtocolEntry): number {
+  const start = new Date(protocol.startDate);
+  const end = new Date(protocol.endDate);
+  return Math.max(1, Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)));
+}
+
+/** Build an ICS calendar containing one weekly event per peptide. */
+export function buildProtocolICS(protocol: ProtocolEntry): string {
+  const pad = (n: number) => String(n).padStart(2, "0");
+  const events: string[] = [];
+
+  for (const peptide of protocol.peptides) {
+    const days = peptide.daysOfWeek ?? getDefaultActiveDays(peptide.frequency);
+    for (const dow of days) {
+      const daysAhead = daysUntilWeekday(dow);
+      const start = new Date();
+      start.setDate(start.getDate() + daysAhead);
+      // Default times based on timing label
+      let hh = 9, mm = 0;
+      const t = peptide.timing.toLowerCase();
+      if (t.includes("bedtime")) { hh = 22; mm = 0; }
+      else if (t.includes("pm") || t.includes("evening")) { hh = 18; mm = 0; }
+      else if (t.includes("am") || t.includes("morning")) { hh = 8; mm = 0; }
+      start.setHours(hh, mm, 0, 0);
+      const dtstart = `${start.getFullYear()}${pad(start.getMonth() + 1)}${pad(start.getDate())}T${pad(hh)}${pad(mm)}00`;
+      const rrule = peptide.frequency === "weekly" ? "RRULE:FREQ=WEEKLY" : "RRULE:FREQ=WEEKLY;BYDAY=" + dayNameIcs(dow);
+      events.push(
+        "BEGIN:VEVENT",
+        `UID:${protocol.id}-${peptide.name}-${dow}@peptidescholar.app`,
+        `DTSTART:${dtstart}`,
+        rrule,
+        `SUMMARY:${peptide.name} (${protocol.name})`,
+        `DESCRIPTION:Dose: ${peptide.doseAmount} ${peptide.doseUnit} — ${peptide.timing}. Protocol: ${protocol.name}`,
+        "END:VEVENT"
+      );
+      // sequence counter reserved for future multi-protocol UID disambiguation
+    }
+  }
+
+  return [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//PeptideScholar//Tracker//EN",
+    "CALSCALE:GREGORIAN",
+    ...events,
+    "END:VCALENDAR",
+  ].join("\r\n");
+}
+
+function dayNameIcs(dow: number): string {
+  return ["SU", "MO", "TU", "WE", "TH", "FR", "SA"][dow];
+}

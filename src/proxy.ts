@@ -24,6 +24,7 @@ export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const marketCode = resolveMarketCode(request.cookies.get(MARKET_COOKIE_NAME)?.value);
   const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-pathname", pathname);
   const siteKey = resolveSiteKeyFromHost(
     request.headers.get("x-forwarded-host") || request.headers.get("host")
   );

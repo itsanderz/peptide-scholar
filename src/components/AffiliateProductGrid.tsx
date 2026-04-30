@@ -14,7 +14,7 @@ function CartIcon() {
       height="18"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#3B7A9E"
+      stroke="currentColor"
       strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -28,21 +28,10 @@ function CartIcon() {
 
 export function AffiliateProductGrid({ heading, subheading, products }: AffiliateProductGridProps) {
   return (
-    <section
-      className="rounded-xl p-6 mb-8"
-      style={{ backgroundColor: "#FAFBFC", border: "1px solid #D0D7E2" }}
-    >
-      <h3
-        className="text-lg font-bold mb-1"
-        style={{
-          color: "#1A3A5C",
-          fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-        }}
-      >
-        {heading}
-      </h3>
+    <section className="resource-box">
+      <h3 className="section-title">{heading}</h3>
       {subheading && (
-        <p className="text-sm text-gray-500 mb-4 leading-relaxed">{subheading}</p>
+        <p className="resource-desc">{subheading}</p>
       )}
 
       <div className="grid sm:grid-cols-2 gap-3">
@@ -53,44 +42,26 @@ export function AffiliateProductGrid({ heading, subheading, products }: Affiliat
             target="_blank"
             rel="noopener noreferrer nofollow"
             data-affiliate="amazon-product"
-            className="group flex items-start gap-3 p-4 rounded-lg transition-shadow hover:shadow-md"
-            style={{ backgroundColor: "#FFFFFF", border: "1px solid #E5E7EB" }}
+            className="resource-card"
           >
-            <div
-              className="flex-shrink-0 mt-0.5 p-2 rounded-lg"
-              style={{ backgroundColor: "#F0F7FA" }}
-            >
+            <div className="resource-icon">
               <CartIcon />
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="font-semibold text-sm mb-0.5 leading-snug" style={{ color: "#1A3A5C" }}>
-                {product.title}
-              </p>
-              <p className="text-xs text-gray-500 leading-relaxed mb-2">
-                {product.description}
-              </p>
-              <div className="flex items-center justify-between gap-2 flex-wrap">
-                <span className="text-xs font-medium" style={{ color: "#3B7A9E" }}>
-                  {product.priceRange}
-                </span>
-                <span
-                  className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-md"
-                  style={{ backgroundColor: "#FF9900", color: "#FFFFFF" }}
-                >
-                  View on Amazon
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </span>
+            <div>
+              <p className="resource-title">{product.title}</p>
+              <p className="resource-desc">{product.description}</p>
+              <div className="provider-badges">
+                <span className="legal-badge is-warn">{product.priceRange}</span>
+                <span className="legal-badge is-alert">View on Amazon</span>
               </div>
             </div>
           </a>
         ))}
       </div>
 
-      <p className="text-[11px] mt-4" style={{ color: "#9CA3AF" }}>
-        Amazon affiliate links — we may earn a small commission at no extra cost to you. See our{" "}
-        <Link href="/disclosure" className="underline" style={{ color: "#6B7280" }}>
+      <p className="resource-note">
+        Amazon affiliate links; we may earn a small commission at no extra cost to you. See our{" "}
+        <Link href="/disclosure" className="underline">
           disclosure
         </Link>
         .

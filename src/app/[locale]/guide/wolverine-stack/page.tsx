@@ -93,7 +93,7 @@ export default async function WolverineStackPage({
         }}
       />
 
-      <div className="max-w-5xl mx-auto px-4 py-8">
+      <div className="guide-article-page max-w-5xl mx-auto px-4 py-8">
         <BreadcrumbNav
           crumbs={[
             { label: "Home", href: `${prefix}/` },

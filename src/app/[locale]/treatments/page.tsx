@@ -52,7 +52,7 @@ export default async function TreatmentsIndexPage({
         }}
       />
 
-      <div className="max-w-5xl mx-auto px-4 py-8">
+      <div className="treatment-index-page max-w-5xl mx-auto px-4 py-8">
         <BreadcrumbNav
           crumbs={[
             { label: "Home", href: "/" },
@@ -60,18 +60,15 @@ export default async function TreatmentsIndexPage({
           ]}
         />
 
-        <div className="mt-6 mb-10">
-          <div
-            className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold mb-4"
-            style={{ backgroundColor: "#F8FAFC", borderColor: "#D0D7E2", color: "#334155" }}
-          >
+        <div className="treatment-index-hero mt-6 mb-10">
+          <div className="treatment-index-market">
             <span>Active market:</span>
-            <span style={{ color: "#1A3A5C" }}>{market.name}</span>
+            <strong>{market.name}</strong>
           </div>
-          <h1 className="text-3xl md:text-5xl font-bold mb-4" style={{ color: "#1A3A5C" }}>
+          <h1 className="treatment-index-title">
             Approved Treatment Hubs
           </h1>
-          <p className="text-lg text-gray-600 max-w-3xl">
+          <p className="treatment-index-copy">
             These treatment hubs are built for US approved-treatment decision flows. Each hub covers
             the official product landscape, cost friction, provider routing, and tracker next steps
             in one structured, source-backed page.
@@ -79,14 +76,11 @@ export default async function TreatmentsIndexPage({
         </div>
 
         {market.code !== "us" && (
-          <div
-            className="rounded-xl p-4 mb-8"
-            style={{ backgroundColor: "#FFF7ED", border: "1px solid #FDBA74" }}
-          >
-            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#C2410C] mb-2">
+          <div className="treatment-index-note">
+            <div className="treatment-index-note-label">
               Market Note
             </div>
-            <div className="text-sm md:text-base text-[#9A3412]">
+            <div className="treatment-index-note-copy">
               {market.name} is selected. These hubs are currently US-first and reflect US approval
               and coverage logic. Use them as a reference while localized treatment pathways remain
               staged.
@@ -94,43 +88,42 @@ export default async function TreatmentsIndexPage({
           </div>
         )}
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="treatment-index-grid">
           {hubs.map((hub) => (
             <Link
               key={hub.meta.id}
               href={getGeneratedTreatmentHref(hub.meta.slug)}
-              className="rounded-2xl p-6 transition-transform hover:-translate-y-1"
-              style={{ backgroundColor: "#FFFFFF", border: "1px solid #D0D7E2" }}
+              className="treatment-index-card"
             >
-              <div className="text-xs font-semibold uppercase tracking-[0.16em] mb-3" style={{ color: "#3B7A9E" }}>
+              <div className="treatment-index-card-kicker">
                 {hub.treatmentName}
               </div>
-              <h2 className="text-2xl font-bold mb-3" style={{ color: "#1A3A5C" }}>
+              <h2 className="treatment-index-card-title">
                 {hub.seo.title}
               </h2>
-              <p className="text-sm leading-relaxed mb-4" style={{ color: "#5A6577" }}>
+              <p className="treatment-index-card-copy">
                 {hub.marketSummary}
               </p>
-              <div className="grid gap-3 text-sm mb-4">
+              <div className="treatment-index-card-meta">
                 <div>
-                  <strong style={{ color: "#1C2028" }}>Approved products:</strong>{" "}
-                  <span style={{ color: "#5A6577" }}>
+                  <strong>Approved products:</strong>{" "}
+                  <span>
                     {hub.approvedProducts.map((p) => p.name).join(", ")}
                   </span>
                 </div>
                 <div>
-                  <strong style={{ color: "#1C2028" }}>Routes:</strong>{" "}
-                  <span style={{ color: "#5A6577" }}>{hub.routes.join(", ")}</span>
+                  <strong>Routes:</strong>{" "}
+                  <span>{hub.routes.join(", ")}</span>
                 </div>
               </div>
-              <span className="font-semibold" style={{ color: "#3B7A9E" }}>
+              <span className="treatment-index-card-link">
                 Open treatment hub &rarr;
               </span>
             </Link>
           ))}
         </div>
 
-        <div className="mt-10">
+        <div className="treatment-index-disclaimer mt-10">
           <MedicalDisclaimer compact />
         </div>
       </div>

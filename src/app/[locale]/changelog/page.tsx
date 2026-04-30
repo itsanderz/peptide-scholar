@@ -118,7 +118,7 @@ export default async function ChangelogPage({
   const prefix = locale === "en" ? "" : `/${locale}`;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
+    <div className="legacy-info-page max-w-3xl mx-auto px-4 py-8">
       <BreadcrumbNav
         crumbs={[
           { label: "Home", href: `${prefix}/` },
@@ -139,7 +139,7 @@ export default async function ChangelogPage({
       >
         We believe transparency is the foundation of trust. This log documents
         every significant correction, enhancement, and infrastructure change
-        made to PeptideScholar's content and sourcing practices.
+        made to PeptideScholar&apos;s content and sourcing practices.
       </p>
 
       <div className="space-y-6">

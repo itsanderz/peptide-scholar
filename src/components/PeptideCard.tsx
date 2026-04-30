@@ -12,10 +12,10 @@ interface PeptideCardProps {
 }
 
 const LEVEL_ACCENT: Record<string, string> = {
-  A: "#16a34a",
-  B: "#2563eb",
-  C: "#d97706",
-  D: "#dc2626",
+  A: "#d8e628",
+  B: "#5d75c7",
+  C: "#cfcfc9",
+  D: "#8a8a84",
 };
 
 const CATEGORY_ICON: Record<string, React.ReactNode> = {
@@ -58,47 +58,43 @@ export function PeptideCard({
   href,
 }: PeptideCardProps) {
   const linkHref = href || `/peptides/${slug}`;
-  const accent = LEVEL_ACCENT[evidenceLevel] || "#1A3A5C";
-  const isApproved = fdaStatus.toLowerCase().includes("approved");
-  const isCos = fdaStatus.toLowerCase().includes("cosmetic");
+  const accent = LEVEL_ACCENT[evidenceLevel] || "#050505";
+  const isApproved = fdaStatus === "approved";
+  const isDiscontinued = fdaStatus === "discontinued";
+  const isCos = fdaStatus === "cosmetic";
   const categoryIcon = CATEGORY_ICON[category] || null;
 
   return (
     <Link
       href={linkHref}
-      className="group block relative rounded-xl overflow-hidden transition-all duration-200 hover:shadow-xl hover:-translate-y-1"
+      className="group block relative overflow-hidden transition-all duration-200 hover:-translate-y-0.5"
       style={{
-        backgroundColor: "#FFFFFF",
-        border: "1px solid #D0D7E2",
+        backgroundColor: "var(--bone, #edeae3)",
+        border: "1px solid var(--black, #050505)",
       }}
     >
       {/* Top accent bar */}
       <div className="h-1.5" style={{ background: accent }} />
 
       <div className="p-5">
-        {/* Header row: name + evidence badge */}
         <div className="flex items-start justify-between gap-3 mb-3">
           <h3
-            className="text-lg font-bold leading-tight group-hover:text-[#3B7A9E] transition-colors"
-            style={{
-              color: "#1A3A5C",
-              fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-            }}
+            className="text-base leading-tight group-hover:opacity-70 transition-opacity font-sans font-extrabold uppercase tracking-tight"
+            style={{ color: "var(--black, #050505)" }}
           >
             {name}
           </h3>
           <EvidenceBadge level={evidenceLevel} showLabel={false} />
         </div>
 
-        {/* Pills row */}
         <div className="flex flex-wrap gap-1.5 mb-3">
-          {/* Category pill with icon */}
+          {/* Category pill */}
           <span
-            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-semibold"
+            className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] uppercase tracking-wider font-semibold font-mono"
             style={{
-              backgroundColor: "#F0F3F7",
-              color: "#3B7A9E",
-              border: "1px solid #D0D7E2",
+              backgroundColor: "var(--concrete, #cfcfc9)",
+              color: "var(--black, #050505)",
+              border: "1px solid var(--black, #050505)",
             }}
           >
             {categoryIcon && <span className="opacity-70">{categoryIcon}</span>}
@@ -107,11 +103,11 @@ export function PeptideCard({
 
           {/* FDA status pill */}
           <span
-            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-bold"
+            className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] uppercase tracking-wider font-bold font-mono"
             style={{
-              backgroundColor: isApproved ? "#ECFDF5" : isCos ? "#EFF6FF" : "#FFFBEB",
-              color: isApproved ? "#15803d" : isCos ? "#1d4ed8" : "#92400e",
-              border: `1px solid ${isApproved ? "#BBF7D0" : isCos ? "#BFDBFE" : "#FDE68A"}`,
+              backgroundColor: isApproved ? "var(--lime, #d8e628)" : isCos ? "var(--blue, #5d75c7)" : isDiscontinued ? "#fef3c7" : "var(--concrete, #cfcfc9)",
+              color: isApproved ? "var(--black, #050505)" : isCos ? "var(--bone, #edeae3)" : isDiscontinued ? "#92400e" : "var(--black, #050505)",
+              border: isApproved ? "1px solid transparent" : isCos ? "1px solid transparent" : "1px solid var(--black, #050505)",
             }}
           >
             {isApproved && (
@@ -121,28 +117,26 @@ export function PeptideCard({
           </span>
         </div>
 
-        {/* Description */}
         <p
-          className="text-sm leading-relaxed line-clamp-3"
-          style={{ color: "#5A6577" }}
+          className="font-mono text-xs leading-relaxed line-clamp-3"
+          style={{ color: "var(--black, #050505)", opacity: 0.6 }}
         >
           {description}
         </p>
 
-        {/* Footer CTA */}
         <div
           className="mt-4 pt-3 flex items-center justify-between"
-          style={{ borderTop: "1px solid #F0F3F7" }}
+          style={{ borderTop: "1px dashed var(--black, #050505)" }}
         >
           <span
-            className="text-xs font-semibold uppercase tracking-wider"
-            style={{ color: "#6B7280" }}
+            className="text-[9px] uppercase tracking-wider font-mono font-semibold"
+            style={{ color: "var(--black, #050505)", opacity: 0.4 }}
           >
-            Evidence Level {evidenceLevel}
+            Evidence {evidenceLevel}
           </span>
           <span
-            className="text-xs font-semibold group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1"
-            style={{ color: "#3B7A9E" }}
+            className="font-mono text-xs font-semibold group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1"
+            style={{ color: "var(--blue, #5d75c7)" }}
           >
             View Details
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">

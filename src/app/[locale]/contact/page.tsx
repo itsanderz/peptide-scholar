@@ -55,7 +55,7 @@ export default async function ContactPage({
   )}`;
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-8">
+    <div className="legacy-info-page legacy-contact-page max-w-4xl mx-auto px-4 py-8">
       <PageTracker
         event="market_page_view"
         params={{

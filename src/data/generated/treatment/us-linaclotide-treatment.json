@@ -1,0 +1,104 @@
+{
+  "meta": {
+    "id": "us-linaclotide-treatment-hub",
+    "slug": "linaclotide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Linaclotide Treatment Guide: Linzess, Constella, Cost and Provider Paths",
+    "description": "US-first linaclotide treatment hub covering approved product paths, cost friction, provider selection, and clinical evidence.",
+    "canonicalPath": "/treatments/linaclotide",
+    "keywords": [
+      "linaclotide treatment guide",
+      "linaclotide provider",
+      "linaclotide treatment path",
+      "linaclotide cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 2,
+    "disclaimer": "This hub summarizes official linaclotide treatment pathways at a high level. Indication fit, coverage, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "linaclotide",
+  "treatmentName": "Linaclotide",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, Linaclotide is an FDA-approved peptide therapy. Irritable bowel syndrome with constipation (IBS-C) in adults and children aged 6-17; chronic idiopathic constipation (CIC) in adults",
+  "overview": "Linaclotide is a guanylate cyclase-C (GC-C) receptor agonist approved by the FDA for irritable bowel syndrome with constipation (IBS-C) and chronic idiopathic constipation (CIC). It increases intestinal fluid secretion and accelerates transit without being absorbed systemically.",
+  "approvedProducts": [
+    {
+      "slug": "linzess",
+      "name": "Linzess",
+      "summary": "Branded linaclotide pathway. Irritable bowel syndrome with constipation (IBS-C) in adults and children aged 6-17; chronic idiopathic constipation (CIC) in adults"
+    },
+    {
+      "slug": "constella",
+      "name": "Constella",
+      "summary": "Branded linaclotide pathway. Irritable bowel syndrome with constipation (IBS-C) in adults and children aged 6-17; chronic idiopathic constipation (CIC) in adults"
+    }
+  ],
+  "benefits": [
+    "Significant improvement in abdominal pain and bowel habits in IBS-C",
+    "Increases complete spontaneous bowel movements in CIC",
+    "Minimal systemic absorption (acts locally in gut)",
+    "Approved for both adult and pediatric (6-17 years) IBS-C"
+  ],
+  "sideEffects": [
+    "Diarrhea (most common; dose-dependent, usually early)",
+    "Abdominal pain and distension",
+    "Flatulence",
+    "Headache"
+  ],
+  "routes": [
+    "Oral"
+  ],
+  "costSummary": "Linaclotide costs vary by brand, pharmacy, and insurance design. As an FDA-approved medication, coverage may be available but often requires prior authorization and documentation of the approved indication.",
+  "providerSummary": "The highest-value next step is finding a provider experienced in anti-inflammatory who can evaluate whether Linaclotide fits the patient's clinical profile and insurance constraints.",
+  "appSummary": "Linaclotide treatment creates tracking demand for dose timing, symptom logging, and refill management to support long-term adherence.",
+  "faqs": [
+    {
+      "question": "Why does linaclotide cause diarrhea?",
+      "answer": "Diarrhea is the primary side effect because linaclotide increases chloride and bicarbonate secretion into the intestinal lumen via CFTR channels, drawing water into the bowel. This is the intended pharmacological effect. Most cases are mild to moderate and occur early in treatment. Severe diarrhea leading to dehydration is rare but requires discontinuation."
+    },
+    {
+      "question": "Is linaclotide absorbed into the bloodstream?",
+      "answer": "No. Linaclotide has minimal to no systemic absorption. It acts locally on GC-C receptors in the intestinal epithelium and is then degraded in the gut lumen. This local action avoids systemic side effects common to many drugs."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a linaclotide provider",
+    "primaryHref": "/providers?treatment=linaclotide",
+    "secondaryLabel": "Review linaclotide costs",
+    "secondaryHref": "/costs/linaclotide",
+    "notes": "Use the provider matcher when Linaclotide already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "linaclotide-ref-1",
+      "authority": "Am J Gastroenterol",
+      "title": "Linaclotide for irritable bowel syndrome with constipation: a 26-week, randomized, double-blind, placebo-controlled trial to evaluate efficacy and safety.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22986437/",
+      "publishedAt": "2012",
+      "claimType": "clinical"
+    },
+    {
+      "id": "linaclotide-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Linaclotide",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

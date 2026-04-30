@@ -45,7 +45,7 @@ export default async function AboutPage({
   const prefix = locale === "en" ? "" : `/${locale}`;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
+    <div className="legacy-info-page max-w-3xl mx-auto px-4 py-8">
       <BreadcrumbNav
         crumbs={[
           { label: "Home", href: `${prefix}/` },

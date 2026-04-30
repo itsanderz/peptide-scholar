@@ -86,10 +86,7 @@ export default async function PeptidesIndexPage({ params }: Props) {
       />
 
       {/* ── Hero ───────────────────────────────────────────────────────── */}
-      <section
-        className="relative py-14 md:py-20 text-center text-white overflow-hidden"
-        style={{ backgroundColor: "#1A3A5C" }}
-      >
+      <section className="pi-hero">
         {/* Decorative background pattern */}
         <div
           className="absolute inset-0 opacity-[0.04]"
@@ -100,14 +97,11 @@ export default async function PeptidesIndexPage({ params }: Props) {
           }}
         />
 
-        <div className="relative max-w-4xl mx-auto px-4">
-          <h1
-            className="text-3xl md:text-5xl font-bold mb-4 tracking-tight"
-            style={{ fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)" }}
-          >
+        <div className="container">
+          <h1>
             Browse All Peptides
           </h1>
-          <p className="text-lg md:text-xl text-white/75 max-w-2xl mx-auto mb-0">
+          <p>
             Every peptide graded A through D for evidence strength. Search, filter, and compare — with every claim
             backed by PubMed citations.
           </p>
@@ -115,24 +109,18 @@ export default async function PeptidesIndexPage({ params }: Props) {
       </section>
 
       {/* ── Stats Bar ─────────────────────────────────────────────────── */}
-      <section className="py-6" style={{ backgroundColor: "#F0F3F7" }}>
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <section className="pi-stats">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="pi-stats-grid">
             {[
               { value: allPeptides.length.toString(), label: "Peptides" },
               { value: fdaApprovedCount.toString(), label: "FDA-Approved" },
               { value: categories.length.toString(), label: "Categories" },
               { value: `${comparisonCount}+`, label: "Comparisons" },
             ].map((stat) => (
-              <div
-                key={stat.label}
-                className="text-center py-3 px-2 rounded-lg"
-                style={{ backgroundColor: "#FFFFFF", border: "1px solid #D0D7E2" }}
-              >
-                <div className="text-xl md:text-2xl font-bold" style={{ color: "#1A3A5C" }}>
-                  {stat.value}
-                </div>
-                <div className="text-xs text-gray-500 uppercase tracking-wider mt-0.5">{stat.label}</div>
+              <div key={stat.label} className="pi-stat">
+                <div className="pi-stat-val">{stat.value}</div>
+                <div className="pi-stat-lbl">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -140,55 +128,36 @@ export default async function PeptidesIndexPage({ params }: Props) {
       </section>
 
       {/* ── Evidence Grading Explainer ────────────────────────────────── */}
-      <section className="max-w-5xl mx-auto px-4 pt-10 pb-4">
+      <section className="pi-grade-row">
+        <div className="container">
         <BreadcrumbNav crumbs={crumbs} />
 
-        <div
-          className="rounded-xl p-5 mb-8"
-          style={{ backgroundColor: "#F8FAFC", border: "1px solid #D0D7E2" }}
-        >
-          <h2
-            className="text-base font-bold mb-3"
-            style={{
-              color: "#1A3A5C",
-              fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-            }}
-          >
+        <div>
+          <h2 className="section-title">
             Understanding Evidence Grades
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="pi-grade-grid">
             {[
-              { grade: "A", color: "#2B8A5E", bg: "#dcfce7", desc: "FDA-approved with robust clinical evidence" },
-              { grade: "B", color: "#3B7A9E", bg: "#dbeafe", desc: "Supported by human clinical studies" },
-              { grade: "C", color: "#D4912A", bg: "#fef3c7", desc: "Preclinical (animal/in vitro) evidence only" },
-              { grade: "D", color: "#5A6577", bg: "#f3f4f6", desc: "Very limited or no published evidence" },
+              { grade: "A", className: "a", desc: "FDA-approved with robust clinical evidence" },
+              { grade: "B", className: "b", desc: "Supported by human clinical studies" },
+              { grade: "C", className: "c", desc: "Preclinical evidence only" },
+              { grade: "D", className: "d", desc: "Very limited or no published evidence" },
             ].map((item) => (
-              <div key={item.grade} className="flex items-start gap-2">
-                <span
-                  className="inline-flex items-center justify-center rounded-full shrink-0 mt-0.5"
-                  style={{
-                    width: "1.5rem",
-                    height: "1.5rem",
-                    backgroundColor: item.color,
-                    color: "#FFFFFF",
-                    fontSize: "0.75rem",
-                    fontWeight: 800,
-                  }}
-                >
-                  {item.grade}
-                </span>
-                <p className="text-xs leading-snug m-0" style={{ color: "#5A6577" }}>
-                  {item.desc}
-                </p>
+              <div key={item.grade} className="pi-grade">
+                <span className={`pi-grade-ltr ${item.className}`}>{item.grade}</span>
+                <p className="pi-grade-desc">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
+        </div>
       </section>
 
       {/* ── Search & Results ──────────────────────────────────────────── */}
-      <section className="max-w-5xl mx-auto px-4 pb-10">
-        <PeptideSearch peptides={peptideData} categories={categoryData} />
+      <section className="pi-filters">
+        <div className="container">
+          <PeptideSearch peptides={peptideData} categories={categoryData} />
+        </div>
       </section>
 
       {/* ── Ad + Disclaimer ───────────────────────────────────────────── */}

@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "id": "us-bremelanotide-treatment-hub",
+    "slug": "bremelanotide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Bremelanotide Treatment Guide: Vyleesi, HSDD, and Provider Paths",
+    "description": "US-first bremelanotide treatment hub covering Vyleesi for hypoactive sexual desire disorder, on-demand dosing, cost friction, provider selection, and clinical evidence.",
+    "canonicalPath": "/treatments/bremelanotide",
+    "keywords": [
+      "bremelanotide treatment guide",
+      "vyleesi provider",
+      "bremelanotide hsdd",
+      "bremelanotide on demand",
+      "bremelanotide cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 3,
+    "disclaimer": "This hub summarizes official bremelanotide treatment pathways at a high level. Indication fit, coverage, ongoing access, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "bremelanotide",
+  "treatmentName": "Bremelanotide",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, bremelanotide is approved as Vyleesi for hypoactive sexual desire disorder (HSDD) in premenopausal women. Its on-demand dosing and central mechanism of action distinguish it from peripheral therapies.",
+  "overview": "Bremelanotide is a melanocortin-4 receptor agonist approved for HSDD in premenopausal women. Unlike phosphodiesterase inhibitors that work peripherally, bremelanotide acts centrally to modulate sexual desire and arousal pathways. It is dosed on demand rather than daily, which changes the adherence and cost structure compared to chronic medications.",
+  "approvedProducts": [
+    {
+      "slug": "vyleesi",
+      "name": "Vyleesi",
+      "summary": "Branded bremelanotide for HSDD in premenopausal women. Dosed as 1.75 mg SC on demand before anticipated sexual activity. Maximum 1 dose per 24 hours and 8 doses per month."
+    }
+  ],
+  "benefits": [
+    "FDA-approved treatment for hypoactive sexual desire disorder in premenopausal women",
+    "On-demand dosing avoids daily medication burden and allows situational use",
+    "Central mechanism targets desire pathways rather than peripheral blood flow",
+    "A regulated pathway that can be paired with provider matching and cost review"
+  ],
+  "sideEffects": [
+    "Nausea is the most common side effect, occurring in approximately 40% of patients",
+    "Transient blood pressure increases and flushing require monitoring",
+    "Skin hyperpigmentation may develop with repeated use, especially in darker skin tones",
+    "Contraindicated in patients with uncontrolled hypertension or cardiovascular disease"
+  ],
+  "routes": [
+    "Subcutaneous injection"
+  ],
+  "costSummary": "Bremelanotide costs vary by pharmacy and insurance. As a specialty medication for HSDD, coverage is often limited and may require prior authorization. Manufacturer savings programs may reduce out-of-pocket costs for eligible patients.",
+  "providerSummary": "The highest-value next step is finding a provider experienced in sexual health or women's health who can evaluate whether bremelanotide fits the patient's clinical profile, cardiovascular risk, and insurance constraints.",
+  "appSummary": "On-demand bremelanotide dosing creates unique tracking needs: dose timing, monthly dose limits, blood pressure monitoring, and side-effect logging help patients use the medication safely and effectively.",
+  "faqs": [
+    {
+      "question": "Is bremelanotide the same as PT-141?",
+      "answer": "Yes. Bremelanotide is the generic name; PT-141 was its developmental code name. Vyleesi is the FDA-approved brand name for bremelanotide. Compounded or unregulated versions sold as PT-141 are not FDA-approved."
+    },
+    {
+      "question": "How does bremelanotide compare to other HSDD treatments?",
+      "answer": "Bremelanotide is the only FDA-approved on-demand injectable for HSDD. Flibanserin (Addyi) is an oral daily medication. Bremelanotide acts centrally via melanocortin receptors, while flibanserin modulates serotonin and dopamine. The choice depends on patient preference for daily vs on-demand dosing and side-effect profiles."
+    },
+    {
+      "question": "What is the safest next step before starting bremelanotide?",
+      "answer": "Review cardiovascular history and blood pressure, confirm the official indication fit, verify realistic cost and coverage friction, and then use a licensed provider route experienced in sexual health or women's health."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a bremelanotide provider",
+    "primaryHref": "/providers?treatment=bremelanotide",
+    "secondaryLabel": "Review bremelanotide costs",
+    "secondaryHref": "/costs/bremelanotide",
+    "notes": "Use the provider matcher when bremelanotide already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "vyleesi-home-2026",
+      "authority": "Palatin Technologies",
+      "title": "Vyleesi (bremelanotide) for HSDD",
+      "url": "https://www.vyleesi.com/",
+      "publishedAt": "2026",
+      "claimType": "clinical"
+    },
+    {
+      "id": "bremelanotide-hsdd-2019",
+      "authority": "JAMA Internal Medicine",
+      "title": "Effect of Bremelanotide on Sexual Desire in Women",
+      "url": "https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2736463",
+      "publishedAt": "2019",
+      "claimType": "clinical"
+    },
+    {
+      "id": "fda-vyleesi-2019",
+      "authority": "FDA",
+      "title": "FDA approves Vyleesi for hypoactive sexual desire disorder",
+      "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-vyleesi-hypoactive-sexual-desire-disorder",
+      "publishedAt": "2019",
+      "claimType": "regulatory"
+    }
+  ]
+}

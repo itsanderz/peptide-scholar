@@ -21,7 +21,7 @@ export function ApprovedCategoryRouteCard({
 
   return (
     <section
-      className="mb-8 rounded-xl p-5"
+      className="approved-category-card mb-8 rounded-xl p-5"
       style={{ backgroundColor: "#F8FAFC", border: "1px solid #D0D7E2" }}
     >
       <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#3B7A9E] mb-2">
@@ -41,7 +41,7 @@ export function ApprovedCategoryRouteCard({
         {options.map((option) => (
           <div
             key={option.slug}
-            className="rounded-lg p-4"
+            className="approved-category-entry rounded-lg p-4"
             style={{ backgroundColor: "#FFFFFF", border: "1px solid #D0D7E2" }}
           >
             <div className="text-sm font-semibold mb-1" style={{ color: "#1A3A5C" }}>

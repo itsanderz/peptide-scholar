@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "id": "us-exenatide-treatment-hub",
+    "slug": "exenatide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Exenatide Treatment Guide: Byetta, Bydureon, Cost and Provider Paths",
+    "description": "US-first exenatide treatment hub covering approved product paths, twice-daily vs weekly formulations, cost friction, provider selection, and tracker next steps.",
+    "canonicalPath": "/treatments/exenatide",
+    "keywords": [
+      "exenatide treatment guide",
+      "byetta vs bydureon",
+      "exenatide provider",
+      "exenatide treatment path",
+      "exenatide cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 3,
+    "disclaimer": "This hub summarizes official exenatide treatment pathways at a high level. Brand availability, indication fit, coverage, and dosing choices still need confirmation from current official materials and a licensed clinician."
+  },
+  "treatmentSlug": "exenatide",
+  "treatmentName": "Exenatide",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, exenatide is available as Byetta (twice-daily) and Bydureon BCise (once-weekly). As the first GLP-1 receptor agonist approved by the FDA, it established the foundational class data for glucose lowering and modest weight loss.",
+  "overview": "Exenatide is the pioneer GLP-1 receptor agonist, derived from the Gila monster peptide exendin-4. Approved in 2005, it has over 15 years of post-marketing safety data. While newer GLP-1s like semaglutide and tirzepatide offer superior efficacy, exenatide remains a viable option for patients who prefer established safety profiles or have specific insurance coverage constraints.",
+  "approvedProducts": [
+    {
+      "slug": "byetta",
+      "name": "Byetta",
+      "summary": "Twice-daily exenatide injection (5–10 mcg) for type 2 diabetes. The original GLP-1 agonist with extensive long-term safety data."
+    },
+    {
+      "slug": "bydureon-bcise",
+      "name": "Bydureon BCise",
+      "summary": "Once-weekly exenatide extended-release injection (2 mg) for type 2 diabetes. Simpler regimen for patients who prefer weekly dosing."
+    }
+  ],
+  "benefits": [
+    "First GLP-1 agonist approved by the FDA with over 15 years of real-world safety data",
+    "Significant HbA1c reduction and modest weight loss in type 2 diabetes patients",
+    "Both twice-daily and once-weekly formulation options available",
+    "A regulated pathway that can be paired with provider matching and cost review"
+  ],
+  "sideEffects": [
+    "Gastrointestinal side effects such as nausea and vomiting are common and dose-dependent",
+    "Hypoglycemia risk increases when combined with sulfonylureas or insulin",
+    "Anti-exenatide antibodies may develop and reduce efficacy in some patients",
+    "Renal impairment contraindication (eGFR <30) limits use in advanced kidney disease"
+  ],
+  "routes": [
+    "Subcutaneous injection"
+  ],
+  "costSummary": "Exenatide costs vary by formulation and coverage. Bydureon BCise (weekly) is typically more expensive than Byetta (twice-daily) but may improve adherence. Manufacturer savings programs may be available for eligible patients.",
+  "providerSummary": "The highest-converting next step is comparing exenatide provider paths by formulation preference, renal function, coverage posture, and whether weekly or daily dosing fits the patient's routine.",
+  "appSummary": "Exenatide tracking demand varies by formulation: Byetta requires twice-daily dose logging, while Bydureon BCise focuses on weekly adherence, refill timing, and side-effect monitoring.",
+  "faqs": [
+    {
+      "question": "Is exenatide still used today?",
+      "answer": "Yes, though less commonly than newer GLP-1 agonists. Bydureon (once-weekly) remains an option for patients who prefer a weekly injection or have specific insurance coverage. Many providers have moved to newer agents with superior efficacy."
+    },
+    {
+      "question": "Why is exenatide derived from Gila monster saliva?",
+      "answer": "Exenatide is a synthetic version of exendin-4, a peptide found in the saliva of the Gila monster. Exendin-4 shares ~53% homology with human GLP-1 but is naturally resistant to DPP-4 degradation, giving it a longer half-life than native GLP-1."
+    },
+    {
+      "question": "What is the safest next step before starting exenatide?",
+      "answer": "Review kidney function (eGFR), confirm the official product path, check realistic cost and coverage friction, and then use a licensed provider route that fits your state and budget."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find an exenatide provider",
+    "primaryHref": "/providers?treatment=exenatide",
+    "secondaryLabel": "Review exenatide costs",
+    "secondaryHref": "/costs/exenatide",
+    "notes": "Use the provider matcher if you already know exenatide is the right treatment family; use the cost guide if you still need to narrow the path."
+  },
+  "sources": [
+    {
+      "id": "byetta-home-2026",
+      "authority": "AstraZeneca",
+      "title": "Byetta (exenatide) for Type 2 Diabetes",
+      "url": "https://www.byetta.com/",
+      "publishedAt": "2026",
+      "claimType": "clinical"
+    },
+    {
+      "id": "bydureon-home-2026",
+      "authority": "AstraZeneca",
+      "title": "Bydureon BCise (exenatide) for Type 2 Diabetes",
+      "url": "https://www.bydureon.com/",
+      "publishedAt": "2026",
+      "claimType": "clinical"
+    },
+    {
+      "id": "fda-exenatide-2005",
+      "authority": "FDA",
+      "title": "FDA Approves Byetta for Type 2 Diabetes",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2005",
+      "claimType": "regulatory"
+    }
+  ]
+}

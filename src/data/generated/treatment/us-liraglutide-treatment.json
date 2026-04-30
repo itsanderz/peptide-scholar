@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "id": "us-liraglutide-treatment-hub",
+    "slug": "liraglutide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Liraglutide Treatment Guide: Victoza, Saxenda, Cost and Provider Paths",
+    "description": "US-first liraglutide treatment hub covering approved product paths, route differences, cost friction, provider selection, and tracker next steps.",
+    "canonicalPath": "/treatments/liraglutide",
+    "keywords": [
+      "liraglutide treatment guide",
+      "victoza vs saxenda",
+      "liraglutide provider",
+      "liraglutide treatment path",
+      "liraglutide cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 3,
+    "disclaimer": "This hub summarizes official liraglutide treatment pathways at a high level. Brand availability, indication fit, coverage, and dosing choices still need confirmation from current official materials and a licensed clinician."
+  },
+  "treatmentSlug": "liraglutide",
+  "treatmentName": "Liraglutide",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, liraglutide is available through two distinct branded pathways: Victoza for type 2 diabetes and Saxenda for chronic weight management. These differ in dose, indication, coverage logic, and provider workflows.",
+  "overview": "Liraglutide is the first GLP-1 receptor agonist approved for both type 2 diabetes (Victoza, 2010) and chronic weight management (Saxenda, 2014). It has over a decade of real-world safety data and proven cardiovascular benefit in the LEADER trial. For users comparing GLP-1 options, liraglutide offers daily dosing flexibility but generally produces less weight loss than semaglutide or tirzepatide.",
+  "approvedProducts": [
+    {
+      "slug": "victoza",
+      "name": "Victoza",
+      "summary": "Branded liraglutide pathway for type 2 diabetes, dosed at 1.2–1.8 mg daily. Supported by cardiovascular outcome data from the LEADER trial."
+    },
+    {
+      "slug": "saxenda",
+      "name": "Saxenda",
+      "summary": "Branded liraglutide pathway for chronic weight management, dosed at 3.0 mg daily. The first GLP-1 agonist specifically approved for obesity."
+    }
+  ],
+  "benefits": [
+    "Longest real-world safety track record among GLP-1 agonists (10+ years post-approval)",
+    "Proven cardiovascular risk reduction in the LEADER trial for type 2 diabetes patients",
+    "Daily dosing allows flexible titration and rapid dose adjustments",
+    "A regulated pathway that can be paired with provider matching, cost review, and adherence tracking"
+  ],
+  "sideEffects": [
+    "Gastrointestinal side effects such as nausea, vomiting, diarrhea, and constipation are common during titration",
+    "Daily injection burden vs weekly alternatives may affect adherence for some patients",
+    "Pancreatitis and gallbladder disorders are rare but documented class risks",
+    "Victoza and Saxenda are not interchangeable; they differ in dose, indication, and coverage"
+  ],
+  "routes": [
+    "Subcutaneous injection"
+  ],
+  "costSummary": "Liraglutide costs vary by brand, indication, and coverage. Saxenda for obesity often faces stricter formulary restrictions than Victoza for diabetes. Manufacturer savings programs may reduce out-of-pocket costs for eligible patients.",
+  "providerSummary": "The highest-converting next step is comparing liraglutide provider paths by state, coverage posture, budget, and whether the daily injection schedule fits the patient's lifestyle.",
+  "appSummary": "Daily liraglutide dosing creates strong tracking demand: dose timing, side-effect logging, and refill management are recurring jobs that justify a dedicated tracker workflow.",
+  "faqs": [
+    {
+      "question": "What is the difference between Victoza and Saxenda?",
+      "answer": "Both contain liraglutide but at different doses and for different indications. Victoza (1.2–1.8 mg) is for type 2 diabetes. Saxenda (3.0 mg) is for chronic weight management. They should not be used together."
+    },
+    {
+      "question": "How does liraglutide compare to semaglutide or tirzepatide?",
+      "answer": "Semaglutide and tirzepatide generally produce greater weight loss (15% and 20% respectively vs 8% for liraglutide) and are dosed weekly rather than daily. However, liraglutide has more long-term safety data and may be preferred by patients who want daily dosing flexibility."
+    },
+    {
+      "question": "What is the safest next step before starting liraglutide?",
+      "answer": "Review the official product path, check realistic cost and coverage friction, and then use a licensed provider route that fits your state, urgency, and budget."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a liraglutide provider",
+    "primaryHref": "/providers?treatment=liraglutide",
+    "secondaryLabel": "Review liraglutide costs",
+    "secondaryHref": "/costs/liraglutide",
+    "notes": "Use the provider matcher if you already know liraglutide is the right treatment family; use the cost guide if you still need to narrow the path."
+  },
+  "sources": [
+    {
+      "id": "victoza-home-2026",
+      "authority": "Novo Nordisk",
+      "title": "Victoza (liraglutide) for Type 2 Diabetes",
+      "url": "https://www.victoza.com/",
+      "publishedAt": "2026",
+      "claimType": "clinical"
+    },
+    {
+      "id": "saxenda-home-2026",
+      "authority": "Novo Nordisk",
+      "title": "Saxenda (liraglutide) for Weight Management",
+      "url": "https://www.saxenda.com/",
+      "publishedAt": "2026",
+      "claimType": "clinical"
+    },
+    {
+      "id": "fda-liraglutide-leader-2016",
+      "authority": "FDA",
+      "title": "FDA approves Victoza to reduce risk of major cardiovascular events",
+      "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-victoza-reduce-risk-major-cardiovascular-events",
+      "publishedAt": "2017",
+      "claimType": "regulatory"
+    }
+  ]
+}

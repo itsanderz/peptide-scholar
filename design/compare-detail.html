@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compare Detail — Neobrutalist Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #050505;
+      --bone: #edeae3;
+      --concrete: #cfcfc9;
+      --lime: #d8e628;
+      --blue: #5d75c7;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      background: var(--bone);
+      color: var(--black);
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+    @media (min-width: 768px) { .container { padding: 0 32px; } }
+
+    .header { border-bottom: 1px solid var(--black); background: var(--black); position: sticky; top: 0; z-index: 100; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    .logo { display: flex; align-items: center; gap: 8px; }
+    .logo-mark { width: 28px; height: 28px; background: var(--bone); display: flex; align-items: center; justify-content: center; }
+    .logo-mark span { color: var(--bone); font-weight: 700; font-size: 10px; }
+    .logo-text { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: -0.02em; }
+    .nav { display: none; }
+    @media (min-width: 768px) { .nav { display: flex; align-items: center; gap: 0; } .nav a { padding: 8px 14px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; transition: background .15s; } .nav a:hover { background: var(--black); color: var(--bone); } }
+
+    .btn-lime {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; background: var(--lime); color: var(--black);
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500;
+      border: 1px solid var(--black); cursor: pointer;
+      transition: filter .15s, transform .05s;
+    }
+    .btn-lime:hover { filter: brightness(0.92); }
+
+    .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 16px 0; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .breadcrumb a { opacity: 0.5; transition: opacity .15s; }
+    .breadcrumb a:hover { opacity: 1; }
+    .breadcrumb span { opacity: 0.3; }
+
+    .section-title {
+      font-family: 'Inter Tight', sans-serif; font-weight: 800;
+      font-size: 18px; text-transform: uppercase; letter-spacing: -0.02em;
+      margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::after { content: ""; flex: 1; height: 1px; background: var(--black); opacity: 0.2; }
+
+    /* Top hero */
+    .compare-hero { margin-bottom: 40px; }
+    .compare-hero h1 {
+      font-family: 'Inter Tight', sans-serif; font-weight: 900;
+      font-size: clamp(1.6rem, 4vw, 2.6rem); line-height: 0.95;
+      text-transform: uppercase; letter-spacing: -0.03em; margin-bottom: 12px;
+    }
+    .compare-hero p { font-size: 13px; opacity: 0.6; line-height: 1.7; max-width: 640px; }
+
+    .vs-badge {
+      display: inline-flex; align-items: center; gap: 16px;
+      padding: 8px 20px; border: 1px solid var(--black);
+      background: var(--concrete); margin: 16px 0 24px;
+    }
+    .vs-badge .name { font-family: 'Inter Tight', sans-serif; font-weight: 800; font-size: 14px; text-transform: uppercase; }
+    .vs-badge .vs { font-size: 10px; opacity: 0.3; font-weight: 500; letter-spacing: 0.1em; }
+
+    /* Comparison table */
+    .comp-table { width: 100%; border-collapse: collapse; border: 1px solid var(--black); margin-bottom: 48px; font-size: 12px; }
+    .comp-table th {
+      background: var(--black); color: var(--bone); text-align: left;
+      padding: 12px 16px; font-family: 'Inter Tight', sans-serif;
+      font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .comp-table th:first-child { width: 28%; }
+    .comp-table td { padding: 12px 16px; border-bottom: 1px solid var(--black); line-height: 1.6; }
+    .comp-table tr:last-child td { border-bottom: none; }
+    .comp-table tr:nth-child(even) td { background: rgba(207,207,201,0.3); }
+    .comp-table .dim-label { font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.6; }
+
+    .winner { display: inline-block; padding: 1px 8px; border: 1px solid var(--black); font-size: 8px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-left: 6px; vertical-align: middle; }
+    .winner-a { background: var(--lime); color: var(--black); border-color: transparent; }
+    .winner-b { background: var(--blue); color: var(--bone); border-color: transparent; }
+    .winner-tie { background: var(--concrete); border-color: transparent; }
+
+    /* Two-column peptide overviews */
+    .overview-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
+    @media (min-width: 640px) { .overview-grid { grid-template-columns: 1fr 1fr; } }
+
+    .overview-card { border: 1px solid var(--black); padding: 24px; display: flex; flex-direction: column; }
+    .overview-card-name { font-family: 'Inter Tight', sans-serif; font-weight: 800; font-size: 16px; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .overview-card-type { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.4; margin-bottom: 12px; }
+    .overview-card-desc { font-size: 12px; opacity: 0.7; line-height: 1.7; flex: 1; margin-bottom: 16px; }
+    .overview-card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 16px; }
+    .overview-card-tag { padding: 2px 8px; border: 1px solid var(--black); font-size: 8px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* FAQ */
+    .faq-item { border: 1px solid var(--black); border-top: none; }
+    .faq-item:first-child { border-top: 1px solid var(--black); }
+    .faq-q { padding: 14px 16px; font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 13px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-q::after { content: "+"; font-size: 16px; opacity: 0.3; }
+    .faq-a { padding: 0 16px 14px; font-size: 12px; opacity: 0.7; line-height: 1.7; display: none; }
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .faq-q::after { content: "−"; }
+
+    .disclaimer { padding: 14px 16px; border: 1px solid var(--black); font-size: 10px; opacity: 0.5; line-height: 1.6; background: var(--concrete); margin: 32px 0; }
+    .disclaimer strong { opacity: 1; }
+
+    .footer { background: var(--black); color: var(--bone); margin-top: 64px; }
+    .footer-grid { display: grid; grid-template-columns: 1fr; gap: 32px; padding: 48px 0; border-bottom: 1px solid rgba(237,234,227,0.15); }
+    @media (min-width: 768px) { .footer-grid { grid-template-columns: 4fr 2fr 2fr 2fr; gap: 0; padding: 64px 0; } .footer-brand { border-right: 1px solid rgba(237,234,227,0.15); padding-right: 32px; } .footer-col { padding-left: 32px; } }
+    .footer-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+    .footer-logo-mark { width: 28px; height: 28px; background: var(--black); display: flex; align-items: center; justify-content: center; }
+    .footer-logo-mark span { color: var(--black); font-weight: 700; font-size: 10px; }
+    .footer-logo-text { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: -0.02em; }
+    .footer-desc { font-size: 11px; opacity: 0.5; line-height: 1.7; max-width: 260px; }
+    .footer-heading { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; opacity: 0.4; margin-bottom: 12px; }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a { font-size: 11px; opacity: 0.7; transition: opacity .15s; }
+    .footer-links a:hover { opacity: 1; }
+    .footer-bottom { display: flex; flex-direction: column; gap: 12px; padding: 24px 0; align-items: flex-start; }
+    @media (min-width: 640px) { .footer-bottom { flex-direction: row; align-items: center; justify-content: space-between; } }
+    .footer-copy { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.3; }
+    .footer-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border: 1px solid rgba(237,234,227,0.25); }
+    .footer-badge-dot { width: 6px; height: 6px; background: var(--lime); }
+    .footer-badge-text { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner" style="max-width:1200px">
+      <a href="/" class="logo">
+        <div class="logo-mark"><span>PS</span></div>
+        <span class="logo-text">PeptideScholar</span>
+      </a>
+      <nav class="nav">
+        <a href="/peptides">Peptides</a>
+        <a href="/about">About</a>
+        <a href="/blog">Research</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <a href="/peptides" class="btn-lime">Browse All</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/compare">Compare</a>
+      <span>/</span>
+      <span style="opacity:1">Retatrutide vs Tirzepatide</span>
+    </nav>
+
+    <!-- Hero -->
+    <section class="compare-hero">
+      <div class="vs-badge">
+        <span class="name">Retatrutide</span>
+        <span class="vs">VS</span>
+        <span class="name">Tirzepatide</span>
+      </div>
+      <h1>Retatrutide vs Tirzepatide:<br>Head-to-Head Comparison</h1>
+      <p>Both developed by Eli Lilly, these two agents represent distinct generations of incretin-based therapy. Tirzepatide is a dual GLP-1/GIP agonist (FDA-approved). Retatrutide adds glucagon agonism for a triple mechanism. Here's how they compare across efficacy, safety, and clinical profile.</p>
+    </section>
+
+    <!-- Comparison Table -->
+    <h2 class="section-title">Side-by-Side Comparison</h2>
+    <table class="comp-table">
+      <thead>
+        <tr><th>Dimension</th><th>Retatrutide</th><th>Tirzepatide</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="dim-label">Mechanism</td>
+          <td>GLP-1 + GIP + Glucagon <span class="winner winner-a">Triple</span></td>
+          <td>GLP-1 + GIP <span class="winner winner-b">Dual</span></td>
+        </tr>
+        <tr>
+          <td class="dim-label">Max Weight Loss</td>
+          <td>24.2% at 48 weeks <span class="winner winner-a">Higher</span></td>
+          <td>22.5% at 72 weeks</td>
+        </tr>
+        <tr>
+          <td class="dim-label">FDA Status</td>
+          <td>Phase III (not yet approved)</td>
+          <td>FDA Approved (T2DM + Obesity) <span class="winner winner-b">Approved</span></td>
+        </tr>
+        <tr>
+          <td class="dim-label">Dosing</td>
+          <td>Once weekly SC</td>
+          <td>Once weekly SC</td>
+        </tr>
+        <tr>
+          <td class="dim-label">Max Dose</td>
+          <td>12 mg (Phase III exploring up to 12 mg)</td>
+          <td>15 mg</td>
+        </tr>
+        <tr>
+          <td class="dim-label">Heart Rate Effect</td>
+          <td>+2 to +5 bpm (glucagon-mediated)</td>
+          <td>No significant increase</td>
+        </tr>
+        <tr>
+          <td class="dim-label">Energy Expenditure</td>
+          <td>Increases (glucagon agonism) <span class="winner winner-a">↑</span></td>
+          <td>No direct effect</td>
+        </tr>
+        <tr>
+          <td class="dim-label">GI Tolerability</td>
+          <td>Nausea ~48%, Vomiting ~28%</td>
+          <td>Nausea ~40%, Vomiting ~22% <span class="winner winner-b">Better</span></td>
+        </tr>
+        <tr>
+          <td class="dim-label">MASLD Efficacy</td>
+          <td>Significant liver fat reduction <span class="winner winner-a">Yes</span></td>
+          <td>Some data (secondary analysis)</td>
+        </tr>
+        <tr>
+          <td class="dim-label">Availability</td>
+          <td>Clinical trials only</td>
+          <td>Widely available (Mounjaro/Zepbound) <span class="winner winner-b">Available</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Peptide Overviews -->
+    <h2 class="section-title">Peptide Overviews</h2>
+    <div class="overview-grid">
+      <div class="overview-card" style="border-left:4px solid var(--lime)">
+        <div class="overview-card-name">Retatrutide</div>
+        <div class="overview-card-type">GLP-1 / GIP / Glucagon Triple Agonist · Phase III</div>
+        <div class="overview-card-desc">Novel triple-agonist peptide in clinical development. Achieves 24.2% weight loss at 48 weeks — the highest reported for any pharmacologic intervention. Also shows promise for MASLD.</div>
+        <div class="overview-card-tags">
+          <span class="overview-card-tag">Evidence B</span>
+          <span class="overview-card-tag">Triple Agonist</span>
+          <span class="overview-card-tag">Phase III</span>
+        </div>
+        <a href="/peptides/retatrutide" class="btn-outline" style="align-self:flex-start;font-size:10px">View Full Profile →</a>
+      </div>
+      <div class="overview-card" style="border-left:4px solid var(--blue)">
+        <div class="overview-card-name">Tirzepatide</div>
+        <div class="overview-card-type">GLP-1 / GIP Dual Agonist · FDA Approved</div>
+        <div class="overview-card-desc">First-in-class dual GLP-1/GIP agonist. FDA-approved for T2DM (Mounjaro) and obesity (Zepbound). Up to 22.5% weight loss with a well-characterized safety profile.</div>
+        <div class="overview-card-tags">
+          <span class="overview-card-tag">Evidence A</span>
+          <span class="overview-card-tag" style="background:var(--lime);border-color:transparent">FDA Approved</span>
+          <span class="overview-card-tag">Dual Agonist</span>
+        </div>
+        <a href="/peptides/tirzepatide" class="btn-outline" style="align-self:flex-start;font-size:10px">View Full Profile →</a>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <h2 class="section-title">FAQ</h2>
+    <div class="faq-item open">
+      <div class="faq-q">Which is more effective for weight loss?</div>
+      <div class="faq-a">Based on Phase II data, retatrutide shows higher weight loss (24.2% at 48 weeks vs 22.5% at 72 weeks for tirzepatide). However, no head-to-head Phase III trial has directly compared them. Retatrutide's glucagon component likely drives the additional efficacy through increased energy expenditure.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I get retatrutide now? Should I wait?</div>
+      <div class="faq-a">Retatrutide is only available through clinical trials. Tirzepatide is widely available by prescription (Mounjaro/Zepbound). If you need treatment now, tirzepatide is the clinically appropriate choice. Retatrutide may offer advantages when approved, but it is not yet accessible.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Which has a better safety profile?</div>
+      <div class="faq-a">Tirzepatide has a longer and larger safety database as an approved drug. Retatrutide's safety profile is still being characterized in Phase III. Both share GLP-1 class effects (GI events), but retatrutide additionally causes a mild heart rate increase due to glucagon activation, the long-term significance of which is under investigation.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Are they both made by the same company?</div>
+      <div class="faq-a">Yes, both retatrutide (LY3437943) and tirzepatide (LY3298176) are developed by Eli Lilly. This positions Lilly to potentially offer a continuum of incretin-based therapies — from single to dual to triple agonism — depending on patient needs and disease severity.</div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="disclaimer">
+      <strong>Research use only.</strong> This comparison is for educational purposes and does not constitute medical advice. Consult a qualified healthcare provider before making any health decisions. Tirzepatide (Mounjaro, Zepbound) is FDA-approved. Retatrutide is investigational.
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="container" style="max-width:1200px">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-mark"><span>PS</span></div>
+            <span class="footer-logo-text">PeptideScholar</span>
+          </div>
+          <p class="footer-desc">Evidence-based peptide reference. Every claim cited from PubMed. No hype. Just data.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Browse</div>
+          <div class="footer-links">
+            <a href="/peptides">All Peptides</a>
+            <a href="/compare">Comparisons</a>
+            <a href="/blog">Research Blog</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <div class="footer-links">
+            <a href="/about">About</a>
+            <a href="/methodology">Methodology</a>
+            <a href="/contact">Contact</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Legal</div>
+          <div class="footer-links">
+            <a href="/disclaimer">Disclaimer</a>
+            <a href="/legal">Legal Status</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 PeptideScholar</span>
+        <span class="footer-badge">
+          <span class="footer-badge-dot"></span>
+          <span class="footer-badge-text">Research Use Only</span>
+        </span>
+      </div>
+    </div>
+  </footer></body>
+</html>

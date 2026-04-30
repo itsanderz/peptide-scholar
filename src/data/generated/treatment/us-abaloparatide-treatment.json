@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "id": "us-abaloparatide-treatment-hub",
+    "slug": "abaloparatide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Abaloparatide Treatment Guide: Tymlos, Cost and Provider Paths",
+    "description": "US-first abaloparatide treatment hub covering approved product paths, cost friction, provider selection, and clinical evidence.",
+    "canonicalPath": "/treatments/abaloparatide",
+    "keywords": [
+      "abaloparatide treatment guide",
+      "abaloparatide provider",
+      "abaloparatide treatment path",
+      "abaloparatide cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 2,
+    "disclaimer": "This hub summarizes official abaloparatide treatment pathways at a high level. Indication fit, coverage, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "abaloparatide",
+  "treatmentName": "Abaloparatide",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, Abaloparatide is an FDA-approved peptide therapy. Osteoporosis in postmenopausal women at high risk of fracture",
+  "overview": "Abaloparatide is a synthetic analog of parathyroid hormone-related protein (PTHrP 1-34) approved by the FDA for osteoporosis in postmenopausal women at high risk of fracture. Like teriparatide, it is an anabolic bone-building agent with a more transient receptor activation profile.",
+  "approvedProducts": [
+    {
+      "slug": "tymlos",
+      "name": "Tymlos",
+      "summary": "Branded abaloparatide pathway. Osteoporosis in postmenopausal women at high risk of fracture"
+    }
+  ],
+  "benefits": [
+    "Anabolic bone-building agent for severe osteoporosis",
+    "Significant reduction in vertebral and non-vertebral fractures",
+    "Faster early BMD gains than teriparatide in some studies",
+    "Lower incidence of hypercalcemia vs teriparatide"
+  ],
+  "sideEffects": [
+    "Hypercalcemia (less frequent than teriparatide)",
+    "Dizziness, nausea, headache",
+    "Palpitations and orthostatic hypotension",
+    "Injection site reactions"
+  ],
+  "routes": [
+    "Subcutaneous injection"
+  ],
+  "costSummary": "Abaloparatide costs vary by brand, pharmacy, and insurance design. As an FDA-approved medication, coverage may be available but often requires prior authorization and documentation of the approved indication.",
+  "providerSummary": "The highest-value next step is finding a provider experienced in healing & recovery who can evaluate whether Abaloparatide fits the patient's clinical profile and insurance constraints.",
+  "appSummary": "Abaloparatide treatment creates tracking demand for dose timing, symptom logging, and refill management to support long-term adherence.",
+  "faqs": [
+    {
+      "question": "How does abaloparatide compare to teriparatide?",
+      "answer": "Both are anabolic bone-building peptides with the same 2-year treatment limit. Abaloparatide may produce faster early BMD increases and has lower hypercalcemia incidence (3% vs 6%). Head-to-head fracture data is limited. Choice depends on cost, insurance, and patient factors."
+    },
+    {
+      "question": "Can abaloparatide and teriparatide be used sequentially?",
+      "answer": "No. The FDA black box warning applies to both drugs collectively: lifetime cumulative exposure to PTH analogs must not exceed 2 years. Using them sequentially would exceed this limit. After 2 years, transition to an antiresorptive agent."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a abaloparatide provider",
+    "primaryHref": "/providers?treatment=abaloparatide",
+    "secondaryLabel": "Review abaloparatide costs",
+    "secondaryHref": "/costs/abaloparatide",
+    "notes": "Use the provider matcher when Abaloparatide already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "abaloparatide-ref-1",
+      "authority": "J Clin Endocrinol Metab",
+      "title": "Effect of Abaloparatide vs Alendronate on Fracture Risk Reduction in Postmenopausal Women With Osteoporosis.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31674644/",
+      "publishedAt": "2020",
+      "claimType": "clinical"
+    },
+    {
+      "id": "abaloparatide-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Abaloparatide",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

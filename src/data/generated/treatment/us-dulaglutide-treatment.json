@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "id": "us-dulaglutide-treatment-hub",
+    "slug": "dulaglutide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Dulaglutide Treatment Guide: Trulicity, Cost and Provider Paths",
+    "description": "US-first dulaglutide treatment hub covering approved product paths, cardiovascular benefit, cost friction, provider selection, and tracker next steps.",
+    "canonicalPath": "/treatments/dulaglutide",
+    "keywords": [
+      "dulaglutide treatment guide",
+      "trulicity provider",
+      "dulaglutide treatment path",
+      "dulaglutide cost and coverage",
+      "trulicity cardiovascular benefit"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 3,
+    "disclaimer": "This hub summarizes official dulaglutide treatment pathways at a high level. Brand availability, indication fit, coverage, and dosing choices still need confirmation from current official materials and a licensed clinician."
+  },
+  "treatmentSlug": "dulaglutide",
+  "treatmentName": "Dulaglutide",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, dulaglutide is available as Trulicity, a once-weekly GLP-1 receptor agonist approved for type 2 diabetes and cardiovascular risk reduction. Its simple pen design and proven CV benefit make it a practical choice for many patients.",
+  "overview": "Dulaglutide is a once-weekly GLP-1 receptor agonist delivered via a simple, pre-filled pen device. Approved for type 2 diabetes and cardiovascular risk reduction (REWIND trial), it offers a user-friendly alternative to more complex GLP-1 regimens. While it produces less weight loss than semaglutide or tirzepatide, its simplicity and cardiovascular data make it attractive for patients with established heart disease.",
+  "approvedProducts": [
+    {
+      "slug": "trulicity",
+      "name": "Trulicity",
+      "summary": "Once-weekly dulaglutide injection (0.75–4.5 mg) for type 2 diabetes and cardiovascular risk reduction. Features a simple, pre-filled pen with no dose-escalation complexity."
+    }
+  ],
+  "benefits": [
+    "Once-weekly dosing with a simple, pre-filled pen device — no dose titration required for most patients",
+    "Proven cardiovascular benefit in the REWIND trial for patients with established CV disease or multiple risk factors",
+    "Lower injection-site reaction rates compared to some other GLP-1 agonists",
+    "A regulated pathway that can be paired with provider matching and cost review"
+  ],
+  "sideEffects": [
+    "Gastrointestinal side effects such as nausea, vomiting, diarrhea, and decreased appetite are common class effects",
+    "Hypoglycemia risk increases when combined with insulin or sulfonylureas",
+    "Thyroid C-cell tumor risk is a class warning based on animal data; contraindicated in patients with personal or family history of medullary thyroid carcinoma",
+    "Less weight loss efficacy than semaglutide or tirzepatide; not approved for chronic weight management"
+  ],
+  "routes": [
+    "Subcutaneous injection"
+  ],
+  "costSummary": "Dulaglutide costs depend on dose, insurance design, and whether the patient qualifies for manufacturer savings programs. As a diabetes medication, it often has stronger formulary coverage than obesity-only GLP-1s.",
+  "providerSummary": "The highest-converting next step is comparing dulaglutide provider paths by cardiovascular history, coverage posture, and whether the simplicity of the Trulicity pen aligns with the patient's preferences.",
+  "appSummary": "Weekly dulaglutide dosing creates moderate tracking demand: dose-day reminders, refill timing, and side-effect logging help patients stay consistent over the long term.",
+  "faqs": [
+    {
+      "question": "How does dulaglutide compare to semaglutide?",
+      "answer": "Semaglutide generally produces greater weight loss (~15% vs ~3–5% with dulaglutide) and superior HbA1c reduction. Dulaglutide's advantage is simplicity: no dose escalation titration and a very user-friendly pen. The REWIND trial demonstrated cardiovascular benefit, making it a strong choice for patients with established cardiovascular disease."
+    },
+    {
+      "question": "Is dulaglutide approved for weight loss?",
+      "answer": "No. Dulaglutide is FDA-approved for type 2 diabetes and cardiovascular risk reduction, not for chronic weight management. While it produces modest weight loss, this is significantly less than semaglutide or tirzepatide."
+    },
+    {
+      "question": "What is the safest next step before starting dulaglutide?",
+      "answer": "Review cardiovascular history, confirm the official product path, check realistic cost and coverage friction, and then use a licensed provider route that fits your state and budget."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a dulaglutide provider",
+    "primaryHref": "/providers?treatment=dulaglutide",
+    "secondaryLabel": "Review dulaglutide costs",
+    "secondaryHref": "/costs/dulaglutide",
+    "notes": "Use the provider matcher if you already know dulaglutide is the right treatment family; use the cost guide if you still need to narrow the path."
+  },
+  "sources": [
+    {
+      "id": "trulicity-home-2026",
+      "authority": "Eli Lilly",
+      "title": "Trulicity (dulaglutide) for Type 2 Diabetes",
+      "url": "https://www.trulicity.com/",
+      "publishedAt": "2026",
+      "claimType": "clinical"
+    },
+    {
+      "id": "rewind-trial-2019",
+      "authority": "The Lancet",
+      "title": "Dulaglutide and cardiovascular outcomes in type 2 diabetes (REWIND)",
+      "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(19)31149-3/fulltext",
+      "publishedAt": "2019",
+      "claimType": "clinical"
+    },
+    {
+      "id": "fda-trulicity-cv-2020",
+      "authority": "FDA",
+      "title": "FDA approves Trulicity to reduce cardiovascular risk in adults with type 2 diabetes",
+      "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-trulicity-reduce-cardiovascular-risk-adults-type-2-diabetes",
+      "publishedAt": "2020",
+      "claimType": "regulatory"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "id": "us-teduglutide-treatment-hub",
+    "slug": "teduglutide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Teduglutide Treatment Guide: Gattex, Cost and Provider Paths",
+    "description": "US-first teduglutide treatment hub covering approved product paths, cost friction, provider selection, and clinical evidence.",
+    "canonicalPath": "/treatments/teduglutide",
+    "keywords": [
+      "teduglutide treatment guide",
+      "teduglutide provider",
+      "teduglutide treatment path",
+      "teduglutide cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 2,
+    "disclaimer": "This hub summarizes official teduglutide treatment pathways at a high level. Indication fit, coverage, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "teduglutide",
+  "treatmentName": "Teduglutide",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, Teduglutide is an FDA-approved peptide therapy. Short bowel syndrome in adult and pediatric patients who are dependent on parenteral support",
+  "overview": "Teduglutide is a recombinant analog of human GLP-2 and the first FDA-approved therapy for short bowel syndrome (SBS) dependent on parenteral support. It promotes intestinal growth and adaptation, reducing the need for intravenous nutrition.",
+  "approvedProducts": [
+    {
+      "slug": "gattex",
+      "name": "Gattex",
+      "summary": "Branded teduglutide pathway. Short bowel syndrome in adult and pediatric patients who are dependent on parenteral support"
+    }
+  ],
+  "benefits": [
+    "Only FDA-approved drug for short bowel syndrome",
+    "Reduces parenteral nutrition volume requirements by ~30-50%",
+    "Achieves parenteral nutrition independence in ~20-30% of patients",
+    "Improves intestinal absorption and mucosal architecture"
+  ],
+  "sideEffects": [
+    "Abdominal pain and distension",
+    "Nausea and vomiting",
+    "Upper respiratory tract infection",
+    "Injection site reactions"
+  ],
+  "routes": [
+    "Subcutaneous injection"
+  ],
+  "costSummary": "Teduglutide costs vary by brand, pharmacy, and insurance design. As an FDA-approved medication, coverage may be available but often requires prior authorization and documentation of the approved indication.",
+  "providerSummary": "The highest-value next step is finding a provider experienced in healing & recovery who can evaluate whether Teduglutide fits the patient's clinical profile and insurance constraints.",
+  "appSummary": "Teduglutide treatment creates tracking demand for dose timing, symptom logging, and refill management to support long-term adherence.",
+  "faqs": [
+    {
+      "question": "How long does teduglutide take to work?",
+      "answer": "Response is gradual. Most patients show reductions in parenteral nutrition volume within 12-24 weeks. Some may require up to 6 months. Approximately 20-30% achieve complete independence, which can take 1-2 years. Treatment should be stopped if no benefit after 6 months."
+    },
+    {
+      "question": "Why does teduglutide require colonoscopy monitoring?",
+      "answer": "GLP-2 is a trophic hormone that promotes intestinal mucosal growth. In preclinical studies, very high doses caused intestinal polyp growth in rodents. While no increased cancer risk has been observed in humans, the FDA requires baseline colonoscopy with polyp removal before starting, and surveillance every 1-2 years during treatment."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a teduglutide provider",
+    "primaryHref": "/providers?treatment=teduglutide",
+    "secondaryLabel": "Review teduglutide costs",
+    "secondaryHref": "/costs/teduglutide",
+    "notes": "Use the provider matcher when Teduglutide already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "teduglutide-ref-1",
+      "authority": "Gut",
+      "title": "Teduglutide (ALX-0600), a dipeptidyl peptidase IV resistant glucagon-like peptide 2 analogue, improves intestinal function in short bowel syndrome patients.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16099790/",
+      "publishedAt": "2005",
+      "claimType": "clinical"
+    },
+    {
+      "id": "teduglutide-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Teduglutide",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

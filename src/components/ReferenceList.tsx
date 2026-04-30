@@ -21,66 +21,19 @@ export function ReferenceList({ refs }: ReferenceListProps) {
   if (!refs || refs.length === 0) return null;
 
   return (
-    <section
-      style={{
-        marginTop: "2.5rem",
-        paddingTop: "1.5rem",
-        borderTop: "1px solid var(--color-border, #e5e7eb)",
-      }}
-    >
-      <h2
-        style={{
-          fontSize: "1.15rem",
-          fontWeight: 700,
-          marginBottom: "1rem",
-          color: "var(--color-text, #1A3A5C)",
-          fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-        }}
-      >
-        References
-      </h2>
-      <ol
-        style={{
-          listStyle: "none",
-          padding: 0,
-          margin: 0,
-          counterReset: "ref-counter",
-          fontSize: "0.85rem",
-          lineHeight: 1.6,
-          color: "var(--color-text-muted, #4b5563)",
-        }}
-      >
+    <section className="reference-list">
+      <h2 className="section-title">References</h2>
+      <ol>
         {refs.map((ref, i) => {
           const index = i + 1;
           const url = getPubMedUrl(ref.pmid);
           const idLabel = ref.pmid.startsWith("PMC") ? "PMC" : "PMID";
 
           return (
-            <li
-              key={ref.pmid}
-              id={`ref-${index}`}
-              style={{
-                marginBottom: "0.75rem",
-                paddingLeft: "2rem",
-                textIndent: "-2rem",
-              }}
-            >
-              <span style={{ fontWeight: 700, color: "var(--color-text, #1A3A5C)" }}>
-                {index}.
-              </span>{" "}
-              {ref.title}.{" "}
-              <em>{ref.journal}</em>, {ref.year}.{" "}
-              &ldquo;{ref.finding}&rdquo;{" "}
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: "var(--color-secondary, #3B7A9E)",
-                  textDecoration: "underline",
-                  textUnderlineOffset: "2px",
-                }}
-              >
+            <li key={ref.pmid} id={`ref-${index}`}>
+              <span className="reference-index">{index}.</span>
+              {ref.title}. <em>{ref.journal}</em>, {ref.year}. &quot;{ref.finding}&quot;{" "}
+              <a href={url} target="_blank" rel="noopener noreferrer">
                 [{idLabel}: {ref.pmid}]
               </a>
             </li>

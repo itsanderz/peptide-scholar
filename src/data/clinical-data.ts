@@ -121,6 +121,23 @@ export const titrationSchedules: TitrationSchedule[] = [
     sourceUrl: "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/206321s020lbl.pdf",
     notes: "If >3 days missed, reinitiate at 0.6mg and re-titrate. Daily injection (not weekly).",
   },
+  {
+    slug: "retatrutide-ly3437943",
+    brandName: "Retatrutide (investigational)",
+    genericName: "Retatrutide",
+    indication: "Obesity / Type 2 diabetes (investigational)",
+    route: "Subcutaneous injection",
+    maxDoseMg: 12,
+    steps: [
+      { week: 1, durationWeeks: 4, doseMg: 1, frequency: "Once weekly", isMaintenanceDose: false },
+      { week: 5, durationWeeks: 4, doseMg: 4, frequency: "Once weekly", isMaintenanceDose: false },
+      { week: 9, durationWeeks: 4, doseMg: 8, frequency: "Once weekly", isMaintenanceDose: false },
+      { week: 13, durationWeeks: 0, doseMg: 12, frequency: "Once weekly", isMaintenanceDose: true },
+    ],
+    source: "Jastreboff et al. (2023) — NEJM Phase 2 obesity trial + Coskun et al. (2022) Cell Metabolism",
+    sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/37366315/",
+    notes: "Investigational dosing from Phase 2 trials. Phase 3 TRIUMPH program may use modified escalation schedules. Not FDA approved. Weekly subcutaneous injection with C20 diacid lipidation for albumin binding.",
+  },
 ];
 
 // ── Side Effect Data ─────────────────────────────────────────────────────
@@ -186,7 +203,7 @@ export const sideEffectProfiles: SideEffectProfile[] = [
     ],
     discontinuationRate: { drug: 4.3, placebo: 2.6 },
     source: "Zepbound FDA Prescribing Information, Table 3 — SURMOUNT-1 data (adverse events ≥2% and greater than placebo)",
-    sourceUrl: "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/21844s001lbl.pdf",
+    sourceUrl: "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/217806s031lbl.pdf",
   },
   {
     slug: "tirzepatide-10mg",
@@ -246,6 +263,28 @@ export const sideEffectProfiles: SideEffectProfile[] = [
     discontinuationRate: { drug: 9.8, placebo: 3.8 },
     source: "Saxenda FDA Label — SCALE trial data",
     sourceUrl: "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/206321s020lbl.pdf",
+  },
+  {
+    slug: "retatrutide-12mg",
+    brandName: "Retatrutide (investigational)",
+    genericName: "Retatrutide",
+    dose: "12mg weekly",
+    trialName: "Phase 2 obesity (NEJM 2023)",
+    sideEffects: [
+      { name: "Nausea", drugPercent: 52, placeboPercent: 14 },
+      { name: "Diarrhea", drugPercent: 31, placeboPercent: 9 },
+      { name: "Vomiting", drugPercent: 26, placeboPercent: 4 },
+      { name: "Decreased appetite", drugPercent: 45, placeboPercent: 8 },
+      { name: "Constipation", drugPercent: 18, placeboPercent: 6 },
+      { name: "Fatigue", drugPercent: 12, placeboPercent: 5 },
+      { name: "Headache", drugPercent: 10, placeboPercent: 6 },
+      { name: "Abdominal pain", drugPercent: 9, placeboPercent: 4 },
+      { name: "Dyspepsia", drugPercent: 7, placeboPercent: 3 },
+      { name: "Dizziness", drugPercent: 6, placeboPercent: 3 },
+    ],
+    discontinuationRate: { drug: 5.5, placebo: 2.0 },
+    source: "Jastreboff et al. (2023) — NEJM Phase 2 obesity trial (adverse events ≥2% and greater than placebo)",
+    sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/37366315/",
   },
 ];
 

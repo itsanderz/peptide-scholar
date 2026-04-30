@@ -6,31 +6,31 @@ interface EvidenceBadgeProps {
 const EVIDENCE_CONFIG = {
   A: {
     label: "FDA Approved",
-    bg: "#dcfce7",
-    border: "#16a34a",
-    text: "#15803d",
-    title: "Level A: FDA-approved therapeutic with robust clinical evidence",
+    bg: "var(--lime, #d8e628)",
+    border: "var(--black, #050505)",
+    text: "var(--black, #050505)",
+    title: "Level A: FDA-approved with robust clinical evidence",
   },
   B: {
     label: "Human Studies",
-    bg: "#dbeafe",
-    border: "#2563eb",
-    text: "#1d4ed8",
-    title: "Level B: Supported by human clinical studies but not FDA-approved for this indication",
+    bg: "var(--blue, #5d75c7)",
+    border: "var(--black, #050505)",
+    text: "var(--bone, #edeae3)",
+    title: "Level B: Supported by human clinical studies",
   },
   C: {
     label: "Preclinical",
-    bg: "#fef3c7",
-    border: "#d97706",
-    text: "#b45309",
-    title: "Level C: Preclinical (animal or in vitro) evidence only; no adequate human trials",
+    bg: "var(--concrete, #cfcfc9)",
+    border: "var(--black, #050505)",
+    text: "var(--black, #050505)",
+    title: "Level C: Preclinical evidence only",
   },
   D: {
     label: "Limited Data",
-    bg: "#fee2e2",
-    border: "#dc2626",
-    text: "#b91c1c",
-    title: "Level D: Very limited or no published scientific evidence",
+    bg: "var(--black, #050505)",
+    border: "var(--black, #050505)",
+    text: "var(--bone, #edeae3)",
+    title: "Level D: Very limited or no published evidence",
   },
 } as const;
 
@@ -40,19 +40,11 @@ export function EvidenceBadge({ level, showLabel = true }: EvidenceBadgeProps) {
   return (
     <span
       title={config.title}
+      className="tag"
       style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: "0.35rem",
-        padding: "0.2rem 0.6rem",
-        borderRadius: "9999px",
-        fontSize: "0.8rem",
-        fontWeight: 700,
-        lineHeight: 1.4,
         backgroundColor: config.bg,
-        border: `1.5px solid ${config.border}`,
         color: config.text,
-        whiteSpace: "nowrap",
+        border: `1px solid ${config.border}`,
       }}
     >
       <span
@@ -60,13 +52,10 @@ export function EvidenceBadge({ level, showLabel = true }: EvidenceBadgeProps) {
           display: "inline-flex",
           alignItems: "center",
           justifyContent: "center",
-          width: "1.25rem",
-          height: "1.25rem",
-          borderRadius: "50%",
-          backgroundColor: config.border,
-          color: "#fff",
-          fontSize: "0.7rem",
+          width: "1rem",
+          height: "1rem",
           fontWeight: 800,
+          fontSize: "0.65rem",
           lineHeight: 1,
         }}
       >

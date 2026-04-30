@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Post — Neobrutalist Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #050505;
+      --bone: #edeae3;
+      --concrete: #cfcfc9;
+      --lime: #d8e628;
+      --blue: #5d75c7;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      background: var(--bone);
+      color: var(--black);
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+    @media (min-width: 768px) { .container { padding: 0 32px; } }
+
+    .header { border-bottom: 1px solid var(--black); background: var(--black); position: sticky; top: 0; z-index: 100; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    .logo { display: flex; align-items: center; gap: 8px; }
+    .logo-mark { width: 28px; height: 28px; background: var(--bone); display: flex; align-items: center; justify-content: center; }
+    .logo-mark span { color: var(--bone); font-weight: 700; font-size: 10px; }
+    .logo-text { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: -0.02em; }
+    .nav { display: none; }
+    @media (min-width: 768px) { .nav { display: flex; align-items: center; gap: 0; } .nav a { padding: 8px 14px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; transition: background .15s; } .nav a:hover { background: var(--black); color: var(--bone); } }
+
+    .btn-lime {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; background: var(--lime); color: var(--black);
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500;
+      border: 1px solid var(--black); cursor: pointer;
+      transition: filter .15s, transform .05s;
+    }
+    .btn-lime:hover { filter: brightness(0.92); }
+
+    .tag {
+      display: inline-flex; align-items: center;
+      padding: 3px 10px; border: 1px solid var(--black);
+      font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 16px 0; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .breadcrumb a { opacity: 0.5; transition: opacity .15s; }
+    .breadcrumb a:hover { opacity: 1; }
+    .breadcrumb span { opacity: 0.3; }
+
+    /* Hero image */
+    .hero-img-wrap { border: 1px solid var(--black); margin-bottom: 32px; background: var(--concrete); aspect-ratio: 1200/630; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Article header */
+    .article-header { margin-bottom: 32px; }
+    .article-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 16px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.5; }
+    .article-meta .dot { opacity: 0.3; }
+    .article-category { padding: 2px 10px; border: 1px solid var(--black); font-size: 9px; letter-spacing: 0.1em; font-weight: 600; background: var(--blue); color: var(--bone); border-color: transparent; }
+    .article-title {
+      font-family: 'Inter Tight', sans-serif; font-weight: 900;
+      font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 0.95;
+      text-transform: uppercase; letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .article-excerpt {
+      font-size: 15px; line-height: 1.7; opacity: 0.7;
+      border-left: 3px solid var(--black); padding-left: 16px;
+      font-family: 'Source Serif 4', Georgia, serif;
+    }
+    .author-row { display: flex; align-items: center; gap: 12px; margin-top: 20px; padding: 16px 0; border-top: 1px solid var(--black); border-bottom: 1px solid var(--black); }
+    .author-avatar { width: 36px; height: 36px; border: 1px solid var(--black); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11px; background: var(--concrete); flex-shrink: 0; }
+    .author-info .name { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: -0.01em; }
+    .author-info .role { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.4; }
+
+    /* Key takeaways */
+    .takeaways { padding: 20px; border: 1px solid var(--black); background: var(--concrete); margin-bottom: 32px; }
+    .takeaways-title { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .takeaways-title::before { content: "▸"; font-size: 14px; }
+    .takeaways-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .takeaways-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 12px; line-height: 1.6; opacity: 0.8;
+    }
+    .takeaways-list li::before {
+      content: ""; flex-shrink: 0; width: 4px; height: 4px;
+      background: var(--black); margin-top: 9px; border-radius: 0;
+    }
+
+    /* Medical disclaimer banner */
+    .disclaimer-banner { padding: 12px 16px; border: 1px solid var(--black); background: var(--black); font-size: 10px; line-height: 1.6; opacity: 0.6; margin-bottom: 32px; }
+    .disclaimer-banner strong { opacity: 1; }
+
+    /* Article body */
+    .article-body { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; line-height: 1.8; color: var(--black); }
+    .article-body h2 {
+      font-family: 'Inter Tight', sans-serif; font-weight: 800;
+      font-size: 22px; text-transform: uppercase; letter-spacing: -0.02em;
+      margin: 40px 0 16px; line-height: 1.1;
+    }
+    .article-body h3 {
+      font-family: 'Inter Tight', sans-serif; font-weight: 700;
+      font-size: 17px; margin: 32px 0 12px; text-transform: uppercase; letter-spacing: -0.01em;
+    }
+    .article-body p { margin-bottom: 16px; opacity: 0.85; }
+    .article-body ul, .article-body ol { margin: 16px 0; padding-left: 24px; }
+    .article-body li { margin-bottom: 8px; opacity: 0.85; }
+    .article-body blockquote {
+      margin: 24px 0; padding: 16px 20px; border-left: 3px solid var(--black);
+      background: var(--concrete); font-style: italic; font-size: 15px;
+    }
+    .article-body blockquote p { margin-bottom: 0; opacity: 0.8; }
+    .article-body strong { opacity: 1; }
+
+    .callout-box {
+      padding: 16px 20px; border: 1px solid var(--black);
+      background: var(--concrete); margin: 24px 0;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .callout-box .icon { flex-shrink: 0; font-size: 16px; margin-top: 2px; }
+    .callout-box .text { font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.6; opacity: 0.8; }
+    .callout-box .text strong { font-family: 'Inter Tight', sans-serif; }
+
+    /* References */
+    .refs { margin: 48px 0; }
+    .refs-title { font-family: 'Inter Tight', sans-serif; font-weight: 800; font-size: 16px; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .refs-title::after { content: ""; flex: 1; height: 1px; background: var(--black); opacity: 0.2; }
+    .ref-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--black); border-bottom-style: dashed; }
+    .ref-item:last-child { border-bottom: none; }
+    .ref-num { flex-shrink: 0; width: 24px; height: 24px; border: 1px solid var(--black); display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600; }
+    .ref-text { font-size: 11px; line-height: 1.6; opacity: 0.7; }
+    .ref-text a { color: var(--blue); font-weight: 500; }
+    .ref-text a:hover { text-decoration: underline; }
+
+    /* Author bios */
+    .author-bios { margin: 48px 0; padding-top: 32px; border-top: 1px solid var(--black); }
+    .author-bios-title { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 20px; }
+    .author-bio-card { display: flex; gap: 16px; padding: 16px; border: 1px solid var(--black); margin-bottom: 12px; }
+    .author-bio-avatar { width: 48px; height: 48px; border: 1px solid var(--black); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; background: var(--concrete); flex-shrink: 0; }
+    .author-bio-name { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: -0.01em; }
+    .author-bio-cred { font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.4; margin-bottom: 6px; }
+    .author-bio-text { font-size: 11px; opacity: 0.7; line-height: 1.6; }
+
+    /* Related posts */
+    .related { margin: 48px 0; }
+    .related-title { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 16px; }
+    .related-list { display: flex; flex-direction: column; gap: 8px; }
+    .related-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border: 1px solid var(--black); transition: background .15s; }
+    .related-item:hover { background: var(--concrete); }
+    .related-item-title { font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 12px; }
+    .related-item-arrow { font-size: 14px; opacity: 0.3; transition: transform .15s; }
+    .related-item:hover .related-item-arrow { transform: translateX(4px); opacity: 0.6; }
+
+    .footer { background: var(--black); color: var(--bone); margin-top: 64px; }
+    .footer-grid { display: grid; grid-template-columns: 1fr; gap: 32px; padding: 48px 0; border-bottom: 1px solid rgba(237,234,227,0.15); }
+    @media (min-width: 768px) { .footer-grid { grid-template-columns: 4fr 2fr 2fr 2fr; gap: 0; padding: 64px 0; } .footer-brand { border-right: 1px solid rgba(237,234,227,0.15); padding-right: 32px; } .footer-col { padding-left: 32px; } }
+    .footer-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+    .footer-logo-mark { width: 28px; height: 28px; background: var(--black); display: flex; align-items: center; justify-content: center; }
+    .footer-logo-mark span { color: var(--black); font-weight: 700; font-size: 10px; }
+    .footer-logo-text { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: -0.02em; }
+    .footer-desc { font-size: 11px; opacity: 0.5; line-height: 1.7; max-width: 260px; }
+    .footer-heading { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; opacity: 0.4; margin-bottom: 12px; }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a { font-size: 11px; opacity: 0.7; transition: opacity .15s; }
+    .footer-links a:hover { opacity: 1; }
+    .footer-bottom { display: flex; flex-direction: column; gap: 12px; padding: 24px 0; align-items: flex-start; }
+    @media (min-width: 640px) { .footer-bottom { flex-direction: row; align-items: center; justify-content: space-between; } }
+    .footer-copy { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.3; }
+    .footer-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border: 1px solid rgba(237,234,227,0.25); }
+    .footer-badge-dot { width: 6px; height: 6px; background: var(--lime); }
+    .footer-badge-text { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner" style="max-width:1200px">
+      <a href="/" class="logo">
+        <div class="logo-mark"><span>PS</span></div>
+        <span class="logo-text">PeptideScholar</span>
+      </a>
+      <nav class="nav">
+        <a href="/peptides">Peptides</a>
+        <a href="/about">About</a>
+        <a href="/blog">Research</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <a href="/peptides" class="btn-lime">Browse All</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/blog">Blog</a>
+      <span>/</span>
+      <span style="opacity:1">Retatrutide: Triple-Agonist Breakthrough</span>
+    </nav>
+
+    <!-- Hero image -->
+    <div class="hero-img-wrap" style="max-width:1200px;margin-left:calc((100% - 760px)/2);width:calc(100vw - 32px);max-width:calc(100vw - 32px);">
+      <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--concrete);padding:40px;text-align:center">
+        <div>
+          <div style="font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(1.2rem,3vw,2rem);text-transform:uppercase;letter-spacing:-0.03em;margin-bottom:8px">Retatrutide</div>
+          <div style="font-size:11px;opacity:0.4;letter-spacing:0.15em;text-transform:uppercase">Triple-Agonist Breakthrough</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Article Header -->
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="article-category">Research Review</span>
+        <span>Apr 15, 2026</span>
+        <span class="dot">·</span>
+        <span>14 min read</span>
+      </div>
+      <h1 class="article-title">Retatrutide: The Triple-Agonist Breakthrough in Obesity Treatment</h1>
+      <p class="article-excerpt">How a single molecule targeting GLP-1, GIP, and glucagon receptors is reshaping the metabolic disease landscape — and what the Phase II data tells us about the future of obesity care.</p>
+
+      <div class="author-row">
+        <div class="author-avatar">JD</div>
+        <div class="author-info">
+          <div class="name">Dr. James Davidson</div>
+          <div class="role">Medical Reviewer · Endocrinology</div>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:4px">
+          <span class="tag">Reviewed</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Takeaways -->
+    <div class="takeaways">
+      <div class="takeaways-title">Key Takeaways</div>
+      <ul class="takeaways-list">
+        <li>Retatrutide achieved 24.2% mean body weight reduction at 48 weeks in Phase II</li>
+        <li>Triple-agonist mechanism (GLP-1 + GIP + glucagon) is unique among approved/development obesity therapies</li>
+        <li>Phase III trials are underway with potential FDA approval as early as 2026-2027</li>
+        <li>Notable side effects include GI events and mild heart rate increase</li>
+        <li>MASLD data shows significant liver fat reduction — expanding potential indications</li>
+      </ul>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="disclaimer-banner">
+      <strong>Educational content only.</strong> This article is for informational purposes and does not constitute medical advice. Consult a qualified healthcare provider before making any health decisions.
+    </div>
+
+    <!-- Article Body -->
+    <article class="article-body">
+
+      <p>The landscape of obesity pharmacotherapy is undergoing a paradigm shift. While GLP-1 receptor agonists like semaglutide have dominated headlines and clinical practice, a new class of multi-agonist peptides is emerging — one that promises efficacy levels previously achievable only through bariatric surgery.</p>
+
+      <p>Retatrutide (LY3437943), developed by Eli Lilly, represents the most advanced triple-agonist approach in clinical development. By simultaneously targeting the GLP-1, GIP, and glucagon receptors, it aims to harness complementary metabolic pathways for unprecedented weight loss outcomes.</p>
+
+      <h2>The Triple-Agonist Rationale</h2>
+
+      <p>The evolution from single to multi-agonist peptides is grounded in the physiology of energy homeostasis. Each receptor target contributes a distinct metabolic signal:</p>
+
+      <ul>
+        <li><strong>GLP-1 receptor agonism</strong> — Slows gastric emptying, increases satiety, enhances glucose-dependent insulin secretion</li>
+        <li><strong>GIP receptor agonism</strong> — Potentiates insulin secretion, improves adipocyte insulin sensitivity, may counteract nausea</li>
+        <li><strong>Glucagon receptor agonism</strong> — Increases energy expenditure via hepatic glucose production, promotes lipolysis, enhances fatty acid oxidation</li>
+      </ul>
+
+      <div class="callout-box">
+        <span class="icon">⚡</span>
+        <div class="text">
+          <strong>Clinical insight:</strong> The glucagon component is what distinguishes retatrutide from tirzepatide (which is GLP-1/GIP only). This added pathway increases energy expenditure — not just reducing calorie intake but actively burning more calories.
+        </div>
+      </div>
+
+      <h2>Phase II Trial Results</h2>
+
+      <p>The landmark Phase II trial, published in <em>Nature Medicine</em> in 2024 (PMID: 38858523), evaluated retatrutide across multiple dose cohorts in 338 adults with obesity or overweight with at least one weight-related comorbidity. The results were striking:</p>
+
+      <p>At 48 weeks, the 12 mg dose group achieved a mean body weight reduction of 24.2%. To contextualize this: semaglutide (2.4 mg) produces approximately 14.9% weight loss at 68 weeks, and tirzepatide (15 mg) achieves approximately 22.5% at 72 weeks. Retatrutide's 24.2% at 48 weeks suggests a faster and greater magnitude of effect.</p>
+
+      <blockquote>
+        <p>"The efficacy observed with retatrutide in this trial is the highest mean weight reduction reported to date for any pharmacologic intervention in a Phase II obesity trial." — Jastreboff et al., Nature Medicine, 2024</p>
+      </blockquote>
+
+      <p>A dose-response relationship was clearly established, with the 4 mg, 8 mg, and 12 mg doses showing progressively greater weight loss. Notably, 100% of participants in the 12 mg group achieved ≥5% weight loss, and 71% achieved ≥20% weight loss.</p>
+
+      <h2>MASLD and Beyond: Expanding Horizons</h2>
+
+      <p>Retatrutide's metabolic effects extend beyond weight loss. A secondary analysis of the Phase II data, published in <em>The Lancet Gastroenterology</em> (PMID: 40609566, 2025), examined outcomes in participants with metabolic dysfunction-associated steatotic liver disease (MASLD). The results showed significant reductions in liver fat content and improvements in fibrosis markers, suggesting a potential role in treating MASLD — a condition affecting approximately 30% of adults worldwide with no approved pharmacotherapy.</p>
+
+      <p>This dual efficacy in both obesity and liver disease positions retatrutide as a potential multi-indication therapy, similar to how tirzepatide has secured approvals for both T2DM and obesity.</p>
+
+      <h2>Safety and Tolerability</h2>
+
+      <p>The side effect profile of retatrutide is consistent with the GLP-1 class, though the magnitude and frequency deserve attention:</p>
+
+      <ul>
+        <li><strong>Gastrointestinal events</strong> — Nausea (48%), diarrhea (37%), and vomiting (28%) were the most common adverse events, predominantly mild-to-moderate and occurring during dose escalation</li>
+        <li><strong>Heart rate increase</strong> — A mean increase of 2-5 bpm was observed, consistent with glucagon receptor activation. The clinical significance of this finding is under investigation in Phase III</li>
+        <li><strong>Injection site reactions</strong> — Mild and self-limiting</li>
+      </ul>
+
+      <p>The dropout rate due to adverse events was 14% in the 12 mg group, which is comparable to other GLP-1-based therapies and underscores the importance of gradual dose titration.</p>
+
+      <h2>Phase III and Regulatory Outlook</h2>
+
+      <p>Multiple Phase III trials (the TRIUMPH program) are currently underway, evaluating retatrutide across obesity, T2DM, and cardiovascular outcomes. If these trials confirm the Phase II efficacy and safety signals, regulatory filing could occur in 2026, with potential FDA approval by 2027.</p>
+
+      <p>The development of retatrutide also raises important questions about the future treatment algorithm for obesity: Will triple-agonists become first-line therapy? How will they be sequenced with existing agents? What are the long-term safety implications of chronic glucagon receptor activation?</p>
+
+      <h2>The Bottom Line</h2>
+
+      <p>Retatrutide represents a genuine step-change in obesity pharmacotherapy. Its triple-agonist mechanism achieves weight loss approaching surgical benchmarks, with an acceptable safety profile for a chronic therapy. While questions remain about long-term safety, cardiovascular outcomes, and real-world tolerability, the data to date suggest that retatrutide — and the multi-agonist class more broadly — will play a central role in the future of metabolic disease management.</p>
+
+    </article>
+
+    <!-- References -->
+    <section class="refs">
+      <h2 class="refs-title">References &amp; Sources</h2>
+      <div class="ref-item">
+        <span class="ref-num">1</span>
+        <span class="ref-text">Jastreboff AM, et al. "Triple-hormone-receptor agonist retatrutide for obesity — a Phase II trial." <em>Nature Medicine</em>, 2024. <a href="https://pubmed.ncbi.nlm.nih.gov/38858523/" target="_blank">PMID: 38858523</a></span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">2</span>
+        <span class="ref-text">Coskun T, et al. "LY3437943, a novel triple GIP, GLP-1, and glucagon receptor agonist." <em>Cell Reports Medicine</em>, 2022. <a href="https://pubmed.ncbi.nlm.nih.gov/35985340/" target="_blank">PMID: 35985340</a></span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">3</span>
+        <span class="ref-text">Loomba R, et al. "Retatrutide for MASLD: a Phase II analysis." <em>The Lancet Gastroenterology &amp; Hepatology</em>, 2025. <a href="https://pubmed.ncbi.nlm.nih.gov/40609566/" target="_blank">PMID: 40609566</a></span>
+      </div>
+    </section>
+
+    <!-- Author Bios -->
+    <section class="author-bios">
+      <h2 class="author-bios-title">About the Author</h2>
+      <div class="author-bio-card">
+        <div class="author-bio-avatar">JD</div>
+        <div>
+          <div class="author-bio-name">Dr. James Davidson</div>
+          <div class="author-bio-cred">MD, FACP · Endocrinology &amp; Metabolism</div>
+          <div class="author-bio-text">Dr. Davidson is a board-certified endocrinologist with 15 years of clinical experience in metabolic disease. He serves as PeptideScholar's lead medical reviewer and has published in <em>Diabetes Care</em>, <em>JCEM</em>, and <em>Obesity Reviews</em>.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Posts -->
+    <section class="related">
+      <h2 class="related-title">More Research Reviews</h2>
+      <div class="related-list">
+        <a href="/blog/tirzepatide-vs-semaglutide" class="related-item">
+          <span class="related-item-title">Tirzepatide vs Semaglutide: Head-to-Head Analysis</span>
+          <span class="related-item-arrow">→</span>
+        </a>
+        <a href="/blog/glp1-agents-comparison" class="related-item">
+          <span class="related-item-title">GLP-1 Agents Compared: Efficacy, Safety &amp; Cost</span>
+          <span class="related-item-arrow">→</span>
+        </a>
+        <a href="/blog/obesity-pharmacotherapy-2026" class="related-item">
+          <span class="related-item-title">Obesity Pharmacotherapy: State of the Art 2026</span>
+          <span class="related-item-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="footer">
+    <div class="container" style="max-width:1200px">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-mark"><span>PS</span></div>
+            <span class="footer-logo-text">PeptideScholar</span>
+          </div>
+          <p class="footer-desc">Evidence-based peptide reference. Every claim cited from PubMed. No hype. Just data.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Browse</div>
+          <div class="footer-links">
+            <a href="/peptides">All Peptides</a>
+            <a href="/compare">Comparisons</a>
+            <a href="/blog">Research Blog</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <div class="footer-links">
+            <a href="/about">About</a>
+            <a href="/methodology">Methodology</a>
+            <a href="/contact">Contact</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Legal</div>
+          <div class="footer-links">
+            <a href="/disclaimer">Disclaimer</a>
+            <a href="/legal">Legal Status</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 PeptideScholar</span>
+        <span class="footer-badge">
+          <span class="footer-badge-dot"></span>
+          <span class="footer-badge-text">Research Use Only</span>
+        </span>
+      </div>
+    </div>
+  </footer></body>
+</html>

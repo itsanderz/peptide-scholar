@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "id": "us-tesamorelin-cost",
+    "slug": "tesamorelin",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "cost"
+  },
+  "seo": {
+    "title": "Tesamorelin Cost Guide: Insurance, Cash Pay, and Savings",
+    "description": "US-first tesamorelin cost guide covering insurance pathways, cash-pay options, prior authorization, and what to verify before starting treatment.",
+    "canonicalPath": "/costs/tesamorelin",
+    "keywords": [
+      "tesamorelin cost",
+      "tesamorelin insurance coverage",
+      "tesamorelin cash pay",
+      "tesamorelin savings card"
+    ]
+  },
+  "trust": {
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 3,
+    "disclaimer": "Pricing, savings eligibility, and coverage rules can change quickly. Verify all current figures and terms directly on official brand pages before acting."
+  },
+  "treatmentSlug": "tesamorelin",
+  "treatmentName": "Tesamorelin",
+  "marketSummary": "In the United States, Tesamorelin costs depend on brand, pharmacy, insurance design, and whether the patient qualifies for manufacturer savings programs.",
+  "listPrice": "Verify current pricing directly on official Egrifta pages before starting, because list pricing, self-pay offers, and eligibility terms can change.",
+  "cashPayRange": "Official cash-pay pricing varies by pharmacy and dose. Contact multiple pharmacies or use a prescription discount service for current rates.",
+  "insuranceSummary": "Commercial coverage for Tesamorelin varies by plan and indication. Prior authorization is commonly required.",
+  "couponSummary": "Manufacturer savings programs may reduce out-of-pocket cost for eligible commercially insured patients.",
+  "priorAuthSummary": "Prior authorization is common and may require documentation of diagnosis, prior treatments, and clinical need.",
+  "faqs": [
+    {
+      "question": "What is the safest way to check current Tesamorelin pricing?",
+      "answer": "Use official brand pages first, then confirm the exact cash-pay or insured amount with the prescribing service and dispensing pharmacy."
+    },
+    {
+      "question": "Does insurance always cover Tesamorelin?",
+      "answer": "No. Coverage depends on the specific plan, indication, and whether prior authorization is approved. Some plans may require step therapy or documentation of medical necessity."
+    },
+    {
+      "question": "Are there manufacturer savings programs for Tesamorelin?",
+      "answer": "Many branded peptide therapies offer savings cards or patient assistance programs. Eligibility typically requires commercial insurance and may exclude government programs like Medicare or Medicaid."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a tesamorelin provider",
+    "primaryHref": "/providers?treatment=tesamorelin",
+    "secondaryLabel": "Use the cost calculator",
+    "secondaryHref": "/tools/cost-calculator",
+    "notes": "Use provider matching when you need help comparing insured and self-pay treatment paths."
+  },
+  "sources": [
+    {
+      "id": "tesamorelin-cost-ref-1",
+      "authority": "Drugs",
+      "title": "Tesamorelin: a review of its use in the management of HIV-associated lipodystrophy.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21668043/",
+      "publishedAt": "2011",
+      "claimType": "review"
+    },
+    {
+      "id": "tesamorelin-cost-ref-2",
+      "authority": "Lancet HIV",
+      "title": "Effects of tesamorelin on non-alcoholic fatty liver disease in HIV: a randomised, double-blind, multicentre trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31611038/",
+      "publishedAt": "2019",
+      "claimType": "clinical"
+    },
+    {
+      "id": "tesamorelin-cost-ref-3",
+      "authority": "Arch Neurol",
+      "title": "Effects of growth hormone–releasing hormone on cognitive function in adults with mild cognitive impairment and healthy older adults: results of a controlled trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22869065/",
+      "publishedAt": "2012",
+      "claimType": "clinical"
+    }
+  ]
+}

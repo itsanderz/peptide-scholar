@@ -1,0 +1,262 @@
+{
+  "ok": false,
+  "errors": [],
+  "warnings": [
+    {
+      "peptide": "BPC-157",
+      "severity": "warning",
+      "message": "6/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "TB-500 (Thymosin Beta-4)",
+      "severity": "warning",
+      "message": "6/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "GHK-Cu",
+      "severity": "warning",
+      "message": "6/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "Ipamorelin",
+      "severity": "warning",
+      "message": "7/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "CJC-1295",
+      "severity": "warning",
+      "message": "9/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Sermorelin",
+      "severity": "warning",
+      "message": "8/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Tesamorelin",
+      "severity": "warning",
+      "message": "6/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Bremelanotide (PT-141)",
+      "severity": "warning",
+      "message": "9/10 claims lack sourceIds"
+    },
+    {
+      "peptide": "Semaglutide",
+      "severity": "warning",
+      "message": "4/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Tirzepatide",
+      "severity": "warning",
+      "message": "2/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "AOD-9604",
+      "severity": "warning",
+      "message": "8/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "DSIP (Delta Sleep-Inducing Peptide)",
+      "severity": "warning",
+      "message": "6/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "Epithalon (Epitalon)",
+      "severity": "warning",
+      "message": "7/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "Selank",
+      "severity": "warning",
+      "message": "7/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "Semax",
+      "severity": "warning",
+      "message": "7/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "GHRP-2",
+      "severity": "warning",
+      "message": "9/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "GHRP-6",
+      "severity": "warning",
+      "message": "9/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Hexarelin",
+      "severity": "warning",
+      "message": "6/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "Melanotan II",
+      "severity": "warning",
+      "message": "10/10 claims lack sourceIds"
+    },
+    {
+      "peptide": "LL-37",
+      "severity": "warning",
+      "message": "5/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "Thymalin",
+      "severity": "warning",
+      "message": "7/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "KPV",
+      "severity": "warning",
+      "message": "7/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "Liraglutide",
+      "severity": "warning",
+      "message": "6/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Retatrutide",
+      "severity": "warning",
+      "message": "7/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Exenatide",
+      "severity": "warning",
+      "message": "7/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Dulaglutide",
+      "severity": "warning",
+      "message": "8/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Teriparatide",
+      "severity": "warning",
+      "message": "6/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Octreotide",
+      "severity": "warning",
+      "message": "7/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Triptorelin",
+      "severity": "warning",
+      "message": "8/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Desmopressin",
+      "severity": "warning",
+      "message": "8/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Setmelanotide",
+      "severity": "warning",
+      "message": "6/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Pramlintide",
+      "severity": "warning",
+      "message": "7/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Survodutide",
+      "severity": "warning",
+      "message": "8/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Linaclotide",
+      "severity": "warning",
+      "message": "7/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Plecanatide",
+      "severity": "warning",
+      "message": "8/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Teduglutide",
+      "severity": "warning",
+      "message": "8/10 claims lack sourceIds"
+    },
+    {
+      "peptide": "Abaloparatide",
+      "severity": "warning",
+      "message": "8/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Lanreotide",
+      "severity": "warning",
+      "message": "7/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Ziconotide",
+      "severity": "warning",
+      "message": "8/10 claims lack sourceIds"
+    },
+    {
+      "peptide": "Vosoritide",
+      "severity": "warning",
+      "message": "6/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Elamipretide",
+      "severity": "warning",
+      "message": "7/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "MOTS-c",
+      "severity": "warning",
+      "message": "6/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "Humanin",
+      "severity": "warning",
+      "message": "6/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "FOXO4-DRI",
+      "severity": "warning",
+      "message": "4/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "Cerebrolysin",
+      "severity": "warning",
+      "message": "8/9 claims lack sourceIds"
+    },
+    {
+      "peptide": "Oxytocin",
+      "severity": "warning",
+      "message": "9/10 claims lack sourceIds"
+    },
+    {
+      "peptide": "Dihexa",
+      "severity": "warning",
+      "message": "7/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "IGF-1 LR3",
+      "severity": "warning",
+      "message": "8/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "Follistatin-344",
+      "severity": "warning",
+      "message": "8/8 claims lack sourceIds"
+    },
+    {
+      "peptide": "MGF (Mechano Growth Factor)",
+      "severity": "warning",
+      "message": "7/7 claims lack sourceIds"
+    },
+    {
+      "peptide": "P21",
+      "severity": "warning",
+      "message": "7/7 claims lack sourceIds"
+    }
+  ],
+  "timestamp": "2026-04-26T18:19:56.940Z"
+}

@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "id": "us-tesamorelin-treatment-hub",
+    "slug": "tesamorelin",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Tesamorelin Treatment Guide: Egrifta, HIV Lipodystrophy, and Provider Paths",
+    "description": "US-first tesamorelin treatment hub covering Egrifta for HIV-associated lipodystrophy, visceral fat reduction, cost friction, provider selection, and clinical evidence.",
+    "canonicalPath": "/treatments/tesamorelin",
+    "keywords": [
+      "tesamorelin treatment guide",
+      "egrifta provider",
+      "tesamorelin hiv lipodystrophy",
+      "tesamorelin visceral fat",
+      "tesamorelin cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 3,
+    "disclaimer": "This hub summarizes official tesamorelin treatment pathways at a high level. Indication fit, coverage, ongoing access, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "tesamorelin",
+  "treatmentName": "Tesamorelin",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, tesamorelin is approved as Egrifta for reduction of excess abdominal fat in HIV-infected patients with lipodystrophy. It is also studied for liver fat reduction and cognitive preservation in aging.",
+  "overview": "Tesamorelin is a synthetic GHRH analog that stimulates the pituitary to release endogenous growth hormone. Unlike direct GH injections, tesamorelin preserves the natural pulsatile GH pattern and feedback axis. Its FDA-approved indication is HIV-associated lipodystrophy, but clinical interest extends to NAFLD and cognitive aging.",
+  "approvedProducts": [
+    {
+      "slug": "egrifta",
+      "name": "Egrifta",
+      "summary": "Branded tesamorelin for HIV-associated lipodystrophy. Dosed at 2 mg SC once daily. Requires reconstitution before injection."
+    },
+    {
+      "slug": "egrifta-sv",
+      "name": "Egrifta SV",
+      "summary": "Same tesamorelin peptide as Egrifta in a different formulation. Used for the same indication with the same dosing schedule."
+    }
+  ],
+  "benefits": [
+    "FDA-approved reduction of visceral adipose tissue in HIV-associated lipodystrophy",
+    "Demonstrated reduction in liver fat fraction (NAFLD) in HIV-infected patients",
+    "Preserves natural growth hormone pulsatility via pituitary stimulation",
+    "Emerging evidence for cognitive function preservation in aging adults"
+  ],
+  "sideEffects": [
+    "Injection site reactions including erythema, pruritus, and pain are common",
+    "Fluid retention, peripheral edema, and arthralgia may occur",
+    "Treatment should be discontinued if no reduction in visceral fat after 6 months",
+    "Not indicated for general weight loss or cosmetic fat reduction outside approved populations"
+  ],
+  "routes": [
+    "Subcutaneous injection"
+  ],
+  "costSummary": "Tesamorelin costs vary by fulfillment channel and insurance. As a specialty medication for HIV lipodystrophy, it may be covered under some plans but often requires prior authorization and documentation of HIV status and lipodystrophy diagnosis.",
+  "providerSummary": "The highest-value next step is finding a provider experienced in HIV metabolic care or hormone optimization who can evaluate whether tesamorelin fits the patient's clinical profile and insurance constraints.",
+  "appSummary": "Daily tesamorelin dosing creates tracking demand for injection-site rotation, symptom logging, and 6-month efficacy reassessment reminders.",
+  "faqs": [
+    {
+      "question": "Is tesamorelin only for HIV patients?",
+      "answer": "FDA approval is specifically for HIV-infected patients with lipodystrophy. Off-label use for other populations (such as general aging or NAFLD) is not FDA-approved and should be discussed with a qualified clinician."
+    },
+    {
+      "question": "How does tesamorelin compare to sermorelin?",
+      "answer": "Both are GHRH analogs, but tesamorelin has a trans-3-hexenoic acid modification that increases receptor binding stability. Tesamorelin is FDA-approved for HIV lipodystrophy; sermorelin's approved brand (Geref) was discontinued, though sermorelin remains available through compounding."
+    },
+    {
+      "question": "What is the safest next step before starting tesamorelin?",
+      "answer": "Confirm the official indication fit, verify realistic cost and coverage friction, and then use a licensed provider route experienced in HIV metabolic care or hormone optimization."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a tesamorelin provider",
+    "primaryHref": "/providers?treatment=tesamorelin",
+    "secondaryLabel": "Review tesamorelin costs",
+    "secondaryHref": "/costs/tesamorelin",
+    "notes": "Use the provider matcher when tesamorelin already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "egrifta-home-2026",
+      "authority": "Theratechnologies",
+      "title": "Egrifta (tesamorelin) for HIV-Associated Lipodystrophy",
+      "url": "https://www.egrifta.com/",
+      "publishedAt": "2026",
+      "claimType": "clinical"
+    },
+    {
+      "id": "tesamorelin-naflD-2019",
+      "authority": "The Lancet HIV",
+      "title": "Effects of tesamorelin on non-alcoholic fatty liver disease in HIV",
+      "url": "https://www.thelancet.com/journals/lanhiv/article/PIIS2352-3018(19)30331-8/fulltext",
+      "publishedAt": "2019",
+      "claimType": "clinical"
+    },
+    {
+      "id": "fda-egrifta-2010",
+      "authority": "FDA",
+      "title": "FDA Approves Egrifta for HIV-Associated Lipodystrophy",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2010",
+      "claimType": "regulatory"
+    }
+  ]
+}

@@ -22,13 +22,13 @@ export function FAQ({ items, title }: { items: FAQItem[]; title?: string }) {
   };
 
   return (
-    <section className="mt-8">
+    <section className="faq-section">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <h2 className="text-xl font-bold mb-4">{title ?? "Frequently Asked Questions"}</h2>
-      <div className="space-y-2">
+      <h2 className="section-title">{title ?? "Frequently Asked Questions"}</h2>
+      <div className="faq-list">
         {items.map((item, i) => (
           <FAQAccordion key={i} question={item.question} answer={item.answer} />
         ))}
@@ -40,16 +40,16 @@ export function FAQ({ items, title }: { items: FAQItem[]; title?: string }) {
 function FAQAccordion({ question, answer }: FAQItem) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border border-gray-200 rounded-lg overflow-hidden">
+    <div className="faq-item">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-4 py-3 text-left font-medium text-gray-900 hover:bg-gray-50"
+        className="faq-button"
       >
         <span>{question}</span>
-        <span className="text-gray-400 ml-2">{open ? "\u2212" : "+"}</span>
+        <span>{open ? "-" : "+"}</span>
       </button>
       {open && (
-        <div className="px-4 pb-3 text-sm text-gray-600 leading-relaxed">
+        <div className="faq-answer">
           {answer}
         </div>
       )}

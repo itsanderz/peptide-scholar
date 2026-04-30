@@ -99,18 +99,15 @@ export default async function ComparisonPage({ params }: Props) {
         }}
       />
 
-      <div className="max-w-5xl mx-auto px-4 py-8">
+      <div className="container py-8">
         <BreadcrumbNav crumbs={crumbs} />
         <ReviewedBadge compact />
 
-        <div
-          className="rounded-xl p-4 mb-6"
-          style={{ backgroundColor: "#F8FAFC", border: "1px solid #D0D7E2" }}
-        >
-          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#3B7A9E] mb-2">
+        <div className="pd-desc-box">
+          <div className="pd-side-lbl">
             Active Market
           </div>
-          <div className="text-sm md:text-base text-[#1C2028]">
+          <div>
             {market.code === "us"
               ? "This comparison can feed directly into US-first legal, provider, and cost workflows."
               : `${market.name} is selected. The evidence comparison is still valid, but provider availability, legal positioning, and cost assumptions may still be staged for later rollout.`}
@@ -118,18 +115,12 @@ export default async function ComparisonPage({ params }: Props) {
         </div>
 
         {/* ── Title ──────────────────────────────────────────────────── */}
-        <h1
-          className="text-3xl md:text-4xl font-bold mb-4"
-          style={{
-            color: "var(--color-primary, #1A3A5C)",
-            fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-          }}
-        >
+        <h1 className="pd-name">
           {comparison.peptideAName} vs {comparison.peptideBName}: Head-to-Head Comparison
         </h1>
 
         {/* ── Summary ────────────────────────────────────────────────── */}
-        <p className="text-base md:text-lg leading-relaxed text-gray-700 mb-8 max-w-3xl">
+        <p className="pd-desc-box">
           {comparison.summary}
         </p>
 
@@ -192,37 +183,31 @@ export default async function ComparisonPage({ params }: Props) {
                 <Link
                   key={p.slug}
                   href={`/treatments/${p.slug}`}
-                  className="rounded-xl p-5"
-                  style={{ backgroundColor: "#F0F9FF", border: "1px solid #BAE6FD" }}
+                  className="resource-card"
                 >
-                  <div className="text-xs font-semibold uppercase tracking-[0.16em] mb-2" style={{ color: "#0369A1" }}>
-                    Treatment Hub
+                  <div className="resource-icon">
+                    +
                   </div>
-                  <div className="text-lg font-bold mb-2" style={{ color: "#1A3A5C" }}>
-                    {p.name} Treatment Guide
+                  <div>
+                    <div className="pd-side-lbl">Treatment Hub</div>
+                    <div className="resource-title">
+                      {p.name} Treatment Guide
+                    </div>
+                    <p className="resource-desc">
+                      Approved product paths, cost friction, provider routing, and tracker next steps in one source-backed hub.
+                    </p>
+                    <span className="pd-comp-name">
+                      Open treatment hub -&gt;
+                    </span>
                   </div>
-                  <p className="text-sm leading-relaxed mb-3" style={{ color: "#5A6577" }}>
-                    Approved product paths, cost friction, provider routing, and tracker next steps in one source-backed hub.
-                  </p>
-                  <span className="font-semibold" style={{ color: "#0369A1" }}>
-                    Open treatment hub &rarr;
-                  </span>
                 </Link>
               ))}
             </div>
           );
         })()}
 
-        <section className="mb-10">
-          <h2
-            className="text-xl md:text-2xl font-bold mb-4"
-            style={{
-              color: "var(--color-primary, #1A3A5C)",
-              fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-            }}
-          >
-            Side-by-Side Comparison
-          </h2>
+        <section className="pd-section">
+          <h2 className="section-title">Side-by-Side Comparison</h2>
           <ComparisonGrid
             peptideAName={comparison.peptideAName}
             peptideBName={comparison.peptideBName}
@@ -231,16 +216,8 @@ export default async function ComparisonPage({ params }: Props) {
         </section>
 
         {/* ── Two-Column Peptide Overviews ────────────────────────────── */}
-        <section className="mb-10">
-          <h2
-            className="text-xl md:text-2xl font-bold mb-6"
-            style={{
-              color: "var(--color-primary, #1A3A5C)",
-              fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-            }}
-          >
-            Peptide Overviews
-          </h2>
+        <section className="pd-section">
+          <h2 className="section-title">Peptide Overviews</h2>
 
           <div className="grid md:grid-cols-2 gap-6">
             {/* Peptide A */}
@@ -285,7 +262,7 @@ export default async function ComparisonPage({ params }: Props) {
                     border: `1px solid ${peptideA.fdaStatus === "approved" ? "#bbf7d0" : "#fde68a"}`,
                   }}
                 >
-                  {peptideA.fdaStatus === "approved" ? "FDA Approved" : peptideA.fdaStatus === "cosmetic" ? "Cosmetic" : "Not Approved"}
+                  {peptideA.fdaStatus === "approved" ? "FDA Approved" : peptideA.fdaStatus === "cosmetic" ? "Cosmetic" : peptideA.fdaStatus === "discontinued" ? "Discontinued" : "Not Approved"}
                 </span>
               </div>
               <Link
@@ -339,7 +316,7 @@ export default async function ComparisonPage({ params }: Props) {
                     border: `1px solid ${peptideB.fdaStatus === "approved" ? "#bbf7d0" : "#fde68a"}`,
                   }}
                 >
-                  {peptideB.fdaStatus === "approved" ? "FDA Approved" : peptideB.fdaStatus === "cosmetic" ? "Cosmetic" : "Not Approved"}
+                  {peptideB.fdaStatus === "approved" ? "FDA Approved" : peptideB.fdaStatus === "cosmetic" ? "Cosmetic" : peptideB.fdaStatus === "discontinued" ? "Discontinued" : "Not Approved"}
                 </span>
               </div>
               <Link

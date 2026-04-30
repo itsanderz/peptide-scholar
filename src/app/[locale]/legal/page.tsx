@@ -35,6 +35,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: siteConfig.name,
     }),
     alternates: alt,
+    robots: {
+      index: false,
+      follow: false,
+    },
   };
 }
 
@@ -128,6 +132,8 @@ export default async function LegalIndexPage({ params }: Props) {
       />
 
       {/* ── Hero ───────────────────────────────────────────────────────── */}
+      <div className="legacy-index-page legal-index-page">
+
       <section
         className="relative py-14 md:py-20 text-center text-white overflow-hidden"
         style={{ backgroundColor: "#1A3A5C" }}
@@ -455,6 +461,7 @@ export default async function LegalIndexPage({ params }: Props) {
       <section className="max-w-4xl mx-auto px-4 pb-12">
         <MedicalDisclaimer />
       </section>
+      </div>
 
       <style>{`
         .state-card:hover {

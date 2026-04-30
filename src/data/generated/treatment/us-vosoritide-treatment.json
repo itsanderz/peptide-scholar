@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "id": "us-vosoritide-treatment-hub",
+    "slug": "vosoritide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Vosoritide Treatment Guide: Voxzogo, Cost and Provider Paths",
+    "description": "US-first vosoritide treatment hub covering approved product paths, cost friction, provider selection, and clinical evidence.",
+    "canonicalPath": "/treatments/vosoritide",
+    "keywords": [
+      "vosoritide treatment guide",
+      "vosoritide provider",
+      "vosoritide treatment path",
+      "vosoritide cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 2,
+    "disclaimer": "This hub summarizes official vosoritide treatment pathways at a high level. Indication fit, coverage, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "vosoritide",
+  "treatmentName": "Vosoritide",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, Vosoritide is an FDA-approved peptide therapy. Achondroplasia in children aged 5 years and older with open epiphyses (growth plates)",
+  "overview": "Vosoritide is a recombinant analog of C-type natriuretic peptide (CNP) approved by the FDA for achondroplasia in children aged 5 years and older with open growth plates. It is the first and only disease-modifying therapy for the most common form of dwarfism.",
+  "approvedProducts": [
+    {
+      "slug": "voxzogo",
+      "name": "Voxzogo",
+      "summary": "Branded vosoritide pathway. Achondroplasia in children aged 5 years and older with open epiphyses (growth plates)"
+    }
+  ],
+  "benefits": [
+    "First disease-modifying therapy for achondroplasia",
+    "Significantly increases annual growth velocity in children",
+    "Improves body proportions over time",
+    "Once-daily subcutaneous injection (home administration)"
+  ],
+  "sideEffects": [
+    "Injection site reactions (erythema, swelling, pain)",
+    "Vomiting",
+    "Transient decrease in blood pressure (due to natriuretic peptide vasodilation)",
+    "Headache"
+  ],
+  "routes": [
+    "Subcutaneous injection"
+  ],
+  "costSummary": "Vosoritide costs vary by brand, pharmacy, and insurance design. As an FDA-approved medication, coverage may be available but often requires prior authorization and documentation of the approved indication.",
+  "providerSummary": "The highest-value next step is finding a provider experienced in healing & recovery who can evaluate whether Vosoritide fits the patient's clinical profile and insurance constraints.",
+  "appSummary": "Vosoritide treatment creates tracking demand for dose timing, symptom logging, and refill management to support long-term adherence.",
+  "faqs": [
+    {
+      "question": "Does vosoritide cure achondroplasia?",
+      "answer": "No. Vosoritide does not cure achondroplasia or correct the underlying FGFR3 mutation. It is a disease-modifying therapy that increases growth velocity by counteracting the overactive FGFR3 signaling at the growth plate. Children treated with vosoritide will still have achondroplasia and require comprehensive multidisciplinary care. The goal is to improve final adult height and body proportions, not to eliminate the condition."
+    },
+    {
+      "question": "When should vosoritide treatment stop?",
+      "answer": "Treatment should stop when the child's growth plates (epiphyses) close, which occurs at different ages depending on sex and pubertal timing — typically around 14-16 years in girls and 16-18 years in boys. Once epiphyseal fusion occurs, further linear growth is impossible and vosoritide has no benefit. Regular hand/wrist X-rays are used to monitor bone age and growth plate status."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a vosoritide provider",
+    "primaryHref": "/providers?treatment=vosoritide",
+    "secondaryLabel": "Review vosoritide costs",
+    "secondaryHref": "/costs/vosoritide",
+    "notes": "Use the provider matcher when Vosoritide already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "vosoritide-ref-1",
+      "authority": "N Engl J Med",
+      "title": "C-Type Natriuretic Peptide Analogue Therapy in Children with Achondroplasia.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31269546/",
+      "publishedAt": "2019",
+      "claimType": "clinical"
+    },
+    {
+      "id": "vosoritide-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Vosoritide",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

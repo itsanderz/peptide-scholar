@@ -1,0 +1,104 @@
+{
+  "meta": {
+    "id": "us-teriparatide-treatment-hub",
+    "slug": "teriparatide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Teriparatide Treatment Guide: Forteo, Bonsity, Cost and Provider Paths",
+    "description": "US-first teriparatide treatment hub covering approved product paths, cost friction, provider selection, and clinical evidence.",
+    "canonicalPath": "/treatments/teriparatide",
+    "keywords": [
+      "teriparatide treatment guide",
+      "teriparatide provider",
+      "teriparatide treatment path",
+      "teriparatide cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 2,
+    "disclaimer": "This hub summarizes official teriparatide treatment pathways at a high level. Indication fit, coverage, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "teriparatide",
+  "treatmentName": "Teriparatide",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, Teriparatide is an FDA-approved peptide therapy. Osteoporosis in postmenopausal women at high risk of fracture; primary hypogonadal osteoporosis in men; glucocorticoid-induced osteoporosis",
+  "overview": "Teriparatide is a recombinant human parathyroid hormone analog (PTH 1-34) and the first anabolic (bone-building) agent approved by the FDA for osteoporosis. Unlike bisphosphonates which suppress bone resorption, teriparatide stimulates osteoblast activity and new bone formation.",
+  "approvedProducts": [
+    {
+      "slug": "forteo",
+      "name": "Forteo",
+      "summary": "Branded teriparatide pathway. Osteoporosis in postmenopausal women at high risk of fracture; primary hypogonadal osteoporosis in men; glucocorticoid-induced osteoporosis"
+    },
+    {
+      "slug": "bonsity",
+      "name": "Bonsity",
+      "summary": "Branded teriparatide pathway. Osteoporosis in postmenopausal women at high risk of fracture; primary hypogonadal osteoporosis in men; glucocorticoid-induced osteoporosis"
+    }
+  ],
+  "benefits": [
+    "Only FDA-approved anabolic (bone-building) osteoporosis drug",
+    "Significant reduction in vertebral and non-vertebral fractures",
+    "Increases bone mineral density at spine and hip",
+    "Approved for glucocorticoid-induced osteoporosis"
+  ],
+  "sideEffects": [
+    "Nausea, dizziness, leg cramps",
+    "Hypercalcemia (transient, dose-dependent)",
+    "Injection site reactions",
+    "Osteosarcoma risk in rats (black box warning; limit human use to 2 years)"
+  ],
+  "routes": [
+    "Subcutaneous injection"
+  ],
+  "costSummary": "Teriparatide costs vary by brand, pharmacy, and insurance design. As an FDA-approved medication, coverage may be available but often requires prior authorization and documentation of the approved indication.",
+  "providerSummary": "The highest-value next step is finding a provider experienced in healing & recovery who can evaluate whether Teriparatide fits the patient's clinical profile and insurance constraints.",
+  "appSummary": "Teriparatide treatment creates tracking demand for dose timing, symptom logging, and refill management to support long-term adherence.",
+  "faqs": [
+    {
+      "question": "Why is teriparatide limited to 2 years of use?",
+      "answer": "In rats given very high doses of PTH analogs for most of their lifespans, an increased incidence of osteosarcoma (bone cancer) was observed. No increased risk has been observed in humans, but as a precaution, the FDA mandates a lifetime maximum of 2 years of teriparatide therapy. After completing teriparatide, patients typically transition to an antiresorptive agent (bisphosphonate or denosumab) to maintain bone density gains."
+    },
+    {
+      "question": "How is teriparatide different from bisphosphonates?",
+      "answer": "Bisphosphonates (alendronate, zoledronate) work by suppressing osteoclasts — cells that break down bone. This reduces bone loss but does not build new bone. Teriparatide is anabolic: it stimulates osteoblasts to form new bone, actually increasing bone mass and improving bone architecture. For severe osteoporosis or patients who have fractured on bisphosphonates, teriparatide is often preferred."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a teriparatide provider",
+    "primaryHref": "/providers?treatment=teriparatide",
+    "secondaryLabel": "Review teriparatide costs",
+    "secondaryHref": "/costs/teriparatide",
+    "notes": "Use the provider matcher when Teriparatide already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "teriparatide-ref-1",
+      "authority": "N Engl J Med",
+      "title": "Effect of parathyroid hormone (1-34) on fractures and bone mineral density in postmenopausal women with osteoporosis.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/11346808/",
+      "publishedAt": "2001",
+      "claimType": "clinical"
+    },
+    {
+      "id": "teriparatide-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Teriparatide",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

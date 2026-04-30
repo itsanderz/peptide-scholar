@@ -200,7 +200,7 @@ export const affiliateCatalog: Record<AffiliateCategory, AffiliateProduct[]> = {
 };
 
 export type PeptideAffiliateContext = {
-  fdaStatus: "approved" | "not-approved" | "cosmetic";
+  fdaStatus: "approved" | "not-approved" | "cosmetic" | "discontinued";
   category: string;
   routes: string[];
 };
@@ -234,19 +234,44 @@ export function getProductSectionsForPeptide(ctx: PeptideAffiliateContext): Affi
   }
 
   if (ctx.fdaStatus === "approved") {
-    sections.push({
-      heading: "GLP-1 Support Essentials",
-      subheading: "Products to help manage side effects and optimize outcomes during treatment.",
-      products: glp1SupportProducts,
-    });
-    sections.push({
-      heading: "Progress Tracking Tools",
-      subheading: "Monitor weight, body composition, and nutrition to maximize results.",
-      products: nutritionProducts,
-    });
+    if (ctx.category === "weight-loss" || ctx.category === "metabolic-health") {
+      sections.push({
+        heading: "GLP-1 Support Essentials",
+        subheading: "Products to help manage side effects and optimize outcomes during treatment.",
+        products: glp1SupportProducts,
+      });
+      sections.push({
+        heading: "Progress Tracking Tools",
+        subheading: "Monitor weight, body composition, and nutrition to maximize results.",
+        products: nutritionProducts,
+      });
+    } else if (ctx.category === "growth-hormone") {
+      sections.push({
+        heading: "Recovery Support Products",
+        subheading: "Tools and supplements commonly used alongside hormone optimization protocols.",
+        products: recoveryProducts,
+      });
+      sections.push({
+        heading: "Progress Tracking Tools",
+        subheading: "Monitor body composition, sleep, and recovery metrics.",
+        products: nutritionProducts,
+      });
+    } else if (ctx.category === "sexual-health") {
+      sections.push({
+        heading: "Wellness Support Products",
+        subheading: "Tools and supplements that support overall health and vitality.",
+        products: nutritionProducts,
+      });
+    } else {
+      sections.push({
+        heading: "Progress Tracking Tools",
+        subheading: "Monitor health markers and outcomes during treatment.",
+        products: nutritionProducts,
+      });
+    }
   }
 
-  if (ctx.fdaStatus === "not-approved" && ctx.category === "healing-recovery") {
+  if ((ctx.fdaStatus === "not-approved" || ctx.fdaStatus === "discontinued") && ctx.category === "healing-recovery") {
     sections.push({
       heading: "Recovery Support Products",
       subheading: "Tools and supplements commonly used alongside healing peptide research protocols.",
@@ -254,7 +279,7 @@ export function getProductSectionsForPeptide(ctx: PeptideAffiliateContext): Affi
     });
   }
 
-  if (injectable && ctx.fdaStatus === "not-approved") {
+  if (injectable && (ctx.fdaStatus === "not-approved" || ctx.fdaStatus === "discontinued")) {
     sections.push({
       heading: "Research Supplies",
       subheading: "Equipment for responsible research-grade peptide handling and administration.",
@@ -404,7 +429,7 @@ export function getProductSectionsForComparison(
   const hasRecovery = peptides.some((p) => p.category === "healing-recovery");
   const hasCosmetic = peptides.some((p) => p.fdaStatus === "cosmetic");
   const hasResearchInjectable = peptides.some((p) =>
-    p.fdaStatus === "not-approved" &&
+    (p.fdaStatus === "not-approved" || p.fdaStatus === "discontinued") &&
     p.routes.some((route) =>
       route.toLowerCase().includes("injection") || route.toLowerCase().includes("subcutaneous")
     )

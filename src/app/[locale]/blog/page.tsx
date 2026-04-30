@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllBlogPosts } from "@/data/blog-posts";
-import { generateSEO, JsonLd } from "@/components/SEOHead";
 import { BreadcrumbNav, AdSlot, EmailCapture, PageTracker } from "@/components";
+import { generateSEO, JsonLd } from "@/components/SEOHead";
+import { getAllBlogPosts } from "@/data/blog-posts";
+import { getBlogImageSrc } from "@/lib/blog-image";
 import { isValidLocale } from "@/lib/i18n";
 import { localeAlternates } from "@/lib/locale-params";
 import { getRequestMarket } from "@/lib/request-market";
@@ -22,9 +24,9 @@ export async function generateMetadata({
 
   return {
     ...generateSEO({
-      title: "Peptide Research Blog — Evidence-Based Analysis",
+      title: "Peptide Research Blog - Evidence-Based Analysis",
       description:
-        `In-depth reviews of peptide clinical trial data, regulatory updates, and practical guides ${market.code === "us" ? "with US-first commercial context" : `for ${market.name}`}. Every article cites primary literature.`,
+        `In-depth reviews of peptide clinical trial data, regulatory updates, and practical guides ${market.code === "us" ? "with US-first care-path context" : `for ${market.name}`}. Every article cites primary literature.`,
       canonical: alt.canonical,
       siteName: siteConfig.name,
     }),
@@ -58,7 +60,6 @@ export default async function BlogIndexPage({
   const { locale } = await params;
   if (!isValidLocale(locale)) notFound();
   const market = await getRequestMarket();
-
   const posts = getAllBlogPosts();
 
   const jsonLd = {
@@ -72,12 +73,12 @@ export default async function BlogIndexPage({
       name: "PeptideScholar",
       url: siteConfig.domain,
     },
-    blogPost: posts.map((p) => ({
+    blogPost: posts.map((post) => ({
       "@type": "BlogPosting",
-      headline: p.title,
-      description: p.excerpt,
-      datePublished: p.publishedAt,
-      url: `${siteConfig.domain}/blog/${p.slug}`,
+      headline: post.title,
+      description: post.excerpt,
+      datePublished: post.publishedAt,
+      url: `${siteConfig.domain}/blog/${post.slug}`,
     })),
   };
 
@@ -86,135 +87,114 @@ export default async function BlogIndexPage({
       <PageTracker event="market_page_view" params={{ page_family: "blog-index", page_slug: "blog", market: market.code }} />
       <JsonLd data={jsonLd} />
 
-      {/* Header */}
-      <div style={{ background: "linear-gradient(145deg, #0F2740 0%, #1A3A5C 100%)" }} className="py-14">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5"
-            style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.14)" }}
-          >
-            <span className="text-xs font-semibold tracking-wide text-white/80">
-              Active Market: {market.name}
-            </span>
+      <div className="blog-index-page">
+        <section className="blog-index-hero">
+          <div className="blog-index-shell blog-index-hero__inner">
+            <div>
+              <div className="blog-index-badges">
+                <span className="blog-index-badge">Active market: {market.name}</span>
+                <span className="blog-index-badge is-alt">Primary literature, clinical trials, and regulatory updates</span>
+              </div>
+              <h1>Peptide Research Blog</h1>
+              <p>
+                In-depth analysis of peptide clinical trials, regulatory changes, and practical guides.
+                Every article cites primary literature and feeds back into the evidence library.
+              </p>
+            </div>
           </div>
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5"
-            style={{ backgroundColor: "rgba(59,122,158,0.2)", border: "1px solid rgba(59,122,158,0.3)" }}
-          >
-            <span className="text-xs font-semibold tracking-wide" style={{ color: "#3B7A9E" }}>
-              Primary Literature · Clinical Trials · Regulatory Updates
-            </span>
-          </div>
-          <h1
-            className="text-3xl md:text-4xl font-extrabold text-white mb-4"
-            style={{ fontFamily: "var(--font-libre-franklin)" }}
-          >
-            Peptide Research Blog
-          </h1>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto" style={{ fontFamily: "Source Serif 4, Georgia, serif" }}>
-            In-depth analysis of peptide clinical trials, regulatory changes, and evidence-based practical guides.
-            Every article cites primary literature.
-          </p>
-        </div>
-      </div>
+        </section>
 
-      <div className="max-w-4xl mx-auto px-4 py-10">
-        <BreadcrumbNav
-          crumbs={[
-            { label: "Home", href: "/" },
-            { label: "Blog", href: "/blog" },
-          ]}
-        />
-
-        <div
-          className="rounded-xl p-4 mt-6 mb-8"
-          style={{ backgroundColor: "#F8FAFC", border: "1px solid #D0D7E2" }}
-        >
-          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#3B7A9E] mb-2">
-            Active Market
-          </div>
-          <div className="text-sm md:text-base text-[#1C2028]">
-            {market.code === "us"
-              ? "These research articles connect directly into US-first legal, cost, and provider journeys."
-              : `${market.name} is selected. Research analysis remains globally useful, but some downstream legal and provider calls to action may stay US-first while ${market.name} rollout is still in progress.`}
-          </div>
-        </div>
-
-        <div className="space-y-8 mt-6">
-          {posts.map((post) => {
-            const catStyle = CATEGORY_COLORS[post.category] ?? { bg: "#F0F3F7", text: "#1A3A5C" };
-            return (
-              <article
-                key={post.slug}
-                className="bg-white rounded-xl overflow-hidden transition-shadow hover:shadow-md"
-                style={{ border: "1px solid #D0D7E2" }}
-              >
-                <Link href={`/blog/${post.slug}`} className="block p-6 md:p-8">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span
-                      className="text-xs font-bold px-2.5 py-1 rounded-full"
-                      style={{ backgroundColor: catStyle.bg, color: catStyle.text }}
-                    >
-                      {post.category}
-                    </span>
-                    <span className="text-xs text-gray-400">{formatDate(post.publishedAt)}</span>
-                    <span className="text-xs text-gray-400">&middot; {post.readingTime} min read</span>
-                  </div>
-
-                  <h2
-                    className="text-xl md:text-2xl font-bold mb-3 leading-snug"
-                    style={{ color: "#1A3A5C", fontFamily: "var(--font-libre-franklin)" }}
-                  >
-                    {post.title}
-                  </h2>
-
-                  <p className="text-gray-600 mb-4 leading-relaxed" style={{ fontFamily: "Source Serif 4, Georgia, serif" }}>
-                    {post.excerpt}
-                  </p>
-
-                  <div className="mb-4">
-                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Key Takeaways</p>
-                    <ul className="space-y-1">
-                      {post.keyTakeaways.slice(0, 3).map((t, ki) => (
-                        <li key={ki} className="flex items-start gap-2 text-sm text-gray-600">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2B8A5E" strokeWidth="2.5" className="flex-shrink-0 mt-0.5">
-                            <path d="M5 13l4 4L19 7" />
-                          </svg>
-                          {t}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="flex items-center gap-2 text-sm font-semibold" style={{ color: "#3B7A9E" }}>
-                    Read full analysis
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                </Link>
-              </article>
-            );
-          })}
-        </div>
-
-        <AdSlot className="mt-10" />
-
-        <div
-          className="mt-10 rounded-xl p-6 text-center"
-          style={{ backgroundColor: "#F0F3F7", border: "1px solid #D0D7E2" }}
-        >
-          <EmailCapture
-            headline={market.code === "us" ? "Want research updates in your inbox?" : `Join the ${market.name} research waitlist`}
-            description={
-              market.code === "us"
-                ? "New articles, regulatory changes, and trial data summaries delivered weekly. No spam."
-                : `Get notified when ${market.name}-specific legal guides, provider flows, and tracker support are added to the research hub.`
-            }
-            signupLocation="blog_index"
-            marketCode={market.code}
-            offerSlug={market.code === "us" ? "blog_research_digest" : "market_blog_waitlist"}
+        <div className="blog-index-shell blog-index-main">
+          <BreadcrumbNav
+            crumbs={[
+              { label: "Home", href: "/" },
+              { label: "Blog", href: "/blog" },
+            ]}
           />
+
+          <div className="blog-market-note">
+            <strong>Active market</strong>
+            <p>
+              {market.code === "us"
+                ? "These research articles connect directly into US-first legal, cost, and provider journeys."
+                : `${market.name} is selected. Research analysis remains globally useful, but some downstream legal and provider calls to action may stay US-first while ${market.name} rollout is still in progress.`}
+            </p>
+          </div>
+
+          <div className="blog-index-grid">
+            {posts.map((post) => {
+              const catStyle = CATEGORY_COLORS[post.category] ?? { bg: "#F0F3F7", text: "#1A3A5C" };
+
+              return (
+                <article key={post.slug} className="blog-index-card">
+                  <Link href={`/blog/${post.slug}`} className="blog-index-card-link">
+                    <div className="blog-index-card-media">
+                      <Image
+                        src={getBlogImageSrc(post.slug)}
+                        alt={post.title}
+                        fill
+                        className="object-cover transition-transform duration-500 hover:scale-105"
+                        sizes="(max-width: 920px) 100vw, 50vw"
+                      />
+                    </div>
+
+                    <div className="blog-index-card-copy">
+                      <div className="blog-index-meta">
+                        <span
+                          className="blog-index-category"
+                          style={{ backgroundColor: catStyle.bg, color: catStyle.text }}
+                        >
+                          {post.category}
+                        </span>
+                        <span>{formatDate(post.publishedAt)}</span>
+                        <span>{post.readingTime} min read</span>
+                      </div>
+
+                      <h2>{post.title}</h2>
+                      <p>{post.excerpt}</p>
+
+                      <div className="blog-index-takeaways">
+                        <strong>Key takeaways</strong>
+                        <ul>
+                          {post.keyTakeaways.slice(0, 3).map((takeaway, index) => (
+                            <li key={index}>
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2B8A5E" strokeWidth="2.5" aria-hidden="true">
+                                <path d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span>{takeaway}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="blog-index-cta">
+                        Read full analysis
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </Link>
+                </article>
+              );
+            })}
+          </div>
+
+          <AdSlot className="mt-10" />
+
+          <div className="blog-index-email">
+            <EmailCapture
+              headline={market.code === "us" ? "Want research updates in your inbox?" : `Join the ${market.name} research waitlist`}
+              description={
+                market.code === "us"
+                  ? "New articles, regulatory changes, and trial data summaries delivered weekly. No spam."
+                  : `Get notified when ${market.name}-specific legal guides, provider flows, and tracker support are added to the research hub.`
+              }
+              signupLocation="blog_index"
+              marketCode={market.code}
+              offerSlug={market.code === "us" ? "blog_research_digest" : "market_blog_waitlist"}
+            />
+          </div>
         </div>
       </div>
     </>

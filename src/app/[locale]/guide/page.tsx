@@ -167,7 +167,7 @@ export default async function GuidePage({
   }));
 
   return (
-    <>
+    <div className="guide-index-page">
       {/* ── JSON-LD: Article + FAQPage ───────────────────────────────── */}
       <PageTracker event="market_page_view" params={{ page_family: "guide", page_slug: "what-are-peptides", market: market.code }} />
       <JsonLd
@@ -1064,6 +1064,6 @@ export default async function GuidePage({
           </article>
         </div>
       </div>
-    </>
+    </div>
   );
 }

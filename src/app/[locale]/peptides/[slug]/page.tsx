@@ -111,53 +111,46 @@ export default async function PeptideDetailPage({ params }: Props) {
         }}
       />
 
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="container py-8">
         <BreadcrumbNav crumbs={crumbs} />
         <ReviewedBadge />
 
         {/* ── Two-column layout ───────────────────────────────────────── */}
-        <div className="grid lg:grid-cols-3 gap-8 mt-6">
+        <div className="pd-grid mt-6">
           {/* ── Main Content (left, wider) ────────────────────────────── */}
-          <div className="lg:col-span-2">
-            {/* Title + Evidence + Molecule */}
-            <div className="flex items-start justify-between gap-4 mb-4">
-              <div className="flex-1">
-                <div className="flex flex-wrap items-center gap-3 mb-2">
-                  <h1
-                    className="text-3xl md:text-4xl font-bold"
-                    style={{
-                      color: "#1A3A5C",
-                      fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-                    }}
-                  >
-                    {peptide.name}
-                  </h1>
-                  <EvidenceBadge level={peptide.evidenceLevel} />
-                  <TrustBadge peptide={peptide} />
+          <div className="pd-main">
+            <header className="pd-hdr">
+              <div className="pd-hdr-top">
+                <div>
+                  <h1 className="pd-name">{peptide.name}</h1>
+                  <p className="pd-meta">
+                    <span>{peptide.type}</span>
+                    {peptide.aminoAcidCount !== null && (
+                      <span>{peptide.aminoAcidCount} amino acids</span>
+                    )}
+                    {peptide.brandNames.length > 0 && (
+                      <span>Brand: {peptide.brandNames.join(", ")}</span>
+                    )}
+                  </p>
+                  <div className="pd-badges">
+                    <EvidenceBadge level={peptide.evidenceLevel} />
+                    <TrustBadge peptide={peptide} />
+                  </div>
                 </div>
-                <p className="text-sm text-gray-500 mb-3">
-                  {peptide.type}
-                  {peptide.aminoAcidCount !== null && (
-                    <> &middot; {peptide.aminoAcidCount} amino acids</>
-                  )}
-                  {peptide.brandNames.length > 0 && (
-                    <> &middot; Brand: {peptide.brandNames.join(", ")}</>
-                  )}
-                </p>
+                <div className="pd-mol">
+                  <MoleculeDecoration
+                    variant={
+                      peptide.aminoAcidCount !== null && peptide.aminoAcidCount <= 5
+                        ? "chain"
+                        : "helix"
+                    }
+                  />
+                </div>
               </div>
-              <div className="hidden md:block flex-shrink-0">
-                <MoleculeDecoration
-                  variant={
-                    peptide.aminoAcidCount !== null && peptide.aminoAcidCount <= 5
-                      ? "chain"
-                      : "helix"
-                  }
-                />
-              </div>
-            </div>
+            </header>
 
             {/* Legal Status Badges */}
-            <div className="mb-6">
+            <div className="pd-badges">
               <LegalStatusBadge
                 fdaStatus={peptide.fdaStatus}
                 prescriptionRequired={peptide.prescriptionRequired}
@@ -167,56 +160,22 @@ export default async function PeptideDetailPage({ params }: Props) {
             </div>
 
             {/* Description */}
-            <div
-              className="rounded-lg p-5 mb-6"
-              style={{ backgroundColor: "#FAFBFC", border: "1px solid #D0D7E2" }}
-            >
-              <p className="text-gray-700 leading-relaxed">
-                {peptide.description}
-              </p>
+            <div className="pd-desc-box">
+              <p>{peptide.description}</p>
             </div>
 
             {/* Mechanism of Action */}
-            <section className="mb-8">
-              <h2
-                className="text-xl md:text-2xl font-bold mb-3"
-                style={{
-                  color: "#1A3A5C",
-                  fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-                }}
-              >
-                Mechanism of Action
-              </h2>
-              <p className="text-gray-700 leading-relaxed">
-                {peptide.mechanism}
-              </p>
+            <section className="pd-section">
+              <h2 className="section-title">Mechanism of Action</h2>
+              <p>{peptide.mechanism}</p>
             </section>
 
             {/* Benefits */}
-            <section className="mb-8">
-              <h2
-                className="text-xl md:text-2xl font-bold mb-3"
-                style={{
-                  color: "#1A3A5C",
-                  fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-                }}
-              >
-                Benefits
-              </h2>
-              <ul className="space-y-2">
+            <section className="pd-section">
+              <h2 className="section-title">Benefits</h2>
+              <ul className="pd-benefits">
                 {peptide.benefits.map((claim, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#2B8A5E"
-                      strokeWidth="2.5"
-                      className="flex-shrink-0 mt-0.5"
-                    >
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg>
+                  <li key={i}>
                     <ClaimSource claim={claim} refs={peptide.refs} />
                   </li>
                 ))}
@@ -231,32 +190,11 @@ export default async function PeptideDetailPage({ params }: Props) {
             />
 
             {/* Side Effects */}
-            <section className="mb-8">
-              <h2
-                className="text-xl md:text-2xl font-bold mb-3"
-                style={{
-                  color: "#1A3A5C",
-                  fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-                }}
-              >
-                Side Effects
-              </h2>
-              <ul className="space-y-2">
+            <section className="pd-section">
+              <h2 className="section-title">Side Effects</h2>
+              <ul className="pd-sideeffects">
                 {peptide.sideEffects.map((claim, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#D4553A"
-                      strokeWidth="2.5"
-                      className="flex-shrink-0 mt-0.5"
-                    >
-                      <circle cx="12" cy="12" r="10" />
-                      <line x1="12" y1="8" x2="12" y2="12" />
-                      <line x1="12" y1="16" x2="12.01" y2="16" />
-                    </svg>
+                  <li key={i}>
                     <ClaimSource claim={claim} refs={peptide.refs} />
                   </li>
                 ))}
@@ -284,35 +222,26 @@ export default async function PeptideDetailPage({ params }: Props) {
 
             {peptide.fdaStatus === "approved" && getGeneratedTreatmentHubSlugs("us").includes(peptide.slug) && (
               <div
-                className="rounded-xl p-5 mb-8"
-                style={{ backgroundColor: "#F0F9FF", border: "1px solid #BAE6FD" }}
+                className="provider-cta is-muted"
               >
-                <div className="text-xs font-semibold uppercase tracking-[0.16em] mb-2" style={{ color: "#0369A1" }}>
+                <div className="pd-side-lbl">
                   Treatment Hub
                 </div>
-                <div className="text-lg font-bold mb-2" style={{ color: "#1A3A5C" }}>
+                <div className="provider-title">
                   {peptide.name} Treatment Guide
                 </div>
-                <p className="text-sm leading-relaxed mb-3" style={{ color: "#5A6577" }}>
+                <p className="provider-copy">
                   Approved product paths, real cost friction, provider routing, and tracker next steps — all in one source-backed hub.
                 </p>
-                <Link href={`/treatments/${peptide.slug}`} className="font-semibold" style={{ color: "#0369A1" }}>
+                <Link href={`/treatments/${peptide.slug}`} className="btn-outline">
                   Open treatment hub &rarr;
                 </Link>
               </div>
             )}
 
             {/* Research & Evidence */}
-            <section className="mb-8">
-              <h2
-                className="text-xl md:text-2xl font-bold mb-4"
-                style={{
-                  color: "#1A3A5C",
-                  fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-                }}
-              >
-                Research &amp; Evidence
-              </h2>
+            <section className="pd-section">
+              <h2 className="section-title">Research &amp; Evidence</h2>
               {peptide.refs.map((ref) => (
                 <ResearchCard
                   key={ref.pmid}
@@ -330,16 +259,8 @@ export default async function PeptideDetailPage({ params }: Props) {
 
             {/* Compare with */}
             {comparisons.length > 0 && (
-              <section className="mb-8">
-                <h2
-                  className="text-xl md:text-2xl font-bold mb-4"
-                  style={{
-                    color: "#1A3A5C",
-                    fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-                  }}
-                >
-                  Compare {peptide.name} With
-                </h2>
+              <section className="pd-section">
+                <h2 className="section-title">Compare {peptide.name} With</h2>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {comparisons.map((comp) => {
                     const otherName =
@@ -349,30 +270,14 @@ export default async function PeptideDetailPage({ params }: Props) {
                       <Link
                         key={comp.slug}
                         href={`/compare/${comp.slug}`}
-                        className="flex items-center justify-between p-4 rounded-lg transition-colors"
-                        style={{
-                          border: "1px solid #D0D7E2",
-                          backgroundColor: "#FFFFFF",
-                        }}
+                        className="pd-comp-link"
                       >
                         <div>
-                          <span
-                            className="font-semibold text-sm"
-                            style={{ color: "#1A3A5C" }}
-                          >
+                          <span className="pd-comp-name">
                             {peptide.name} vs {otherName}
                           </span>
                         </div>
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="#3B7A9E"
-                          strokeWidth="2"
-                        >
-                          <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
+                        <span className="pd-comp-arrow">-&gt;</span>
                       </Link>
                     );
                   })}
@@ -415,7 +320,7 @@ export default async function PeptideDetailPage({ params }: Props) {
 
             {/* FAQ */}
             {peptide.faqs.length > 0 && (
-              <div className="mt-8">
+              <div>
                 <FAQ items={peptide.faqs} title={`${peptide.name} FAQ`} />
               </div>
             )}
@@ -425,7 +330,7 @@ export default async function PeptideDetailPage({ params }: Props) {
           </div>
 
           {/* ── Sidebar (right, narrower) ─────────────────────────────── */}
-          <div className="space-y-6">
+          <div className="pd-sidebar">
             <PeptideSidebar
               name={peptide.name}
               type={peptide.type}
@@ -443,17 +348,9 @@ export default async function PeptideDetailPage({ params }: Props) {
 
             {/* Related Peptides as compact cards */}
             {relatedPeptideData.length > 0 && (
-              <div>
-                <h3
-                  className="font-bold mb-3"
-                  style={{
-                    color: "#1A3A5C",
-                    fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-                  }}
-                >
-                  Related Peptides
-                </h3>
-                <div className="space-y-3">
+              <div className="pd-side-card">
+                <h3 className="pd-side-title">Related Peptides</h3>
+                <div className="pd-related">
                   {relatedPeptideData.map((related) => (
                     <PeptideCard
                       key={related.slug}

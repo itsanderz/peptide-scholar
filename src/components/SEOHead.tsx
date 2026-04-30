@@ -7,6 +7,7 @@ interface SEOProps {
   siteName: string;
   ogImage?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  robots?: Metadata["robots"];
 }
 
 export function generateSEO({
@@ -15,6 +16,7 @@ export function generateSEO({
   canonical,
   siteName,
   ogImage = "/opengraph-image",
+  robots,
 }: SEOProps): Metadata {
   return {
     title,
@@ -34,7 +36,7 @@ export function generateSEO({
       description,
       images: [ogImage],
     },
-    robots: { index: true, follow: true },
+    robots: robots ?? { index: true, follow: true },
   };
 }
 

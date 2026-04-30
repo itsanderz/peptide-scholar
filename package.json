@@ -9,16 +9,21 @@
     "lint": "eslint",
     "validate:generated": "node scripts/validate-generated-content.mjs",
     "validate:pmids": "node scripts/verify-pmids.mjs",
-    "validate:all": "npm run validate:generated && npm run validate:pmids"
+    "validate:all": "npm run validate:generated && npm run validate:pmids",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
+    "@fal-ai/client": "^1.10.0",
     "@vercel/analytics": "^2.0.1",
+    "lightningcss-linux-x64-gnu": "^1.32.0",
     "next": "16.1.6",
     "playwright": "^1.58.2",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

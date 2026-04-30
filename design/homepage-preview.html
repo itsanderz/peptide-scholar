@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PeptideScholar — Neobrutalist Homepage Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #050505;
+      --bone: #edeae3;
+      --concrete: #cfcfc9;
+      --lime: #d8e628;
+      --blue: #5d75c7;
+      --border: 1px solid var(--black);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      background: var(--bone);
+      color: var(--black);
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 16px; }
+    @media (min-width: 768px) { .container { padding: 0 32px; } }
+
+    .font-sans { font-family: 'Inter Tight', system-ui, sans-serif; }
+    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+
+    .btn-lime {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; background: var(--lime); color: var(--black);
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+      text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500;
+      border: 1px solid var(--black); cursor: pointer;
+      transition: filter .15s, transform .05s;
+    }
+    .btn-lime:hover { filter: brightness(0.95); }
+    .btn-lime:active { transform: translateY(1px); }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; background: transparent; color: var(--black);
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+      text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500;
+      border: 1px solid var(--black); cursor: pointer;
+      transition: background .15s, color .15s, transform .05s;
+    }
+    .btn-outline:hover { background: var(--black); color: var(--bone); }
+    .btn-outline:active { transform: translateY(1px); }
+
+    .header {
+      border-bottom: var(--border); background: var(--black);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .logo-mark {
+      width: 32px; height: 32px; background: var(--bone);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-mark span {
+      color: var(--bone); font-weight: 700; font-size: 11px; font-family: 'IBM Plex Mono', monospace;
+    }
+    .logo-text {
+      font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 14px;
+      text-transform: uppercase; letter-spacing: -0.02em;
+    }
+    .nav { display: none; }
+    @media (min-width: 768px) {
+      .nav { display: flex; align-items: center; gap: 0; }
+      .nav a {
+        padding: 8px 16px; font-size: 11px; text-transform: uppercase;
+        letter-spacing: 0.08em; font-weight: 500;
+        transition: background .15s, color .15s;
+      }
+      .nav a:hover { background: var(--black); color: var(--bone); }
+    }
+    .header-cta { display: flex; align-items: center; gap: 12px; }
+    .market-badge {
+      display: none;
+      padding: 4px 8px; border: 1px solid var(--black); font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.5;
+    }
+    @media (min-width: 1024px) { .market-badge { display: inline-block; } }
+
+    .hero {
+      border-bottom: var(--border); background: var(--bone);
+      position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr;
+      min-height: 520px;
+    }
+    @media (min-width: 1024px) {
+      .hero-grid { grid-template-columns: 7fr 5fr; min-height: 600px; }
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 64px 0; position: relative; z-index: 10;
+    }
+    @media (min-width: 1024px) { .hero-left { padding: 96px 48px 96px 0; } }
+
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px;
+    }
+    .hero-label-dot { width: 8px; height: 8px; background: var(--blue); }
+    .hero-label-text {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--blue); font-weight: 500;
+    }
+
+    .hero-title {
+      font-family: 'Inter Tight', sans-serif; font-weight: 900;
+      font-size: clamp(2.5rem, 6vw, 5.5rem); line-height: 0.92;
+      text-transform: uppercase; letter-spacing: -0.04em;
+      color: var(--black); margin-bottom: 24px;
+    }
+    .hero-title .muted { color: var(--concrete); }
+
+    .hero-sub {
+      font-size: 14px; opacity: 0.7; max-width: 420px;
+      margin-bottom: 32px; line-height: 1.7;
+    }
+
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .hero-right {
+      display: flex; align-items: center; justify-content: center;
+      padding: 48px 0; border-top: var(--border); position: relative;
+    }
+    @media (min-width: 1024px) {
+      .hero-right { border-top: none; border-left: var(--border); padding: 0; }
+    }
+
+    .bust-bg {
+      position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+      width: 300px; height: 400px; opacity: 0.15; pointer-events: none;
+      object-fit: contain;
+    }
+    @media (min-width: 768px) { .bust-bg { width: 400px; height: 520px; } }
+
+    .hero-image-wrap {
+      width: 100%; max-width: 320px; text-align: center;
+      border: var(--border);
+    }
+    .hero-image-wrap img {
+      width: 100%; height: auto; display: block;
+    }
+    .vial-caption {
+      margin-top: 16px; display: flex; align-items: center;
+      justify-content: center; gap: 12px;
+    }
+    .vial-caption .line {
+      width: 24px; height: 1px; background: var(--black); opacity: 0.3;
+    }
+    .vial-caption span {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em;
+      opacity: 0.4;
+    }
+
+    .features { border-bottom: var(--border); }
+    .features-grid {
+      display: grid; grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) { .features-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .feature-card {
+      padding: 32px; border-bottom: var(--border);
+    }
+    @media (min-width: 640px) {
+      .feature-card { border-bottom: var(--border); }
+      .feature-card:nth-child(odd) { border-right: var(--border); }
+    }
+    @media (min-width: 1024px) {
+      .feature-card { border-bottom: none; border-right: var(--border); }
+      .feature-card:last-child { border-right: none; }
+    }
+
+    .feature-num {
+      width: 32px; height: 32px; background: var(--black);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .feature-num span { color: var(--lime); font-size: 11px; font-weight: 700; }
+    .feature-title {
+      font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 16px;
+      text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 8px;
+    }
+    .feature-body { font-size: 12px; opacity: 0.6; line-height: 1.7; }
+
+    .quality { border-bottom: var(--border); }
+    .quality-grid {
+      display: grid; grid-template-columns: 1fr;
+    }
+    @media (min-width: 1024px) { .quality-grid { grid-template-columns: 7fr 5fr; } }
+
+    .quality-dark {
+      background: var(--black); color: var(--bone);
+      padding: 64px 32px; display: flex; flex-direction: column;
+      justify-content: center;
+    }
+    @media (min-width: 768px) { .quality-dark { padding: 96px 64px; } }
+
+    .quality-label {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--blue); margin-bottom: 16px; font-weight: 500;
+    }
+    .quality-title {
+      font-family: 'Inter Tight', sans-serif; font-weight: 900;
+      font-size: clamp(2rem, 4vw, 3rem); line-height: 0.95;
+      text-transform: uppercase; letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .quality-body {
+      font-size: 13px; opacity: 0.6; max-width: 420px;
+      margin-bottom: 32px; line-height: 1.7;
+    }
+
+    .quality-img {
+      background: var(--concrete); border-top: var(--border);
+      display: flex; align-items: center; justify-content: center;
+      min-height: 280px; overflow: hidden;
+    }
+    @media (min-width: 1024px) {
+      .quality-img { border-top: none; border-left: var(--border); }
+    }
+    .quality-img img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+
+    .explore { border-bottom: var(--border); padding: 64px 0; }
+    @media (min-width: 768px) { .explore { padding: 96px 0; } }
+
+    .explore-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    .explore-label {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--blue); margin-bottom: 8px; font-weight: 500; display: block;
+    }
+    .explore-title {
+      font-family: 'Inter Tight', sans-serif; font-weight: 900;
+      font-size: clamp(2rem, 4vw, 3rem); line-height: 0.95;
+      text-transform: uppercase; letter-spacing: -0.03em;
+    }
+    .explore-link {
+      display: none; font-size: 12px; text-transform: uppercase;
+      letter-spacing: 0.08em; font-weight: 500; align-items: center; gap: 6px;
+    }
+    .explore-link:hover { color: var(--blue); }
+    @media (min-width: 768px) { .explore-link { display: inline-flex; } }
+
+    .cat-grid {
+      display: grid; grid-template-columns: 1fr; border: var(--border);
+    }
+    @media (min-width: 640px) { .cat-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) { .cat-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .cat-card {
+      position: relative; display: flex; flex-direction: column;
+      justify-content: space-between; padding: 32px; min-height: 280px;
+      background: var(--bone); border-bottom: var(--border);
+      overflow: hidden; transition: background .15s;
+    }
+    .cat-card:hover { background: #e5e2db; }
+    @media (min-width: 640px) {
+      .cat-card { border-bottom: var(--border); }
+      .cat-card:nth-child(odd) { border-right: var(--border); }
+    }
+    @media (min-width: 1024px) {
+      .cat-card { border-bottom: none; border-right: var(--border); }
+      .cat-card:last-child { border-right: none; }
+    }
+    .cat-card .cat-bg-img {
+      position: absolute; inset: 0; pointer-events: none;
+      width: 100%; height: 100%; object-fit: cover; opacity: 0.2;
+    }
+    .cat-title {
+      position: relative; z-index: 1;
+      font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 18px;
+      text-transform: uppercase; letter-spacing: -0.02em;
+    }
+    .cat-meta {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 48px;
+    }
+    .cat-meta span {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; opacity: 0.4;
+    }
+    .cat-meta .arrow {
+      font-size: 20px; opacity: 0.2;
+      transition: opacity .15s, transform .15s;
+    }
+    .cat-card:hover .arrow { opacity: 0.4; transform: translateX(4px); }
+    .cat-strip {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+      background: var(--lime); transform: scaleX(0); transform-origin: left;
+      transition: transform .25s ease;
+    }
+    .cat-card:hover .cat-strip { transform: scaleX(1); }
+
+    .trust { border-bottom: var(--border); background: var(--concrete); }
+    .trust-grid {
+      display: grid; grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) { .trust-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) { .trust-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .trust-item {
+      padding: 32px; border-bottom: var(--border);
+    }
+    @media (min-width: 640px) {
+      .trust-item { border-bottom: var(--border); }
+      .trust-item:nth-child(odd) { border-right: var(--border); }
+    }
+    @media (min-width: 1024px) {
+      .trust-item { border-bottom: none; border-right: var(--border); }
+      .trust-item:last-child { border-right: none; }
+    }
+    .trust-title {
+      font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 14px;
+      text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 4px;
+    }
+    .trust-sub {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.5;
+    }
+
+    .footer { background: var(--black); color: var(--bone); }
+    .footer-grid {
+      display: grid; grid-template-columns: 1fr; gap: 32px;
+      padding: 48px 0; border-bottom: 1px solid rgba(237,234,227,0.15);
+    }
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 4fr 2fr 2fr 2fr; gap: 0;
+        padding: 64px 0;
+      }
+      .footer-brand { border-right: 1px solid rgba(237,234,227,0.15); padding-right: 32px; }
+      .footer-col { padding-left: 32px; }
+    }
+    .footer-logo {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+    }
+    .footer-logo-mark {
+      width: 32px; height: 32px; background: var(--black);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .footer-logo-mark span { color: var(--black); font-weight: 700; font-size: 11px; }
+    .footer-logo-text {
+      font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 14px;
+      text-transform: uppercase; letter-spacing: -0.02em;
+    }
+    .footer-desc {
+      font-size: 12px; opacity: 0.5; line-height: 1.7; max-width: 280px;
+    }
+    .footer-heading {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em;
+      opacity: 0.4; margin-bottom: 12px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a {
+      font-size: 12px; opacity: 0.7; transition: opacity .15s;
+    }
+    .footer-links a:hover { opacity: 1; }
+
+    .footer-bottom {
+      display: flex; flex-direction: column; gap: 12px;
+      padding: 24px 0; align-items: flex-start;
+    }
+    @media (min-width: 640px) {
+      .footer-bottom {
+        flex-direction: row; align-items: center; justify-content: space-between;
+      }
+    }
+    .footer-copy {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.3;
+    }
+    .footer-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 12px; border: 1px solid rgba(237,234,227,0.25);
+    }
+    .footer-badge-dot { width: 6px; height: 6px; background: var(--lime); }
+    .footer-badge-text {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- HEADER                                                         -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark"><span>PS</span></div>
+        <span class="logo-text">PeptideScholar</span>
+      </a>
+
+      <nav class="nav">
+        <a href="/peptides">Peptides</a>
+        <a href="/about">About</a>
+        <a href="/methodology">Quality</a>
+        <a href="/resources">Resources</a>
+        <a href="/contact">Contact</a>
+      </nav>
+
+      <div class="header-cta">
+        <span class="market-badge">US</span>
+        <a href="/peptides" class="btn-lime">Browse Peptides</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- HERO                                                           -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <!-- Classical bust background (generated PNG) -->
+    <img src="../public/images/nb-landing/classical-bust.png" alt="" class="bust-bg">
+
+    <div class="container hero-grid">
+      <!-- Left: text -->
+      <div class="hero-left">
+        <div class="hero-label">
+          <span class="hero-label-dot"></span>
+          <span class="hero-label-text">Research Peptides</span>
+        </div>
+
+        <h1 class="hero-title">
+          Science<br>
+          Driven.<br>
+          <span class="muted">Human</span><br>
+          Focused.
+        </h1>
+
+        <p class="hero-sub">
+          High purity. Rigorously tested. Built for research. Every claim cited from PubMed.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="/peptides" class="btn-lime">Browse All Peptides</a>
+          <a href="/about" class="btn-outline">Learn More</a>
+        </div>
+      </div>
+
+      <!-- Right: hero vial image (generated PNG) -->
+      <div class="hero-right">
+        <div class="hero-image-wrap">
+          <img src="../public/images/nb-landing/hero-vial.png" alt="Peptide vial cross-section">
+          <div class="vial-caption">
+            <span class="line"></span>
+            <span>Research Use Only</span>
+            <span class="line"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- FEATURE GRID                                                   -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="features">
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-num"><span>01</span></div>
+        <h3 class="feature-title">Verified Purity</h3>
+        <p class="feature-body">≥99% purity verified by HPLC. Every batch tested, documented, and traceable.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num"><span>02</span></div>
+        <h3 class="feature-title">Research Only</h3>
+        <p class="feature-body">Intended for laboratory research use only. Not for human consumption.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num"><span>03</span></div>
+        <h3 class="feature-title">Discreet Shipping</h3>
+        <p class="feature-body">Secure, fast, and reliable. Plain packaging with full tracking.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num"><span>04</span></div>
+        <h3 class="feature-title">Science Backed</h3>
+        <p class="feature-body">Peptides. Data. Results. Every mechanism explained with PubMed citations.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- QUALITY SECTION                                                -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="quality">
+    <div class="quality-grid">
+      <div class="quality-dark">
+        <span class="quality-label">Quality Assurance</span>
+        <h2 class="quality-title">
+          Quality You<br>Can Trust
+        </h2>
+        <p class="quality-body">
+          Every batch is tested, verified, and documented. HPLC, mass spec, and certificate of analysis included. No exceptions.
+        </p>
+        <a href="/methodology" class="btn-lime">Our Quality Standards</a>
+      </div>
+      <div class="quality-img">
+        <img src="../public/images/nb-landing/lab-bench.png" alt="Laboratory bench setup">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- EXPLORE PEPTIDES                                               -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="explore">
+    <div class="container">
+      <div class="explore-header">
+        <div>
+          <span class="explore-label">Browse</span>
+          <h2 class="explore-title">Explore Peptides</h2>
+        </div>
+        <a href="/peptides" class="explore-link">View All →</a>
+      </div>
+
+      <div class="cat-grid">
+        <!-- Weight Loss -->
+        <a href="/best-for/weight-loss" class="cat-card">
+          <img src="../public/images/nb-landing/tex-weight-loss.png" alt="" class="cat-bg-img">
+          <h3 class="cat-title">Weight Loss</h3>
+          <div class="cat-meta">
+            <span>Category</span>
+            <span class="arrow">→</span>
+          </div>
+          <div class="cat-strip"></div>
+        </a>
+
+        <!-- Performance -->
+        <a href="/best-for/growth-hormone" class="cat-card">
+          <img src="../public/images/nb-landing/tex-performance.png" alt="" class="cat-bg-img">
+          <h3 class="cat-title">Performance</h3>
+          <div class="cat-meta">
+            <span>Category</span>
+            <span class="arrow">→</span>
+          </div>
+          <div class="cat-strip"></div>
+        </a>
+
+        <!-- Recovery -->
+        <a href="/best-for/healing-recovery" class="cat-card">
+          <img src="../public/images/nb-landing/tex-recovery.png" alt="" class="cat-bg-img">
+          <h3 class="cat-title">Recovery</h3>
+          <div class="cat-meta">
+            <span>Category</span>
+            <span class="arrow">→</span>
+          </div>
+          <div class="cat-strip"></div>
+        </a>
+
+        <!-- Anti-Aging -->
+        <a href="/best-for/anti-aging" class="cat-card">
+          <img src="../public/images/nb-landing/tex-anti-aging.png" alt="" class="cat-bg-img">
+          <h3 class="cat-title">Anti-Aging</h3>
+          <div class="cat-meta">
+            <span>Category</span>
+            <span class="arrow">→</span>
+          </div>
+          <div class="cat-strip"></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- TRUST BAR                                                      -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="trust">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="trust-title">Global Reach</div>
+        <div class="trust-sub">Ships worldwide</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-title">Bulk Inquiries</div>
+        <div class="trust-sub">Wholesale available</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-title">Quality Guaranteed</div>
+        <div class="trust-sub">HPLC verified</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-title">Transparent Data</div>
+        <div class="trust-sub">PubMed cited</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- FOOTER                                                         -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-mark"><span>PS</span></div>
+            <span class="footer-logo-text">PeptideScholar</span>
+          </div>
+          <p class="footer-desc">
+            Evidence-based peptide reference. Every claim cited from PubMed. No hype. Just data.
+          </p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Browse</div>
+          <div class="footer-links">
+            <a href="/peptides">All Peptides</a>
+            <a href="/compare">Comparisons</a>
+            <a href="/blog">Research Blog</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <div class="footer-links">
+            <a href="/about">About</a>
+            <a href="/methodology">Methodology</a>
+            <a href="/contact">Contact</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Legal</div>
+          <div class="footer-links">
+            <a href="/disclaimer">Disclaimer</a>
+            <a href="/legal">Legal Status</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 PeptideScholar</span>
+        <span class="footer-badge">
+          <span class="footer-badge-dot"></span>
+          <span class="footer-badge-text">Research Use Only</span>
+        </span>
+      </div>
+    </div>
+  </footer></body>
+</html>

@@ -12,12 +12,19 @@ import {
   TreatmentMoneyLinks,
   AffiliateProductGrid,
 } from "@/components";
-import { affiliateCatalog } from "@/data/affiliate-products";
+import { getProductSectionsForPeptide } from "@/data/affiliate-products";
+import { peptides } from "@/data/peptides";
 import { generateSEO } from "@/components/SEOHead";
 import { EditorialTreatmentView } from "@/components/editorial/EditorialTreatmentView";
+import { EnrichedTreatmentContent } from "@/components/EnrichedTreatmentContent";
+import { getEnrichedTreatment, hasEnrichedContent } from "@/data/treatment-enrichment";
+import { getPrimaryReviewerForTopic, getAuthorById } from "@/data/content-authors";
+import { MedicalReviewBadge } from "@/components/MedicalReviewBadge";
+import { ContentDate } from "@/components/ContentDate";
 import {
   getGeneratedTreatmentHubContent,
   getGeneratedTreatmentHubSlugs,
+  getGeneratedAppLandingContent,
 } from "@/lib/generated-content";
 import { isValidLocale } from "@/lib/i18n";
 import { getRequestMarket } from "@/lib/request-market";
@@ -39,11 +46,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const hub = getGeneratedTreatmentHubContent(slug, "us");
   if (!hub) return {};
 
+  const isThin = !hasEnrichedContent(slug) && !EDITORIAL_PILOT_SLUGS.has(slug);
+
   return generateSEO({
     title: hub.seo.title,
     description: hub.seo.description,
     canonical: `${siteConfig.domain}${hub.seo.canonicalPath}`,
     siteName: siteConfig.name,
+    robots: isThin
+      ? { index: false, follow: false, googleBot: { index: false, follow: false } }
+      : undefined,
   });
 }
 
@@ -57,6 +69,20 @@ export default async function TreatmentDetailPage({ params }: Props) {
   const market = await getRequestMarket();
   const useEditorial = EDITORIAL_PILOT_SLUGS.has(slug);
 
+  const peptide = peptides.find((p) => p.slug === slug);
+  const affiliateSections = peptide
+    ? getProductSectionsForPeptide({
+        fdaStatus: peptide.fdaStatus,
+        category: peptide.category,
+        routes: peptide.routes,
+      })
+    : [];
+  const appLanding = getGeneratedAppLandingContent(`${slug}-tracker`, "us");
+  const enriched = hasEnrichedContent(slug) ? getEnrichedTreatment(slug) : undefined;
+  const reviewer = enriched
+    ? getAuthorById(enriched.reviewerId)
+    : getPrimaryReviewerForTopic(hub.treatmentName);
+
   return (
     <>
       <PageTracker
@@ -66,6 +92,7 @@ export default async function TreatmentDetailPage({ params }: Props) {
           page_slug: slug,
           market: market.code,
           design_variant: useEditorial ? "editorial" : "standard",
+          enriched: enriched ? "true" : "false",
         }}
       />
       <JsonLd
@@ -79,6 +106,14 @@ export default async function TreatmentDetailPage({ params }: Props) {
             "@type": "Drug",
             name: hub.treatmentName,
           },
+          reviewedBy: reviewer
+            ? {
+                "@type": "Person",
+                name: reviewer.name,
+                description: reviewer.credentials,
+              }
+            : undefined,
+          dateModified: enriched?.lastReviewed ?? hub.trust.reviewedAt,
         }}
       />
 
@@ -102,6 +137,14 @@ export default async function TreatmentDetailPage({ params }: Props) {
           >
             <span>Treatment hub</span>
             <span style={{ color: "#1A3A5C" }}>{hub.fdaStatus === "approved" ? "FDA Approved" : hub.fdaStatus}</span>
+            {enriched && (
+              <span
+                className="ml-1 px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider"
+                style={{ backgroundColor: "#DCFCE7", color: "#166534" }}
+              >
+                Deep Dive
+              </span>
+            )}
           </div>
           <h1 className="text-3xl md:text-5xl font-bold mb-4" style={{ color: "#1A3A5C" }}>
             {hub.seo.title}
@@ -109,7 +152,25 @@ export default async function TreatmentDetailPage({ params }: Props) {
           <p className="text-lg leading-relaxed max-w-4xl" style={{ color: "#5A6577" }}>
             {hub.marketSummary}
           </p>
+          <div className="mt-4">
+            <ContentDate
+              publishedAt={hub.meta.generatedAt}
+              updatedAt={enriched?.lastReviewed ?? hub.trust.reviewedAt}
+              reviewedAt={enriched?.lastReviewed ?? hub.trust.reviewedAt}
+            />
+          </div>
         </div>
+
+        {/* Medical Review Badge */}
+        {reviewer && (
+          <div className="mb-6">
+            <MedicalReviewBadge
+              reviewerName={reviewer.name}
+              reviewerCredentials={reviewer.credentials}
+              reviewedAt={enriched?.lastReviewed ?? hub.trust.reviewedAt}
+            />
+          </div>
+        )}
 
         {/* Market notice for non-US */}
         {market.code !== "us" && (
@@ -237,7 +298,14 @@ export default async function TreatmentDetailPage({ params }: Props) {
           </div>
         </div>
 
-        {/* Primary CTA: provider matcher */}
+        {/* Enriched Content (Deep Dive) */}
+        {enriched && (
+          <div className="mb-10">
+            <EnrichedTreatmentContent content={enriched} treatmentName={hub.treatmentName} />
+          </div>
+        )}
+
+        {/* Primary CTA: provider matcher — moved below educational content */}
         <ProviderIntentCard
           marketCode={market.code}
           location={`treatment_detail_${hub.treatmentSlug}`}
@@ -253,38 +321,36 @@ export default async function TreatmentDetailPage({ params }: Props) {
         </div>
 
         {/* App/tracker summary */}
-        <div
-          className="rounded-xl p-5 mb-8"
-          style={{ backgroundColor: "#F8FAFC", border: "1px solid #D0D7E2" }}
-        >
-          <div className="text-xs font-semibold uppercase tracking-[0.16em] mb-2" style={{ color: "#3B7A9E" }}>
-            Tracker &amp; Retention
-          </div>
-          <p className="text-sm leading-relaxed mb-3" style={{ color: "#1C2028" }}>
-            {hub.appSummary}
-          </p>
-          <Link
-            href={`/app/${hub.treatmentSlug}-tracker`}
-            className="inline-flex items-center rounded-lg px-4 py-2 text-sm font-semibold"
-            style={{ backgroundColor: "#1A3A5C", color: "#FFFFFF" }}
+        {appLanding && (
+          <div
+            className="rounded-xl p-5 mb-8"
+            style={{ backgroundColor: "#F8FAFC", border: "1px solid #D0D7E2" }}
           >
-            View tracker landing &rarr;
-          </Link>
-        </div>
+            <div className="text-xs font-semibold uppercase tracking-[0.16em] mb-2" style={{ color: "#3B7A9E" }}>
+              Tracker &amp; Retention
+            </div>
+            <p className="text-sm leading-relaxed mb-3" style={{ color: "#1C2028" }}>
+              {hub.appSummary}
+            </p>
+            <Link
+              href={`/app/${hub.treatmentSlug}-tracker`}
+              className="inline-flex items-center rounded-lg px-4 py-2 text-sm font-semibold"
+              style={{ backgroundColor: "#1A3A5C", color: "#FFFFFF" }}
+            >
+              View tracker landing &rarr;
+            </Link>
+          </div>
+        )}
 
-        {/* Affiliate: GLP-1 support essentials */}
-        <AffiliateProductGrid
-          heading="GLP-1 Support Essentials"
-          subheading="Products to help manage common side effects and optimize outcomes during semaglutide or tirzepatide treatment."
-          products={affiliateCatalog["glp1-support"]}
-        />
-
-        {/* Affiliate: Progress tracking tools */}
-        <AffiliateProductGrid
-          heading="Progress Tracking Tools"
-          subheading="Monitor weight, body composition, and nutrition to stay on track and maximize results."
-          products={affiliateCatalog["nutrition"]}
-        />
+        {/* Dynamic affiliate sections by peptide category */}
+        {affiliateSections.map((section, idx) => (
+          <AffiliateProductGrid
+            key={idx}
+            heading={section.heading}
+            subheading={section.subheading}
+            products={section.products}
+          />
+        ))}
 
         {/* Trust block */}
         <div

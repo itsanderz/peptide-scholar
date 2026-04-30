@@ -18,25 +18,21 @@ export function BreadcrumbNav({ crumbs }: { crumbs: Crumb[] }) {
   };
 
   return (
-    <nav aria-label="Breadcrumb" className="mb-4 text-sm text-gray-500">
+    <nav aria-label="Breadcrumb" className="breadcrumb">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <ol className="flex flex-wrap items-center gap-1">
-        {crumbs.map((crumb, i) => (
-          <li key={crumb.href} className="flex items-center gap-1">
-            {i > 0 && <span aria-hidden="true">/</span>}
-            {i === crumbs.length - 1 ? (
-              <span className="text-gray-900 font-medium">{crumb.label}</span>
-            ) : (
-              <Link href={crumb.href} className="hover:text-gray-700 underline">
-                {crumb.label}
-              </Link>
-            )}
-          </li>
-        ))}
-      </ol>
+      {crumbs.map((crumb, i) => (
+        <span key={crumb.href} className="flex items-center gap-2">
+          {i > 0 && <span>/</span>}
+          {i === crumbs.length - 1 ? (
+            <span style={{ opacity: 1, fontWeight: 500 }}>{crumb.label}</span>
+          ) : (
+            <Link href={crumb.href}>{crumb.label}</Link>
+          )}
+        </span>
+      ))}
     </nav>
   );
 }

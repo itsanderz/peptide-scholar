@@ -179,7 +179,7 @@ export default async function ProvidersPage({ params, searchParams }: Props) {
         }}
       />
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="container py-8 legacy-index-page providers-index-page">
         <BreadcrumbNav
           crumbs={[
             { label: "Home", href: "/" },
@@ -188,37 +188,34 @@ export default async function ProvidersPage({ params, searchParams }: Props) {
         />
 
         <div className="mt-6 mb-8">
-          <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold mb-4" style={{ backgroundColor: "#F8FAFC", borderColor: "#D0D7E2", color: "#334155" }}>
+          <div className="legal-badge is-warn mb-4">
             <span>Active market:</span>
-            <span style={{ color: "#1A3A5C" }}>{market.name}</span>
+            <span>{market.name}</span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: "#1A3A5C" }}>
+          <h1 className="pd-name">
             Find a Provider
           </h1>
-          <p className="text-base md:text-lg leading-relaxed max-w-3xl" style={{ color: "#5A6577" }}>
+          <p className="ci-copy" style={{ marginTop: 12, marginBottom: 0 }}>
             {market.code === "us"
               ? "Use the matcher to narrow the right telehealth or prescribing path for approved peptide treatments."
               : `Provider matching is not fully live in ${market.name} yet, but you can still save your treatment preferences and join the rollout list.`}
           </p>
         </div>
 
-        <div
-          className="rounded-xl p-4 mb-8"
-          style={{ backgroundColor: "#F8FAFC", border: "1px solid #D0D7E2" }}
-        >
-          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#3B7A9E] mb-2">
+        <div className="pd-desc-box">
+          <div className="pd-side-lbl">
             How This Works
           </div>
-          <div className="text-sm md:text-base text-[#1C2028]">
+          <div>
             {market.code === "us"
               ? "We use your treatment, state, budget, insurance, and timing preferences to package the most relevant next step."
               : "We save your market, treatment, and budget preferences now so the rollout can prioritize the right routing profiles later."}
           </div>
         </div>
 
-        <section className="mb-8 grid md:grid-cols-2 gap-4">
+        <section className="providers-browse-grid">
           <div
-            className="rounded-xl p-4"
+            className="provider-browse-card"
             style={{ backgroundColor: "#FFFFFF", border: "1px solid #D0D7E2" }}
           >
             <h2 className="text-lg font-bold mb-3" style={{ color: "#1A3A5C" }}>
@@ -229,7 +226,7 @@ export default async function ProvidersPage({ params, searchParams }: Props) {
                 <Link
                   key={slug}
                   href={`/providers/treatment/${slug}`}
-                  className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium"
+                  className="provider-chip"
                   style={{
                     backgroundColor: "#F8FAFC",
                     color: "#1A3A5C",
@@ -244,7 +241,7 @@ export default async function ProvidersPage({ params, searchParams }: Props) {
           </div>
 
           <div
-            className="rounded-xl p-4"
+            className="provider-browse-card"
             style={{ backgroundColor: "#FFFFFF", border: "1px solid #D0D7E2" }}
           >
             <h2 className="text-lg font-bold mb-3" style={{ color: "#1A3A5C" }}>
@@ -255,7 +252,7 @@ export default async function ProvidersPage({ params, searchParams }: Props) {
                 <Link
                   key={slug}
                   href={`/providers/goal/${slug}`}
-                  className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium"
+                  className="provider-chip"
                   style={{
                     backgroundColor: "#F8FAFC",
                     color: "#1A3A5C",
@@ -270,7 +267,7 @@ export default async function ProvidersPage({ params, searchParams }: Props) {
           </div>
 
           <div
-            className="rounded-xl p-4 md:col-span-2"
+            className="provider-browse-card provider-browse-card--wide"
             style={{ backgroundColor: "#FFFFFF", border: "1px solid #D0D7E2" }}
           >
             <h2 className="text-lg font-bold mb-3" style={{ color: "#1A3A5C" }}>
@@ -284,7 +281,7 @@ export default async function ProvidersPage({ params, searchParams }: Props) {
                 <Link
                   key={slug}
                   href={`/providers/state/${slug}`}
-                  className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium"
+                  className="provider-chip"
                   style={{
                     backgroundColor: "#F8FAFC",
                     color: "#1A3A5C",
@@ -299,7 +296,7 @@ export default async function ProvidersPage({ params, searchParams }: Props) {
           </div>
 
           <div
-            className="rounded-xl p-4"
+            className="provider-browse-card"
             style={{ backgroundColor: "#FFFFFF", border: "1px solid #D0D7E2" }}
           >
             <h2 className="text-lg font-bold mb-3" style={{ color: "#1A3A5C" }}>
@@ -310,7 +307,7 @@ export default async function ProvidersPage({ params, searchParams }: Props) {
                 <Link
                   key={slug}
                   href={`/providers/insurance/${slug}`}
-                  className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium"
+                  className="provider-chip"
                   style={{
                     backgroundColor: "#F8FAFC",
                     color: "#1A3A5C",
@@ -325,7 +322,7 @@ export default async function ProvidersPage({ params, searchParams }: Props) {
           </div>
 
           <div
-            className="rounded-xl p-4"
+            className="provider-browse-card"
             style={{ backgroundColor: "#FFFFFF", border: "1px solid #D0D7E2" }}
           >
             <h2 className="text-lg font-bold mb-3" style={{ color: "#1A3A5C" }}>
@@ -336,7 +333,7 @@ export default async function ProvidersPage({ params, searchParams }: Props) {
                 <Link
                   key={slug}
                   href={`/providers/intake/${slug}`}
-                  className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium"
+                  className="provider-chip"
                   style={{
                     backgroundColor: "#F8FAFC",
                     color: "#1A3A5C",
@@ -401,6 +398,7 @@ export default async function ProvidersPage({ params, searchParams }: Props) {
                   partner={partner}
                   location={providerEnabled ? "providers_directory_active" : "providers_directory_reference"}
                   marketCode={market.code}
+                  treatmentSlug={treatmentDirectoryFilter !== "all" ? treatmentDirectoryFilter : undefined}
                 />
               ))}
             </div>
@@ -454,6 +452,7 @@ export default async function ProvidersPage({ params, searchParams }: Props) {
                   partner={partner}
                   location="providers_page_featured"
                   marketCode={market.code}
+                  treatmentSlug={initialTreatment}
                 />
               ))}
             </div>

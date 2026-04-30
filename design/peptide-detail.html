@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peptide Detail — Neobrutalist Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #050505;
+      --bone: #edeae3;
+      --concrete: #cfcfc9;
+      --lime: #d8e628;
+      --blue: #5d75c7;
+      --gray: #8a8a84;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      background: var(--bone);
+      color: var(--black);
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+    @media (min-width: 768px) { .container { padding: 0 32px; } }
+
+    .font-sans { font-family: 'Inter Tight', sans-serif; }
+    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+
+    /* Header */
+    .header { border-bottom: 1px solid var(--black); background: var(--black); position: sticky; top: 0; z-index: 100; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    .logo { display: flex; align-items: center; gap: 8px; }
+    .logo-mark { width: 28px; height: 28px; background: var(--bone); display: flex; align-items: center; justify-content: center; }
+    .logo-mark span { color: var(--bone); font-weight: 700; font-size: 10px; }
+    .logo-text { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: -0.02em; }
+    .nav { display: none; }
+    @media (min-width: 768px) { .nav { display: flex; align-items: center; gap: 0; } .nav a { padding: 8px 14px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; transition: background .15s; } .nav a:hover { background: var(--black); color: var(--bone); } }
+
+    .btn-lime {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; background: var(--lime); color: var(--black);
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500;
+      border: 1px solid var(--black); cursor: pointer;
+      transition: filter .15s, transform .05s;
+    }
+    .btn-lime:hover { filter: brightness(0.92); }
+    .btn-lime:active { transform: translateY(1px); }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; background: transparent; color: var(--black);
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500;
+      border: 1px solid var(--black); cursor: pointer;
+      transition: background .15s, color .15s;
+    }
+    .btn-outline:hover { background: var(--black); color: var(--bone); }
+
+    .tag {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 8px; border: 1px solid var(--black);
+      font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 16px 0; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .breadcrumb a { opacity: 0.5; transition: opacity .15s; }
+    .breadcrumb a:hover { opacity: 1; }
+    .breadcrumb span { opacity: 0.3; }
+
+    /* Two-column layout */
+    .page-grid { display: grid; grid-template-columns: 1fr; gap: 32px; padding-bottom: 64px; }
+    @media (min-width: 1024px) { .page-grid { grid-template-columns: 7fr 4fr; } }
+
+    /* Main content */
+    .main { min-width: 0; }
+
+    .peptide-header { margin-bottom: 32px; }
+    .peptide-header-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+    .peptide-name {
+      font-family: 'Inter Tight', sans-serif; font-weight: 900;
+      font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 0.95;
+      text-transform: uppercase; letter-spacing: -0.03em;
+    }
+    .peptide-meta { font-size: 11px; opacity: 0.5; margin-bottom: 16px; }
+    .peptide-meta span + span::before { content: " · "; opacity: 0.3; }
+
+    .badge-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .badge { padding: 3px 10px; border: 1px solid var(--black); font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
+    .badge-a { background: var(--lime); color: var(--black); }
+    .badge-b { background: var(--blue); color: var(--bone); }
+    .badge-c { background: var(--concrete); color: var(--black); }
+    .badge-fda { background: var(--black); color: var(--lime); }
+    .badge-warning { background: var(--black); color: var(--bone); border-color: transparent; }
+
+    /* Molecule decoration */
+    .mol-wrap { display: none; }
+    @media (min-width: 768px) { .mol-wrap { display: flex; flex-shrink: 0; width: 80px; height: 80px; align-items: center; justify-content: center; border: 1px solid var(--black); background: var(--concrete); } }
+
+    .section { margin-bottom: 40px; }
+    .section-title {
+      font-family: 'Inter Tight', sans-serif; font-weight: 800;
+      font-size: 18px; text-transform: uppercase; letter-spacing: -0.02em;
+      margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::after { content: ""; flex: 1; height: 1px; background: var(--black); opacity: 0.2; }
+
+    .desc-block {
+      padding: 20px; border: 1px solid var(--black);
+      background: var(--bone); font-size: 13px; line-height: 1.7;
+    }
+
+    .benefit-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .benefit-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 12px 16px; border: 1px solid var(--black);
+      font-size: 12px; line-height: 1.6;
+    }
+    .benefit-list li::before {
+      content: "+"; flex-shrink: 0; width: 20px; height: 20px;
+      background: var(--lime); display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 12px; margin-top: 2px;
+    }
+
+    .sideeffect-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .sideeffect-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 12px 16px; border: 1px solid var(--black);
+      font-size: 12px; line-height: 1.6;
+    }
+    .sideeffect-list li::before {
+      content: "!"; flex-shrink: 0; width: 20px; height: 20px;
+      background: var(--black); color: var(--bone); display: flex;
+      align-items: center; justify-content: center;
+      font-weight: 700; font-size: 12px; margin-top: 2px;
+    }
+
+    /* Dosing table */
+    .dosing-table { width: 100%; border-collapse: collapse; border: 1px solid var(--black); font-size: 12px; }
+    .dosing-table th {
+      background: var(--black); color: var(--bone); text-align: left;
+      padding: 10px 14px; font-family: 'Inter Tight', sans-serif;
+      font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .dosing-table td { padding: 10px 14px; border-bottom: 1px solid var(--black); }
+    .dosing-table tr:last-child td { border-bottom: none; }
+    .dosing-table tr:nth-child(even) td { background: var(--concrete); opacity: 0.5; }
+
+    /* Research card */
+    .research-card { display: flex; gap: 12px; padding: 16px; border: 1px solid var(--black); margin-bottom: 8px; }
+    .research-pmid { flex-shrink: 0; width: 70px; font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue); font-weight: 500; }
+    .research-body { flex: 1; }
+    .research-title { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+    .research-journal { font-size: 10px; opacity: 0.5; margin-bottom: 4px; }
+    .research-finding { font-size: 11px; opacity: 0.7; line-height: 1.6; }
+
+    /* Comparison link */
+    .comp-link { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border: 1px solid var(--black); transition: background .15s; }
+    .comp-link:hover { background: var(--concrete); }
+    .comp-link-name { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 13px; }
+    .comp-link-arrow { font-size: 18px; opacity: 0.3; transition: transform .15s; }
+    .comp-link:hover .comp-link-arrow { transform: translateX(4px); opacity: 0.6; }
+
+    /* FAQ */
+    .faq-item { border: 1px solid var(--black); border-top: none; }
+    .faq-item:first-child { border-top: 1px solid var(--black); }
+    .faq-q { padding: 14px 16px; font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 13px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-q::after { content: "+"; font-size: 16px; opacity: 0.3; font-family: 'IBM Plex Mono', monospace; }
+    .faq-a { padding: 0 16px 14px; font-size: 12px; opacity: 0.7; line-height: 1.7; display: none; }
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .faq-q::after { content: "−"; }
+
+    /* Sidebar */
+    .sidebar { display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { border: 1px solid var(--black); padding: 20px; }
+    .sidebar-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; opacity: 0.4; margin-bottom: 12px; font-weight: 500; }
+    .info-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 12px; border-bottom: 1px solid var(--black); border-bottom-width: 1px; border-bottom-style: dashed; opacity: 0.6; }
+    .info-row:last-child { border-bottom: none; }
+    .info-row .label { opacity: 0.5; }
+    .info-row .value { font-weight: 500; }
+
+    .sidebar-related { display: flex; flex-direction: column; gap: 8px; }
+    .related-card { padding: 12px 14px; border: 1px solid var(--black); transition: background .15s; }
+    .related-card:hover { background: var(--concrete); }
+    .related-name { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: -0.01em; }
+    .related-category { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.4; margin-top: 2px; }
+
+    /* Footer (same as homepage) */
+    .footer { background: var(--black); color: var(--bone); margin-top: 64px; }
+    .footer-grid { display: grid; grid-template-columns: 1fr; gap: 32px; padding: 48px 0; border-bottom: 1px solid rgba(237,234,227,0.15); }
+    @media (min-width: 768px) { .footer-grid { grid-template-columns: 4fr 2fr 2fr 2fr; gap: 0; padding: 64px 0; } .footer-brand { border-right: 1px solid rgba(237,234,227,0.15); padding-right: 32px; } .footer-col { padding-left: 32px; } }
+    .footer-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+    .footer-logo-mark { width: 28px; height: 28px; background: var(--black); display: flex; align-items: center; justify-content: center; }
+    .footer-logo-mark span { color: var(--black); font-weight: 700; font-size: 10px; }
+    .footer-logo-text { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: -0.02em; }
+    .footer-desc { font-size: 11px; opacity: 0.5; line-height: 1.7; max-width: 260px; }
+    .footer-heading { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; opacity: 0.4; margin-bottom: 12px; }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a { font-size: 11px; opacity: 0.7; transition: opacity .15s; }
+    .footer-links a:hover { opacity: 1; }
+    .footer-bottom { display: flex; flex-direction: column; gap: 12px; padding: 24px 0; align-items: flex-start; }
+    @media (min-width: 640px) { .footer-bottom { flex-direction: row; align-items: center; justify-content: space-between; } }
+    .footer-copy { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.3; }
+    .footer-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border: 1px solid rgba(237,234,227,0.25); }
+    .footer-badge-dot { width: 6px; height: 6px; background: var(--lime); }
+    .footer-badge-text { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+
+    .disclaimer { padding: 14px 16px; border: 1px solid var(--black); font-size: 10px; opacity: 0.5; line-height: 1.6; background: var(--concrete); }
+    .disclaimer strong { opacity: 1; }
+  </style>
+</head>
+<body>
+  <!-- ═══ HEADER ═══ -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark"><span>PS</span></div>
+        <span class="logo-text">PeptideScholar</span>
+      </a>
+      <nav class="nav">
+        <a href="/peptides">Peptides</a>
+        <a href="/about">About</a>
+        <a href="/blog">Research</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <a href="/peptides" class="btn-lime">Browse All</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- ═══ BREADCRUMB ═══ -->
+    <nav class="breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/peptides">Peptides</a>
+      <span>/</span>
+      <span style="opacity:1">Retatrutide</span>
+    </nav>
+
+    <!-- ═══ TWO-COLUMN PAGE ═══ -->
+    <div class="page-grid">
+
+      <!-- ═══ MAIN ═══ -->
+      <div class="main">
+
+        <!-- Header -->
+        <div class="peptide-header">
+          <div class="peptide-header-top">
+            <div>
+              <h1 class="peptide-name">Retatrutide</h1>
+              <div class="peptide-meta">
+                <span>GLP-1 / GIP / Glucagon Triple Agonist</span>
+                <span>41 amino acids</span>
+                <span>LY3437943</span>
+              </div>
+            </div>
+            <div class="mol-wrap">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <path d="M20 4L36 12V28L20 36L4 28V12L20 4Z" stroke="#050505" stroke-width="1.5" fill="none"/>
+                <circle cx="20" cy="12" r="3" fill="#d8e628"/>
+                <circle cx="28" cy="18" r="2" fill="#5d75c7"/>
+                <circle cx="24" cy="28" r="2.5" fill="#050505"/>
+                <circle cx="14" cy="26" r="2" fill="#cfcfc9"/>
+                <line x1="20" y1="15" x2="26" y2="17" stroke="#050505" stroke-width="1"/>
+                <line x1="26" y1="19" x2="23" y2="26" stroke="#050505" stroke-width="1"/>
+                <line x1="22" y1="26" x2="16" y2="25" stroke="#050505" stroke-width="1"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="badge-row">
+            <span class="badge badge-b">Evidence B</span>
+            <span class="badge badge-fda">Phase III</span>
+            <span class="badge badge-warning">Rx Required</span>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="section">
+          <h2 class="section-title">Overview</h2>
+          <div class="desc-block">
+            Retatrutide is a novel triple hormone receptor agonist targeting GLP-1, GIP, and glucagon receptors for the treatment of obesity and metabolic dysfunction. In clinical trials, it has demonstrated exceptional weight loss efficacy—up to 24% body weight reduction at 48 weeks—surpassing existing single and dual agonist therapies.
+          </div>
+        </div>
+
+        <!-- Mechanism -->
+        <div class="section">
+          <h2 class="section-title">Mechanism of Action</h2>
+          <div class="desc-block" style="background:var(--concrete)">
+            <p style="font-size:13px;line-height:1.7">Retatrutide activates three distinct receptor pathways simultaneously: GLP-1 receptor agonism slows gastric emptying and reduces appetite; GIP receptor agonism enhances insulin secretion and improves adipocyte function; glucagon receptor agonism increases energy expenditure through hepatic glucose production and lipolysis. This triple activation produces synergistic metabolic effects beyond any dual-agonist approach.</p>
+          </div>
+        </div>
+
+        <!-- Benefits -->
+        <div class="section">
+          <h2 class="section-title">Benefits</h2>
+          <ul class="benefit-list">
+            <li>Up to 24.2% body weight reduction at 48 weeks (Phase II trial)</li>
+            <li>Triple-mechanism synergy — targets appetite, energy expenditure, and fat metabolism</li>
+            <li>Significant HbA1c reduction in T2DM patients</li>
+            <li>Improved lipid profile (LDL, HDL, triglycerides)</li>
+            <li>Once-weekly subcutaneous dosing</li>
+          </ul>
+        </div>
+
+        <!-- Side Effects -->
+        <div class="section">
+          <h2 class="section-title">Side Effects</h2>
+          <ul class="sideeffect-list">
+            <li>Gastrointestinal: nausea (most common), vomiting, diarrhea</li>
+            <li>Injection site reactions — mild and self-limiting</li>
+            <li>Increased heart rate (2-5 bpm average increase observed)</li>
+            <li>Potential for hypoglycemia when combined with insulin</li>
+            <li>Pancreatitis risk (class effect — monitor symptoms)</li>
+          </ul>
+        </div>
+
+        <!-- Dosing -->
+        <div class="section">
+          <h2 class="section-title">Dosing &amp; Titration</h2>
+          <table class="dosing-table">
+            <thead>
+              <tr><th>Week</th><th>Dose</th><th>Frequency</th><th>Route</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1-4</td><td>2 mg</td><td>Weekly</td><td>Subcutaneous</td></tr>
+              <tr><td>5-8</td><td>4 mg</td><td>Weekly</td><td>Subcutaneous</td></tr>
+              <tr><td>9-12</td><td>6 mg</td><td>Weekly</td><td>Subcutaneous</td></tr>
+              <tr><td>13+</td><td>8-12 mg</td><td>Weekly</td><td>Subcutaneous</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Research -->
+        <div class="section">
+          <h2 class="section-title">Research &amp; Evidence</h2>
+          <div class="research-card">
+            <div class="research-pmid">PMID: 38858523</div>
+            <div class="research-body">
+              <div class="research-title">Triple-hormone-receptor agonist retatrutide for obesity — Phase II trial</div>
+              <div class="research-journal">Nature Medicine, 2024</div>
+              <div class="research-finding">24.2% mean weight reduction at 48 weeks — significantly greater than placebo and all active comparators. 100% of participants achieved ≥5% weight loss.</div>
+            </div>
+          </div>
+          <div class="research-card">
+            <div class="research-pmid">PMID: 35985340</div>
+            <div class="research-body">
+              <div class="research-title">Mechanism of action and preclinical profile of retatrutide</div>
+              <div class="research-journal">Cell Reports Medicine, 2022</div>
+              <div class="research-finding">Characterized the triple-agonist profile showing enhanced weight loss via glucagon-mediated energy expenditure.</div>
+            </div>
+          </div>
+          <div class="research-card">
+            <div class="research-pmid">PMID: 40609566</div>
+            <div class="research-body">
+              <div class="research-title">Retatrutide in MASLD: a Phase II analysis</div>
+              <div class="research-journal">The Lancet Gastroenterology, 2025</div>
+              <div class="research-finding">Significant reduction in liver fat content and fibrosis markers in MASLD patients.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Compare links -->
+        <div class="section">
+          <h2 class="section-title">Compare Retatrutide</h2>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <a href="/compare/retatrutide-vs-tirzepatide" class="comp-link">
+              <span class="comp-link-name">Retatrutide vs Tirzepatide</span>
+              <span class="comp-link-arrow">→</span>
+            </a>
+            <a href="/compare/retatrutide-vs-semaglutide" class="comp-link">
+              <span class="comp-link-name">Retatrutide vs Semaglutide</span>
+              <span class="comp-link-arrow">→</span>
+            </a>
+            <a href="/compare/retatrutide-vs-survodutide" class="comp-link">
+              <span class="comp-link-name">Retatrutide vs Survodutide</span>
+              <span class="comp-link-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="section">
+          <h2 class="section-title">Retatrutide FAQ</h2>
+          <div class="faq-item open">
+            <div class="faq-q">When will retatrutide be FDA approved?</div>
+            <div class="faq-a">Retatrutide is currently in Phase III clinical trials. If successful, FDA approval could come as early as 2026-2027. The Phase II data showed exceptional efficacy, which has accelerated the development timeline.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">How does retatrutide compare to Mounjaro?</div>
+            <div class="faq-a">Retatrutide is a triple agonist (GLP-1 + GIP + glucagon), while Mounjaro/tirzepatide is a dual agonist (GLP-1 + GIP only). Retatrutide's added glucagon agonism increases energy expenditure, resulting in greater weight loss in head-to-trial comparisons.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Is retatrutide available now?</div>
+            <div class="faq-a">Retatrutide is not yet FDA approved and is only available through clinical trials. It should not be purchased from research chemical suppliers claiming to sell it.</div>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+          <strong>Research use only.</strong> This information is for educational purposes and does not constitute medical advice. Consult a qualified healthcare provider before making any health decisions.
+        </div>
+
+      </div>
+
+      <!-- ═══ SIDEBAR ═══ -->
+      <div class="sidebar">
+
+        <!-- Info card -->
+        <div class="sidebar-card">
+          <div class="sidebar-label">Peptide Profile</div>
+          <div class="info-row"><span class="label">Type</span><span class="value">Triple Agonist</span></div>
+          <div class="info-row"><span class="label">Category</span><span class="value">Weight Loss</span></div>
+          <div class="info-row"><span class="label">Evidence</span><span class="value">B (Human Studies)</span></div>
+          <div class="info-row"><span class="label">AA Count</span><span class="value">41</span></div>
+          <div class="info-row"><span class="label">Route</span><span class="value">Subcutaneous</span></div>
+          <div class="info-row"><span class="label">Half-Life</span><span class="value">~6 days</span></div>
+          <div class="info-row"><span class="label">FDA Status</span><span class="value">Phase III</span></div>
+        </div>
+
+        <!-- Related -->
+        <div class="sidebar-card">
+          <div class="sidebar-label">Related Peptides</div>
+          <div class="sidebar-related">
+            <a href="/peptides/tirzepatide" class="related-card">
+              <div class="related-name">Tirzepatide</div>
+              <div class="related-category">GLP-1 / GIP Dual Agonist</div>
+            </a>
+            <a href="/peptides/semaglutide" class="related-card">
+              <div class="related-name">Semaglutide</div>
+              <div class="related-category">GLP-1 Agonist</div>
+            </a>
+            <a href="/peptides/survodutide" class="related-card">
+              <div class="related-name">Survodutide</div>
+              <div class="related-category">GLP-1 / Glucagon Dual Agonist</div>
+            </a>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="sidebar-card" style="background:var(--lime)">
+          <div class="sidebar-label" style="opacity:0.6">Research Updates</div>
+          <p style="font-size:11px;line-height:1.6;margin-bottom:12px;font-family:'Inter Tight',sans-serif;font-weight:600">Get weekly evidence summaries and regulatory alerts.</p>
+          <a href="#" class="btn-outline" style="width:100%;justify-content:center;font-size:10px">Subscribe Free</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-mark"><span>PS</span></div>
+            <span class="footer-logo-text">PeptideScholar</span>
+          </div>
+          <p class="footer-desc">Evidence-based peptide reference. Every claim cited from PubMed. No hype. Just data.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Browse</div>
+          <div class="footer-links">
+            <a href="/peptides">All Peptides</a>
+            <a href="/compare">Comparisons</a>
+            <a href="/blog">Research Blog</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Company</div>
+          <div class="footer-links">
+            <a href="/about">About</a>
+            <a href="/methodology">Methodology</a>
+            <a href="/contact">Contact</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-heading">Legal</div>
+          <div class="footer-links">
+            <a href="/disclaimer">Disclaimer</a>
+            <a href="/legal">Legal Status</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 PeptideScholar</span>
+        <span class="footer-badge">
+          <span class="footer-badge-dot"></span>
+          <span class="footer-badge-text">Research Use Only</span>
+        </span>
+      </div>
+    </div>
+  </footer></body>
+</html>

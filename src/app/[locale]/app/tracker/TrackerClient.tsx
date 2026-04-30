@@ -5,23 +5,35 @@ import {
   BRAND_OPTIONS,
   COMPOUND_LABELS,
   DAYS_OF_WEEK,
+  PROTOCOL_TEMPLATES,
   SEVERITY_LABELS,
   SYMPTOMS,
   type CompoundSlug,
   type DoseEntry,
   type InjectionSite,
+  type ProtocolEntry,
+  type ProtocolPeptide,
   type ReminderConfig,
   type SymptomEntry,
   type TrackerData,
   addDoseEntry,
+  addProtocol,
   addSymptomEntry,
   buildICS,
+  buildProtocolICS,
   clearAllTrackerData,
+  daysInProtocol,
   daysUntilWeekday,
   deleteDoseEntry,
+  deleteProtocol,
   deleteSymptomEntry,
+  estimateMonthlyCost,
+  estimateVialDuration,
   generateId,
+  getDefaultActiveDays,
   loadTrackerData,
+  logProtocolDoses,
+  protocolProgress,
   setReminderConfig,
 } from "@/lib/tracker-store";
 import {
@@ -41,12 +53,13 @@ const C = {
   surface: "#FFFFFF",
 } as const;
 
-type Tab = "dose" | "symptom" | "reminder" | "export";
+type Tab = "dose" | "symptom" | "reminder" | "protocols" | "export";
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "dose", label: "Dose Log" },
   { id: "symptom", label: "Symptoms" },
   { id: "reminder", label: "Reminder" },
+  { id: "protocols", label: "Protocols" },
   { id: "export", label: "Export" },
 ];
 
@@ -95,6 +108,7 @@ export default function TrackerClient() {
     doseLog: [],
     symptomLog: [],
     reminder: null,
+    protocols: [],
     schemaVersion: 1,
   });
   const [activeTab, setActiveTab] = useState<Tab>("dose");
@@ -121,6 +135,14 @@ export default function TrackerClient() {
   const [reminderMM, setReminderMM] = useState(0);
   const [reminderSaved, setReminderSaved] = useState(false);
 
+  // Protocol form
+  const [protoTemplate, setProtoTemplate] = useState("");
+  const [protoStart, setProtoStart] = useState("");
+  const [protoEnd, setProtoEnd] = useState("");
+  const [protoGlp1Type, setProtoGlp1Type] = useState("Semaglutide");
+  const [customPeptides, setCustomPeptides] = useState<ProtocolPeptide[]>([]);
+  const [expandedProtocol, setExpandedProtocol] = useState<string | null>(null);
+
   // Export
   const [exportCopied, setExportCopied] = useState(false);
   const printRef = useRef<HTMLDivElement>(null);
@@ -140,6 +162,7 @@ export default function TrackerClient() {
     }
     setDoseDate(t);
     setSymptomDate(t);
+    setProtoStart(t);
     setLoaded(true);
     /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
@@ -255,6 +278,13 @@ export default function TrackerClient() {
         (e) =>
           `${fmtDate(e.date)} | Severity: ${SEVERITY_LABELS[e.severity]} | Symptoms: ${e.symptoms.join(", ")}${e.notes ? ` | Notes: ${e.notes}` : ""}`
       ),
+      "",
+      "=== PROTOCOLS ===",
+      ...data.protocols.flatMap((p) => [
+        `${p.name} (${p.status}) — ${fmtDate(p.startDate)} → ${fmtDate(p.endDate)}`,
+        ...p.peptides.map((pep) => `  • ${pep.name} — ${pep.doseAmount} ${pep.doseUnit}, ${pep.timing} (${pep.frequency})`),
+        "",
+      ]),
     ];
     navigator.clipboard.writeText(lines.join("\n")).then(() => {
       setExportCopied(true);
@@ -266,7 +296,85 @@ export default function TrackerClient() {
   const handleClearAll = useCallback(() => {
     if (!confirm("Delete all logged data? This cannot be undone.")) return;
     clearAllTrackerData();
-    setData({ doseLog: [], symptomLog: [], reminder: null, schemaVersion: 1 });
+    setData({ doseLog: [], symptomLog: [], reminder: null, protocols: [], schemaVersion: 1 });
+  }, []);
+
+  /* ── Protocols ────────────────────────────────────────────────────────── */
+  const activeTemplate = PROTOCOL_TEMPLATES.find((t) => t.id === protoTemplate);
+
+  const handleStartProtocol = useCallback(() => {
+    if (!activeTemplate || !protoStart || !protoEnd) return;
+    let peptides = activeTemplate.peptides.map((p) => ({ ...p }));
+    if (activeTemplate.id === "glp1") {
+      peptides = peptides.map((p) => ({
+        ...p,
+        name: protoGlp1Type,
+        compound: protoGlp1Type.toLowerCase().includes("tirzepatide") ? "tirzepatide" : "semaglutide",
+      }));
+    }
+    if (activeTemplate.id === "custom") {
+      if (customPeptides.length === 0) return;
+      peptides = customPeptides.map((p) => ({ ...p }));
+    }
+    const entry: ProtocolEntry = {
+      id: generateId(),
+      name: activeTemplate.name,
+      templateId: activeTemplate.id,
+      peptides,
+      startDate: protoStart,
+      endDate: protoEnd,
+      status: "active",
+      dailyCheckoffs: {},
+      glp1Type: activeTemplate.id === "glp1" ? protoGlp1Type : undefined,
+      createdAt: new Date().toISOString(),
+    };
+    setData(addProtocol(entry));
+    setProtoTemplate("");
+    setCustomPeptides([]);
+  }, [activeTemplate, protoStart, protoEnd, protoGlp1Type, customPeptides]);
+
+  const handleDeleteProtocol = useCallback((id: string) => {
+    if (!confirm("Delete this protocol?")) return;
+    setData(deleteProtocol(id));
+    if (expandedProtocol === id) setExpandedProtocol(null);
+  }, [expandedProtocol]);
+
+  const handleCheckProtocol = useCallback((protocolId: string, date: string) => {
+    setData(logProtocolDoses(protocolId, date));
+  }, []);
+
+  const handleDownloadProtocolICS = useCallback((protocol: ProtocolEntry) => {
+    const ics = buildProtocolICS(protocol);
+    const blob = new Blob([ics], { type: "text/calendar" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${protocol.templateId}-protocol-reminder.ics`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }, []);
+
+  const handleExportProtocolText = useCallback((protocol: ProtocolEntry) => {
+    const lines: string[] = [
+      `Protocol: ${protocol.name}`,
+      `Dates: ${fmtDate(protocol.startDate)} → ${fmtDate(protocol.endDate)}`,
+      "",
+      "Peptides:",
+      ...protocol.peptides.map(
+        (p) => `  • ${p.name} — ${p.doseAmount} ${p.doseUnit}, ${p.timing} (${p.frequency})`
+      ),
+      "",
+      "Weekly Schedule:",
+      ...protocol.peptides.map((p) => {
+        const days = p.daysOfWeek ?? getDefaultActiveDays(p.frequency);
+        return `  • ${p.name}: ${days.map((d) => DAYS_OF_WEEK[d]).join(", ")}`;
+      }),
+      "",
+      `Estimated Monthly Cost: $${estimateMonthlyCost(protocol.peptides).toFixed(0)}`,
+      "",
+      "Disclaimer: These are example protocols for research planning only. Consult a qualified healthcare provider before starting any peptide regimen.",
+    ];
+    navigator.clipboard.writeText(lines.join("\n"));
   }, []);
 
   if (!loaded) {
@@ -720,6 +828,399 @@ export default function TrackerClient() {
         </div>
       )}
 
+      {/* ── Tab: Protocols ────────────────────────────────────────────── */}
+      {activeTab === "protocols" && (
+        <div>
+          {/* New protocol form */}
+          <div
+            className="rounded-2xl p-5 mb-6"
+            style={{ backgroundColor: C.surface, border: `1px solid ${C.border}` }}
+          >
+            <h2 className="text-base font-bold mb-4" style={{ color: C.navy }}>
+              Start a Protocol
+            </h2>
+
+            <FieldBox>
+              <InputLabel>Protocol Template</InputLabel>
+              <select
+                className={inputCls}
+                style={inputStyle}
+                value={protoTemplate}
+                onChange={(e) => {
+                  const id = e.target.value;
+                  setProtoTemplate(id);
+                  const tmpl = PROTOCOL_TEMPLATES.find((t) => t.id === id);
+                  if (tmpl) {
+                    const s = new Date(protoStart || today());
+                    const end = new Date(s);
+                    end.setDate(end.getDate() + tmpl.defaultLengthDays);
+                    setProtoEnd(end.toISOString().slice(0, 10));
+                  }
+                  if (id !== "custom") setCustomPeptides([]);
+                }}
+              >
+                <option value="">Select a protocol…</option>
+                {PROTOCOL_TEMPLATES.map((t) => (
+                  <option key={t.id} value={t.id}>
+                    {t.name}
+                  </option>
+                ))}
+              </select>
+            </FieldBox>
+
+            {activeTemplate?.id === "glp1" && (
+              <FieldBox>
+                <InputLabel>GLP-1 Type</InputLabel>
+                <select
+                  className={inputCls}
+                  style={inputStyle}
+                  value={protoGlp1Type}
+                  onChange={(e) => setProtoGlp1Type(e.target.value)}
+                >
+                  <option value="Semaglutide">Semaglutide</option>
+                  <option value="Tirzepatide">Tirzepatide</option>
+                </select>
+              </FieldBox>
+            )}
+
+            {activeTemplate?.id === "custom" && (
+              <div className="mb-4">
+                <InputLabel>Custom Peptides</InputLabel>
+                <div className="space-y-2">
+                  {customPeptides.map((p, idx) => (
+                    <div key={idx} className="grid grid-cols-5 gap-2">
+                      <input
+                        type="text"
+                        placeholder="Name"
+                        className={inputCls}
+                        style={inputStyle}
+                        value={p.name}
+                        onChange={(e) => {
+                          const next = [...customPeptides];
+                          next[idx] = { ...next[idx], name: e.target.value };
+                          setCustomPeptides(next);
+                        }}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Dose"
+                        className={inputCls}
+                        style={inputStyle}
+                        value={p.doseAmount}
+                        onChange={(e) => {
+                          const next = [...customPeptides];
+                          next[idx] = { ...next[idx], doseAmount: e.target.value };
+                          setCustomPeptides(next);
+                        }}
+                      />
+                      <select
+                        className={inputCls}
+                        style={inputStyle}
+                        value={p.doseUnit}
+                        onChange={(e) => {
+                          const next = [...customPeptides];
+                          next[idx] = { ...next[idx], doseUnit: e.target.value };
+                          setCustomPeptides(next);
+                        }}
+                      >
+                        <option value="mg">mg</option>
+                        <option value="mcg">mcg</option>
+                        <option value="units">units</option>
+                      </select>
+                      <input
+                        type="text"
+                        placeholder="Timing"
+                        className={inputCls}
+                        style={inputStyle}
+                        value={p.timing}
+                        onChange={(e) => {
+                          const next = [...customPeptides];
+                          next[idx] = { ...next[idx], timing: e.target.value };
+                          setCustomPeptides(next);
+                        }}
+                      />
+                      <select
+                        className={inputCls}
+                        style={inputStyle}
+                        value={p.frequency}
+                        onChange={(e) => {
+                          const next = [...customPeptides];
+                          next[idx] = { ...next[idx], frequency: e.target.value };
+                          setCustomPeptides(next);
+                        }}
+                      >
+                        <option value="daily">Daily</option>
+                        <option value="5 on / 2 off">5 on / 2 off</option>
+                        <option value="weekly">Weekly</option>
+                      </select>
+                    </div>
+                  ))}
+                </div>
+                <button
+                  onClick={() =>
+                    setCustomPeptides([
+                      ...customPeptides,
+                      { name: "", doseAmount: "", doseUnit: "mg", timing: "Morning", frequency: "daily" },
+                    ])
+                  }
+                  className="mt-2 text-xs font-semibold"
+                  style={{ color: C.teal }}
+                >
+                  + Add peptide
+                </button>
+              </div>
+            )}
+
+            <div className="grid sm:grid-cols-2 gap-x-4">
+              <FieldBox>
+                <InputLabel>Start Date</InputLabel>
+                <input
+                  type="date"
+                  className={inputCls}
+                  style={inputStyle}
+                  value={protoStart}
+                  onChange={(e) => setProtoStart(e.target.value)}
+                />
+              </FieldBox>
+              <FieldBox>
+                <InputLabel>End Date</InputLabel>
+                <input
+                  type="date"
+                  className={inputCls}
+                  style={inputStyle}
+                  value={protoEnd}
+                  onChange={(e) => setProtoEnd(e.target.value)}
+                />
+              </FieldBox>
+            </div>
+
+            <button
+              onClick={handleStartProtocol}
+              disabled={!protoTemplate || !protoStart || !protoEnd || (activeTemplate?.id === "custom" && customPeptides.length === 0)}
+              className={btnPrimary}
+              style={{
+                backgroundColor:
+                  protoTemplate && protoStart && protoEnd && (activeTemplate?.id !== "custom" || customPeptides.length > 0)
+                    ? C.teal
+                    : C.border,
+              }}
+            >
+              Start Protocol
+            </button>
+          </div>
+
+          {/* Protocol list */}
+          <h3 className="text-sm font-bold mb-3" style={{ color: C.navy }}>
+            Your Protocols ({data.protocols.length})
+          </h3>
+          {data.protocols.length === 0 ? (
+            <p className="text-sm text-gray-400">No protocols started yet.</p>
+          ) : (
+            <div className="space-y-3">
+              {data.protocols.map((protocol) => {
+                const pct = protocolProgress(protocol);
+                const isExpanded = expandedProtocol === protocol.id;
+                const totalDays = daysInProtocol(protocol);
+                const todayStr = today();
+                const isActive = protocol.status === "active";
+                const todayChecked = !!protocol.dailyCheckoffs[todayStr];
+                const isGlp1 = protocol.templateId === "glp1";
+                return (
+                  <div
+                    key={protocol.id}
+                    className="rounded-2xl overflow-hidden"
+                    style={{ backgroundColor: C.surface, border: `1px solid ${C.border}` }}
+                  >
+                    {/* Header */}
+                    <div className="px-5 py-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="text-sm font-bold" style={{ color: C.navy }}>
+                          {protocol.name}
+                        </h4>
+                        <span
+                          className="text-xs font-bold px-2 py-0.5 rounded-full"
+                          style={{
+                            backgroundColor: isActive ? "#E6F4EA" : "#F3F4F6",
+                            color: isActive ? C.success : "#5A6577",
+                          }}
+                        >
+                          {isActive ? `${pct}% complete` : protocol.status}
+                        </span>
+                      </div>
+
+                      {/* Progress bar */}
+                      <div className="h-2 rounded-full mb-3" style={{ backgroundColor: C.bg }}>
+                        <div
+                          className="h-2 rounded-full transition-all"
+                          style={{
+                            width: `${pct}%`,
+                            backgroundColor: pct >= 100 ? C.success : C.teal,
+                          }}
+                        />
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <p className="text-xs text-gray-400">
+                          {fmtDate(protocol.startDate)} → {fmtDate(protocol.endDate)} · {totalDays} days
+                        </p>
+                        <div className="flex gap-2">
+                          {isActive && (
+                            <button
+                              onClick={() => handleCheckProtocol(protocol.id, todayStr)}
+                              disabled={todayChecked}
+                              className="text-xs font-bold px-3 py-1.5 rounded-lg border"
+                              style={{
+                                backgroundColor: todayChecked ? "#E6F4EA" : C.surface,
+                                color: todayChecked ? C.success : C.teal,
+                                borderColor: todayChecked ? C.success : C.border,
+                              }}
+                            >
+                              {todayChecked ? "Checked off" : "Check off today"}
+                            </button>
+                          )}
+                          <button
+                            onClick={() => setExpandedProtocol(isExpanded ? null : protocol.id)}
+                            className="text-xs font-semibold px-3 py-1.5 rounded-lg border"
+                            style={{ borderColor: C.border, color: C.navy }}
+                          >
+                            {isExpanded ? "Hide" : "View"}
+                          </button>
+                          <button
+                            onClick={() => handleDeleteProtocol(protocol.id)}
+                            className="text-xs text-gray-400 hover:text-red-500 px-2"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Expanded detail */}
+                    {isExpanded && (
+                      <div className="px-5 pb-5 border-t" style={{ borderColor: C.border }}>
+                        {/* Peptide list */}
+                        <div className="mt-4 space-y-3">
+                          {protocol.peptides.map((p, i) => {
+                            const days = p.daysOfWeek ?? getDefaultActiveDays(p.frequency);
+                            return (
+                              <div
+                                key={i}
+                                className="rounded-xl p-3"
+                                style={{ backgroundColor: C.bg, border: `1px solid ${C.border}` }}
+                              >
+                                <div className="flex items-center justify-between mb-1">
+                                  <span className="text-sm font-bold" style={{ color: C.navy }}>
+                                    {p.name}
+                                  </span>
+                                  <span className="text-xs" style={{ color: C.teal }}>
+                                    {p.doseAmount} {p.doseUnit} · {p.timing}
+                                  </span>
+                                </div>
+                                <div className="flex gap-1 mt-2">
+                                  {DAYS_OF_WEEK.map((d, idx) => (
+                                    <div
+                                      key={d}
+                                      className="flex-1 text-center text-[10px] font-bold py-1 rounded"
+                                      style={{
+                                        backgroundColor: days.includes(idx) ? C.teal : "#E5E7EB",
+                                        color: days.includes(idx) ? "#FFFFFF" : "#9CA3AF",
+                                      }}
+                                    >
+                                      {d}
+                                    </div>
+                                  ))}
+                                </div>
+                                <p className="text-[10px] text-gray-400 mt-1">
+                                  Est. vial duration: {estimateVialDuration(p)}
+                                </p>
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        {/* Cost & meta */}
+                        <div
+                          className="rounded-xl p-3 mt-4"
+                          style={{ backgroundColor: C.bg, border: `1px solid ${C.border}` }}
+                        >
+                          <p className="text-xs font-semibold" style={{ color: C.navy }}>
+                            Estimated Monthly Cost:{" "}
+                            <span style={{ color: C.teal }}>
+                              ${estimateMonthlyCost(protocol.peptides).toFixed(0)}
+                            </span>
+                          </p>
+                        </div>
+
+                        {/* Daily checklist for today */}
+                        {isActive && (
+                          <div className="mt-4">
+                            <p className="text-xs font-bold mb-2" style={{ color: C.navy }}>
+                              Today&apos;s doses
+                            </p>
+                            <div className="space-y-1">
+                              {protocol.peptides.map((p, i) => {
+                                const days = p.daysOfWeek ?? getDefaultActiveDays(p.frequency);
+                                const dayIdx = new Date(todayStr).getDay();
+                                const shouldTake = days.includes(dayIdx);
+                                if (!shouldTake) return null;
+                                return (
+                                  <div key={i} className="flex items-center gap-2 text-xs text-gray-600">
+                                    <span
+                                      className="w-2 h-2 rounded-full"
+                                      style={{ backgroundColor: todayChecked ? C.success : C.border }}
+                                    />
+                                    {p.name} — {p.doseAmount} {p.doseUnit} ({p.timing})
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Safety disclaimer */}
+                        <div
+                          className="rounded-xl p-3 mt-4"
+                          style={{ backgroundColor: "#FFF7ED", border: `1px solid #FED7AA` }}
+                        >
+                          <p className="text-[11px]" style={{ color: "#92400E" }}>
+                            These are example protocols for research planning only. Consult a qualified
+                            healthcare provider before starting any peptide regimen.
+                          </p>
+                          {isGlp1 && (
+                            <p className="text-[11px] font-bold mt-1" style={{ color: "#92400E" }}>
+                              Requires medical supervision. Not for self-administration without
+                              prescription.
+                            </p>
+                          )}
+                        </div>
+
+                        {/* Actions */}
+                        <div className="flex gap-3 mt-4 flex-wrap">
+                          <button
+                            onClick={() => handleDownloadProtocolICS(protocol)}
+                            className={btnSecondary}
+                            style={{ borderColor: C.border, color: C.teal }}
+                          >
+                            Add to calendar (.ics)
+                          </button>
+                          <button
+                            onClick={() => handleExportProtocolText(protocol)}
+                            className={btnSecondary}
+                            style={{ borderColor: C.border, color: C.navy }}
+                          >
+                            Copy schedule
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* ── Tab: Export ───────────────────────────────────────────────── */}
       {activeTab === "export" && (
         <div>
@@ -831,6 +1332,38 @@ export default function TrackerClient() {
                     </span>
                     <p className="text-xs text-gray-700 mt-0.5">{e.symptoms.join(", ")}</p>
                     {e.notes && <p className="text-xs text-gray-400 mt-0.5">{e.notes}</p>}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Protocols */}
+            <h3 className="text-sm font-bold mb-2 mt-6" style={{ color: C.navy }}>
+              Protocols ({data.protocols.length})
+            </h3>
+            {data.protocols.length === 0 ? (
+              <p className="text-xs text-gray-400 mb-4">No protocols.</p>
+            ) : (
+              <div className="space-y-3 mb-5">
+                {data.protocols.map((p) => (
+                  <div
+                    key={p.id}
+                    className="rounded-xl px-3 py-2"
+                    style={{ backgroundColor: C.bg, border: `1px solid ${C.border}` }}
+                  >
+                    <span className="text-xs font-semibold" style={{ color: C.teal }}>
+                      {p.name}
+                    </span>
+                    <span className="text-xs text-gray-500 ml-2">
+                      {fmtDate(p.startDate)} → {fmtDate(p.endDate)} · {p.status}
+                    </span>
+                    <div className="mt-1 space-y-0.5">
+                      {p.peptides.map((pep, i) => (
+                        <p key={i} className="text-xs text-gray-700">
+                          {pep.name} — {pep.doseAmount} {pep.doseUnit}, {pep.timing} ({pep.frequency})
+                        </p>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>

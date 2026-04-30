@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "id": "us-plecanatide-treatment-hub",
+    "slug": "plecanatide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Plecanatide Treatment Guide: Trulance, Cost and Provider Paths",
+    "description": "US-first plecanatide treatment hub covering approved product paths, cost friction, provider selection, and clinical evidence.",
+    "canonicalPath": "/treatments/plecanatide",
+    "keywords": [
+      "plecanatide treatment guide",
+      "plecanatide provider",
+      "plecanatide treatment path",
+      "plecanatide cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 2,
+    "disclaimer": "This hub summarizes official plecanatide treatment pathways at a high level. Indication fit, coverage, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "plecanatide",
+  "treatmentName": "Plecanatide",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, Plecanatide is an FDA-approved peptide therapy. Chronic idiopathic constipation (CIC) in adults; irritable bowel syndrome with constipation (IBS-C) in adults",
+  "overview": "Plecanatide is a GC-C receptor agonist approved by the FDA for chronic idiopathic constipation (CIC) and irritable bowel syndrome with constipation (IBS-C). It is structurally similar to linaclotide but has a lower incidence of diarrhea.",
+  "approvedProducts": [
+    {
+      "slug": "trulance",
+      "name": "Trulance",
+      "summary": "Branded plecanatide pathway. Chronic idiopathic constipation (CIC) in adults; irritable bowel syndrome with constipation (IBS-C) in adults"
+    }
+  ],
+  "benefits": [
+    "Improves complete spontaneous bowel movements in CIC",
+    "Reduces abdominal pain and constipation in IBS-C",
+    "Lower diarrhea rates than linaclotide in clinical trials",
+    "Once-daily oral dosing"
+  ],
+  "sideEffects": [
+    "Diarrhea (less frequent than linaclotide)",
+    "Upper respiratory tract infection",
+    "Sinusitis",
+    "Abdominal distension"
+  ],
+  "routes": [
+    "Oral"
+  ],
+  "costSummary": "Plecanatide costs vary by brand, pharmacy, and insurance design. As an FDA-approved medication, coverage may be available but often requires prior authorization and documentation of the approved indication.",
+  "providerSummary": "The highest-value next step is finding a provider experienced in anti-inflammatory who can evaluate whether Plecanatide fits the patient's clinical profile and insurance constraints.",
+  "appSummary": "Plecanatide treatment creates tracking demand for dose timing, symptom logging, and refill management to support long-term adherence.",
+  "faqs": [
+    {
+      "question": "How does plecanatide compare to linaclotide?",
+      "answer": "Both are GC-C agonists with the same mechanism, but plecanatide has a lower incidence of diarrhea (5-6% vs 16-20% with linaclotide). Efficacy for constipation and IBS-C is comparable. Choice often depends on diarrhea tolerance and insurance coverage."
+    },
+    {
+      "question": "Is plecanatide safe long-term?",
+      "answer": "Plecanatide has been studied in long-term safety trials up to 72 weeks with no new safety signals. Because it is minimally absorbed systemically, drug-drug interactions are unlikely. It is generally considered safe for chronic use."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a plecanatide provider",
+    "primaryHref": "/providers?treatment=plecanatide",
+    "secondaryLabel": "Review plecanatide costs",
+    "secondaryHref": "/costs/plecanatide",
+    "notes": "Use the provider matcher when Plecanatide already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "plecanatide-ref-1",
+      "authority": "Am J Gastroenterol",
+      "title": "A Randomized Phase III Clinical Trial of Plecanatide, a Uroguanylin Analog, in Patients With Chronic Idiopathic Constipation.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28169285/",
+      "publishedAt": "2017",
+      "claimType": "clinical"
+    },
+    {
+      "id": "plecanatide-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Plecanatide",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

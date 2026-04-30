@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "id": "us-oxytocin-treatment-hub",
+    "slug": "oxytocin",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Oxytocin Treatment Guide: Pitocin, Syntocinon, Cost and Provider Paths",
+    "description": "US-first oxytocin treatment hub covering approved product paths, cost friction, provider selection, and clinical evidence.",
+    "canonicalPath": "/treatments/oxytocin",
+    "keywords": [
+      "oxytocin treatment guide",
+      "oxytocin provider",
+      "oxytocin treatment path",
+      "oxytocin cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 2,
+    "disclaimer": "This hub summarizes official oxytocin treatment pathways at a high level. Indication fit, coverage, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "oxytocin",
+  "treatmentName": "Oxytocin",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, Oxytocin is an FDA-approved peptide therapy. Labor induction; control of postpartum uterine bleeding; incomplete or inevitable abortion",
+  "overview": "Oxytocin is a naturally occurring nonapeptide hormone produced in the hypothalamus and released by the posterior pituitary. Best known for its roles in childbirth, lactation, and social bonding, it is also being studied for autism spectrum disorder, social anxiety, and PTSD. FDA-approved for inducing labor and controlling postpartum bleeding.",
+  "approvedProducts": [
+    {
+      "slug": "pitocin",
+      "name": "Pitocin",
+      "summary": "Branded oxytocin pathway. Labor induction; control of postpartum uterine bleeding; incomplete or inevitable abortion"
+    },
+    {
+      "slug": "syntocinon",
+      "name": "Syntocinon",
+      "summary": "Branded oxytocin pathway. Labor induction; control of postpartum uterine bleeding; incomplete or inevitable abortion"
+    }
+  ],
+  "benefits": [
+    "FDA-approved for labor induction and postpartum hemorrhage control",
+    "Promotes social bonding, trust, and pair formation",
+    "Reduces amygdala reactivity to social threats",
+    "Investigated for autism spectrum disorder social deficits"
+  ],
+  "sideEffects": [
+    "Uterine contractions and tachysystole (when used for labor)",
+    "Hypotension and water intoxication (dose-dependent)",
+    "Nausea and vomiting",
+    "Intranasal: headache, nasal irritation"
+  ],
+  "routes": [
+    "Intravenous",
+    "Intramuscular injection",
+    "Intranasal"
+  ],
+  "costSummary": "Oxytocin costs vary by brand, pharmacy, and insurance design. As an FDA-approved medication, coverage may be available but often requires prior authorization and documentation of the approved indication.",
+  "providerSummary": "The highest-value next step is finding a provider experienced in sleep & stress who can evaluate whether Oxytocin fits the patient's clinical profile and insurance constraints.",
+  "appSummary": "Oxytocin treatment creates tracking demand for dose timing, symptom logging, and refill management to support long-term adherence.",
+  "faqs": [
+    {
+      "question": "Does intranasal oxytocin improve social skills in autism?",
+      "answer": "The evidence is mixed and disappointing relative to early enthusiasm. Multiple large randomized controlled trials have failed to show consistent improvements in social cognition or behavior in autism spectrum disorder. Some studies show modest effects on specific measures (eye contact, emotion recognition), but these are not clinically meaningful across the population. Oxytocin is not an established treatment for autism."
+    },
+    {
+      "question": "Is oxytocin the 'love hormone'?",
+      "answer": "The 'love hormone' or 'cuddle hormone' nickname oversimplifies oxytocin. While it does facilitate pair bonding, maternal behavior, and social trust, it also plays roles in stress response, aggression, and in-group favoritism. Its effects are highly context-dependent."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a oxytocin provider",
+    "primaryHref": "/providers?treatment=oxytocin",
+    "secondaryLabel": "Review oxytocin costs",
+    "secondaryHref": "/costs/oxytocin",
+    "notes": "Use the provider matcher when Oxytocin already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "oxytocin-ref-1",
+      "authority": "Ann N Y Acad Sci",
+      "title": "Oxytocin and opioid antagonists: A dual approach to improving social behavior.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40471548/",
+      "publishedAt": "2025",
+      "claimType": "review"
+    },
+    {
+      "id": "oxytocin-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Oxytocin",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

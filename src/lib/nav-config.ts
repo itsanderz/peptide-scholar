@@ -16,6 +16,52 @@ export type NavConfig = {
   groups: NavGroup[];
 };
 
+const MAIN_EDITORIAL_NAV_CONFIG: NavConfig = {
+  direct: [
+    { label: "Peptides", href: "/peptides" },
+    { label: "Compare", href: "/compare" },
+    { label: "Blog", href: "/blog" },
+    { label: "Tools", href: "/tools" },
+  ],
+  groups: [
+    {
+      label: "Care Paths",
+      items: [
+        { label: "Treatments", href: "/treatments", description: "Approved treatment decision hubs" },
+        { label: "Costs", href: "/costs", description: "Pricing, coverage, and savings guides" },
+        { label: "Providers", href: "/providers", description: "Provider routing and matching" },
+      ],
+    },
+    {
+      label: "Learn",
+      items: [
+        { label: "Beginner Guide", href: "/guide", description: "How peptides work, evidence, and safety" },
+        { label: "Methodology", href: "/methodology", description: "Evidence levels and trust scoring" },
+        { label: "Legal Status", href: "/legal", description: "State-by-state legal coverage" },
+        { label: "Glossary", href: "/glossary", description: "Clinical and research terms" },
+      ],
+    },
+    {
+      label: "Specialty",
+      items: [
+        { label: "Pets", href: "/pets", description: "Veterinary peptide reference" },
+        { label: "Labs", href: "/labs", description: "Advanced research tools and data" },
+        { label: "Stack", href: "/stack", description: "Combination stack hub and planning tools" },
+      ],
+    },
+  ],
+};
+
+function cloneNavConfig(config: NavConfig): NavConfig {
+  return {
+    direct: config.direct.map((item) => ({ ...item })),
+    groups: config.groups.map((group) => ({
+      ...group,
+      items: group.items.map((item) => ({ ...item })),
+    })),
+  };
+}
+
 export function buildNavConfig(showMainNav: boolean, mainSiteUrl: string): NavConfig {
   if (!showMainNav) {
     return {
@@ -27,28 +73,5 @@ export function buildNavConfig(showMainNav: boolean, mainSiteUrl: string): NavCo
     };
   }
 
-  return {
-    direct: [
-      { label: "Treatments", href: "/treatments" },
-      { label: "Providers", href: "/providers" },
-    ],
-    groups: [
-      {
-        label: "Learn",
-        items: [
-          { label: "Peptides", href: "/peptides", description: "Browse all peptides by category" },
-          { label: "Guide", href: "/guide", description: "How peptides work, dosing, and safety" },
-          { label: "Costs", href: "/costs", description: "Real-world pricing and insurance" },
-          { label: "Compare", href: "/compare", description: "Side-by-side peptide comparisons" },
-        ],
-      },
-      {
-        label: "Tools",
-        items: [
-          { label: "All Tools", href: "/tools", description: "Calculators and planners" },
-          { label: "Legal Status", href: "/legal", description: "Legality by compound and country" },
-        ],
-      },
-    ],
-  };
+  return cloneNavConfig(MAIN_EDITORIAL_NAV_CONFIG);
 }

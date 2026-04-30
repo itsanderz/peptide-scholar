@@ -27,74 +27,47 @@ export function TreatmentMoneyLinks({
   const marketMessage =
     marketCode === "us"
       ? "US-first money path"
-      : `${marketCode.toUpperCase()} selected • still using US-first conversion assets`;
+      : `${marketCode.toUpperCase()} selected - using US-first conversion assets`;
 
   return (
     <section
-      className={compact ? "mb-6" : "mb-8"}
+      className={compact ? "resource-box" : "resource-box"}
       aria-label={`${treatmentName} cost and tracker links`}
     >
-      <div className="flex items-center justify-between gap-3 mb-4">
-        <h2
-          className={compact ? "text-lg font-bold" : "text-xl md:text-2xl font-bold"}
-          style={{
-            color: "#1A3A5C",
-            fontFamily: "var(--font-heading, 'Libre Franklin', sans-serif)",
-          }}
-        >
+      <div className="pd-hdr-top">
+        <h2 className="section-title" style={{ marginBottom: 0 }}>
           {treatmentName} Next Steps
         </h2>
-        <span
-          className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold"
-          style={{ backgroundColor: "#F0F9FF", color: "#0369A1", border: "1px solid #BAE6FD" }}
-        >
-          {marketMessage}
-        </span>
+        <span className="legal-badge is-warn">{marketMessage}</span>
       </div>
 
       <div className="grid md:grid-cols-2 gap-4">
-        <Link
-          href={`/costs/${treatmentSlug}`}
-          className="rounded-xl p-5"
-          style={{ backgroundColor: "#FFFFFF", border: "1px solid #D0D7E2" }}
-        >
-          <div
-            className="text-xs font-semibold uppercase tracking-[0.16em] mb-2"
-            style={{ color: "#3B7A9E" }}
-          >
-            Cost Guide
+        <Link href={`/costs/${treatmentSlug}`} className="resource-card">
+          <div className="resource-icon">$</div>
+          <div>
+            <div className="pd-side-lbl">Cost Guide</div>
+            <div className="resource-title">
+              Review {treatmentName.toLowerCase()} pricing, coverage, and savings
+            </div>
+            <p className="resource-desc">
+              Use the reviewed cost hub before you commit to a provider path or a self-pay workflow.
+            </p>
+            <span className="pd-comp-name">Open cost guide -&gt;</span>
           </div>
-          <div className="text-lg font-bold mb-2" style={{ color: "#1A3A5C" }}>
-            Review {treatmentName.toLowerCase()} pricing, coverage, and savings
-          </div>
-          <div className="text-sm leading-relaxed mb-3" style={{ color: "#5A6577" }}>
-            Use the reviewed cost hub before you commit to a provider path or a self-pay workflow.
-          </div>
-          <span className="font-semibold" style={{ color: "#3B7A9E" }}>
-            Open cost guide &rarr;
-          </span>
         </Link>
 
-        <Link
-          href={`/app/${treatmentSlug}-tracker`}
-          className="rounded-xl p-5"
-          style={{ backgroundColor: "#FFFFFF", border: "1px solid #D0D7E2" }}
-        >
-          <div
-            className="text-xs font-semibold uppercase tracking-[0.16em] mb-2"
-            style={{ color: "#3B7A9E" }}
-          >
-            Tracker Landing
+        <Link href={`/app/${treatmentSlug}-tracker`} className="resource-card">
+          <div className="resource-icon">+</div>
+          <div>
+            <div className="pd-side-lbl">Tracker Landing</div>
+            <div className="resource-title">
+              Join the {treatmentName} tracker waitlist
+            </div>
+            <p className="resource-desc">
+              Validate reminder, refill, and symptom-tracking demand before the full PWA launches.
+            </p>
+            <span className="pd-comp-name">Open tracker landing -&gt;</span>
           </div>
-          <div className="text-lg font-bold mb-2" style={{ color: "#1A3A5C" }}>
-            Join the {treatmentName} tracker waitlist
-          </div>
-          <div className="text-sm leading-relaxed mb-3" style={{ color: "#5A6577" }}>
-            Validate reminder, refill, and symptom-tracking demand before the full PWA launches.
-          </div>
-          <span className="font-semibold" style={{ color: "#3B7A9E" }}>
-            Open tracker landing &rarr;
-          </span>
         </Link>
       </div>
     </section>

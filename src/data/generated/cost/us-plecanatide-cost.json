@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "id": "us-plecanatide-cost",
+    "slug": "plecanatide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "cost"
+  },
+  "seo": {
+    "title": "Plecanatide Cost Guide: Insurance, Cash Pay, and Savings",
+    "description": "US-first plecanatide cost guide covering insurance pathways, cash-pay options, prior authorization, and what to verify before starting treatment.",
+    "canonicalPath": "/costs/plecanatide",
+    "keywords": [
+      "plecanatide cost",
+      "plecanatide insurance coverage",
+      "plecanatide cash pay",
+      "plecanatide savings card"
+    ]
+  },
+  "trust": {
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 2,
+    "disclaimer": "Pricing, savings eligibility, and coverage rules can change quickly. Verify all current figures and terms directly on official brand pages before acting."
+  },
+  "treatmentSlug": "plecanatide",
+  "treatmentName": "Plecanatide",
+  "marketSummary": "In the United States, Plecanatide costs depend on brand, pharmacy, insurance design, and whether the patient qualifies for manufacturer savings programs.",
+  "listPrice": "Verify current pricing directly on official Trulance pages before starting, because list pricing, self-pay offers, and eligibility terms can change.",
+  "cashPayRange": "Official cash-pay pricing varies by pharmacy and dose. Contact multiple pharmacies or use a prescription discount service for current rates.",
+  "insuranceSummary": "Commercial coverage for Plecanatide varies by plan and indication. Prior authorization is commonly required.",
+  "couponSummary": "Manufacturer savings programs may reduce out-of-pocket cost for eligible commercially insured patients.",
+  "priorAuthSummary": "Prior authorization is common and may require documentation of diagnosis, prior treatments, and clinical need.",
+  "faqs": [
+    {
+      "question": "What is the safest way to check current Plecanatide pricing?",
+      "answer": "Use official brand pages first, then confirm the exact cash-pay or insured amount with the prescribing service and dispensing pharmacy."
+    },
+    {
+      "question": "Does insurance always cover Plecanatide?",
+      "answer": "No. Coverage depends on the specific plan, indication, and whether prior authorization is approved. Some plans may require step therapy or documentation of medical necessity."
+    },
+    {
+      "question": "Are there manufacturer savings programs for Plecanatide?",
+      "answer": "Many branded peptide therapies offer savings cards or patient assistance programs. Eligibility typically requires commercial insurance and may exclude government programs like Medicare or Medicaid."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a plecanatide provider",
+    "primaryHref": "/providers?treatment=plecanatide",
+    "secondaryLabel": "Use the cost calculator",
+    "secondaryHref": "/tools/cost-calculator",
+    "notes": "Use provider matching when you need help comparing insured and self-pay treatment paths."
+  },
+  "sources": [
+    {
+      "id": "plecanatide-cost-ref-1",
+      "authority": "Am J Gastroenterol",
+      "title": "A Randomized Phase III Clinical Trial of Plecanatide, a Uroguanylin Analog, in Patients With Chronic Idiopathic Constipation.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28169285/",
+      "publishedAt": "2017",
+      "claimType": "clinical"
+    },
+    {
+      "id": "plecanatide-cost-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Plecanatide",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

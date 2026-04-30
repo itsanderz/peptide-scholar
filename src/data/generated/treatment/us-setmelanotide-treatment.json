@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "id": "us-setmelanotide-treatment-hub",
+    "slug": "setmelanotide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Setmelanotide Treatment Guide: Imcivree, Cost and Provider Paths",
+    "description": "US-first setmelanotide treatment hub covering approved product paths, cost friction, provider selection, and clinical evidence.",
+    "canonicalPath": "/treatments/setmelanotide",
+    "keywords": [
+      "setmelanotide treatment guide",
+      "setmelanotide provider",
+      "setmelanotide treatment path",
+      "setmelanotide cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 3,
+    "disclaimer": "This hub summarizes official setmelanotide treatment pathways at a high level. Indication fit, coverage, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "setmelanotide",
+  "treatmentName": "Setmelanotide",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, Setmelanotide is an FDA-approved peptide therapy. Chronic weight management in adult and pediatric patients aged 6 years and older with obesity due to POMC, PCSK1, or LEPR deficiency, or Bardet-Biedl syndrome",
+  "overview": "Setmelanotide is the first melanocortin-4 receptor (MC4R) agonist approved by the FDA for chronic weight management in patients with rare genetic obesity syndromes (POMC, PCSK1, or LEPR deficiency, or Bardet-Biedl syndrome). It is the first obesity drug that targets the hypothalamic melanocortin pathway rather than the gut-brain axis.",
+  "approvedProducts": [
+    {
+      "slug": "imcivree",
+      "name": "Imcivree",
+      "summary": "Branded setmelanotide pathway. Chronic weight management in adult and pediatric patients aged 6 years and older with obesity due to POMC, PCSK1, or LEPR deficiency, or Bardet-Biedl syndrome"
+    }
+  ],
+  "benefits": [
+    "First and only approved therapy for genetic MC4R-pathway obesity",
+    "Dramatic weight loss (~25% body weight) in POMC/LEPR deficiency",
+    "Reduces hunger and restores satiety signaling",
+    "Improves quality of life and reduces comorbidities in rare obesity"
+  ],
+  "sideEffects": [
+    "Injection site reactions (erythema, pruritus)",
+    "Hyperpigmentation (skin darkening, including nevi)",
+    "Nausea, vomiting, diarrhea",
+    "Spontaneous penile erection in males"
+  ],
+  "routes": [
+    "Subcutaneous injection"
+  ],
+  "costSummary": "Setmelanotide costs vary by brand, pharmacy, and insurance design. As an FDA-approved medication, coverage may be available but often requires prior authorization and documentation of the approved indication.",
+  "providerSummary": "The highest-value next step is finding a provider experienced in weight loss who can evaluate whether Setmelanotide fits the patient's clinical profile and insurance constraints.",
+  "appSummary": "Setmelanotide treatment creates tracking demand for dose timing, symptom logging, and refill management to support long-term adherence.",
+  "faqs": [
+    {
+      "question": "Who qualifies for setmelanotide?",
+      "answer": "Setmelanotide is approved only for patients with confirmed genetic variants causing POMC deficiency, PCSK1 deficiency, LEPR deficiency, or Bardet-Biedl syndrome. Genetic testing is required prior to initiation. It is not approved for common (polygenic) obesity. The drug is available through a restricted distribution program and specialty pharmacies."
+    },
+    {
+      "question": "Why does setmelanotide cause skin darkening?",
+      "answer": "MC4R is part of the melanocortin receptor family, which also includes MC1R — the receptor that regulates skin pigmentation. Setmelanotide has some cross-activity at MC1R, stimulating melanin production in skin and hair. This can cause generalized hyperpigmentation and darkening of existing moles (nevi). Patients require regular dermatologic monitoring."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a setmelanotide provider",
+    "primaryHref": "/providers?treatment=setmelanotide",
+    "secondaryLabel": "Review setmelanotide costs",
+    "secondaryHref": "/costs/setmelanotide",
+    "notes": "Use the provider matcher when Setmelanotide already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "setmelanotide-ref-1",
+      "authority": "N Engl J Med",
+      "title": "Proopiomelanocortin Deficiency Treated with a Melanocortin-4 Receptor Agonist.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27468060/",
+      "publishedAt": "2016",
+      "claimType": "review"
+    },
+    {
+      "id": "setmelanotide-ref-2",
+      "authority": "Lancet Diabetes Endocrinol",
+      "title": "Setmelanotide in patients aged 2-5 years with rare MC4R pathway-associated obesity (VENTURE): a 1 year, open-label, multicenter, phase 3 trial.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39549719/",
+      "publishedAt": "2025",
+      "claimType": "clinical"
+    },
+    {
+      "id": "setmelanotide-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Setmelanotide",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

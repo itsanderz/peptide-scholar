@@ -38,9 +38,9 @@ export async function generateMetadata({
 
   return {
     ...generateSEO({
-      title: `Free Peptide & GLP-1 Tools — 11 Free Clinical Tools${titleSuffix}`,
+      title: `Free Peptide & GLP-1 Tools — 24 Free Clinical Tools${titleSuffix}`,
       description:
-        `Free peptide and GLP-1 tools ${descriptor}: peptide finder, reconstitution calculator, legal status checker, titration planner, side effect visualizer, interaction checker, cost calculator, half-life visualizer, vial supply planner, cycle planner, and doctor export. No signup required.`,
+        `Free peptide and GLP-1 tools ${descriptor}: peptide finder, reconstitution calculator, legal status checker, titration planner, side effect visualizer, interaction checker, cost calculator, half-life visualizer, vial supply planner, cycle planner, doctor export, evidence comparator, sequence analyzer, literature alerts, stack explorer, stack generator, structure predictor, community stacks, stack cost calculator, interaction matrix, benchmark system, beginner assessment, side effect triage, and COA verifier. No signup required.`,
       canonical: alt.canonical,
       siteName: siteConfig.name,
     }),
@@ -209,6 +209,196 @@ const tools = [
     ),
     color: "#1A3A5C",
   },
+  {
+    title: "Evidence Comparator",
+    description:
+      "Side-by-side clinical evidence comparison for 2–4 peptides. Compare benefits, side effects, evidence grades, mechanisms, and PubMed references across our full database.",
+    href: "/tools/evidence-comparator",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="7" height="7" rx="1" />
+        <rect x="14" y="3" width="7" height="7" rx="1" />
+        <rect x="3" y="14" width="7" height="7" rx="1" />
+        <rect x="14" y="14" width="7" height="7" rx="1" />
+      </svg>
+    ),
+    color: "#7C3AED",
+  },
+  {
+    title: "Sequence Analyzer",
+    description:
+      "Calculate molecular weight, isoelectric point, hydropathy profile, and net charge from any amino acid sequence. Supports all 20 standard amino acids with interactive pH adjustment.",
+    href: "/tools/sequence-analyzer",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+        <line x1="8" y1="7" x2="16" y2="7" />
+        <line x1="8" y1="11" x2="12" y2="11" />
+        <line x1="8" y1="15" x2="14" y2="15" />
+      </svg>
+    ),
+    color: "#0891B2",
+  },
+  {
+    title: "Literature Alerts",
+    description:
+      "Build a personalized PubMed watchlist for peptide research. Select peptides to generate RSS feed links, direct search URLs, and clinical trial trackers for new publications.",
+    href: "/tools/literature-alerts",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 11a9 9 0 019 9" />
+        <path d="M4 4a16 16 0 0116 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    ),
+    color: "#F97316",
+  },
+  {
+    title: "Stack Explorer",
+    description:
+      "Explore known peptide combinations with synergy rationale, evidence grades, and safety warnings. Covers healing, growth hormone, cognitive, metabolic, and longevity stacks.",
+    href: "/tools/stack-explorer",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="2" width="20" height="8" rx="2" />
+        <rect x="2" y="14" width="20" height="8" rx="2" />
+        <line x1="6" y1="6" x2="6.01" y2="6" />
+        <line x1="6" y1="18" x2="6.01" y2="18" />
+      </svg>
+    ),
+    color: "#7C3AED",
+  },
+  {
+    title: "Stack Generator",
+    description:
+      "Select a symptom or health goal — poor sleep, ED, hair loss, anxiety, cognitive decline, and more — to discover peptides studied for that condition. Every result includes evidence grades, FDA status, and PubMed references.",
+    href: "/tools/stack-generator",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+        <line x1="12" y1="22.08" x2="12" y2="12" />
+      </svg>
+    ),
+    color: "#D4553A",
+  },
+  {
+    title: "Structure Predictor",
+    description:
+      "Predict 3D peptide structures using Meta AI's ESMFold API. Paste any amino acid sequence and receive a PDB file for visualization. Free, no signup required.",
+    href: "/tools/structure-predictor",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+        <path d="M2 17l10 5 10-5" />
+        <path d="M2 12l10 5 10-5" />
+      </svg>
+    ),
+    color: "#3B82F6",
+  },
+  {
+    title: "Community Stacks",
+    description:
+      "Browse and share unverified peptide stack reports from the community. Includes dosage protocols, effects, and side effects with voting. For research transparency only.",
+    href: "/tools/community-stacks",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 00-3-3.87" />
+        <path d="M16 3.13a4 4 0 010 7.75" />
+      </svg>
+    ),
+    color: "#6B7280",
+  },
+  {
+    title: "Stack Cost Calculator",
+    description:
+      "Estimate monthly costs for any peptide stack. Select from research stacks, community stacks, or symptom-based recommendations. Includes 3-month and 6-month projections with insurance notes.",
+    href: "/tools/stack-cost-calculator",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="12" y1="1" x2="12" y2="23" />
+        <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+        <line x1="8" y1="10" x2="16" y2="10" />
+      </svg>
+    ),
+    color: C.success,
+  },
+  {
+    title: "Interaction Matrix",
+    description:
+      "Pharmacologically grounded reference for peptide-to-peptide interactions. Covers synergistic combinations, redundant mechanisms, and combinations that should be avoided. 15+ peer-reviewed entries.",
+    href: "/tools/interaction-matrix",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="7" height="7" rx="1" />
+        <rect x="14" y="3" width="7" height="7" rx="1" />
+        <rect x="3" y="14" width="7" height="7" rx="1" />
+        <rect x="14" y="14" width="7" height="7" rx="1" />
+        <line x1="10" y1="6.5" x2="14" y2="6.5" strokeDasharray="2 2" />
+        <line x1="6.5" y1="10" x2="6.5" y2="14" strokeDasharray="2 2" />
+        <line x1="17.5" y1="10" x2="17.5" y2="14" strokeDasharray="2 2" />
+      </svg>
+    ),
+    color: "#7C3AED",
+  },
+  {
+    title: "Benchmark System",
+    description:
+      "Evidence-based scoring for peptides, providers, and stacks across 6 dimensions. Compare options objectively with weighted scores for evidence quality, cost, safety, WADA compliance, and practicality.",
+    href: "/tools/benchmark",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 20V10" />
+        <path d="M18 20V4" />
+        <path d="M6 20v-4" />
+      </svg>
+    ),
+    color: C.navy,
+  },
+  {
+    title: "Beginner Assessment",
+    description:
+      "Interactive self-assessment to determine if you're ready for peptides. Evaluates your foundation (sleep, nutrition, training, stress), checks contraindications, and provides personalized guidance with conservative recommendations.",
+    href: "/tools/beginner-assessment",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M9 11l3 3L22 4" />
+        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+      </svg>
+    ),
+    color: "#2B8A5E",
+  },
+  {
+    title: "Side Effect Triage",
+    description:
+      "Pharmacologically grounded triage tool for peptide side effects. Select your peptides and symptoms to receive severity-coded guidance: monitor, reduce dose, stop immediately, or seek emergency care. Includes quality vs. reaction differentiation.",
+    href: "/tools/side-effect-triage",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+        <line x1="12" y1="9" x2="12" y2="13" />
+        <line x1="12" y1="17" x2="12.01" y2="17" />
+      </svg>
+    ),
+    color: "#D4553A",
+  },
+  {
+    title: "COA Verifier",
+    description:
+      "Interactive Certificate of Analysis verification tool. Check your peptide COA against 7 required quality standards and 8 common red flags. Get a scored assessment with actionable recommendations for independent testing.",
+    href: "/tools/coa-verifier",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <path d="M9 15l2 2 4-4" />
+      </svg>
+    ),
+    color: "#3B7A9E",
+  },
 ];
 
 /* ── Page ──────────────────────────────────────────────────────────────── */
@@ -237,7 +427,7 @@ export default async function ToolsPage({
         }}
       />
 
-      <div className="max-w-5xl mx-auto px-4 py-8">
+      <div className="container py-8 legacy-index-page tools-index">
         <BreadcrumbNav
           crumbs={[
             { label: "Home", href: `${prefix}/` },

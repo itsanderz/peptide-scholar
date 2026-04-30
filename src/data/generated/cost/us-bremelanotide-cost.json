@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "id": "us-bremelanotide-cost",
+    "slug": "bremelanotide",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "cost"
+  },
+  "seo": {
+    "title": "Bremelanotide (PT-141) Cost Guide: Insurance, Cash Pay, and Savings",
+    "description": "US-first bremelanotide (pt-141) cost guide covering insurance pathways, cash-pay options, prior authorization, and what to verify before starting treatment.",
+    "canonicalPath": "/costs/bremelanotide",
+    "keywords": [
+      "bremelanotide cost",
+      "bremelanotide insurance coverage",
+      "bremelanotide cash pay",
+      "bremelanotide savings card"
+    ]
+  },
+  "trust": {
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 3,
+    "disclaimer": "Pricing, savings eligibility, and coverage rules can change quickly. Verify all current figures and terms directly on official brand pages before acting."
+  },
+  "treatmentSlug": "bremelanotide",
+  "treatmentName": "Bremelanotide (PT-141)",
+  "marketSummary": "In the United States, Bremelanotide (PT-141) costs depend on brand, pharmacy, insurance design, and whether the patient qualifies for manufacturer savings programs.",
+  "listPrice": "Verify current pricing directly on official Vyleesi pages before starting, because list pricing, self-pay offers, and eligibility terms can change.",
+  "cashPayRange": "Official cash-pay pricing varies by pharmacy and dose. Contact multiple pharmacies or use a prescription discount service for current rates.",
+  "insuranceSummary": "Commercial coverage for Bremelanotide (PT-141) varies by plan and indication. Prior authorization is commonly required.",
+  "couponSummary": "Manufacturer savings programs may reduce out-of-pocket cost for eligible commercially insured patients.",
+  "priorAuthSummary": "Prior authorization is common and may require documentation of diagnosis, prior treatments, and clinical need.",
+  "faqs": [
+    {
+      "question": "What is the safest way to check current Bremelanotide (PT-141) pricing?",
+      "answer": "Use official brand pages first, then confirm the exact cash-pay or insured amount with the prescribing service and dispensing pharmacy."
+    },
+    {
+      "question": "Does insurance always cover Bremelanotide (PT-141)?",
+      "answer": "No. Coverage depends on the specific plan, indication, and whether prior authorization is approved. Some plans may require step therapy or documentation of medical necessity."
+    },
+    {
+      "question": "Are there manufacturer savings programs for Bremelanotide (PT-141)?",
+      "answer": "Many branded peptide therapies offer savings cards or patient assistance programs. Eligibility typically requires commercial insurance and may exclude government programs like Medicare or Medicaid."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a bremelanotide provider",
+    "primaryHref": "/providers?treatment=bremelanotide",
+    "secondaryLabel": "Use the cost calculator",
+    "secondaryHref": "/tools/cost-calculator",
+    "notes": "Use provider matching when you need help comparing insured and self-pay treatment paths."
+  },
+  "sources": [
+    {
+      "id": "bremelanotide-cost-ref-1",
+      "authority": "J Womens Health (Larchmt)",
+      "title": "Prespecified and Integrated Subgroup Analyses from the RECONNECT Phase 3 Studies of Bremelanotide.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35230162/",
+      "publishedAt": "2022",
+      "claimType": "clinical"
+    },
+    {
+      "id": "bremelanotide-cost-ref-2",
+      "authority": "Drugs",
+      "title": "Bremelanotide: First Approval.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31429064/",
+      "publishedAt": "2019",
+      "claimType": "review"
+    },
+    {
+      "id": "bremelanotide-cost-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Bremelanotide (PT-141)",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}

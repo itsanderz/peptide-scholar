@@ -116,7 +116,7 @@ export default function LegalChecker({ peptides, states }: LegalCheckerProps) {
 
   return (
     <div
-      className="rounded-xl shadow-lg overflow-hidden"
+      className="tool-shell rounded-xl shadow-lg overflow-hidden"
       style={{ backgroundColor: C.surface, border: `1px solid ${C.border}` }}
     >
       {/* Header */}

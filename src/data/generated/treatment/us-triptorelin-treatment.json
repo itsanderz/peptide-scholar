@@ -1,0 +1,110 @@
+{
+  "meta": {
+    "id": "us-triptorelin-treatment-hub",
+    "slug": "triptorelin",
+    "locale": "en",
+    "market": "us",
+    "reviewState": "reviewed-indexable",
+    "monetizationState": "provider-referral",
+    "indexable": true,
+    "generatedAt": "2026-04-27",
+    "reviewedAt": "2026-04-27",
+    "lastUpdated": "2026-04-27",
+    "contentType": "treatment-hub"
+  },
+  "seo": {
+    "title": "Triptorelin Treatment Guide: Trelstar, Triptodur, Decapeptyl, Cost and Provider Paths",
+    "description": "US-first triptorelin treatment hub covering approved product paths, cost friction, provider selection, and clinical evidence.",
+    "canonicalPath": "/treatments/triptorelin",
+    "keywords": [
+      "triptorelin treatment guide",
+      "triptorelin provider",
+      "triptorelin treatment path",
+      "triptorelin cost and coverage"
+    ]
+  },
+  "trust": {
+    "evidenceLevel": "A",
+    "reviewedBy": "PeptideScholar editorial review",
+    "reviewedAt": "2026-04-27",
+    "sourceCount": 2,
+    "disclaimer": "This hub summarizes official triptorelin treatment pathways at a high level. Indication fit, coverage, and dosing decisions still require confirmation from current official sources and a licensed clinician."
+  },
+  "treatmentSlug": "triptorelin",
+  "treatmentName": "Triptorelin",
+  "evidenceLevel": "A",
+  "fdaStatus": "approved",
+  "marketSummary": "In the United States, Triptorelin is an FDA-approved peptide therapy. Advanced prostate cancer; central precocious puberty; endometriosis; preoperative treatment of uterine leiomyomata",
+  "overview": "Triptorelin is a synthetic decapeptide agonist of gonadotropin-releasing hormone (GnRH), approved by the FDA for advanced prostate cancer, central precocious puberty, and endometriosis. It suppresses sex hormone production through pituitary desensitization.",
+  "approvedProducts": [
+    {
+      "slug": "trelstar",
+      "name": "Trelstar",
+      "summary": "Branded triptorelin pathway. Advanced prostate cancer; central precocious puberty; endometriosis; preoperative treatment of uterine leiomyomata"
+    },
+    {
+      "slug": "triptodur",
+      "name": "Triptodur",
+      "summary": "Branded triptorelin pathway. Advanced prostate cancer; central precocious puberty; endometriosis; preoperative treatment of uterine leiomyomata"
+    },
+    {
+      "slug": "decapeptyl",
+      "name": "Decapeptyl",
+      "summary": "Branded triptorelin pathway. Advanced prostate cancer; central precocious puberty; endometriosis; preoperative treatment of uterine leiomyomata"
+    }
+  ],
+  "benefits": [
+    "First-line androgen deprivation therapy for prostate cancer",
+    "Halts progression of central precocious puberty in children",
+    "Treats endometriosis and uterine fibroids via ovarian suppression",
+    "Used in fertility preservation and assisted reproduction protocols"
+  ],
+  "sideEffects": [
+    "Initial testosterone flare (first 1-2 weeks; may worsen bone pain)",
+    "Hot flashes, decreased libido, erectile dysfunction",
+    "Bone mineral density loss (osteoporosis risk with long-term use)",
+    "Metabolic changes (increased fat mass, insulin resistance)"
+  ],
+  "routes": [
+    "Intramuscular injection",
+    "Subcutaneous injection"
+  ],
+  "costSummary": "Triptorelin costs vary by brand, pharmacy, and insurance design. As an FDA-approved medication, coverage may be available but often requires prior authorization and documentation of the approved indication.",
+  "providerSummary": "The highest-value next step is finding a provider experienced in sexual health who can evaluate whether Triptorelin fits the patient's clinical profile and insurance constraints.",
+  "appSummary": "Triptorelin treatment creates tracking demand for dose timing, symptom logging, and refill management to support long-term adherence.",
+  "faqs": [
+    {
+      "question": "What is the 'flare effect' with triptorelin?",
+      "answer": "The flare effect is a temporary surge in testosterone (or estrogen) that occurs during the first 1-2 weeks of GnRH agonist therapy. Because triptorelin initially stimulates the pituitary before desensitizing it, LH and FSH levels rise briefly, causing a hormone flare. In prostate cancer, this can worsen bone pain or cause spinal cord compression in rare cases. Anti-androgens (bicalutamide) are often co-prescribed for the first 2 weeks to block the flare."
+    },
+    {
+      "question": "How is triptorelin used in fertility treatments?",
+      "answer": "Triptorelin is used in controlled ovarian hyperstimulation protocols for IVF to prevent premature LH surges (downregulation). It suppresses the pituitary, allowing exogenous gonadotropins to control follicular development precisely. However, GnRH antagonists (cetrorelix, ganirelix) have largely replaced agonists for this purpose because they act immediately without a flare effect."
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Find a triptorelin provider",
+    "primaryHref": "/providers?treatment=triptorelin",
+    "secondaryLabel": "Review triptorelin costs",
+    "secondaryHref": "/costs/triptorelin",
+    "notes": "Use the provider matcher when Triptorelin already looks like the right treatment family; use the cost guide when you still need to compare the path."
+  },
+  "sources": [
+    {
+      "id": "triptorelin-ref-1",
+      "authority": "Eur Urol",
+      "title": "Locally advanced and metastatic prostate cancer treated with intermittent androgen monotherapy or maximal androgen blockade: results from a randomised phase 3 study by the South European Uroncological Group.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23582949/",
+      "publishedAt": "2014",
+      "claimType": "clinical"
+    },
+    {
+      "id": "triptorelin-fda",
+      "authority": "FDA",
+      "title": "FDA Information on Triptorelin",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability",
+      "publishedAt": "2026",
+      "claimType": "regulatory"
+    }
+  ]
+}
